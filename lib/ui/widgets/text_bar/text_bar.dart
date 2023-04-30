@@ -23,15 +23,17 @@ class TextBar extends StatelessWidget {
           children: [
             Icon(icon),
             Expanded(
-                child: Text(
-              label,
-              style: const TextStyle(fontSize: 20),
-            )),
+              child: Text(
+                label,
+                style: const TextStyle(fontSize: 20),
+              ),
+            ),
             Expanded(
-                flex: 2,
-                child: TextFormField(
-                  controller: controller,
-                ))
+              flex: 2,
+              child: TextFormField(
+                controller: controller,
+              ),
+            )
           ],
         ),
       ),
