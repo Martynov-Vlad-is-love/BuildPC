@@ -1,10 +1,10 @@
-class MotherboardProducer{
+class MotherboardProducers {
   final int id;
   String producer;
 
-  MotherboardProducer(this.id, this.producer);
+  MotherboardProducers(this.id, this.producer);
 
-  MotherboardProducer.fromJson(Map<String, dynamic> json)
+  MotherboardProducers.fromJson(Map<String, dynamic> json)
       : id = json["id"] as int,
         producer = json["producer"] as String;
 

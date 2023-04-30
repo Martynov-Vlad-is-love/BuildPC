@@ -19,24 +19,25 @@ class GraphicsCard {
   int otherGPUTechnologies;
 
   GraphicsCard(
-      this.id,
-      this.producer,
-      this.name,
-      this.vendor,
-      this.year,
-      this.technicalProcess,
-      this.gpuFrequency,
-      this.memorySize,
-      this.memoryType,
-      this.memoryFrequency,
-      this.bus,
-      this.tdp,
-      this.connector,
-      this.length,
-      this.interfaceType,
-      this.connectionType,
-      this.directXVersion,
-      this.otherGPUTechnologies,);
+    this.id,
+    this.producer,
+    this.name,
+    this.vendor,
+    this.year,
+    this.technicalProcess,
+    this.gpuFrequency,
+    this.memorySize,
+    this.memoryType,
+    this.memoryFrequency,
+    this.bus,
+    this.tdp,
+    this.connector,
+    this.length,
+    this.interfaceType,
+    this.connectionType,
+    this.directXVersion,
+    this.otherGPUTechnologies,
+  );
 
   GraphicsCard.fromJson(Map<String, dynamic> json)
       : id = json['id'] as int,

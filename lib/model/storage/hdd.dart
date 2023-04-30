@@ -10,15 +10,16 @@ class HDD {
   int writingSpeed;
 
   HDD(
-      this.id,
-      this.producer,
-      this.storageSize,
-      this.speed,
-      this.formFactor,
-      this.interface,
-      this.bufferSize,
-      this.readingSpeed,
-      this.writingSpeed,);
+    this.id,
+    this.producer,
+    this.storageSize,
+    this.speed,
+    this.formFactor,
+    this.interface,
+    this.bufferSize,
+    this.readingSpeed,
+    this.writingSpeed,
+  );
 
   HDD.fromJson(Map<String, dynamic> json)
       : id = json["id"] as int,

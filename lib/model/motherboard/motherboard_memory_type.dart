@@ -1,4 +1,4 @@
-class MotherboardMemoryType{
+class MotherboardMemoryType {
   final int id;
   final int memoryTypeId;
 

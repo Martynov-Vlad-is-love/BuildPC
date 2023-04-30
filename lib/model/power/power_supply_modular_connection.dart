@@ -1,4 +1,4 @@
-class PowerSupplyModularConnection{
+class PowerSupplyModularConnection {
   final int id;
   String modularConnection;
 

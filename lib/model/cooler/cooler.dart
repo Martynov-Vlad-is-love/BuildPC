@@ -8,13 +8,14 @@ class Cooler {
   int thermotubes;
 
   Cooler(
-      this.id,
-      this.name,
-      this.connector,
-      this.material,
-      this.maxTDP,
-      this.supportedSockets,
-      this.thermotubes,);
+    this.id,
+    this.name,
+    this.connector,
+    this.material,
+    this.maxTDP,
+    this.supportedSockets,
+    this.thermotubes,
+  );
 
   Cooler.fromJson(Map<String, dynamic> json)
       : id = json["id"] as int,

@@ -10,15 +10,16 @@ class SSD {
   int size;
 
   SSD(
-      this.id,
-      this.producer,
-      this.storageSize,
-      this.formFactor,
-      this.interface,
-      this.readingSpeed,
-      this.writingSpeed,
-      this.cellsType,
-      this.size,);
+    this.id,
+    this.producer,
+    this.storageSize,
+    this.formFactor,
+    this.interface,
+    this.readingSpeed,
+    this.writingSpeed,
+    this.cellsType,
+    this.size,
+  );
 
   SSD.fromJson(Map<String, dynamic> json)
       : id = json["id"] as int,

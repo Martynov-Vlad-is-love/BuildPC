@@ -1,4 +1,4 @@
-class RAMProducer{
+class RAMProducer {
   final int id;
   String producer;
 

@@ -1,4 +1,4 @@
-class StorageProducer{
+class StorageProducer {
   final int id;
   String storageProducer;
 

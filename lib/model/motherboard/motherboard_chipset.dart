@@ -1,4 +1,4 @@
-class MotherboardChipset{
+class MotherboardChipset {
   final int id;
   String chipset;
 

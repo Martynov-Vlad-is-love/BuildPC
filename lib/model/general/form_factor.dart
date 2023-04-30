@@ -1,10 +1,10 @@
-class CaseFormFactor {
+class FormFactor {
   final int id;
   String formFactor;
 
-  CaseFormFactor(this.id, this.formFactor);
+  FormFactor(this.id, this.formFactor);
 
-  CaseFormFactor.fromJson(Map<String, dynamic> json)
+  FormFactor.fromJson(Map<String, dynamic> json)
       : id = json["id"] as int,
         formFactor = json["formFactor"] as String;
 

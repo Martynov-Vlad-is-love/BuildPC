@@ -1,4 +1,4 @@
-class MotherboardNetwork{
+class MotherboardNetwork {
   final int id;
   String network;
 

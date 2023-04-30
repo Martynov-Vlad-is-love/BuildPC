@@ -9,14 +9,15 @@ class PowerSupplyProtectionFunctions {
   bool surgeProtection;
 
   PowerSupplyProtectionFunctions(
-      this.id,
-      {required this.overCurrentProtection,
-      required this.overLoadProtection,
-      required this.overTemperatureProtection,
-      required this.overVoltageProtection,
-      required this.overCircuitProtection,
-      required this.lowVoltageMainsProtection,
-      required this.surgeProtection,});
+    this.id, {
+    required this.overCurrentProtection,
+    required this.overLoadProtection,
+    required this.overTemperatureProtection,
+    required this.overVoltageProtection,
+    required this.overCircuitProtection,
+    required this.lowVoltageMainsProtection,
+    required this.surgeProtection,
+  });
 
   PowerSupplyProtectionFunctions.fromJson(Map<String, dynamic> json)
       : id = json["id"] as int,

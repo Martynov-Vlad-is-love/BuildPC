@@ -1,4 +1,4 @@
-class StorageInterface{
+class StorageInterface {
   final int id;
   String storageInterface;
 

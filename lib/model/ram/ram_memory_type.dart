@@ -1,4 +1,4 @@
-class RAMMemoryType{
+class RAMMemoryType {
   final int id;
   String memoryType;
 

@@ -1,4 +1,4 @@
-class PowerSupplyName{
+class PowerSupplyName {
   final int id;
   String name;
 

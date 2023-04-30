@@ -15,20 +15,21 @@ class BuildPC {
   int ratingId;
 
   BuildPC(
-      this.id,
-      this.nameOfBuild,
-      this.userId,
-      this.motherboard,
-      this.processor,
-      this.graphicCard,
-      this.ram,
-      this.powerSupply,
-      this.hdd,
-      this.ssd,
-      this.pcCase,
-      this.cooler,
-      this.countOfLikes,
-      this.ratingId,);
+    this.id,
+    this.nameOfBuild,
+    this.userId,
+    this.motherboard,
+    this.processor,
+    this.graphicCard,
+    this.ram,
+    this.powerSupply,
+    this.hdd,
+    this.ssd,
+    this.pcCase,
+    this.cooler,
+    this.countOfLikes,
+    this.ratingId,
+  );
 
   BuildPC.fromJson(Map<String, dynamic> json)
       : id = json["id"] as int,

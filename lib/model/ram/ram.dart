@@ -9,14 +9,15 @@ class RAM {
   double powerSupplyVoltage;
 
   RAM(
-      this.id,
-      this.name,
-      this.producer,
-      this.memoryType,
-      this.memoryCapacity,
-      this.frequency,
-      this.timings,
-      this.powerSupplyVoltage,);
+    this.id,
+    this.name,
+    this.producer,
+    this.memoryType,
+    this.memoryCapacity,
+    this.frequency,
+    this.timings,
+    this.powerSupplyVoltage,
+  );
 
   RAM.fromJson(Map<String, dynamic> json)
       : id = json['id'] as int,

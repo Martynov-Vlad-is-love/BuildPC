@@ -1,4 +1,4 @@
-class PowerSupplyFormFactor{
+class PowerSupplyFormFactor {
   final int id;
   String formFactor;
 

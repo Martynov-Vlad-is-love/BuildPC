@@ -1,4 +1,4 @@
-class MotherboardName{
+class MotherboardName {
   final int id;
   String name;
 

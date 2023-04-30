@@ -1,4 +1,4 @@
-class RAMTimings{
+class RAMTimings {
   final int id;
   String timings;
 

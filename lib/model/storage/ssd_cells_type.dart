@@ -1,4 +1,4 @@
-class SSDCellsType{
+class SSDCellsType {
   final int id;
   String cellsType;
 

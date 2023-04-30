@@ -1,4 +1,4 @@
-class RAMName{
+class RAMName {
   int id;
   String name;
 

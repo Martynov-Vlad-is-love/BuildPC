@@ -1,4 +1,4 @@
-class Rating{
+class Rating {
   int id;
   int buildPcId;
   int countOfLikes;

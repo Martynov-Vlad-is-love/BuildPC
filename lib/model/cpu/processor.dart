@@ -34,7 +34,8 @@ class Processor {
     this.maxTemperature,
     this.pcieController,
     this.otherCPUTechnologies, {
-    required this.embeddedGraphics,});
+    required this.embeddedGraphics,
+  });
 
   Processor.fromJson(Map<String, dynamic> json)
       : id = json["id"] as int,

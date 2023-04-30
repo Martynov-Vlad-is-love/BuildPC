@@ -18,23 +18,24 @@ class PowerSupply {
   int countOf12VLines;
 
   PowerSupply(
-      this.id,
-      this.name,
-      this.producer,
-      this.power,
-      this.formFactor,
-      this.performanceLevelClass,
-      this.pfcModule,
-      this.modularConnection,
-      this.protectionFunctions,
-      this.cpu4pin,
-      this.cpu4_4pin,
-      this.cpu8pin,
-      this.pciE6_2pin,
-      this.pciE8pin,
-      this.pciEv5_16pin,
-      this.sata,
-      this.countOf12VLines,);
+    this.id,
+    this.name,
+    this.producer,
+    this.power,
+    this.formFactor,
+    this.performanceLevelClass,
+    this.pfcModule,
+    this.modularConnection,
+    this.protectionFunctions,
+    this.cpu4pin,
+    this.cpu4_4pin,
+    this.cpu8pin,
+    this.pciE6_2pin,
+    this.pciE8pin,
+    this.pciEv5_16pin,
+    this.sata,
+    this.countOf12VLines,
+  );
 
   PowerSupply.fromJson(Map<String, dynamic> json)
       : id = json['id'] as int,

@@ -1,4 +1,4 @@
-class PowerSupplyProducer{
+class PowerSupplyProducer {
   final int id;
   String producer;
 

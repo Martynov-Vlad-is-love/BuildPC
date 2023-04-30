@@ -1,4 +1,4 @@
-class PowerSupplyPerformanceLevelClass{
+class PowerSupplyPerformanceLevelClass {
   final int id;
   String performanceLevel;
 

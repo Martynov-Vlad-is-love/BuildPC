@@ -1,4 +1,4 @@
-class StorageFormFactor{
+class StorageFormFactor {
   final int id;
   String formFactor;
 

@@ -1,4 +1,4 @@
-class MotherboardFormFactor{
+class MotherboardFormFactor {
   final int id;
   String formFactor;
 

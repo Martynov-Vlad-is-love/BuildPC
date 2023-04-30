@@ -1,4 +1,4 @@
-class GPUVendor{
+class GPUVendor {
   final int id;
   String vendor;
 
