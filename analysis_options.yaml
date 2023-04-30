@@ -4,3 +4,7 @@ linter:
   rules:
     public_member_api_docs: false
     sort_pub_dependencies: false
+
+dart_code_metrics:
+  rules:
+    - no-magic-number: false
