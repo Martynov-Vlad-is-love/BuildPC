@@ -1,10 +1,10 @@
-class CoolerName {
+class CoolerProducer {
   final int id;
   String name;
 
-  CoolerName(this.id, this.name);
+  CoolerProducer(this.id, this.name);
 
-  CoolerName.fromJson(Map<String, dynamic> json)
+  CoolerProducer.fromJson(Map<String, dynamic> json)
       : id = json["id"] as int,
         name = json["name"] as String;
 
