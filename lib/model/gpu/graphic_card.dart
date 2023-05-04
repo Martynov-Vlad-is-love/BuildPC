@@ -3,7 +3,7 @@ import 'package:buildpc/model/gpu/gpu_connector.dart';
 import 'package:buildpc/model/gpu/gpu_interface_type.dart';
 import 'package:buildpc/model/gpu/gpu_memory_type.dart';
 import 'package:buildpc/model/gpu/gpu_producer.dart';
-import 'package:buildpc/model/gpu/gpu_to_technologies.dart';
+import 'package:buildpc/model/gpu/gpu_to_connector.dart';
 import 'package:buildpc/model/gpu/gpu_vendor.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -27,7 +27,7 @@ class GraphicCard {
   GPUInterfaceType interfaceType;
   int length;
   String description;
-  List<GPUToTechnologies> gpuTechnologies;
+  List<GPUToConnector> gpuTechnologies;
   int recommendedPrice;
   PerformanceLevel performanceLevel;
 

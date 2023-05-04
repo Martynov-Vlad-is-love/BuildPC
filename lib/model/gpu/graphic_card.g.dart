@@ -27,7 +27,7 @@ GraphicCard _$GraphicCardFromJson(Map<String, dynamic> json) => GraphicCard(
       json['description'] as String,
       json['recommendedPrice'] as int,
       (json['gpuTechnologies'] as List<dynamic>)
-          .map((e) => GPUToTechnologies.fromJson(e as Map<String, dynamic>))
+          .map((e) => GPUToConnector.fromJson(e as Map<String, dynamic>))
           .toList(),
       PerformanceLevel.fromJson(
           json['performanceLevel'] as Map<String, dynamic>),
