@@ -1,4 +1,5 @@
 import 'package:buildpc/model/general/form_factor.dart';
+import 'package:buildpc/model/general/performance_level.dart';
 import 'package:buildpc/model/power/power_supply_producer.dart';
 import 'package:buildpc/model/power/power_supply_protection_functions.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -12,18 +13,19 @@ class PowerSupply {
   PowerSupplyProducer producer;
   int power;
   FormFactor formFactor;
-  int performanceLevelClass;
+  PerformanceLevel performanceLevel;
   bool pfcModule;
   bool modularConnection;
-  PowerSupplyProtectionFunctions protectionFunctions;
-  int cpu4pin;
-  int cpu4_4pin;
-  int cpu8pin;
-  int pciE6_2pin;
-  int pciE8pin;
-  int pciEv5_16pin;
+  List<PowerSupplyProtectionFunctions> protectionFunctions;
+  int cpu_4pin;
+  int cpu_4plus4pin;
+  int cpu_8pin;
+  int pcie_6plus2pin;
+  int pcie_8pin;
+  int pcie_5_16pin;
   int sata;
-  int countOf12VLines;
+  // ignore: non_constant_identifier_names
+  int count_of_12_v_lines;
   String description;
   int recommendedPrice;
 
@@ -33,16 +35,16 @@ class PowerSupply {
     this.producer,
     this.power,
     this.formFactor,
-    this.performanceLevelClass,
+    this.performanceLevel,
     this.protectionFunctions,
-    this.cpu4pin,
-    this.cpu4_4pin,
-    this.cpu8pin,
-    this.pciE6_2pin,
-    this.pciE8pin,
-    this.pciEv5_16pin,
+    this.cpu_4pin,
+    this.cpu_4plus4pin,
+    this.cpu_8pin,
+    this.pcie_6plus2pin,
+    this.pcie_8pin,
+    this.pcie_5_16pin,
     this.sata,
-    this.countOf12VLines,
+    this.count_of_12_v_lines,
     this.description,
     this.recommendedPrice, {
     required this.pfcModule,
