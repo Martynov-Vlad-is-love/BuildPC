@@ -24,6 +24,7 @@ class PowerSupply {
   int pcie_8pin;
   int pcie_5_16pin;
   int sata;
+
   // ignore: non_constant_identifier_names
   int count_of_12_v_lines;
   String description;
