@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+
 part 'case_design_features.g.dart';
 
 @JsonSerializable()
