@@ -1,22 +1,32 @@
+import 'package:buildpc/model/general/build_pc.dart';
+import 'package:buildpc/model/general/user.dart';
+import 'package:json_annotation/json_annotation.dart';
+
+part 'like.g.dart';
+
+@JsonSerializable()
 class Like {
   final int id;
-  int buildPcId;
-  int userId;
+  BuildPC buildPcId;
+  User user;
 
-  Like(this.id, this.buildPcId, this.userId);
+  Like(this.id, this.buildPcId, this.user);
 
-  Like.fromJson(Map<String, dynamic> json)
-      : id = json["id"] as int,
-        buildPcId = json["buildPcId"] as int,
-        userId = json["userId"] as int;
+  factory Like.fromJson(Map<String, dynamic> json) => _$LikeFromJson(json);
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{
-      "id": id.toString(),
-      "buildPcId": buildPcId,
-      "userId": userId,
-    };
-
-    return data;
-  }
+  Map<String, dynamic> toJson() => _$LikeToJson(this);
+// Like.fromJson(Map<String, dynamic> json)
+//     : id = json["id"] as int,
+//       buildPcId = json["buildPcId"] as int,
+//       userId = json["userId"] as int;
+//
+// Map<String, dynamic> toJson() {
+//   final Map<String, dynamic> data = <String, dynamic>{
+//     "id": id.toString(),
+//     "buildPcId": buildPcId,
+//     "userId": userId,
+//   };
+//
+//   return data;
+// }
 }
