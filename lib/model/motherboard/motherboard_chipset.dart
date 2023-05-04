@@ -1,19 +1,29 @@
+import 'package:json_annotation/json_annotation.dart';
+
+part 'motherboard_chipset.g.dart';
+
+@JsonSerializable()
 class MotherboardChipset {
   final int id;
   String chipset;
 
   MotherboardChipset(this.id, this.chipset);
 
-  MotherboardChipset.fromJson(Map<String, dynamic> json)
-      : id = json["id"] as int,
-        chipset = json["chipset"] as String;
+  factory MotherboardChipset.fromJson(Map<String, dynamic> json) =>
+      _$MotherboardChipsetFromJson(json);
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{
-      "id": id.toString(),
-      "chipset": chipset,
-    };
+  Map<String, dynamic> toJson() => _$MotherboardChipsetToJson(this);
 
-    return data;
-  }
+// MotherboardChipset.fromJson(Map<String, dynamic> json)
+//     : id = json["id"] as int,
+//       chipset = json["chipset"] as String;
+//
+// Map<String, dynamic> toJson() {
+//   final Map<String, dynamic> data = <String, dynamic>{
+//     "id": id.toString(),
+//     "chipset": chipset,
+//   };
+//
+//   return data;
+// }
 }
