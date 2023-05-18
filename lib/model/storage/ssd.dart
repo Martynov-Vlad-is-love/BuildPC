@@ -1,8 +1,8 @@
 import 'package:buildpc/model/general/performance_level.dart';
+import 'package:buildpc/model/general/producers.dart';
 import 'package:buildpc/model/storage/ssd_cells_type.dart';
 import 'package:buildpc/model/storage/storage_form_factor.dart';
 import 'package:buildpc/model/storage/storage_interface.dart';
-import 'package:buildpc/model/storage/storage_producer.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'ssd.g.dart';
@@ -10,7 +10,7 @@ part 'ssd.g.dart';
 @JsonSerializable()
 class Ssd {
   final int id;
-  StorageProducer producer;
+  Producers producer;
   int storageSize;
   StorageFormFactor formFactor;
   StorageInterface interface;

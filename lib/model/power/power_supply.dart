@@ -1,6 +1,6 @@
 import 'package:buildpc/model/general/form_factor.dart';
 import 'package:buildpc/model/general/performance_level.dart';
-import 'package:buildpc/model/power/power_supply_producer.dart';
+import 'package:buildpc/model/general/producers.dart';
 import 'package:buildpc/model/power/power_supply_protection_functions.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -10,7 +10,7 @@ part 'power_supply.g.dart';
 class PowerSupply {
   final int id;
   String name;
-  PowerSupplyProducer producer;
+  Producers producer;
   int power;
   FormFactor formFactor;
   PerformanceLevel performanceLevel;

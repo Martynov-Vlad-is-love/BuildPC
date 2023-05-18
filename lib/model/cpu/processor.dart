@@ -1,6 +1,6 @@
 import 'package:buildpc/model/cpu/cpu_generation.dart';
 import 'package:buildpc/model/cpu/cpu_pcie_controller.dart';
-import 'package:buildpc/model/cpu/cpu_producer.dart';
+import 'package:buildpc/model/general/producers.dart';
 import 'package:buildpc/model/motherboard/motherboard_socket.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -10,7 +10,7 @@ part 'processor.g.dart';
 class Processor {
   final int id;
   int name;
-  CPUProducer producer;
+  Producers producer;
   MotherboardSocket socket;
   int yearOfRelease;
   int countOfCores;

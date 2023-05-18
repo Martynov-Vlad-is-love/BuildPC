@@ -1,8 +1,8 @@
 import 'package:buildpc/model/general/performance_level.dart';
+import 'package:buildpc/model/general/producers.dart';
 import 'package:buildpc/model/gpu/gpu_connector.dart';
 import 'package:buildpc/model/gpu/gpu_interface_type.dart';
 import 'package:buildpc/model/gpu/gpu_memory_type.dart';
-import 'package:buildpc/model/gpu/gpu_producer.dart';
 import 'package:buildpc/model/gpu/gpu_to_connector.dart';
 import 'package:buildpc/model/gpu/gpu_vendor.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -12,7 +12,7 @@ part 'graphic_card.g.dart';
 @JsonSerializable()
 class GraphicCard {
   final int id;
-  GPUProducer producer;
+  Producers producer;
   int name;
   GPUVendor vendor;
   int year;

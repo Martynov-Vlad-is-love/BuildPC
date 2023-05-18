@@ -1,8 +1,8 @@
 import 'package:buildpc/model/cpu/cpu_generation.dart';
 import 'package:buildpc/model/general/performance_level.dart';
+import 'package:buildpc/model/general/producers.dart';
 import 'package:buildpc/model/motherboard/motherboard_chipset.dart';
 import 'package:buildpc/model/motherboard/motherboard_network.dart';
-import 'package:buildpc/model/motherboard/motherboard_producer.dart';
 import 'package:buildpc/model/motherboard/motherboard_socket.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -12,7 +12,7 @@ part 'motherboard.g.dart';
 class Motherboard {
   final int id;
   String name;
-  MotherboardProducer producer;
+  Producers producer;
   MotherboardSocket socket;
   List<CPUGeneration> cpuGeneration;
   MotherboardChipset chipset;

@@ -1,7 +1,7 @@
 import 'package:buildpc/model/general/performance_level.dart';
+import 'package:buildpc/model/general/producers.dart';
 import 'package:buildpc/model/storage/storage_form_factor.dart';
 import 'package:buildpc/model/storage/storage_interface.dart';
-import 'package:buildpc/model/storage/storage_producer.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'hdd.g.dart';
@@ -9,7 +9,7 @@ part 'hdd.g.dart';
 @JsonSerializable()
 class Hdd {
   final int id;
-  StorageProducer producer;
+  Producers producer;
   int storageSize;
   int speed;
   StorageFormFactor formFactor;

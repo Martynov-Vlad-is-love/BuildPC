@@ -1,9 +1,9 @@
 import 'package:buildpc/model/case/case_design_features.dart';
 import 'package:buildpc/model/case/case_power_supply_location.dart';
-import 'package:buildpc/model/case/case_producer.dart';
 import 'package:buildpc/model/case/case_size.dart';
 import 'package:buildpc/model/general/form_factor.dart';
 import 'package:buildpc/model/general/performance_level.dart';
+import 'package:buildpc/model/general/producers.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'case.g.dart';
@@ -12,7 +12,7 @@ part 'case.g.dart';
 class Case {
   final int id;
   int name;
-  CaseProducer producer;
+  Producers producer;
   CaseSize size;
   List<FormFactor> formFactor;
   CasePowerSupplyLocation powerSupplyLocation;

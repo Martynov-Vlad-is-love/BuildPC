@@ -1,6 +1,6 @@
 import 'package:buildpc/model/cooler/cooler_material.dart';
-import 'package:buildpc/model/cooler/cooler_producer.dart';
 import 'package:buildpc/model/cooler/cooler_socket.dart';
+import 'package:buildpc/model/general/producers.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'cooler.g.dart';
@@ -9,7 +9,7 @@ part 'cooler.g.dart';
 class Cooler {
   final int id;
   int name;
-  CoolerProducer producer;
+  Producers producer;
   CoolerSocket socket;
   CoolerMaterial material;
   int connector;

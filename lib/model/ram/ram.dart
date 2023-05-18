@@ -1,6 +1,6 @@
 import 'package:buildpc/model/general/performance_level.dart';
+import 'package:buildpc/model/general/producers.dart';
 import 'package:buildpc/model/ram/ram_memory_type.dart';
-import 'package:buildpc/model/ram/ram_producer.dart';
 import 'package:buildpc/model/ram/ram_timings.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -10,7 +10,7 @@ part 'ram.g.dart';
 class Ram {
   final int id;
   int name;
-  RamProducer producer;
+  Producers producer;
   RamMemoryType memoryType;
   int memoryCapacity;
   int frequency;
