@@ -24,9 +24,8 @@ class PowerSupply {
   int pcie_8pin;
   int pcie_5_16pin;
   int sata;
-
-  // ignore: non_constant_identifier_names
-  int count_of_12_v_lines;
+  @JsonKey(name: 'count_of_12_v_lines')
+  int countOf_12VLines;
   String description;
   int recommendedPrice;
 
@@ -45,7 +44,7 @@ class PowerSupply {
     this.pcie_8pin,
     this.pcie_5_16pin,
     this.sata,
-    this.count_of_12_v_lines,
+    this.countOf_12VLines,
     this.description,
     this.recommendedPrice, {
     required this.pfcModule,
