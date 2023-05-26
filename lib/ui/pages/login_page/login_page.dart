@@ -1,6 +1,8 @@
+import 'package:buildpc/project/routes/app_route_constants.dart';
 import 'package:buildpc/ui/widgets/text_bar/text_bar.dart';
 import 'package:buildpc/ui/widgets/top_navigation_bar/custom_top_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -10,7 +12,7 @@ class LoginPage extends StatelessWidget {
     final screenSize = MediaQuery.of(context).size;
 
     return Scaffold(
-      backgroundColor: Colors.grey,
+      backgroundColor: Colors.white,
       appBar: PreferredSize(
         preferredSize: Size(screenSize.width, 80),
         child: const CustomTopNavigationBar(),
@@ -18,7 +20,7 @@ class LoginPage extends StatelessWidget {
       body: Container(
         height: screenSize.height,
         width: screenSize.width,
-        color: Colors.grey,
+        color: Colors.white,
         child: Center(
           child: Column(
             children: [
@@ -55,7 +57,8 @@ class LoginPage extends StatelessWidget {
                     ),
                   ),
                   onPressed: () {
-                    return;
+                    GoRouter.of(context)
+                        .pushNamed(AppRouteConstants.adminRouteName);
                   },
                   child: const Text('Enter'),
                 ),
@@ -68,8 +71,8 @@ class LoginPage extends StatelessWidget {
                     const Text('Not an account?'),
                     TextButton(
                       onPressed: () {
-                        Navigator.of(context)
-                            .pushNamed('/registration', arguments: context);
+                        GoRouter.of(context)
+                            .pushNamed(AppRouteConstants.registrationRouteName);
                       },
                       child: const Text('Register'),
                     )

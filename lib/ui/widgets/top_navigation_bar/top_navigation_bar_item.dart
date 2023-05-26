@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class TopNavigationBarItem extends StatelessWidget {
   final Icon icon;
@@ -25,7 +26,7 @@ class TopNavigationBarItem extends StatelessWidget {
           backgroundColor: MaterialStatePropertyAll<Color>(Colors.green),
         ),
         onPressed: () {
-          Navigator.of(context).pushNamed(destination, arguments: context);
+          GoRouter.of(context).pushNamed(destination);
         },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,

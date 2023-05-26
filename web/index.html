@@ -44,8 +44,10 @@
     window.addEventListener('load', function(ev) {
       // Download main.dart.js
       _flutter.loader.loadEntrypoint({
+        entrypointUrl: "http://localhost:5500//main.dart.js",
         serviceWorker: {
           serviceWorkerVersion: serviceWorkerVersion,
+          serviceWorkerUrl: "http://localhost:5500//flutter_service_worker.js?v=",
         },
         onEntrypointLoaded: function(engineInitializer) {
           engineInitializer.initializeEngine().then(function(appRunner) {

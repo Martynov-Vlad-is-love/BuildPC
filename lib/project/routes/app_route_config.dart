@@ -9,47 +9,54 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class AppRouteConfig {
-  static GoRouter returnRouter(bool isAuth) {
+  final bool isAuth;
+  final GoRouter goRouter; // This instance will be store route state
+  static GoRouter get _router => returnRouter(isAuth: true);
+  AppRouteConfig({required this.isAuth}) : goRouter = _router;
+
+
+  static GoRouter returnRouter({required bool isAuth}) {
     final GoRouter router = GoRouter(
       routes: [
         GoRoute(
           path: '/',
           name: AppRouteConstants.mainRouteName,
-          pageBuilder: (context, state) =>
-              const MaterialPage(child: MainPage()),
-        ),
-        GoRoute(
-          path: '/login',
-          name: AppRouteConstants.loginRouteName,
-          pageBuilder: (context, state) =>
-              const MaterialPage(child: LoginPage()),
-        ),
-        GoRoute(
-          path: '/registration',
-          name: AppRouteConstants.registrationRouteName,
-          pageBuilder: (context, state) =>
-              const MaterialPage(child: RegistrationScreen()),
-        ),
-        GoRoute(
-          path: '/edit:model',
-          name: AppRouteConstants.editRouteName,
-          pageBuilder: (context, state) => MaterialPage(
-            child: EditPage(
-              model: state.pathParameters['model'],
+          builder: (BuildContext context, GoRouterState state) {
+            return const MainPage();
+          },
+          routes: <RouteBase>[
+            GoRoute(
+              path: 'login',
+              name: AppRouteConstants.loginRouteName,
+              builder: (context, state) =>
+                  const LoginPage(),
             ),
-          ),
-        ),
-        GoRoute(
-          path: '/components_page',
-          name: AppRouteConstants.componentsPageRouteName,
-          pageBuilder: (context, state) =>
-              const MaterialPage(child: ComponentsPage()),
-        ),
-        GoRoute(
-          path: '/admin',
-          name: AppRouteConstants.adminRouteName,
-          pageBuilder: (context, state) =>
-              const MaterialPage(child: AdminPage()),
+            GoRoute(
+              path: 'registration',
+              name: AppRouteConstants.registrationRouteName,
+              builder: (context, state) =>
+                  const RegistrationScreen(),
+            ),
+            GoRoute(
+              path: 'edit:model',
+              name: AppRouteConstants.editRouteName,
+              builder: (context, state) => EditPage(
+                model: state.pathParameters['model'],
+              ),
+            ),
+            GoRoute(
+              path: 'components_page',
+              name: AppRouteConstants.componentsPageRouteName,
+              builder: (context, state) =>
+                  const ComponentsPage(),
+            ),
+            GoRoute(
+              path: 'admin',
+              name: AppRouteConstants.adminRouteName,
+              builder: (context, state) =>
+                  const AdminPage(),
+            ),
+          ],
         ),
       ],
       redirect: (context, state) {

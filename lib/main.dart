@@ -8,11 +8,13 @@ class Main extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final config = AppRouteConfig(isAuth: true);
+
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      routeInformationParser:
-          AppRouteConfig.returnRouter(true).routeInformationParser,
-      routerDelegate: AppRouteConfig.returnRouter(true).routerDelegate,
+      routeInformationParser: config.goRouter.routeInformationParser,
+      routeInformationProvider: config.goRouter.routeInformationProvider,
+      routerDelegate: config.goRouter.routerDelegate,
     );
   }
 }

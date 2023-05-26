@@ -1,8 +1,8 @@
-import 'package:buildpc/constant.dart';
+import 'package:buildpc/project/routes/app_route_constants.dart';
 import 'package:buildpc/ui/widgets/text_bar/text_bar.dart';
-import 'package:buildpc/ui/widgets/top_navigation_bar/top_navigation_bar.dart';
-import 'package:buildpc/ui/widgets/top_navigation_bar/top_navigation_bar_item.dart';
+import 'package:buildpc/ui/widgets/top_navigation_bar/custom_top_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class RegistrationScreen extends StatelessWidget {
   const RegistrationScreen({Key? key}) : super(key: key);
@@ -14,29 +14,7 @@ class RegistrationScreen extends StatelessWidget {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size(screenSize.width, 80),
-        child: TopNavigationBar(
-          label: 'BuildPC',
-          height: kTopNavigationBarHeight,
-          color: Colors.green[600],
-          borderRadius: kTopNavigationBarBorderRadius,
-          children: const [
-            TopNavigationBarItem(
-              icon: Icon(Icons.place),
-              label: Text('Home'),
-              destination: '/main',
-            ),
-            TopNavigationBarItem(
-              icon: Icon(Icons.computer),
-              label: Text('My PC'),
-              destination: '/main',
-            ),
-            TopNavigationBarItem(
-              icon: Icon(Icons.door_front_door_outlined),
-              label: Text('Login'),
-              destination: '/login',
-            ),
-          ],
-        ),
+        child: const CustomTopNavigationBar(),
       ),
       body: Container(
         height: screenSize.height,
@@ -95,8 +73,8 @@ class RegistrationScreen extends StatelessWidget {
                     const Text('Have an account?'),
                     TextButton(
                       onPressed: () {
-                        Navigator.of(context)
-                            .pushNamed('/login', arguments: context);
+                        GoRouter.of(context)
+                            .pushNamed(AppRouteConstants.loginRouteName);
                       },
                       child: const Text('Authorize'),
                     )
