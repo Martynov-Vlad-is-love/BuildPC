@@ -13,7 +13,7 @@ Case _$CaseFromJson(Map<String, dynamic> json) => Case(
       (json['formFactor'] as List<dynamic>)
           .map((e) => FormFactor.fromJson(e as Map<String, dynamic>))
           .toList(),
-      CaseProducer.fromJson(json['producer'] as Map<String, dynamic>),
+      Producers.fromJson(json['producer'] as Map<String, dynamic>),
       CasePowerSupplyLocation.fromJson(
           json['powerSupplyLocation'] as Map<String, dynamic>),
       json['usb_3_2'] as int,

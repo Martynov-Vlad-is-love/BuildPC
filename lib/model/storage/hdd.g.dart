@@ -8,7 +8,7 @@ part of 'hdd.dart';
 
 Hdd _$HddFromJson(Map<String, dynamic> json) => Hdd(
       json['id'] as int,
-      StorageProducer.fromJson(json['producer'] as Map<String, dynamic>),
+      Producers.fromJson(json['producer'] as Map<String, dynamic>),
       json['storageSize'] as int,
       json['speed'] as int,
       StorageFormFactor.fromJson(json['formFactor'] as Map<String, dynamic>),

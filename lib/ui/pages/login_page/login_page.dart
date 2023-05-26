@@ -1,11 +1,9 @@
-import 'package:buildpc/constant.dart';
 import 'package:buildpc/ui/widgets/text_bar/text_bar.dart';
-import 'package:buildpc/ui/widgets/top_navigation_bar/top_navigation_bar.dart';
-import 'package:buildpc/ui/widgets/top_navigation_bar/top_navigation_bar_item.dart';
+import 'package:buildpc/ui/widgets/top_navigation_bar/custom_top_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+class LoginPage extends StatelessWidget {
+  const LoginPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,29 +13,7 @@ class LoginScreen extends StatelessWidget {
       backgroundColor: Colors.grey,
       appBar: PreferredSize(
         preferredSize: Size(screenSize.width, 80),
-        child: TopNavigationBar(
-          label: 'BuildPC',
-          height: kTopNavigationBarHeight,
-          color: Colors.green[600],
-          borderRadius: kTopNavigationBarBorderRadius,
-          children: const [
-            TopNavigationBarItem(
-              icon: Icon(Icons.place),
-              label: Text('Home'),
-              destination: '/main',
-            ),
-            TopNavigationBarItem(
-              icon: Icon(Icons.computer),
-              label: Text('My PC'),
-              destination: '/main',
-            ),
-            TopNavigationBarItem(
-              icon: Icon(Icons.door_front_door_outlined),
-              label: Text('Login'),
-              destination: '/login',
-            ),
-          ],
-        ),
+        child: const CustomTopNavigationBar(),
       ),
       body: Container(
         height: screenSize.height,

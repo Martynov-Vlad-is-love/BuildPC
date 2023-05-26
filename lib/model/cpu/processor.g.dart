@@ -9,7 +9,7 @@ part of 'processor.dart';
 Processor _$ProcessorFromJson(Map<String, dynamic> json) => Processor(
       json['id'] as int,
       json['name'] as int,
-      CPUProducer.fromJson(json['producer'] as Map<String, dynamic>),
+      Producers.fromJson(json['producer'] as Map<String, dynamic>),
       json['yearOfRelease'] as int,
       MotherboardSocket.fromJson(json['socket'] as Map<String, dynamic>),
       json['countOfCores'] as int,

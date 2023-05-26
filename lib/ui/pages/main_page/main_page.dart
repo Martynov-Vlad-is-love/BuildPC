@@ -9,6 +9,67 @@ class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
+
+    return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: Size(screenSize.width, 80),
+        child: const _NavigationBar(),
+      ),
+      body: SafeArea(
+        child: Column(
+          children: [
+            Expanded(
+              flex: 1,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisSize: MainAxisSize.max,
+                children: const [
+                  Expanded(
+                    flex: 2,
+                    child: _Border(),
+                  ),
+                  Expanded(flex: 6, child: _MainView()),
+                  Expanded(
+                    flex: 2,
+                    child: _Border(),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _MainView extends StatelessWidget {
+  const _MainView({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.grey,
+    );
+  }
+}
+
+class _Border extends StatelessWidget {
+  const _Border({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.white,
+    );
+  }
+}
+
+class _NavigationBar extends StatelessWidget {
+  const _NavigationBar({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     const isLog = false;
     String profileLabel = 'Sign in/Sign up';
     Icon profileWidget = const Icon(Icons.door_front_door_outlined);
@@ -19,61 +80,27 @@ class MainPage extends StatelessWidget {
       destination = '/profile';
     }
 
-    return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size(screenSize.width, 80),
-        child: TopNavigationBar(
-          label: 'BuildPC',
-          height: kTopNavigationBarHeight,
-          color: Colors.green[600],
-          borderRadius: kTopNavigationBarBorderRadius,
-          children: [
-            const TopNavigationBarItem(
-              icon: Icon(Icons.place),
-              label: Text('Home'),
-              destination: '/main',
-            ),
-            const TopNavigationBarItem(
-              icon: Icon(Icons.computer),
-              label: Text('My PC'),
-              destination: '/main',
-            ),
-            TopNavigationBarItem(
-              icon: profileWidget,
-              label: Text(profileLabel),
-              destination: destination,
-            ),
-          ],
-        ),
-      ),
-      body: Column(
+    return SafeArea(
+      child: TopNavigationBar(
+        label: 'BuildPC',
+        height: kTopNavigationBarHeight,
+        color: Colors.green[600],
+        borderRadius: kTopNavigationBarBorderRadius,
         children: [
-          Expanded(
-            flex: 1,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Expanded(
-                  flex: 1,
-                  child: Container(
-                    color: Colors.white,
-                  ),
-                ),
-                Expanded(
-                  flex: 5,
-                  child: Container(
-                    color: Colors.grey,
-                  ),
-                ),
-                Expanded(
-                  flex: 1,
-                  child: Container(
-                    color: Colors.white,
-                  ),
-                ),
-              ],
-            ),
+          const TopNavigationBarItem(
+            icon: Icon(Icons.place),
+            label: Text('Home'),
+            destination: '/main',
+          ),
+          const TopNavigationBarItem(
+            icon: Icon(Icons.computer),
+            label: Text('My PC'),
+            destination: '/main',
+          ),
+          TopNavigationBarItem(
+            icon: profileWidget,
+            label: Text(profileLabel),
+            destination: destination,
           ),
         ],
       ),

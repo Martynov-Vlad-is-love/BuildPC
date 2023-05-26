@@ -9,7 +9,7 @@ part of 'ram.dart';
 Ram _$RamFromJson(Map<String, dynamic> json) => Ram(
       json['id'] as int,
       json['name'] as int,
-      RamProducer.fromJson(json['producer'] as Map<String, dynamic>),
+      Producers.fromJson(json['producer'] as Map<String, dynamic>),
       RamMemoryType.fromJson(json['memoryType'] as Map<String, dynamic>),
       json['memoryCapacity'] as int,
       json['frequency'] as int,

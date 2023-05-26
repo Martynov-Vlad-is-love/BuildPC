@@ -9,7 +9,7 @@ part of 'cooler.dart';
 Cooler _$CoolerFromJson(Map<String, dynamic> json) => Cooler(
       json['id'] as int,
       json['name'] as int,
-      CoolerProducer.fromJson(json['producer'] as Map<String, dynamic>),
+      Producers.fromJson(json['producer'] as Map<String, dynamic>),
       CoolerSocket.fromJson(json['socket'] as Map<String, dynamic>),
       json['connector'] as int,
       CoolerMaterial.fromJson(json['material'] as Map<String, dynamic>),

@@ -8,7 +8,7 @@ part of 'ssd.dart';
 
 Ssd _$SsdFromJson(Map<String, dynamic> json) => Ssd(
       json['id'] as int,
-      StorageProducer.fromJson(json['producer'] as Map<String, dynamic>),
+      Producers.fromJson(json['producer'] as Map<String, dynamic>),
       json['storageSize'] as int,
       StorageFormFactor.fromJson(json['formFactor'] as Map<String, dynamic>),
       StorageInterface.fromJson(json['interface'] as Map<String, dynamic>),

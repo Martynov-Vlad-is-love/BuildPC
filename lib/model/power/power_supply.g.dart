@@ -9,7 +9,7 @@ part of 'power_supply.dart';
 PowerSupply _$PowerSupplyFromJson(Map<String, dynamic> json) => PowerSupply(
       json['id'] as int,
       json['name'] as String,
-      PowerSupplyProducer.fromJson(json['producer'] as Map<String, dynamic>),
+      Producers.fromJson(json['producer'] as Map<String, dynamic>),
       json['power'] as int,
       FormFactor.fromJson(json['formFactor'] as Map<String, dynamic>),
       PerformanceLevel.fromJson(
@@ -50,7 +50,7 @@ Map<String, dynamic> _$PowerSupplyToJson(PowerSupply instance) =>
       'pcie_8pin': instance.pcie_8pin,
       'pcie_5_16pin': instance.pcie_5_16pin,
       'sata': instance.sata,
-      'count_of_12_v_lines': instance.count_of_12_v_lines,
+      'count_of_12_v_lines': instance.countOf_12VLines,
       'description': instance.description,
       'recommendedPrice': instance.recommendedPrice,
     };
