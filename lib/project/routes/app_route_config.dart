@@ -12,8 +12,8 @@ class AppRouteConfig {
   final bool isAuth;
   final GoRouter goRouter; // This instance will be store route state
   static GoRouter get _router => returnRouter(isAuth: true);
-  AppRouteConfig({required this.isAuth}) : goRouter = _router;
 
+  AppRouteConfig({required this.isAuth}) : goRouter = _router;
 
   static GoRouter returnRouter({required bool isAuth}) {
     final GoRouter router = GoRouter(
@@ -28,14 +28,12 @@ class AppRouteConfig {
             GoRoute(
               path: 'login',
               name: AppRouteConstants.loginRouteName,
-              builder: (context, state) =>
-                  const LoginPage(),
+              builder: (context, state) => const LoginPage(),
             ),
             GoRoute(
               path: 'registration',
               name: AppRouteConstants.registrationRouteName,
-              builder: (context, state) =>
-                  const RegistrationScreen(),
+              builder: (context, state) => const RegistrationScreen(),
             ),
             GoRoute(
               path: 'edit:model',
@@ -47,14 +45,12 @@ class AppRouteConfig {
             GoRoute(
               path: 'components_page',
               name: AppRouteConstants.componentsPageRouteName,
-              builder: (context, state) =>
-                  const ComponentsPage(),
+              builder: (context, state) => const ComponentsPage(),
             ),
             GoRoute(
               path: 'admin',
               name: AppRouteConstants.adminRouteName,
-              builder: (context, state) =>
-                  const AdminPage(),
+              builder: (context, state) => const AdminPage(),
             ),
           ],
         ),

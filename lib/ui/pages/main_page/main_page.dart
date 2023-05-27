@@ -1,7 +1,4 @@
-import 'package:buildpc/constant.dart';
 import 'package:buildpc/ui/widgets/top_navigation_bar/custom_top_navigation_bar.dart';
-import 'package:buildpc/ui/widgets/top_navigation_bar/top_navigation_bar.dart';
-import 'package:buildpc/ui/widgets/top_navigation_bar/top_navigation_bar_item.dart';
 import 'package:flutter/material.dart';
 
 class MainPage extends StatelessWidget {
