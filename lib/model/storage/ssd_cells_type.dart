@@ -13,16 +13,4 @@ class SsdCellsType {
       _$SsdCellsTypeFromJson(json);
 
   Map<String, dynamic> toJson() => _$SsdCellsTypeToJson(this);
-// SSDCellsType.fromJson(Map<String, dynamic> json)
-//     : id = json["id"] as int,
-//       cellsType = json["cellsType"] as String;
-//
-// Map<String, dynamic> toJson() {
-//   final Map<String, dynamic> data = <String, dynamic>{
-//     "id": id.toString(),
-//     "cellsType": cellsType,
-//   };
-//
-//   return data;
-// }
 }

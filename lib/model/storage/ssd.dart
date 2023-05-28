@@ -13,7 +13,7 @@ class Ssd {
   Producers producer;
   int storageSize;
   StorageFormFactor formFactor;
-  StorageInterface interface;
+  StorageInterface storageInterface;
   int bufferSize;
   int readingSpeed;
   int writingSpeed;
@@ -27,7 +27,7 @@ class Ssd {
     this.producer,
     this.storageSize,
     this.formFactor,
-    this.interface,
+    this.storageInterface,
     this.bufferSize,
     this.readingSpeed,
     this.writingSpeed,
@@ -40,30 +40,4 @@ class Ssd {
   factory Ssd.fromJson(Map<String, dynamic> json) => _$SsdFromJson(json);
 
   Map<String, dynamic> toJson() => _$SsdToJson(this);
-// Ssd.fromJson(Map<String, dynamic> json)
-//     : id = json["id"] as int,
-//       producer = json["producer"] as int,
-//       storageSize = json["storageSize"] as int,
-//       formFactor = json["formFactor"] as int,
-//       interface = json["interface"] as int,
-//       readingSpeed = json["readingSpeed"] as int,
-//       writingSpeed = json["writingSpeed"] as int,
-//       cellsType = json["cellsType"] as int,
-//       size = json["size"] as int;
-//
-// Map<String, dynamic> toJson() {
-//   final Map<String, dynamic> data = <String, dynamic>{
-//     "id": id.toString(),
-//     "producer": producer,
-//     "storageSize": storageSize,
-//     "formFactor": formFactor,
-//     "interface": interface,
-//     "readingSpeed": readingSpeed,
-//     "writingSpeed": writingSpeed,
-//     "cellsType": cellsType,
-//     "size": size,
-//   };
-//
-//   return data;
-// }
 }

@@ -13,16 +13,4 @@ class GPUVendor {
       _$GPUVendorFromJson(json);
 
   Map<String, dynamic> toJson() => _$GPUVendorToJson(this);
-// GPUVendor.fromJson(Map<String, dynamic> json)
-//     : id = json["id"] as int,
-//       vendor = json["vendor"] as String;
-//
-// Map<String, dynamic> toJson() {
-//   final Map<String, dynamic> data = <String, dynamic>{
-//     "id": id.toString(),
-//     "vendor": vendor,
-//   };
-//
-//   return data;
-// }
 }

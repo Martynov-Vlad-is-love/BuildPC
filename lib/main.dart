@@ -19,10 +19,10 @@ class Main extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) => LocaleProvider())
       ],
-      builder: (context, child){
+      builder: (context, child) {
         final provider = Provider.of<LocaleProvider>(context);
 
-         return MaterialApp.router(
+        return MaterialApp.router(
           localizationsDelegates: const [
             AppLocalizations.delegate,
             GlobalMaterialLocalizations.delegate,
@@ -37,7 +37,6 @@ class Main extends StatelessWidget {
           routerDelegate: _config.goRouter.routerDelegate,
         );
       },
-
     );
   }
 }

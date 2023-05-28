@@ -13,16 +13,5 @@ class CoolerMaterial {
       _$CoolerMaterialFromJson(json);
 
   Map<String, dynamic> toJson() => _$CoolerMaterialToJson(this);
-// CoolerMaterial.fromJson(Map<String, dynamic> json)
-//     : id = json["id"] as int,
-//       material = json["material"] as String;
-//
-// Map<String, dynamic> toJson() {
-//   final Map<String, dynamic> data = <String, dynamic>{
-//     "id": id.toString(),
-//     "material": material,
-//   };
-//
-//   return data;
-// }
+
 }

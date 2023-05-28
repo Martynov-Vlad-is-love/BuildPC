@@ -13,16 +13,4 @@ class GPUInterfaceType {
       _$GPUInterfaceTypeFromJson(json);
 
   Map<String, dynamic> toJson() => _$GPUInterfaceTypeToJson(this);
-// GPUInterfaceType.fromJson(Map<String, dynamic> json)
-//     : id = json["id"] as int,
-//       interfaceType = json["interfaceType"] as String;
-//
-// Map<String, dynamic> toJson() {
-//   final Map<String, dynamic> data = <String, dynamic>{
-//     "id": id.toString(),
-//     "interfaceType": interfaceType,
-//   };
-//
-//   return data;
-// }
 }

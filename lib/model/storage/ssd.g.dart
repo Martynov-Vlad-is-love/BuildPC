@@ -11,7 +11,8 @@ Ssd _$SsdFromJson(Map<String, dynamic> json) => Ssd(
       Producers.fromJson(json['producer'] as Map<String, dynamic>),
       json['storageSize'] as int,
       StorageFormFactor.fromJson(json['formFactor'] as Map<String, dynamic>),
-      StorageInterface.fromJson(json['interface'] as Map<String, dynamic>),
+      StorageInterface.fromJson(
+          json['storageInterface'] as Map<String, dynamic>),
       json['bufferSize'] as int,
       json['readingSpeed'] as int,
       json['writingSpeed'] as int,
@@ -27,7 +28,7 @@ Map<String, dynamic> _$SsdToJson(Ssd instance) => <String, dynamic>{
       'producer': instance.producer,
       'storageSize': instance.storageSize,
       'formFactor': instance.formFactor,
-      'interface': instance.interface,
+      'storageInterface': instance.storageInterface,
       'bufferSize': instance.bufferSize,
       'readingSpeed': instance.readingSpeed,
       'writingSpeed': instance.writingSpeed,

@@ -13,16 +13,4 @@ class CaseDesignFeatures {
       _$CaseDesignFeaturesFromJson(json);
 
   Map<String, dynamic> toJson() => _$CaseDesignFeaturesToJson(this);
-// CaseDesignFeatures.fromJson(Map<String, dynamic> json)
-//     : id = json["id"] as int,
-//       designFeatures = json["designFeatures"] as String;
-//
-// Map<String, dynamic> toJson() {
-//   final Map<String, dynamic> data = <String, dynamic>{
-//     "id": id.toString(),
-//     "designFeatures": designFeatures,
-//   };
-//
-//   return data;
-// }
 }

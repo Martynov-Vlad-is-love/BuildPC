@@ -39,7 +39,6 @@ Map<String, dynamic> _$PowerSupplyToJson(PowerSupply instance) =>
       'producer': instance.producer,
       'power': instance.power,
       'formFactor': instance.formFactor,
-      'performanceLevel': instance.performanceLevel,
       'pfcModule': instance.pfcModule,
       'modularConnection': instance.modularConnection,
       'protectionFunctions': instance.protectionFunctions,
@@ -53,4 +52,5 @@ Map<String, dynamic> _$PowerSupplyToJson(PowerSupply instance) =>
       'count_of_12_v_lines': instance.countOf_12VLines,
       'description': instance.description,
       'recommendedPrice': instance.recommendedPrice,
+      'performanceLevel': instance.performanceLevel,
     };

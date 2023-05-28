@@ -32,28 +32,4 @@ class Cooler {
   factory Cooler.fromJson(Map<String, dynamic> json) => _$CoolerFromJson(json);
 
   Map<String, dynamic> toJson() => _$CoolerToJson(this);
-// Cooler.fromJson(Map<String, dynamic> json)
-//     : id = json["id"] as int,
-//       name = json["name"] as int,
-//       producer = json["producer"] as CoolerProducer,
-//       socket = json["socket"] as CoolerSocket,
-//       connector = json["connector"] as int,
-//       material = json["material"] as CoolerMaterial,
-//       maxTDP = json["maxTDP"] as int,
-//       supportedSockets = json["supportedSockets"] as int,
-//       thermotubes = json["thermotubes"] as int;
-//
-// Map<String, dynamic> toJson() {
-//   final Map<String, dynamic> data = <String, dynamic>{
-//     "id": id.toString(),
-//     "name": name,
-//     "connector": connector.toString(),
-//     "material": material.toString(),
-//     "maxTDP": maxTDP.toString(),
-//     "supportedSockets": supportedSockets.toString(),
-//     "thermotubes": thermotubes.toString(),
-//   };
-//
-//   return data;
-// }
 }

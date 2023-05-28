@@ -26,7 +26,6 @@ class LanguagePickerItem extends StatelessWidget {
               onTap: () {
                 final provider =
                     Provider.of<LocaleProvider>(context, listen: false);
-
                 provider.setLocale(locale);
               },
               child: Center(

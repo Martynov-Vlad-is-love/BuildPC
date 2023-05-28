@@ -13,16 +13,4 @@ class GPUConnectionType {
       _$GPUConnectionTypeFromJson(json);
 
   Map<String, dynamic> toJson() => _$GPUConnectionTypeToJson(this);
-// GPUConnectionType.fromJson(Map<String, dynamic> json)
-//     : id = json["id"] as int,
-//       connectionType = json["connectionType"] as String;
-//
-// Map<String, dynamic> toJson() {
-//   final Map<String, dynamic> data = <String, dynamic>{
-//     "id": id.toString(),
-//     "connectionType": connectionType,
-//   };
-//
-//   return data;
-// }
 }

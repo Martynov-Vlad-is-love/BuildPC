@@ -23,7 +23,6 @@ Case _$CaseFromJson(Map<String, dynamic> json) => Case(
           .map((e) => CaseDesignFeatures.fromJson(e as Map<String, dynamic>))
           .toList(),
       json['maxLengthOfGraphicCard'] as int,
-      json['powerSupplyFormFactor'] as int,
       json['description'] as String,
       json['recommendedPrice'] as int,
       PerformanceLevel.fromJson(
@@ -44,7 +43,6 @@ Map<String, dynamic> _$CaseToJson(Case instance) => <String, dynamic>{
       'usb_2_0': instance.usb_2_0,
       'designFeatures': instance.designFeatures,
       'maxLengthOfGraphicCard': instance.maxLengthOfGraphicCard,
-      'powerSupplyFormFactor': instance.powerSupplyFormFactor,
       'description': instance.description,
       'recommendedPrice': instance.recommendedPrice,
       'performanceLevel': instance.performanceLevel,

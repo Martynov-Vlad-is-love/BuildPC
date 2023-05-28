@@ -39,30 +39,4 @@ class Hdd {
   factory Hdd.fromJson(Map<String, dynamic> json) => _$HddFromJson(json);
 
   Map<String, dynamic> toJson() => _$HddToJson(this);
-// Hdd.fromJson(Map<String, dynamic> json)
-//     : id = json["id"] as int,
-//       producer = json["producer"] as int,
-//       storageSize = json["storageSize"] as int,
-//       speed = json["speed"] as int,
-//       formFactor = json["formFactor"] as int,
-//       interface = json["interface"] as int,
-//       bufferSize = json["bufferSize"] as int,
-//       readingSpeed = json["readingSpeed"] as int,
-//       writingSpeed = json["writingSpeed"] as int;
-//
-// Map<String, dynamic> toJson() {
-//   final Map<String, dynamic> data = <String, dynamic>{
-//     "id": id.toString(),
-//     "producer": producer,
-//     "storageSize": storageSize,
-//     "speed": speed,
-//     "formFactor": formFactor,
-//     "interface": interface,
-//     "bufferSize": bufferSize,
-//     "readingSpeed": readingSpeed,
-//     "writingSpeed": writingSpeed,
-//   };
-//
-//   return data;
-// }
 }

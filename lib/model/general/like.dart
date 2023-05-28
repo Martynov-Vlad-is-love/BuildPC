@@ -15,18 +15,4 @@ class Like {
   factory Like.fromJson(Map<String, dynamic> json) => _$LikeFromJson(json);
 
   Map<String, dynamic> toJson() => _$LikeToJson(this);
-// Like.fromJson(Map<String, dynamic> json)
-//     : id = json["id"] as int,
-//       buildPcId = json["buildPcId"] as int,
-//       userId = json["userId"] as int;
-//
-// Map<String, dynamic> toJson() {
-//   final Map<String, dynamic> data = <String, dynamic>{
-//     "id": id.toString(),
-//     "buildPcId": buildPcId,
-//     "userId": userId,
-//   };
-//
-//   return data;
-// }
 }

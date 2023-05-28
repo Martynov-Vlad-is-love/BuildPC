@@ -13,16 +13,4 @@ class RamMemoryType {
       _$RamMemoryTypeFromJson(json);
 
   Map<String, dynamic> toJson() => _$RamMemoryTypeToJson(this);
-// RAMMemoryType.fromJson(Map<String, dynamic> json)
-//     : id = json["id"] as int,
-//       memoryType = json["memoryType"] as String;
-//
-// Map<String, dynamic> toJson() {
-//   final Map<String, dynamic> data = <String, dynamic>{
-//     "id": id.toString(),
-//     "memoryType": memoryType,
-//   };
-//
-//   return data;
-// }
 }
