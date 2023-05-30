@@ -1,5 +1,6 @@
 import 'package:buildpc/model/general/performance_level.dart';
 import 'package:buildpc/model/general/producers.dart';
+import 'package:buildpc/model/model.dart';
 import 'package:buildpc/model/ram/ram_memory_type.dart';
 import 'package:buildpc/model/ram/ram_timings.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -7,9 +8,9 @@ import 'package:json_annotation/json_annotation.dart';
 part 'ram.g.dart';
 
 @JsonSerializable()
-class Ram {
+class Ram implements Model {
   final int id;
-  int name;
+  String name;
   Producers producer;
   RamMemoryType memoryType;
   int memoryCapacity;
@@ -36,5 +37,25 @@ class Ram {
 
   factory Ram.fromJson(Map<String, dynamic> json) => _$RamFromJson(json);
 
+  @override
   Map<String, dynamic> toJson() => _$RamToJson(this);
+
+  @override
+  List<String> parsedModels() {
+    final fields = [
+      id.toString(),
+      name,
+      producer.name,
+      memoryType.memoryType,
+      memoryCapacity.toString(),
+      frequency.toString(),
+      timings.timings,
+      powerSupplyVoltage.toString(),
+      description,
+      recommendedPrice.toString(),
+      performanceLevel.level
+    ];
+
+    return fields;
+  }
 }

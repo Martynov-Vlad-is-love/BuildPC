@@ -1,6 +1,8 @@
 import 'package:buildpc/model/cpu/cpu_generation.dart';
+import 'package:buildpc/model/general/form_factor.dart';
 import 'package:buildpc/model/general/performance_level.dart';
 import 'package:buildpc/model/general/producers.dart';
+import 'package:buildpc/model/model.dart';
 import 'package:buildpc/model/motherboard/motherboard_chipset.dart';
 import 'package:buildpc/model/motherboard/motherboard_network.dart';
 import 'package:buildpc/model/motherboard/motherboard_socket.dart';
@@ -9,14 +11,14 @@ import 'package:json_annotation/json_annotation.dart';
 part 'motherboard.g.dart';
 
 @JsonSerializable()
-class Motherboard {
+class Motherboard implements Model {
   final int id;
   String name;
   Producers producer;
   MotherboardSocket socket;
   List<CPUGeneration> cpuGeneration;
   MotherboardChipset chipset;
-  int formFactor;
+  FormFactor formFactor;
   int maxTdpOfProcessors;
   int memorySlots;
   int supportedMemoryFrequency;
@@ -77,5 +79,51 @@ class Motherboard {
   factory Motherboard.fromJson(Map<String, dynamic> json) =>
       _$MotherboardFromJson(json);
 
+  @override
   Map<String, dynamic> toJson() => _$MotherboardToJson(this);
+
+  @override
+  List<String> parsedModels() {
+    final cpuGen = [];
+    for (final gen in cpuGeneration) {
+      cpuGen.add(gen.name);
+    }
+
+    final fields = [
+      id.toString(),
+      name,
+      producer.name,
+      socket.socket,
+      cpuGen.toString(),
+      chipset.chipset,
+      formFactor.toString(),
+      maxTdpOfProcessors.toString(),
+      memorySlots.toString(),
+      maxTdpOfProcessors.toString(),
+      memorySlots.toString(),
+      supportedMemoryFrequency.toString(),
+      maxAmountOfRam.toString(),
+      network.toString(),
+      bluetooth.toString(),
+      wifi.toString(),
+      pciExpressX16.toString(),
+      pciExpressX4.toString(),
+      pciExpressX1.toString(),
+      sata3.toString(),
+      m2.toString(),
+      dSub.toString(),
+      dvi.toString(),
+      hdmi.toString(),
+      displayPort.toString(),
+      usb_3_0.toString(),
+      usb_2_0.toString(),
+      usbTypeC.toString(),
+      digitalAudioJack.toString(),
+      description,
+      recommendedPrice.toString(),
+      performanceLevel.level,
+    ];
+
+    return fields;
+  }
 }

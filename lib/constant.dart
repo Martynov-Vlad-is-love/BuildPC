@@ -19,12 +19,10 @@ const List<String> user = [];
 
 //ignore: prefer-match-file-name
 class Component {
-  BuildContext context;
-
-  Component(this.context);
-
   List<String> getComponentsList(BuildContext context) {
     final AppLocalizations? _locale = AppLocalizations.of(context);
+
+
     final List<String> components = [
       '${_locale?.graphicCard}',
       '${_locale?.pcCase}',
@@ -42,6 +40,7 @@ class Component {
 
   Map<String, List<String>> getComponents(BuildContext context) {
     final AppLocalizations? _locale = AppLocalizations.of(context);
+
     final List<String> _graphicCard = [
       'id',
       '${_locale?.producer}',
@@ -86,10 +85,12 @@ class Component {
       '${_locale?.producer}',
       '${_locale?.socket}',
       '${_locale?.material}',
-      '${_locale?.connector}',
       '${_locale?.maxTDP}',
       '${_locale?.supportedSockets}',
-      '${_locale?.thermotubes}'
+      '${_locale?.thermotubes}',
+      '${_locale?.description}',
+      '${_locale?.recommendedPrice}',
+      '${_locale?.performanceLevel}'
     ];
     final List<String> _processor = [
       'id',
@@ -191,6 +192,7 @@ class Component {
       '${_locale?.recommendedPrice}',
       '${_locale?.performanceLevel}',
     ];
+
     final Map<String, List<String>> components = {
       'Case': _pcCase,
       'Cooler': _cooler,

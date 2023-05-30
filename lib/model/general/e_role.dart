@@ -1,0 +1,4 @@
+enum ERole{
+  roleUser,
+  roleAdmin
+}

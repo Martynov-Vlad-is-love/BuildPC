@@ -9,8 +9,8 @@ part of 'graphic_card.dart';
 GraphicCard _$GraphicCardFromJson(Map<String, dynamic> json) => GraphicCard(
       json['id'] as int,
       Producers.fromJson(json['producer'] as Map<String, dynamic>),
-      json['name'] as int,
-      GPUVendor.fromJson(json['vendor'] as Map<String, dynamic>),
+      json['name'] as String,
+      Producers.fromJson(json['vendor'] as Map<String, dynamic>),
       json['year'] as int,
       json['technicalProcess'] as int,
       json['gpuFrequency'] as int,
@@ -26,9 +26,7 @@ GraphicCard _$GraphicCardFromJson(Map<String, dynamic> json) => GraphicCard(
       GPUInterfaceType.fromJson(json['interfaceType'] as Map<String, dynamic>),
       json['description'] as String,
       json['recommendedPrice'] as int,
-      (json['gpuTechnologies'] as List<dynamic>)
-          .map((e) => GPUToConnector.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      GPUTechnologies.fromJson(json['gpuTechnologies'] as Map<String, dynamic>),
       PerformanceLevel.fromJson(
           json['performanceLevel'] as Map<String, dynamic>),
     );

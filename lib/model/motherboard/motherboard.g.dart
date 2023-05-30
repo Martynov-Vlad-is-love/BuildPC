@@ -15,7 +15,7 @@ Motherboard _$MotherboardFromJson(Map<String, dynamic> json) => Motherboard(
           .map((e) => CPUGeneration.fromJson(e as Map<String, dynamic>))
           .toList(),
       MotherboardChipset.fromJson(json['chipset'] as Map<String, dynamic>),
-      json['formFactor'] as int,
+      FormFactor.fromJson(json['formFactor'] as Map<String, dynamic>),
       json['maxTdpOfProcessors'] as int,
       json['memorySlots'] as int,
       json['supportedMemoryFrequency'] as int,

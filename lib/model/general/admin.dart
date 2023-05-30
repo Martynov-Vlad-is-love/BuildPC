@@ -1,9 +1,10 @@
+import 'package:buildpc/model/model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'admin.g.dart';
 
 @JsonSerializable()
-class Admin {
+class Admin implements Model{
   final int id;
   String login;
   String eMail;
@@ -13,6 +14,19 @@ class Admin {
 
   factory Admin.fromJson(Map<String, dynamic> json) => _$AdminFromJson(json);
 
+  @override
   Map<String, dynamic> toJson() => _$AdminToJson(this);
+
+  @override
+  List<String> parsedModels() {
+    final fields = [
+      id.toString(),
+      login,
+      eMail,
+      password
+    ];
+
+    return fields;
+  }
 
 }

@@ -1,20 +1,20 @@
 import 'package:buildpc/model/model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'cpu_generation.g.dart';
+part 'cpu_pcie_version.g.dart';
 
 @JsonSerializable()
-class CPUGeneration implements Model{
+class CPUPCIeVersion implements Model{
   final int id;
   String name;
 
-  CPUGeneration(this.id, this.name);
+  CPUPCIeVersion(this.id, this.name);
 
-  factory CPUGeneration.fromJson(Map<String, dynamic> json) =>
-      _$CPUGenerationFromJson(json);
+  factory CPUPCIeVersion.fromJson(Map<String, dynamic> json) =>
+      _$CPUPCIeVersionFromJson(json);
 
   @override
-  Map<String, dynamic> toJson() => _$CPUGenerationToJson(this);
+  Map<String, dynamic> toJson() => _$CPUPCIeVersionToJson(this);
 
   @override
   List<String> parsedModels() {
@@ -22,4 +22,5 @@ class CPUGeneration implements Model{
 
     return fields;
   }
+
 }

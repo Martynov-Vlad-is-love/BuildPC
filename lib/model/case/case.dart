@@ -4,14 +4,15 @@ import 'package:buildpc/model/case/case_size.dart';
 import 'package:buildpc/model/general/form_factor.dart';
 import 'package:buildpc/model/general/performance_level.dart';
 import 'package:buildpc/model/general/producers.dart';
+import 'package:buildpc/model/model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'case.g.dart';
 
 @JsonSerializable()
-class Case {
+class Case implements Model{
   final int id;
-  int name;
+  String name;
   Producers producer;
   CaseSize size;
   List<FormFactor> formFactor;
@@ -46,5 +47,39 @@ class Case {
 
   factory Case.fromJson(Map<String, dynamic> json) => _$CaseFromJson(json);
 
+  @override
   Map<String, dynamic> toJson() => _$CaseToJson(this);
+
+
+
+  @override
+  List<String> parsedModels() {
+    final formFactorField = [];
+    for(final form in formFactor){
+      formFactorField.add(form.name);
+    }
+    final designFeaturesField = [];
+    for(final feature in designFeatures){
+      designFeaturesField.add(feature.designFeatures);
+    }
+
+    final List<String> fields = [
+      id.toString(),
+      name,
+      size.size,
+      formFactorField.toString(),
+      producer.name,
+      powerSupplyLocation.powerSupplyLocation,
+      usb_3_2.toString(),
+      usb_3_0.toString(),
+      usb_2_0.toString(),
+      maxLengthOfGraphicCard.toString(),
+      designFeaturesField.toString(),
+      description,
+      recommendedPrice.toString(),
+      performanceLevel.level
+    ];
+
+    return fields;
+  }
 }

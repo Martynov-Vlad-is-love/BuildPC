@@ -8,14 +8,17 @@ part of 'cooler.dart';
 
 Cooler _$CoolerFromJson(Map<String, dynamic> json) => Cooler(
       json['id'] as int,
-      json['name'] as int,
+      json['name'] as String,
       Producers.fromJson(json['producer'] as Map<String, dynamic>),
       CoolerSocket.fromJson(json['socket'] as Map<String, dynamic>),
-      json['connector'] as int,
       CoolerMaterial.fromJson(json['material'] as Map<String, dynamic>),
       json['maxTDP'] as int,
       json['supportedSockets'] as int,
       json['thermotubes'] as int,
+      json['description'] as String,
+      json['recommendedPrice'] as int,
+      PerformanceLevel.fromJson(
+          json['performanceLevel'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$CoolerToJson(Cooler instance) => <String, dynamic>{
@@ -24,8 +27,10 @@ Map<String, dynamic> _$CoolerToJson(Cooler instance) => <String, dynamic>{
       'producer': instance.producer,
       'socket': instance.socket,
       'material': instance.material,
-      'connector': instance.connector,
       'maxTDP': instance.maxTDP,
       'supportedSockets': instance.supportedSockets,
       'thermotubes': instance.thermotubes,
+      'description': instance.description,
+      'recommendedPrice': instance.recommendedPrice,
+      'performanceLevel': instance.performanceLevel,
     };

@@ -3,18 +3,18 @@ import 'package:buildpc/model/general/producers.dart';
 import 'package:buildpc/model/gpu/gpu_connector.dart';
 import 'package:buildpc/model/gpu/gpu_interface_type.dart';
 import 'package:buildpc/model/gpu/gpu_memory_type.dart';
-import 'package:buildpc/model/gpu/gpu_to_connector.dart';
-import 'package:buildpc/model/gpu/gpu_vendor.dart';
+import 'package:buildpc/model/gpu/gpu_technologies.dart';
+import 'package:buildpc/model/model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'graphic_card.g.dart';
 
 @JsonSerializable()
-class GraphicCard {
+class GraphicCard implements Model {
   final int id;
   Producers producer;
-  int name;
-  GPUVendor vendor;
+  String name;
+  Producers vendor;
   int year;
   int technicalProcess;
   int gpuFrequency;
@@ -27,7 +27,7 @@ class GraphicCard {
   GPUInterfaceType interfaceType;
   int length;
   String description;
-  List<GPUToConnector> gpuTechnologies;
+  GPUTechnologies gpuTechnologies;
   int recommendedPrice;
   PerformanceLevel performanceLevel;
 
@@ -56,5 +56,38 @@ class GraphicCard {
   factory GraphicCard.fromJson(Map<String, dynamic> json) =>
       _$GraphicCardFromJson(json);
 
+  @override
   Map<String, dynamic> toJson() => _$GraphicCardToJson(this);
+
+  @override
+  List<String> parsedModels() {
+    final connectors = [];
+    for(final con in connector){
+      connectors.add(con.toString());
+    }
+
+    final fields = [
+      id.toString(),
+      producer.name,
+      name,
+      vendor.name,
+      year.toString(),
+      technicalProcess.toString(),
+      gpuFrequency.toString(),
+      memoryAmount.toString(),
+      memoryType.type,
+      memoryFrequency.toString(),
+      bus.toString(),
+      tdp.toString(),
+      connectors.toString(),
+      interfaceType.interfaceType,
+      length.toString(),
+      description,
+      gpuTechnologies.name,
+      recommendedPrice.toString(),
+      performanceLevel.level
+    ];
+
+    return fields;
+  }
 }

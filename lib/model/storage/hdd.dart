@@ -1,5 +1,6 @@
 import 'package:buildpc/model/general/performance_level.dart';
 import 'package:buildpc/model/general/producers.dart';
+import 'package:buildpc/model/model.dart';
 import 'package:buildpc/model/storage/storage_form_factor.dart';
 import 'package:buildpc/model/storage/storage_interface.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -7,7 +8,7 @@ import 'package:json_annotation/json_annotation.dart';
 part 'hdd.g.dart';
 
 @JsonSerializable()
-class Hdd {
+class Hdd implements Model{
   final int id;
   Producers producer;
   int storageSize;
@@ -38,5 +39,26 @@ class Hdd {
 
   factory Hdd.fromJson(Map<String, dynamic> json) => _$HddFromJson(json);
 
+  @override
   Map<String, dynamic> toJson() => _$HddToJson(this);
+
+  @override
+  List<String> parsedModels() {
+    final fields = [
+      id.toString(),
+      producer.name,
+      storageSize.toString(),
+      speed.toString(),
+      formFactor.name,
+      storageInterface.name,
+      bufferSize.toString(),
+      readingSpeed.toString(),
+      writingSpeed.toString(),
+      description,
+      recommendedPrice.toString(),
+      performanceLevel.level
+    ];
+
+    return fields;
+  }
 }

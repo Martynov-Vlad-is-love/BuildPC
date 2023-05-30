@@ -1,13 +1,14 @@
 import 'package:buildpc/model/general/form_factor.dart';
 import 'package:buildpc/model/general/performance_level.dart';
 import 'package:buildpc/model/general/producers.dart';
+import 'package:buildpc/model/model.dart';
 import 'package:buildpc/model/power/power_supply_protection_functions.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'power_supply.g.dart';
 
 @JsonSerializable()
-class PowerSupply {
+class PowerSupply implements Model{
   final int id;
   String name;
   Producers producer;
@@ -54,5 +55,37 @@ class PowerSupply {
   factory PowerSupply.fromJson(Map<String, dynamic> json) =>
       _$PowerSupplyFromJson(json);
 
+  @override
   Map<String, dynamic> toJson() => _$PowerSupplyToJson(this);
+
+  @override
+  List<String> parsedModels() {
+    final powerSupplyPF = [];
+    for(final protectionFunction in protectionFunctions){
+      powerSupplyPF.add(protectionFunction.name);
+    }
+
+    final List<String> fields = [
+      id.toString(),
+      name,
+      producer.name,
+      power.toString(),
+      formFactor.name,
+      pfcModule.toString(),
+      modularConnection.toString(),
+      powerSupplyPF.toString(),
+      cpu_4pin.toString(),
+      cpu_4plus4pin.toString(),
+      cpu_8pin.toString(),
+      pcie_6plus2pin.toString(),
+      pcie_5_16pin.toString(),
+      sata.toString(),
+      countOf_12VLines.toString(),
+      description,
+      recommendedPrice.toString(),
+      performanceLevel.level
+    ];
+
+    return fields;
+  }
 }

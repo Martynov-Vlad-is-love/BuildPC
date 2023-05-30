@@ -10,7 +10,7 @@ CasePowerSupplyLocation _$CasePowerSupplyLocationFromJson(
         Map<String, dynamic> json) =>
     CasePowerSupplyLocation(
       json['id'] as int,
-      json['powerSupplyLocation'] as String?,
+      json['powerSupplyLocation'] as String,
     );
 
 Map<String, dynamic> _$CasePowerSupplyLocationToJson(

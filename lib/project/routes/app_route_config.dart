@@ -1,3 +1,4 @@
+import 'package:buildpc/model/model.dart';
 import 'package:buildpc/project/routes/app_route_constants.dart';
 import 'package:buildpc/ui/pages/admin_page/admin_page.dart';
 import 'package:buildpc/ui/pages/admin_page/components_page.dart';
@@ -7,6 +8,7 @@ import 'package:buildpc/ui/pages/main_page/main_page.dart';
 import 'package:buildpc/ui/pages/registration_page/registration_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+//ignore_for_file: cast_nullable_to_non_nullable
 
 class AppRouteConfig {
   final bool isAuth;
@@ -36,10 +38,11 @@ class AppRouteConfig {
               builder: (context, state) => const RegistrationScreen(),
             ),
             GoRoute(
-              path: 'edit:model',
+              path: 'edit:modelName',
               name: AppRouteConstants.editRouteName,
               builder: (context, state) => EditPage(
-                model: state.pathParameters['model'],
+                modelName: state.pathParameters['modelName'],
+                model: state.extra as Model,
               ),
             ),
             GoRoute(

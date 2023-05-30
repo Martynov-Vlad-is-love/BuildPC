@@ -9,7 +9,7 @@ part of 'build_pc.dart';
 BuildPC _$BuildPCFromJson(Map<String, dynamic> json) => BuildPC(
       json['id'] as int,
       json['nameOfBuild'] as String,
-      json['userId'] as int,
+      User.fromJson(json['user'] as Map<String, dynamic>),
       Motherboard.fromJson(json['motherboard'] as Map<String, dynamic>),
       Processor.fromJson(json['processor'] as Map<String, dynamic>),
       GraphicCard.fromJson(json['graphicCard'] as Map<String, dynamic>),
@@ -32,7 +32,7 @@ BuildPC _$BuildPCFromJson(Map<String, dynamic> json) => BuildPC(
 Map<String, dynamic> _$BuildPCToJson(BuildPC instance) => <String, dynamic>{
       'id': instance.id,
       'nameOfBuild': instance.nameOfBuild,
-      'userId': instance.userId,
+      'user': instance.user,
       'motherboard': instance.motherboard,
       'processor': instance.processor,
       'graphicCard': instance.graphicCard,

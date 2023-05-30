@@ -1,18 +1,36 @@
+import 'package:buildpc/model/general/e_role.dart';
+import 'package:buildpc/model/model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'user.g.dart';
 
 @JsonSerializable()
-class User {
+class User implements Model{
   int id;
   String name;
-  String login;
+  String username;
   String email;
   String password;
+  ERole role;
 
-  User(this.id, this.name, this.login, this.email, this.password);
+  User(this.id, this.name, this.username, this.email, this.password, this.role);
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 
+  @override
   Map<String, dynamic> toJson() => _$UserToJson(this);
+
+  @override
+  List<String> parsedModels() {
+    final fields = [
+      id.toString(),
+      name,
+      username,
+      email,
+      password,
+      role.name
+    ];
+
+    return fields;
+  }
 }

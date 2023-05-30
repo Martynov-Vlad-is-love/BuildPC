@@ -8,7 +8,7 @@ part of 'processor.dart';
 
 Processor _$ProcessorFromJson(Map<String, dynamic> json) => Processor(
       json['id'] as int,
-      json['name'] as int,
+      json['name'] as String,
       Producers.fromJson(json['producer'] as Map<String, dynamic>),
       json['yearOfRelease'] as int,
       MotherboardSocket.fromJson(json['socket'] as Map<String, dynamic>),
@@ -21,9 +21,9 @@ Processor _$ProcessorFromJson(Map<String, dynamic> json) => Processor(
       json['technicalProcess'] as int,
       json['tdp'] as int,
       json['maxTemperature'] as int,
-      CPUPCIeController.fromJson(
-          json['pcieController'] as Map<String, dynamic>),
-      json['description'] as int,
+      CPUPCIeVersion.fromJson(json['pcieVersion'] as Map<String, dynamic>),
+      CPUTechnologies.fromJson(json['technologies'] as Map<String, dynamic>),
+      json['description'] as String,
       embeddedGraphics: json['embeddedGraphics'] as bool,
     );
 
@@ -43,6 +43,7 @@ Map<String, dynamic> _$ProcessorToJson(Processor instance) => <String, dynamic>{
       'tdp': instance.tdp,
       'maxTemperature': instance.maxTemperature,
       'embeddedGraphics': instance.embeddedGraphics,
-      'pcieController': instance.pcieController,
+      'pcieVersion': instance.pcieVersion,
+      'technologies': instance.technologies,
       'description': instance.description,
     };

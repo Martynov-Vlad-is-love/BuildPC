@@ -1,19 +1,19 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'gpu_connection_type.dart';
+part of 'cpu_pcie_version.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-GPUConnectionType _$GPUConnectionTypeFromJson(Map<String, dynamic> json) =>
-    GPUConnectionType(
+CPUPCIeVersion _$CPUPCIeVersionFromJson(Map<String, dynamic> json) =>
+    CPUPCIeVersion(
       json['id'] as int,
-      json['connectionType'] as String,
+      json['name'] as String,
     );
 
-Map<String, dynamic> _$GPUConnectionTypeToJson(GPUConnectionType instance) =>
+Map<String, dynamic> _$CPUPCIeVersionToJson(CPUPCIeVersion instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'connectionType': instance.connectionType,
+      'name': instance.name,
     };
