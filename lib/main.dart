@@ -1,6 +1,8 @@
+import 'package:buildpc/controller/general/user_controller.dart';
 import 'package:buildpc/l10n/l10n.dart';
 import 'package:buildpc/project/routes/app_route_config.dart';
 import 'package:buildpc/provider/locale_provider.dart';
+import 'package:buildpc/repository/general/user_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -12,11 +14,15 @@ class Main extends StatelessWidget {
   Main({Key? key}) : super(key: key);
 
   final _config = AppRouteConfig(isAuth: true);
-
+  final _userRepository = UserRepository();
   @override
   Widget build(BuildContext context) {
+
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider(
+          create: (context) => UserController(_userRepository),
+        ),
         ChangeNotifierProvider(create: (context) => LocaleProvider())
       ],
       builder: (context, child) {

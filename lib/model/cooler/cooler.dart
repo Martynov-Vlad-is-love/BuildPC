@@ -35,7 +35,25 @@ class Cooler implements Model{
       );
   factory Cooler.fromJson(Map<String, dynamic> json) => _$CoolerFromJson(json);
 
-  @override
+  List<dynamic> modelFields() {
+    final List<dynamic> fields = [
+      id.toString(),
+      name,
+      producer,
+      socket,
+      material,
+      maxTDP.toString(),
+      supportedSockets.toString(),
+      thermotubes.toString(),
+      description,
+      recommendedPrice.toString(),
+      performanceLevel
+    ];
+
+    return fields;
+  }
+
+    @override
   List<String> parsedModels( ) {
     final List<String> fields = [
       id.toString(),

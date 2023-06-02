@@ -3,13 +3,17 @@ import 'package:flutter/material.dart';
 class TextBar extends StatelessWidget {
   final IconData icon;
   final String label;
+  final TextEditingController controller;
 
-  const TextBar({Key? key, required this.icon, required this.label})
+  const TextBar(
+      {Key? key,
+      required this.icon,
+      required this.label,
+      required this.controller,})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final controller = TextEditingController(text: '');
     const kTextBarHeight = 50.0;
 
     return Container(

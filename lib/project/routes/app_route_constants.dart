@@ -4,5 +4,6 @@ class AppRouteConstants {
   static const String registrationRouteName = 'registration';
   static const String editRouteName = 'edit';
   static const String componentsPageRouteName = 'components_page';
+  static const String componentsListPageRouteName = 'components_list_page';
   static const String adminRouteName = 'admin';
 }

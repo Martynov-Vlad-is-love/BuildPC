@@ -1,4 +1,5 @@
+//ignore_for_file: constant_identifier_names
 enum ERole{
-  roleUser,
-  roleAdmin
+  ROLE_USER,
+  ROLE_ADMIN
 }

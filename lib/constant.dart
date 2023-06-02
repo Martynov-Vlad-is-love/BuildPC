@@ -4,9 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 const kPrimaryColor = Colors.blueAccent;
 const kTopNavigationBarHeight = 20.0;
 const kTopNavigationBarBorderRadius = 25.0;
-const authority = 'host';
-const unEncodedPath = 'api/';
-
+const apiPath = '185.197.250.149:1234';
 
 const List<String> admin = [];
 const List<String> buildPc = [];

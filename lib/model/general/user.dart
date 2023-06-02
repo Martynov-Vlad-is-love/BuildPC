@@ -5,15 +5,22 @@ import 'package:json_annotation/json_annotation.dart';
 part 'user.g.dart';
 
 @JsonSerializable()
-class User implements Model{
-  int id;
+class User implements Model {
+  int? id;
   String name;
   String username;
   String email;
-  String password;
-  ERole role;
+  String? password;
+  List<ERole>? roles;
 
-  User(this.id, this.name, this.username, this.email, this.password, this.role);
+  User(
+    this.id,
+    this.name,
+    this.username,
+    this.email,
+    this.password,
+    this.roles,
+  );
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 
@@ -22,13 +29,17 @@ class User implements Model{
 
   @override
   List<String> parsedModels() {
+    String pass = '';
+    if (password != null) {
+      pass = '$password';
+    }
     final fields = [
       id.toString(),
       name,
       username,
       email,
-      password,
-      role.name
+      pass,
+      roles.toString(),
     ];
 
     return fields;

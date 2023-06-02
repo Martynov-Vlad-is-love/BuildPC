@@ -65,7 +65,7 @@ class BuildPC implements Model{
       hddList.add(disc.parsedModels().toString());
     }
     final ssdList = [];
-    for(final disc in ram){
+    for(final disc in ssd){
       ssdList.add(disc.parsedModels().toString());
     }
 

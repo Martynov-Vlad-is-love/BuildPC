@@ -1,6 +1,7 @@
 import 'package:buildpc/model/model.dart';
 import 'package:buildpc/project/routes/app_route_constants.dart';
 import 'package:buildpc/ui/pages/admin_page/admin_page.dart';
+import 'package:buildpc/ui/pages/admin_page/model_list_page.dart';
 import 'package:buildpc/ui/pages/admin_page/components_page.dart';
 import 'package:buildpc/ui/pages/admin_page/edit_page.dart';
 import 'package:buildpc/ui/pages/login_page/login_page.dart';
@@ -43,6 +44,13 @@ class AppRouteConfig {
               builder: (context, state) => EditPage(
                 modelName: state.pathParameters['modelName'],
                 model: state.extra as Model,
+              ),
+            ),
+            GoRoute(
+              path: 'components_list_page',
+              name: AppRouteConstants.componentsListPageRouteName,
+              builder: (context, state) => ModelListPage(
+                modelList: state.extra as List<Model>,
               ),
             ),
             GoRoute(

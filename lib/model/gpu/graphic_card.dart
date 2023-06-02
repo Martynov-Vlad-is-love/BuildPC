@@ -63,7 +63,7 @@ class GraphicCard implements Model {
   List<String> parsedModels() {
     final connectors = [];
     for(final con in connector){
-      connectors.add(con.toString());
+      connectors.add(con.connector);
     }
 
     final fields = [

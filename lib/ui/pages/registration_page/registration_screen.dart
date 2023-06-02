@@ -1,15 +1,35 @@
+import 'package:buildpc/controller/general/user_controller.dart';
 import 'package:buildpc/project/routes/app_route_constants.dart';
 import 'package:buildpc/ui/widgets/text_bar/text_bar.dart';
 import 'package:buildpc/ui/widgets/top_navigation_bar/custom_top_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
-class RegistrationScreen extends StatelessWidget {
+class RegistrationScreen extends StatefulWidget {
   const RegistrationScreen({Key? key}) : super(key: key);
+
+  @override
+  State<RegistrationScreen> createState() => _RegistrationScreenState();
+}
+
+class _RegistrationScreenState extends State<RegistrationScreen> {
+  //ignore: avoid-late-keyword
+  late UserController _userController;
+
+  @override
+  void initState() {
+    _userController = Provider.of<UserController>(context, listen: false);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
+    final _loginController = TextEditingController(text: '');
+    final _passwordController = TextEditingController(text: '');
+    final _nameController = TextEditingController(text: '');
+    final _emailController = TextEditingController(text: '');
 
     return Scaffold(
       appBar: PreferredSize(
@@ -30,17 +50,25 @@ class RegistrationScreen extends StatelessWidget {
                   style: TextStyle(fontSize: 40),
                 ),
               ),
-              const TextBar(
+              TextBar(
                 icon: Icons.perm_identity,
                 label: 'login',
+                controller: _loginController,
               ),
-              const TextBar(
+              TextBar(
                 icon: Icons.lock_open,
                 label: 'password',
+                controller: _passwordController,
               ),
-              const TextBar(
+              TextBar(
                 icon: Icons.badge_outlined,
                 label: 'name',
+                controller: _nameController,
+              ),
+              TextBar(
+                icon: Icons.badge_outlined,
+                label: 'eMail',
+                controller: _emailController,
               ),
               Container(
                 decoration: const BoxDecoration(
@@ -59,8 +87,18 @@ class RegistrationScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  onPressed: () {
-                    return;
+                  onPressed: () async{
+
+                    final result = await _userController.registration(
+                      _loginController.text,
+                      _passwordController.text,
+                      _emailController.text,
+                      _nameController.text,
+                    );
+                    if(result != null){
+                      await GoRouter.of(context)
+                          .pushNamed(AppRouteConstants.loginRouteName);
+                    }
                   },
                   child: const Text('Register'),
                 ),
@@ -73,8 +111,8 @@ class RegistrationScreen extends StatelessWidget {
                     const Text('Have an account?'),
                     TextButton(
                       onPressed: () {
-                        GoRouter.of(context)
-                            .pushNamed(AppRouteConstants.loginRouteName);
+                           GoRouter.of(context)
+                              .pushNamed(AppRouteConstants.loginRouteName);
                       },
                       child: const Text('Authorize'),
                     )
