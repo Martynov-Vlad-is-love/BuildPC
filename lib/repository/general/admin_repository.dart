@@ -1,12 +1,7 @@
-import 'dart:convert' as convert;
-
-import 'package:buildpc/constant.dart';
 import 'package:buildpc/model/general/admin.dart';
 import 'package:buildpc/repository/repository.dart';
-import 'package:http/http.dart' as http;
 
 class AdminRepository implements Repository<Admin> {
-
   final path = 'User';
 
   // Future<Admin?> authentication(String login, String password) async {
@@ -52,7 +47,7 @@ class AdminRepository implements Repository<Admin> {
   // }
 
   @override
-  Future<void> deleteData(int id) {
+  Future<void> deleteData(int? id) {
     // TODO: implement deleteData
     throw UnimplementedError();
   }

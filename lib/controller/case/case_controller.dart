@@ -5,25 +5,25 @@ class CaseController{
   final CaseRepository _caseRepository;
   CaseController(this._caseRepository);
 
-  Future<List<Case>> getCaseList() async{
+  Future<List<Case>> getList() async{
     return _caseRepository.getAllData();
   }
 
-  Future<Case?> getCaseData(int? id) async{
+  Future<Case?> getDataById(int? id) async{
     return _caseRepository.getDataById(id);
   }
 
-  Future<void> updateCaseData(Case pcCase) async{
-    await _caseRepository.updateData(pcCase);
+  Future<void> updateData(Case data) async{
+    await _caseRepository.updateData(data);
   }
 
-  Future<Case?> postCaseData(Case pcCase) async{
-    await _caseRepository.postData(pcCase);
+  Future<Case?> postData(Case data) async{
+    await _caseRepository.postData(data);
 
-    return getCaseData(pcCase.id);
+    return getDataById(data.id);
   }
 
-  Future<void> deleteCase(int id) async{
+  Future<void> delete(int id) async{
     await _caseRepository.deleteData(id);
   }
 }
