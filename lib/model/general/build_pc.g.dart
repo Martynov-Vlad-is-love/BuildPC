@@ -7,7 +7,7 @@ part of 'build_pc.dart';
 // **************************************************************************
 
 BuildPC _$BuildPCFromJson(Map<String, dynamic> json) => BuildPC(
-      json['id'] as int,
+      json['id'] as int?,
       json['nameOfBuild'] as String,
       User.fromJson(json['user'] as Map<String, dynamic>),
       Motherboard.fromJson(json['motherboard'] as Map<String, dynamic>),

@@ -7,7 +7,7 @@ part of 'power_supply.dart';
 // **************************************************************************
 
 PowerSupply _$PowerSupplyFromJson(Map<String, dynamic> json) => PowerSupply(
-      json['id'] as int,
+      json['id'] as int?,
       json['name'] as String,
       Producers.fromJson(json['producer'] as Map<String, dynamic>),
       json['power'] as int,

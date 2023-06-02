@@ -7,7 +7,7 @@ part of 'case.dart';
 // **************************************************************************
 
 Case _$CaseFromJson(Map<String, dynamic> json) => Case(
-      json['id'] as int,
+      json['id'] as int?,
       json['name'] as String,
       CaseSize.fromJson(json['size'] as Map<String, dynamic>),
       (json['formFactor'] as List<dynamic>)

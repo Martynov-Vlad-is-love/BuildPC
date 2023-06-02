@@ -8,7 +8,7 @@ part of 'gpu_memory_type.dart';
 
 GPUMemoryType _$GPUMemoryTypeFromJson(Map<String, dynamic> json) =>
     GPUMemoryType(
-      json['id'] as int,
+      json['id'] as int?,
       json['type'] as String,
     );
 

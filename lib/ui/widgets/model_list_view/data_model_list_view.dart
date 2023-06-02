@@ -13,7 +13,7 @@ class DataModelListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<String>? modelList = model?.parsedModels();
+    final List<dynamic>? modelList = model?.parsedModels();
 
     return ListView.separated(
       shrinkWrap: true,

@@ -8,7 +8,7 @@ part of 'storage_form_factor.dart';
 
 StorageFormFactor _$StorageFormFactorFromJson(Map<String, dynamic> json) =>
     StorageFormFactor(
-      json['id'] as int,
+      json['id'] as int?,
       json['name'] as String,
     );
 

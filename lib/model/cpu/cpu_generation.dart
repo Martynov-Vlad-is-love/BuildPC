@@ -5,7 +5,7 @@ part 'cpu_generation.g.dart';
 
 @JsonSerializable()
 class CPUGeneration implements Model{
-  final int id;
+  final int? id;
   String name;
 
   CPUGeneration(this.id, this.name);

@@ -7,7 +7,7 @@ part of 'form_factor.dart';
 // **************************************************************************
 
 FormFactor _$FormFactorFromJson(Map<String, dynamic> json) => FormFactor(
-      json['id'] as int,
+      json['id'] as int?,
       json['name'] as String,
     );
 

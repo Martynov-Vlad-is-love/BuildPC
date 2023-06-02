@@ -5,7 +5,7 @@ part 'gpu_connector.g.dart';
 
 @JsonSerializable()
 class GPUConnector implements Model {
-  final int id;
+  final int? id;
   String connector;
 
   GPUConnector(this.id, this.connector);

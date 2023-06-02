@@ -11,7 +11,7 @@ part 'graphic_card.g.dart';
 
 @JsonSerializable()
 class GraphicCard implements Model {
-  final int id;
+  final int? id;
   Producers producer;
   String name;
   Producers vendor;

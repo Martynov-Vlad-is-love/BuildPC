@@ -9,7 +9,7 @@ class CaseController{
     return _caseRepository.getAllData();
   }
 
-  Future<Case?> getCaseData(int id) async{
+  Future<Case?> getCaseData(int? id) async{
     return _caseRepository.getDataById(id);
   }
 

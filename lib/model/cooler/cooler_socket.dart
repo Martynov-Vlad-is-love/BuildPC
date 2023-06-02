@@ -5,7 +5,7 @@ part 'cooler_socket.g.dart';
 
 @JsonSerializable()
 class CoolerSocket implements Model{
-  final int id;
+  final int? id;
   String socket;
 
   CoolerSocket(this.id, this.socket);

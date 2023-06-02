@@ -9,7 +9,7 @@ part of 'case_power_supply_location.dart';
 CasePowerSupplyLocation _$CasePowerSupplyLocationFromJson(
         Map<String, dynamic> json) =>
     CasePowerSupplyLocation(
-      json['id'] as int,
+      json['id'] as int?,
       json['powerSupplyLocation'] as String,
     );
 

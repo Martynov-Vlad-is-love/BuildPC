@@ -7,7 +7,7 @@ part of 'graphic_card.dart';
 // **************************************************************************
 
 GraphicCard _$GraphicCardFromJson(Map<String, dynamic> json) => GraphicCard(
-      json['id'] as int,
+      json['id'] as int?,
       Producers.fromJson(json['producer'] as Map<String, dynamic>),
       json['name'] as String,
       Producers.fromJson(json['vendor'] as Map<String, dynamic>),

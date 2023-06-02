@@ -5,7 +5,7 @@ part 'motherboard_network.g.dart';
 
 @JsonSerializable()
 class MotherboardNetwork implements Model {
-  final int id;
+  final int? id;
   String network;
 
   MotherboardNetwork(this.id, this.network);

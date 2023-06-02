@@ -5,7 +5,7 @@ part 'ram_memory_type.g.dart';
 
 @JsonSerializable()
 class RamMemoryType implements Model{
-  final int id;
+  final int? id;
   String memoryType;
 
   RamMemoryType(this.id, this.memoryType);

@@ -7,7 +7,7 @@ part 'rating.g.dart';
 
 @JsonSerializable()
 class Rating implements Model{
-  int id;
+  int? id;
   BuildPC buildPc;
   List<Like> like;
 

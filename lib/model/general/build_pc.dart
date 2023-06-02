@@ -16,7 +16,7 @@ part 'build_pc.g.dart';
 
 @JsonSerializable()
 class BuildPC implements Model{
-  final int id;
+  final int? id;
   String nameOfBuild;
   User user;
   Motherboard motherboard;

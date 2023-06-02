@@ -5,7 +5,7 @@ part 'motherboard_chipset.g.dart';
 
 @JsonSerializable()
 class MotherboardChipset implements Model {
-  final int id;
+  final int? id;
   String chipset;
 
   MotherboardChipset(this.id, this.chipset);

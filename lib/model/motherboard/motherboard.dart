@@ -12,7 +12,7 @@ part 'motherboard.g.dart';
 
 @JsonSerializable()
 class Motherboard implements Model {
-  final int id;
+  final int? id;
   String name;
   Producers producer;
   MotherboardSocket socket;

@@ -10,7 +10,7 @@ part 'ssd.g.dart';
 
 @JsonSerializable()
 class Ssd implements Model{
-  final int id;
+  final int? id;
   Producers producer;
   int storageSize;
   StorageFormFactor formFactor;

@@ -8,7 +8,7 @@ part of 'cpu_generation.dart';
 
 CPUGeneration _$CPUGenerationFromJson(Map<String, dynamic> json) =>
     CPUGeneration(
-      json['id'] as int,
+      json['id'] as int?,
       json['name'] as String,
     );
 

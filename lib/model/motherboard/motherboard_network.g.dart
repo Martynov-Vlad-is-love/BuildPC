@@ -8,7 +8,7 @@ part of 'motherboard_network.dart';
 
 MotherboardNetwork _$MotherboardNetworkFromJson(Map<String, dynamic> json) =>
     MotherboardNetwork(
-      json['id'] as int,
+      json['id'] as int?,
       json['network'] as String,
     );
 

@@ -5,7 +5,7 @@ part 'ssd_cells_type.g.dart';
 
 @JsonSerializable()
 class SsdCellsType implements Model{
-  final int id;
+  final int? id;
   String name;
 
   SsdCellsType(this.id, this.name);

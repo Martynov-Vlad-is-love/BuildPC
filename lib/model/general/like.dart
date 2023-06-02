@@ -7,7 +7,7 @@ part 'like.g.dart';
 
 @JsonSerializable()
 class Like implements Model{
-  final int id;
+  final int? id;
   BuildPC buildPc;
   User user;
 

@@ -5,7 +5,7 @@ part 'motherboard_socket.g.dart';
 
 @JsonSerializable()
 class MotherboardSocket implements Model {
-  final int id;
+  final int? id;
   String socket;
 
   MotherboardSocket(this.id, this.socket);

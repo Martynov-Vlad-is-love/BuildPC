@@ -5,7 +5,7 @@ part 'ram_timings.g.dart';
 
 @JsonSerializable()
 class RamTimings implements Model{
-  final int id;
+  final int? id;
   String timings;
 
   RamTimings(this.id, this.timings);

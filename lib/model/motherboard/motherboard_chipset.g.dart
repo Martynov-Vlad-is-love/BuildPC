@@ -8,7 +8,7 @@ part of 'motherboard_chipset.dart';
 
 MotherboardChipset _$MotherboardChipsetFromJson(Map<String, dynamic> json) =>
     MotherboardChipset(
-      json['id'] as int,
+      json['id'] as int?,
       json['chipset'] as String,
     );
 

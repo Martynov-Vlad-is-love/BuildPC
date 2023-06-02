@@ -8,7 +8,7 @@ part of 'storage_interface.dart';
 
 StorageInterface _$StorageInterfaceFromJson(Map<String, dynamic> json) =>
     StorageInterface(
-      json['id'] as int,
+      json['id'] as int?,
       json['name'] as String,
     );
 

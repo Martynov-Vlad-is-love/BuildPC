@@ -8,7 +8,7 @@ part of 'performance_level.dart';
 
 PerformanceLevel _$PerformanceLevelFromJson(Map<String, dynamic> json) =>
     PerformanceLevel(
-      json['id'] as int,
+      json['id'] as int?,
       json['level'] as String,
     );
 

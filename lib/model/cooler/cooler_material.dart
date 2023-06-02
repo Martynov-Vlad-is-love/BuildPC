@@ -5,7 +5,7 @@ part 'cooler_material.g.dart';
 
 @JsonSerializable()
 class CoolerMaterial implements Model{
-  final int id;
+  final int? id;
   String material;
 
   CoolerMaterial(this.id, this.material);

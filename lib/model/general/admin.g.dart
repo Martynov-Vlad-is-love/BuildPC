@@ -7,7 +7,7 @@ part of 'admin.dart';
 // **************************************************************************
 
 Admin _$AdminFromJson(Map<String, dynamic> json) => Admin(
-      json['id'] as int,
+      json['id'] as int?,
       json['login'] as String,
       json['eMail'] as String,
       json['password'] as String,

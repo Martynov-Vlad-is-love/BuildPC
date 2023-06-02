@@ -10,7 +10,7 @@ part 'processor.g.dart';
 
 @JsonSerializable()
 class Processor implements Model {
-  final int id;
+  final int? id;
   String name;
   Producers producer;
   MotherboardSocket socket;

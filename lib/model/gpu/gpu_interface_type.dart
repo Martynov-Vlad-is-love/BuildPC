@@ -5,7 +5,7 @@ part 'gpu_interface_type.g.dart';
 
 @JsonSerializable()
 class GPUInterfaceType implements Model {
-  final int id;
+  final int? id;
   String interfaceType;
 
   GPUInterfaceType(this.id, this.interfaceType);

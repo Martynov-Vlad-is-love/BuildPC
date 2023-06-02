@@ -1,4 +1,4 @@
 abstract class Model{
-  List<String> parsedModels();
+  List<Object> parsedModels();
   Map<String, dynamic> toJson();
 }

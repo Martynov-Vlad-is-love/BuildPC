@@ -30,9 +30,12 @@ class ModelListViewBar extends StatelessWidget {
         final item = currentItem?.parsedModels();
         final concatenate = StringBuffer();
         Model? model;
-        // if(instanceof(model, currentItem)){
-        //
-        // }
+        if(item != null){
+          if(instanceof(model, item[index])){
+
+          }
+        }
+
 
         item?.forEach((item){
           concatenate.write('$item| ');

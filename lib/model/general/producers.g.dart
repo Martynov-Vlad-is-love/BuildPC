@@ -7,7 +7,7 @@ part of 'producers.dart';
 // **************************************************************************
 
 Producers _$ProducersFromJson(Map<String, dynamic> json) => Producers(
-      json['id'] as int,
+      json['id'] as int?,
       json['name'] as String,
     );
 

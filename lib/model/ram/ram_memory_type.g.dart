@@ -8,7 +8,7 @@ part of 'ram_memory_type.dart';
 
 RamMemoryType _$RamMemoryTypeFromJson(Map<String, dynamic> json) =>
     RamMemoryType(
-      json['id'] as int,
+      json['id'] as int?,
       json['memoryType'] as String,
     );
 

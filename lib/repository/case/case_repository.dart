@@ -15,7 +15,7 @@ class CaseRepository implements Repository<Case>{
   }
 
   @override
-  Future<Case> getDataById(int id) {
+  Future<Case> getDataById(int? id) {
     // TODO: implement getDataById
     throw UnimplementedError();
   }

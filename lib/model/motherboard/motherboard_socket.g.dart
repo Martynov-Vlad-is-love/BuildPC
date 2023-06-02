@@ -8,7 +8,7 @@ part of 'motherboard_socket.dart';
 
 MotherboardSocket _$MotherboardSocketFromJson(Map<String, dynamic> json) =>
     MotherboardSocket(
-      json['id'] as int,
+      json['id'] as int?,
       json['socket'] as String,
     );
 

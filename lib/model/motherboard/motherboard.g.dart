@@ -7,7 +7,7 @@ part of 'motherboard.dart';
 // **************************************************************************
 
 Motherboard _$MotherboardFromJson(Map<String, dynamic> json) => Motherboard(
-      json['id'] as int,
+      json['id'] as int?,
       json['name'] as String,
       Producers.fromJson(json['producer'] as Map<String, dynamic>),
       MotherboardSocket.fromJson(json['socket'] as Map<String, dynamic>),

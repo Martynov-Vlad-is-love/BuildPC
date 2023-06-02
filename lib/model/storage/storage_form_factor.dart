@@ -5,7 +5,7 @@ part 'storage_form_factor.g.dart';
 
 @JsonSerializable()
 class StorageFormFactor implements Model{
-  final int id;
+  final int? id;
   String name;
 
   StorageFormFactor(this.id, this.name);

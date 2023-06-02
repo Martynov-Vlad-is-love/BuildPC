@@ -7,7 +7,7 @@ part of 'case_size.dart';
 // **************************************************************************
 
 CaseSize _$CaseSizeFromJson(Map<String, dynamic> json) => CaseSize(
-      json['id'] as int,
+      json['id'] as int?,
       json['size'] as String,
     );
 

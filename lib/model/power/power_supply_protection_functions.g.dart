@@ -9,7 +9,7 @@ part of 'power_supply_protection_functions.dart';
 PowerSupplyProtectionFunctions _$PowerSupplyProtectionFunctionsFromJson(
         Map<String, dynamic> json) =>
     PowerSupplyProtectionFunctions(
-      json['id'] as int,
+      json['id'] as int?,
       json['name'] as String,
     );
 

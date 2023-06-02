@@ -5,7 +5,7 @@ part 'cpu_technologies.g.dart';
 
 @JsonSerializable()
 class CPUTechnologies implements Model{
-  final int id;
+  final int? id;
   String name;
 
   CPUTechnologies(this.id, this.name);

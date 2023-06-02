@@ -5,7 +5,7 @@ part 'case_design_features.g.dart';
 
 @JsonSerializable()
 class CaseDesignFeatures implements Model{
-  final int id;
+  final int? id;
   String designFeatures;
 
   CaseDesignFeatures(this.id, this.designFeatures);

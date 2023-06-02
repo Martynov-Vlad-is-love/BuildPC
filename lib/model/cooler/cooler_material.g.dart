@@ -8,7 +8,7 @@ part of 'cooler_material.dart';
 
 CoolerMaterial _$CoolerMaterialFromJson(Map<String, dynamic> json) =>
     CoolerMaterial(
-      json['id'] as int,
+      json['id'] as int?,
       json['material'] as String,
     );
 

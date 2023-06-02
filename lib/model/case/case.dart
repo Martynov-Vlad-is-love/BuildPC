@@ -11,7 +11,7 @@ part 'case.g.dart';
 
 @JsonSerializable()
 class Case implements Model{
-  final int id;
+  final int? id;
   String name;
   Producers producer;
   CaseSize size;

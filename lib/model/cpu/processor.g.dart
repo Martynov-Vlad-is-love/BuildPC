@@ -7,7 +7,7 @@ part of 'processor.dart';
 // **************************************************************************
 
 Processor _$ProcessorFromJson(Map<String, dynamic> json) => Processor(
-      json['id'] as int,
+      json['id'] as int?,
       json['name'] as String,
       Producers.fromJson(json['producer'] as Map<String, dynamic>),
       json['yearOfRelease'] as int,

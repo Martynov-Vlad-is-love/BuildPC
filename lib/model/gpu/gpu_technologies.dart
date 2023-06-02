@@ -5,7 +5,7 @@ part 'gpu_technologies.g.dart';
 
 @JsonSerializable()
 class GPUTechnologies implements Model{
-  final int id;
+  final int? id;
   String name;
 
   GPUTechnologies(this.id, this.name);

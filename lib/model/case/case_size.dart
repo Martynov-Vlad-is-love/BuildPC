@@ -5,7 +5,7 @@ part 'case_size.g.dart';
 
 @JsonSerializable()
 class CaseSize implements Model{
-  final int id;
+  final int? id;
   String size;
 
   CaseSize(this.id, this.size);

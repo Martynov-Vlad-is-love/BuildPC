@@ -5,7 +5,7 @@ part 'power_supply_protection_functions.g.dart';
 
 @JsonSerializable()
 class PowerSupplyProtectionFunctions implements Model{
-  final int id;
+  final int? id;
   String name;
 
   PowerSupplyProtectionFunctions(

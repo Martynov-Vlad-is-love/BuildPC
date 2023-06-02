@@ -64,7 +64,7 @@ class AdminRepository implements Repository<Admin> {
   }
 
   @override
-  Future<Admin> getDataById(int id) {
+  Future<Admin> getDataById(int? id) {
     // TODO: implement getDataById
     throw UnimplementedError();
   }

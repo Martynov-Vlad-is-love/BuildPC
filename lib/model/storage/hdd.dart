@@ -9,7 +9,7 @@ part 'hdd.g.dart';
 
 @JsonSerializable()
 class Hdd implements Model{
-  final int id;
+  final int? id;
   Producers producer;
   int storageSize;
   int speed;

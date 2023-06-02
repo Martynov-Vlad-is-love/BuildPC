@@ -5,7 +5,7 @@ part 'gpu_memory_type.g.dart';
 
 @JsonSerializable()
 class GPUMemoryType implements Model{
-  final int id;
+  final int? id;
   String type;
 
   GPUMemoryType(this.id, this.type);

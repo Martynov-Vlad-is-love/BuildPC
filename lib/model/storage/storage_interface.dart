@@ -5,7 +5,7 @@ part 'storage_interface.g.dart';
 
 @JsonSerializable()
 class StorageInterface implements Model{
-  final int id;
+  final int? id;
   String name;
 
   StorageInterface(this.id, this.name);

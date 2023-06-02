@@ -5,7 +5,7 @@ part 'cpu_pcie_version.g.dart';
 
 @JsonSerializable()
 class CPUPCIeVersion implements Model{
-  final int id;
+  final int? id;
   String name;
 
   CPUPCIeVersion(this.id, this.name);

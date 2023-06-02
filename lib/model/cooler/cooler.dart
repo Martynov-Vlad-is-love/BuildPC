@@ -9,7 +9,7 @@ part 'cooler.g.dart';
 
 @JsonSerializable()
 class Cooler implements Model{
-  final int id;
+  final int? id;
   String name;
   Producers producer;
   CoolerSocket socket;

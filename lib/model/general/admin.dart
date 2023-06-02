@@ -5,7 +5,7 @@ part 'admin.g.dart';
 
 @JsonSerializable()
 class Admin implements Model{
-  final int id;
+  final int? id;
   String login;
   String eMail;
   String password;

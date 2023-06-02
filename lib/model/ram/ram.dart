@@ -9,7 +9,7 @@ part 'ram.g.dart';
 
 @JsonSerializable()
 class Ram implements Model {
-  final int id;
+  final int? id;
   String name;
   Producers producer;
   RamMemoryType memoryType;

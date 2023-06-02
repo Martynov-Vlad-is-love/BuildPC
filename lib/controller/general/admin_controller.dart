@@ -21,7 +21,7 @@ class AdminController extends ChangeNotifier{
     return data;
   }
 
-  Future<Admin?> getAdminData(int id) async{
+  Future<Admin?> getAdminData(int? id) async{
     final data = await _adminRepository.getDataById(id);
     notifyListeners();
 

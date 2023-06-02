@@ -5,7 +5,7 @@ part 'form_factor.g.dart';
 
 @JsonSerializable()
 class FormFactor implements Model{
-  final int id;
+  final int? id;
   String name;
 
   FormFactor(this.id, this.name);

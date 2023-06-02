@@ -7,7 +7,7 @@ part of 'like.dart';
 // **************************************************************************
 
 Like _$LikeFromJson(Map<String, dynamic> json) => Like(
-      json['id'] as int,
+      json['id'] as int?,
       BuildPC.fromJson(json['buildPc'] as Map<String, dynamic>),
       User.fromJson(json['user'] as Map<String, dynamic>),
     );

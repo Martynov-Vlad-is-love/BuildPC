@@ -5,7 +5,7 @@ part 'case_power_supply_location.g.dart';
 
 @JsonSerializable()
 class CasePowerSupplyLocation implements Model{
-  final int id;
+  final int? id;
   String powerSupplyLocation;
 
   CasePowerSupplyLocation(this.id, this.powerSupplyLocation);

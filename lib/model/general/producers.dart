@@ -5,7 +5,7 @@ part 'producers.g.dart';
 
 @JsonSerializable()
 class Producers implements Model{
-  final int id;
+  final int? id;
   String name;
 
   Producers(this.id, this.name);

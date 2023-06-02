@@ -8,7 +8,7 @@ part of 'cpu_pcie_version.dart';
 
 CPUPCIeVersion _$CPUPCIeVersionFromJson(Map<String, dynamic> json) =>
     CPUPCIeVersion(
-      json['id'] as int,
+      json['id'] as int?,
       json['name'] as String,
     );
 
