@@ -1,12 +1,12 @@
 import 'dart:convert' as convert;
 
 import 'package:buildpc/constant.dart';
-import 'package:buildpc/model/case/case.dart';
+import 'package:buildpc/model/power/power_supply.dart';
 import 'package:buildpc/repository/repository.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-class CaseRepository implements Repository<Case> {
+class PowerSupplyRepository implements Repository<PowerSupply> {
   final path = 'Producer';
   final header = {
     'Content-type': 'application/json',
@@ -27,14 +27,14 @@ class CaseRepository implements Repository<Case> {
     };
 
     await http.delete(
-      Uri.http(apiPath, '/api/admin/case/$id'),
+      Uri.http(apiPath, '/api/admin/powerSupply/$id'),
       headers: header,
     );
   }
 
   @override
-  Future<List<Case>> getAllData() async {
-    List<Case> pcCase = [];
+  Future<List<PowerSupply>> getAllData() async {
+    List<PowerSupply> powerSupply = [];
     final token = await _getToken();
     final header = {
       'Content-type': 'application/json',
@@ -42,7 +42,7 @@ class CaseRepository implements Repository<Case> {
     };
 
     final response = await http.get(
-      Uri.http(apiPath, '/api/all/case'),
+      Uri.http(apiPath, '/api/all/powerSupply'),
       headers: header,
     );
 
@@ -52,15 +52,15 @@ class CaseRepository implements Repository<Case> {
       final data =
           jsonData.map((value) => value as Map<String, dynamic>).toList();
 
-      pcCase = data.map((e) => Case.fromJson(e)).toList();
+      powerSupply = data.map((e) => PowerSupply.fromJson(e)).toList();
     }
 
-    return pcCase;
+    return powerSupply;
   }
 
   @override
-  Future<Case?> getDataById(int? id) async {
-    Case? pcCase;
+  Future<PowerSupply?> getDataById(int? id) async {
+    PowerSupply? powerSupply;
     final token = await _getToken();
     final header = {
       'Content-type': 'application/json',
@@ -68,7 +68,7 @@ class CaseRepository implements Repository<Case> {
     };
 
     final response = await http.get(
-      Uri.http(apiPath, '/api/all/case/$id'),
+      Uri.http(apiPath, '/api/all/powerSupply/$id'),
       headers: header,
     );
 
@@ -76,21 +76,23 @@ class CaseRepository implements Repository<Case> {
       final jsonData =
           convert.jsonDecode(response.body) as Map<String, dynamic>;
 
-      pcCase = Case.fromJson(jsonData);
+      powerSupply = PowerSupply.fromJson(jsonData);
     }
 
-    return pcCase;
+    return powerSupply;
   }
 
   @override
-  Future<void> postData(Case pcCase) async {
+  Future<void> postData(
+    PowerSupply powerSupply,
+  ) async {
     try {
-      final jsonData = pcCase.toJson();
+      final jsonData = powerSupply.toJson();
       final header = {
         'Content-type': 'application/json',
       };
       await http.post(
-        Uri.http(apiPath, '/api/admin/case'),
+        Uri.http(apiPath, '/api/admin/powerSupply'),
         headers: header,
         body: convert.jsonEncode(jsonData),
       );
@@ -100,18 +102,18 @@ class CaseRepository implements Repository<Case> {
   }
 
   @override
-  Future<void> updateData(Case pcCase) async {
+  Future<void> updateData(PowerSupply powerSupply) async {
     final token = await _getToken();
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
     };
 
-    final jsonData = pcCase.toJson();
+    final jsonData = powerSupply.toJson();
     await http.patch(
       Uri.http(
         apiPath,
-        '/api/admin/case/${pcCase.id}',
+        '/api/admin/powerSupply/${powerSupply.id}',
       ),
       body: convert.jsonEncode(jsonData),
       headers: header,

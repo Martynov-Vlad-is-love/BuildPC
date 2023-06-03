@@ -1,34 +1,119 @@
+import 'dart:convert' as convert;
+
+import 'package:buildpc/constant.dart';
 import 'package:buildpc/model/case/case_design_features.dart';
 import 'package:buildpc/repository/repository.dart';
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CaseDesignFeaturesRepository implements Repository<CaseDesignFeatures> {
+  final path = 'Producer';
+  final header = {
+    'Content-type': 'application/json',
+  };
+
+  Future<String?> _getToken() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    return prefs.getString('token');
+  }
+
   @override
-  Future<void> deleteData(int? id) async {
-    // TODO: implement deleteData
-    throw UnimplementedError();
+  Future<void> deleteData(int id) async {
+    final token = await _getToken();
+    final header = {
+      'Content-type': 'application/json',
+      'Authorization': 'Bearer $token',
+    };
+
+    await http.delete(
+      Uri.http(apiPath, '/api/admin/caseDesignFeatures/$id'),
+      headers: header,
+    );
   }
 
   @override
   Future<List<CaseDesignFeatures>> getAllData() async {
-    // TODO: implement getAllData
-    throw UnimplementedError();
+    List<CaseDesignFeatures> caseDesignFeatures = [];
+    final token = await _getToken();
+    final header = {
+      'Content-type': 'application/json',
+      'Authorization': 'Bearer $token',
+    };
+
+    final response = await http
+        .get(Uri.http(apiPath, '/api/all/caseDesignFeatures'), headers: header);
+
+    if (response.statusCode == 200) {
+      final jsonData = convert.jsonDecode(response.body) as List<dynamic>;
+
+      final data =
+          jsonData.map((value) => value as Map<String, dynamic>).toList();
+
+      caseDesignFeatures =
+          data.map((e) => CaseDesignFeatures.fromJson(e)).toList();
+    }
+
+    return caseDesignFeatures;
   }
 
   @override
-  Future<CaseDesignFeatures> getDataById(int? id) async {
-    // TODO: implement getDataById
-    throw UnimplementedError();
+  Future<CaseDesignFeatures?> getDataById(int? id) async {
+    CaseDesignFeatures? caseDesignFeatures;
+    final token = await _getToken();
+    final header = {
+      'Content-type': 'application/json',
+      'Authorization': 'Bearer $token',
+    };
+
+    final response = await http.get(
+      Uri.http(apiPath, '/api/all/caseDesignFeatures/$id'),
+      headers: header,
+    );
+
+    if (response.statusCode == 200) {
+      final jsonData =
+          convert.jsonDecode(response.body) as Map<String, dynamic>;
+
+      caseDesignFeatures = CaseDesignFeatures.fromJson(jsonData);
+    }
+
+    return caseDesignFeatures;
   }
 
   @override
-  Future<void> postData(CaseDesignFeatures data) async {
-    // TODO: implement postData
-    throw UnimplementedError();
+  Future<void> postData(CaseDesignFeatures caseDesignFeatures) async {
+    try {
+      final jsonData = caseDesignFeatures.toJson();
+      final header = {
+        'Content-type': 'application/json',
+      };
+      await http.post(
+        Uri.http(apiPath, '/api/admin/caseDesignFeatures'),
+        headers: header,
+        body: convert.jsonEncode(jsonData),
+      );
+    } catch (ex) {
+      rethrow;
+    }
   }
 
   @override
-  Future<void> updateData(CaseDesignFeatures data) async {
-    // TODO: implement updateData
-    throw UnimplementedError();
+  Future<void> updateData(CaseDesignFeatures caseDesignFeatures) async {
+    final token = await _getToken();
+    final header = {
+      'Content-type': 'application/json',
+      'Authorization': 'Bearer $token',
+    };
+
+    final jsonData = caseDesignFeatures.toJson();
+    await http.patch(
+      Uri.http(
+        apiPath,
+        '/api/admin/caseDesignFeatures/${caseDesignFeatures.id}',
+      ),
+      body: convert.jsonEncode(jsonData),
+      headers: header,
+    );
   }
 }

@@ -1,12 +1,13 @@
 import 'dart:convert' as convert;
 
 import 'package:buildpc/constant.dart';
-import 'package:buildpc/model/case/case.dart';
+import 'package:buildpc/model/power/power_supply_protection_functions.dart';
 import 'package:buildpc/repository/repository.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-class CaseRepository implements Repository<Case> {
+class PowerSupplyProtectionFunctionsRepository
+    implements Repository<PowerSupplyProtectionFunctions> {
   final path = 'Producer';
   final header = {
     'Content-type': 'application/json',
@@ -27,14 +28,14 @@ class CaseRepository implements Repository<Case> {
     };
 
     await http.delete(
-      Uri.http(apiPath, '/api/admin/case/$id'),
+      Uri.http(apiPath, '/api/admin/powerSupplyProtectionFunctions/$id'),
       headers: header,
     );
   }
 
   @override
-  Future<List<Case>> getAllData() async {
-    List<Case> pcCase = [];
+  Future<List<PowerSupplyProtectionFunctions>> getAllData() async {
+    List<PowerSupplyProtectionFunctions> powerSupplyProtectionFunctions = [];
     final token = await _getToken();
     final header = {
       'Content-type': 'application/json',
@@ -42,7 +43,7 @@ class CaseRepository implements Repository<Case> {
     };
 
     final response = await http.get(
-      Uri.http(apiPath, '/api/all/case'),
+      Uri.http(apiPath, '/api/all/powerSupplyProtectionFunctions'),
       headers: header,
     );
 
@@ -52,15 +53,16 @@ class CaseRepository implements Repository<Case> {
       final data =
           jsonData.map((value) => value as Map<String, dynamic>).toList();
 
-      pcCase = data.map((e) => Case.fromJson(e)).toList();
+      powerSupplyProtectionFunctions =
+          data.map((e) => PowerSupplyProtectionFunctions.fromJson(e)).toList();
     }
 
-    return pcCase;
+    return powerSupplyProtectionFunctions;
   }
 
   @override
-  Future<Case?> getDataById(int? id) async {
-    Case? pcCase;
+  Future<PowerSupplyProtectionFunctions?> getDataById(int? id) async {
+    PowerSupplyProtectionFunctions? powerSupplyProtectionFunctions;
     final token = await _getToken();
     final header = {
       'Content-type': 'application/json',
@@ -68,7 +70,7 @@ class CaseRepository implements Repository<Case> {
     };
 
     final response = await http.get(
-      Uri.http(apiPath, '/api/all/case/$id'),
+      Uri.http(apiPath, '/api/all/powerSupplyProtectionFunctions/$id'),
       headers: header,
     );
 
@@ -76,21 +78,23 @@ class CaseRepository implements Repository<Case> {
       final jsonData =
           convert.jsonDecode(response.body) as Map<String, dynamic>;
 
-      pcCase = Case.fromJson(jsonData);
+      powerSupplyProtectionFunctions =
+          PowerSupplyProtectionFunctions.fromJson(jsonData);
     }
 
-    return pcCase;
+    return powerSupplyProtectionFunctions;
   }
 
   @override
-  Future<void> postData(Case pcCase) async {
+  Future<void> postData(
+      PowerSupplyProtectionFunctions powerSupplyProtectionFunctions,) async {
     try {
-      final jsonData = pcCase.toJson();
+      final jsonData = powerSupplyProtectionFunctions.toJson();
       final header = {
         'Content-type': 'application/json',
       };
       await http.post(
-        Uri.http(apiPath, '/api/admin/case'),
+        Uri.http(apiPath, '/api/admin/powerSupplyProtectionFunctions'),
         headers: header,
         body: convert.jsonEncode(jsonData),
       );
@@ -100,18 +104,19 @@ class CaseRepository implements Repository<Case> {
   }
 
   @override
-  Future<void> updateData(Case pcCase) async {
+  Future<void> updateData(
+      PowerSupplyProtectionFunctions powerSupplyProtectionFunctions,) async {
     final token = await _getToken();
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
     };
 
-    final jsonData = pcCase.toJson();
+    final jsonData = powerSupplyProtectionFunctions.toJson();
     await http.patch(
       Uri.http(
         apiPath,
-        '/api/admin/case/${pcCase.id}',
+        '/api/admin/powerSupplyProtectionFunctions/${powerSupplyProtectionFunctions.id}',
       ),
       body: convert.jsonEncode(jsonData),
       headers: header,

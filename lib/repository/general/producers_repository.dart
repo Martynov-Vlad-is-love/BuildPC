@@ -1,12 +1,12 @@
 import 'dart:convert' as convert;
 
 import 'package:buildpc/constant.dart';
-import 'package:buildpc/model/case/case.dart';
+import 'package:buildpc/model/general/producers.dart';
 import 'package:buildpc/repository/repository.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-class CaseRepository implements Repository<Case> {
+class ProducersRepository implements Repository<Producers> {
   final path = 'Producer';
   final header = {
     'Content-type': 'application/json',
@@ -17,7 +17,6 @@ class CaseRepository implements Repository<Case> {
 
     return prefs.getString('token');
   }
-
   @override
   Future<void> deleteData(int id) async {
     final token = await _getToken();
@@ -27,40 +26,38 @@ class CaseRepository implements Repository<Case> {
     };
 
     await http.delete(
-      Uri.http(apiPath, '/api/admin/case/$id'),
+      Uri.http(apiPath, '/api/admin/producers/$id'),
       headers: header,
     );
   }
 
   @override
-  Future<List<Case>> getAllData() async {
-    List<Case> pcCase = [];
+  Future<List<Producers>> getAllData() async {
+    List<Producers> producers = [];
     final token = await _getToken();
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
     };
 
-    final response = await http.get(
-      Uri.http(apiPath, '/api/all/case'),
-      headers: header,
-    );
+    final response =
+    await http.get(Uri.http(apiPath, '/api/all/producers'), headers: header);
 
     if (response.statusCode == 200) {
       final jsonData = convert.jsonDecode(response.body) as List<dynamic>;
 
       final data =
-          jsonData.map((value) => value as Map<String, dynamic>).toList();
+      jsonData.map((value) => value as Map<String, dynamic>).toList();
 
-      pcCase = data.map((e) => Case.fromJson(e)).toList();
+      producers = data.map((e) => Producers.fromJson(e)).toList();
     }
 
-    return pcCase;
+    return producers;
   }
 
   @override
-  Future<Case?> getDataById(int? id) async {
-    Case? pcCase;
+  Future<Producers?> getDataById(int? id) async {
+    Producers? producers;
     final token = await _getToken();
     final header = {
       'Content-type': 'application/json',
@@ -68,29 +65,29 @@ class CaseRepository implements Repository<Case> {
     };
 
     final response = await http.get(
-      Uri.http(apiPath, '/api/all/case/$id'),
+      Uri.http(apiPath, '/api/all/producers/$id'),
       headers: header,
     );
 
     if (response.statusCode == 200) {
       final jsonData =
-          convert.jsonDecode(response.body) as Map<String, dynamic>;
+      convert.jsonDecode(response.body) as Map<String, dynamic>;
 
-      pcCase = Case.fromJson(jsonData);
+      producers = Producers.fromJson(jsonData);
     }
 
-    return pcCase;
+    return producers;
   }
 
   @override
-  Future<void> postData(Case pcCase) async {
+  Future<void> postData(Producers producers) async {
     try {
-      final jsonData = pcCase.toJson();
+      final jsonData = producers.toJson();
       final header = {
         'Content-type': 'application/json',
       };
       await http.post(
-        Uri.http(apiPath, '/api/admin/case'),
+        Uri.http(apiPath, '/api/admin/producers'),
         headers: header,
         body: convert.jsonEncode(jsonData),
       );
@@ -100,19 +97,16 @@ class CaseRepository implements Repository<Case> {
   }
 
   @override
-  Future<void> updateData(Case pcCase) async {
+  Future<void> updateData(Producers producers) async {
     final token = await _getToken();
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
     };
 
-    final jsonData = pcCase.toJson();
+    final jsonData = producers.toJson();
     await http.patch(
-      Uri.http(
-        apiPath,
-        '/api/admin/case/${pcCase.id}',
-      ),
+      Uri.http(apiPath, '/api/admin/producers/${producers.id}'),
       body: convert.jsonEncode(jsonData),
       headers: header,
     );

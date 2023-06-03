@@ -1,12 +1,12 @@
 import 'dart:convert' as convert;
 
 import 'package:buildpc/constant.dart';
-import 'package:buildpc/model/case/case.dart';
+import 'package:buildpc/model/storage/storage_form_factor.dart';
 import 'package:buildpc/repository/repository.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-class CaseRepository implements Repository<Case> {
+class StorageFormFactorRepository implements Repository<StorageFormFactor> {
   final path = 'Producer';
   final header = {
     'Content-type': 'application/json',
@@ -27,24 +27,22 @@ class CaseRepository implements Repository<Case> {
     };
 
     await http.delete(
-      Uri.http(apiPath, '/api/admin/case/$id'),
+      Uri.http(apiPath, '/api/admin/storageFormFactor/$id'),
       headers: header,
     );
   }
 
   @override
-  Future<List<Case>> getAllData() async {
-    List<Case> pcCase = [];
+  Future<List<StorageFormFactor>> getAllData() async {
+    List<StorageFormFactor> storageFormFactor = [];
     final token = await _getToken();
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
     };
 
-    final response = await http.get(
-      Uri.http(apiPath, '/api/all/case'),
-      headers: header,
-    );
+    final response = await http
+        .get(Uri.http(apiPath, '/api/all/storageFormFactor'), headers: header);
 
     if (response.statusCode == 200) {
       final jsonData = convert.jsonDecode(response.body) as List<dynamic>;
@@ -52,15 +50,16 @@ class CaseRepository implements Repository<Case> {
       final data =
           jsonData.map((value) => value as Map<String, dynamic>).toList();
 
-      pcCase = data.map((e) => Case.fromJson(e)).toList();
+      storageFormFactor =
+          data.map((e) => StorageFormFactor.fromJson(e)).toList();
     }
 
-    return pcCase;
+    return storageFormFactor;
   }
 
   @override
-  Future<Case?> getDataById(int? id) async {
-    Case? pcCase;
+  Future<StorageFormFactor?> getDataById(int? id) async {
+    StorageFormFactor? storageFormFactor;
     final token = await _getToken();
     final header = {
       'Content-type': 'application/json',
@@ -68,7 +67,7 @@ class CaseRepository implements Repository<Case> {
     };
 
     final response = await http.get(
-      Uri.http(apiPath, '/api/all/case/$id'),
+      Uri.http(apiPath, '/api/all/storageFormFactor/$id'),
       headers: header,
     );
 
@@ -76,21 +75,21 @@ class CaseRepository implements Repository<Case> {
       final jsonData =
           convert.jsonDecode(response.body) as Map<String, dynamic>;
 
-      pcCase = Case.fromJson(jsonData);
+      storageFormFactor = StorageFormFactor.fromJson(jsonData);
     }
 
-    return pcCase;
+    return storageFormFactor;
   }
 
   @override
-  Future<void> postData(Case pcCase) async {
+  Future<void> postData(StorageFormFactor storageFormFactor) async {
     try {
-      final jsonData = pcCase.toJson();
+      final jsonData = storageFormFactor.toJson();
       final header = {
         'Content-type': 'application/json',
       };
       await http.post(
-        Uri.http(apiPath, '/api/admin/case'),
+        Uri.http(apiPath, '/api/admin/storageFormFactor'),
         headers: header,
         body: convert.jsonEncode(jsonData),
       );
@@ -100,18 +99,18 @@ class CaseRepository implements Repository<Case> {
   }
 
   @override
-  Future<void> updateData(Case pcCase) async {
+  Future<void> updateData(StorageFormFactor storageFormFactor) async {
     final token = await _getToken();
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
     };
 
-    final jsonData = pcCase.toJson();
+    final jsonData = storageFormFactor.toJson();
     await http.patch(
       Uri.http(
         apiPath,
-        '/api/admin/case/${pcCase.id}',
+        '/api/admin/storageFormFactor/${storageFormFactor.id}',
       ),
       body: convert.jsonEncode(jsonData),
       headers: header,

@@ -1,12 +1,12 @@
 import 'dart:convert' as convert;
 
 import 'package:buildpc/constant.dart';
-import 'package:buildpc/model/case/case.dart';
+import 'package:buildpc/model/cpu/cpu_generation.dart';
 import 'package:buildpc/repository/repository.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-class CaseRepository implements Repository<Case> {
+class CpuGenerationRepository implements Repository<CPUGeneration> {
   final path = 'Producer';
   final header = {
     'Content-type': 'application/json',
@@ -27,14 +27,14 @@ class CaseRepository implements Repository<Case> {
     };
 
     await http.delete(
-      Uri.http(apiPath, '/api/admin/case/$id'),
+      Uri.http(apiPath, '/api/admin/cpuGeneration/$id'),
       headers: header,
     );
   }
 
   @override
-  Future<List<Case>> getAllData() async {
-    List<Case> pcCase = [];
+  Future<List<CPUGeneration>> getAllData() async {
+    List<CPUGeneration> cpuGeneration = [];
     final token = await _getToken();
     final header = {
       'Content-type': 'application/json',
@@ -42,7 +42,7 @@ class CaseRepository implements Repository<Case> {
     };
 
     final response = await http.get(
-      Uri.http(apiPath, '/api/all/case'),
+      Uri.http(apiPath, '/api/all/cpuGeneration'),
       headers: header,
     );
 
@@ -52,15 +52,15 @@ class CaseRepository implements Repository<Case> {
       final data =
           jsonData.map((value) => value as Map<String, dynamic>).toList();
 
-      pcCase = data.map((e) => Case.fromJson(e)).toList();
+      cpuGeneration = data.map((e) => CPUGeneration.fromJson(e)).toList();
     }
 
-    return pcCase;
+    return cpuGeneration;
   }
 
   @override
-  Future<Case?> getDataById(int? id) async {
-    Case? pcCase;
+  Future<CPUGeneration?> getDataById(int? id) async {
+    CPUGeneration? cpuGeneration;
     final token = await _getToken();
     final header = {
       'Content-type': 'application/json',
@@ -68,7 +68,7 @@ class CaseRepository implements Repository<Case> {
     };
 
     final response = await http.get(
-      Uri.http(apiPath, '/api/all/case/$id'),
+      Uri.http(apiPath, '/api/all/cpuGeneration/$id'),
       headers: header,
     );
 
@@ -76,21 +76,21 @@ class CaseRepository implements Repository<Case> {
       final jsonData =
           convert.jsonDecode(response.body) as Map<String, dynamic>;
 
-      pcCase = Case.fromJson(jsonData);
+      cpuGeneration = CPUGeneration.fromJson(jsonData);
     }
 
-    return pcCase;
+    return cpuGeneration;
   }
 
   @override
-  Future<void> postData(Case pcCase) async {
+  Future<void> postData(CPUGeneration cpuGeneration) async {
     try {
-      final jsonData = pcCase.toJson();
+      final jsonData = cpuGeneration.toJson();
       final header = {
         'Content-type': 'application/json',
       };
       await http.post(
-        Uri.http(apiPath, '/api/admin/case'),
+        Uri.http(apiPath, '/api/admin/cpuGeneration'),
         headers: header,
         body: convert.jsonEncode(jsonData),
       );
@@ -100,18 +100,18 @@ class CaseRepository implements Repository<Case> {
   }
 
   @override
-  Future<void> updateData(Case pcCase) async {
+  Future<void> updateData(CPUGeneration cpuGeneration) async {
     final token = await _getToken();
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
     };
 
-    final jsonData = pcCase.toJson();
+    final jsonData = cpuGeneration.toJson();
     await http.patch(
       Uri.http(
         apiPath,
-        '/api/admin/case/${pcCase.id}',
+        '/api/admin/cpuGeneration/${cpuGeneration.id}',
       ),
       body: convert.jsonEncode(jsonData),
       headers: header,

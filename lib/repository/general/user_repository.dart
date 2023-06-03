@@ -61,15 +61,15 @@ class UserRepository implements Repository<User> {
 
       if (response.statusCode == 200) {
         final jsonData =
-        convert.jsonDecode(response.body) as Map<String, dynamic>;
+            convert.jsonDecode(response.body) as Map<String, dynamic>;
 
         final user = User.fromJson(jsonData);
         final Future<SharedPreferences> _prefs =
-        SharedPreferences.getInstance();
+            SharedPreferences.getInstance();
 
         final SharedPreferences prefs = await _prefs;
 
-        await prefs.setString('Token', jsonData['accessToken'].toString());
+        await prefs.setString('token', jsonData['accessToken'].toString());
 
         return user;
       } else {
@@ -79,49 +79,105 @@ class UserRepository implements Repository<User> {
       return user;
     }
   }
-  Future<String?> getToken() async {
+
+  Future<String?> _getToken() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
     return prefs.getString('token');
   }
 
   @override
-  Future<void> deleteData(int id) async{
-    final jsonData = {
-      'id': id
-    };
-
-    final token = await getToken();
+  Future<void> deleteData(int id) async {
+    final token = await _getToken();
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
     };
 
-    await http.delete(Uri.http(apiPath, '/api/user/user'), headers: header, body: convert.jsonEncode(jsonData));
-
+    await http.delete(
+      Uri.http(apiPath, '/api/user/user/$id'),
+      headers: header,
+    );
   }
 
   @override
-  Future<List<User>> getAllData() {
-    // TODO: implement getAllData
-    throw UnimplementedError();
+  Future<List<User>> getAllData() async {
+    List<User> users = [];
+    final token = await _getToken();
+    final header = {
+      'Content-type': 'application/json',
+      'Authorization': 'Bearer $token',
+    };
+
+    final response =
+        await http.get(Uri.http(apiPath, '/api/user/user'), headers: header);
+
+    if (response.statusCode == 200) {
+      final jsonData = convert.jsonDecode(response.body) as List<dynamic>;
+
+      final data =
+          jsonData.map((value) => value as Map<String, dynamic>).toList();
+
+      users = data.map((e) => User.fromJson(e)).toList();
+    }
+
+    return users;
   }
 
   @override
-  Future<User> getDataById(int? id) {
-    // TODO: implement getDataById
-    throw UnimplementedError();
+  Future<User?> getDataById(int? id) async {
+    User? user;
+    final token = await _getToken();
+    final header = {
+      'Content-type': 'application/json',
+      'Authorization': 'Bearer $token',
+    };
+
+    final response = await http.get(
+      Uri.http(apiPath, '/api/user/user/$id'),
+      headers: header,
+    );
+
+    if (response.statusCode == 200) {
+      final jsonData =
+          convert.jsonDecode(response.body) as Map<String, dynamic>;
+
+      user = User.fromJson(jsonData);
+    }
+
+    return user;
   }
 
   @override
   Future<void> postData(User user) async {
-    // TODO: implement postData
-    throw UnimplementedError();
+    try {
+      final jsonData = user.toJson();
+      final header = {
+        'Content-type': 'application/json',
+      };
+      await http.post(
+        Uri.http(apiPath, '/api/user/user'),
+        headers: header,
+        body: convert.jsonEncode(jsonData),
+      );
+    } catch (ex) {
+      rethrow;
+    }
   }
 
   @override
-  Future<void> updateData(User user) {
-    // TODO: implement updateData
-    throw UnimplementedError();
+  Future<void> updateData(User user) async {
+    final token = await _getToken();
+    final header = {
+      'Content-type': 'application/json',
+      'Authorization': 'Bearer $token',
+    };
+
+    final jsonData = user.toJson();
+    await http.patch(
+      Uri.http(apiPath, '/api/user/user/${user.id}'),
+      body: convert.jsonEncode(jsonData),
+      headers: header,
+    );
   }
 }

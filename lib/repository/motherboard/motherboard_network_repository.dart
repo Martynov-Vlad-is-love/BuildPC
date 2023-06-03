@@ -1,12 +1,12 @@
 import 'dart:convert' as convert;
 
 import 'package:buildpc/constant.dart';
-import 'package:buildpc/model/case/case.dart';
+import 'package:buildpc/model/motherboard/motherboard_network.dart';
 import 'package:buildpc/repository/repository.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-class CaseRepository implements Repository<Case> {
+class MotherboardNetworkRepository implements Repository<MotherboardNetwork> {
   final path = 'Producer';
   final header = {
     'Content-type': 'application/json',
@@ -27,14 +27,14 @@ class CaseRepository implements Repository<Case> {
     };
 
     await http.delete(
-      Uri.http(apiPath, '/api/admin/case/$id'),
+      Uri.http(apiPath, '/api/admin/motherboardNetwork/$id'),
       headers: header,
     );
   }
 
   @override
-  Future<List<Case>> getAllData() async {
-    List<Case> pcCase = [];
+  Future<List<MotherboardNetwork>> getAllData() async {
+    List<MotherboardNetwork> motherboardNetwork = [];
     final token = await _getToken();
     final header = {
       'Content-type': 'application/json',
@@ -42,7 +42,7 @@ class CaseRepository implements Repository<Case> {
     };
 
     final response = await http.get(
-      Uri.http(apiPath, '/api/all/case'),
+      Uri.http(apiPath, '/api/all/motherboardNetwork'),
       headers: header,
     );
 
@@ -52,15 +52,16 @@ class CaseRepository implements Repository<Case> {
       final data =
           jsonData.map((value) => value as Map<String, dynamic>).toList();
 
-      pcCase = data.map((e) => Case.fromJson(e)).toList();
+      motherboardNetwork =
+          data.map((e) => MotherboardNetwork.fromJson(e)).toList();
     }
 
-    return pcCase;
+    return motherboardNetwork;
   }
 
   @override
-  Future<Case?> getDataById(int? id) async {
-    Case? pcCase;
+  Future<MotherboardNetwork?> getDataById(int? id) async {
+    MotherboardNetwork? motherboardNetwork;
     final token = await _getToken();
     final header = {
       'Content-type': 'application/json',
@@ -68,7 +69,7 @@ class CaseRepository implements Repository<Case> {
     };
 
     final response = await http.get(
-      Uri.http(apiPath, '/api/all/case/$id'),
+      Uri.http(apiPath, '/api/all/motherboardNetwork/$id'),
       headers: header,
     );
 
@@ -76,21 +77,21 @@ class CaseRepository implements Repository<Case> {
       final jsonData =
           convert.jsonDecode(response.body) as Map<String, dynamic>;
 
-      pcCase = Case.fromJson(jsonData);
+      motherboardNetwork = MotherboardNetwork.fromJson(jsonData);
     }
 
-    return pcCase;
+    return motherboardNetwork;
   }
 
   @override
-  Future<void> postData(Case pcCase) async {
+  Future<void> postData(MotherboardNetwork motherboardNetwork) async {
     try {
-      final jsonData = pcCase.toJson();
+      final jsonData = motherboardNetwork.toJson();
       final header = {
         'Content-type': 'application/json',
       };
       await http.post(
-        Uri.http(apiPath, '/api/admin/case'),
+        Uri.http(apiPath, '/api/admin/motherboardNetwork'),
         headers: header,
         body: convert.jsonEncode(jsonData),
       );
@@ -100,18 +101,18 @@ class CaseRepository implements Repository<Case> {
   }
 
   @override
-  Future<void> updateData(Case pcCase) async {
+  Future<void> updateData(MotherboardNetwork motherboardNetwork) async {
     final token = await _getToken();
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
     };
 
-    final jsonData = pcCase.toJson();
+    final jsonData = motherboardNetwork.toJson();
     await http.patch(
       Uri.http(
         apiPath,
-        '/api/admin/case/${pcCase.id}',
+        '/api/admin/motherboardNetwork/${motherboardNetwork.id}',
       ),
       body: convert.jsonEncode(jsonData),
       headers: header,
