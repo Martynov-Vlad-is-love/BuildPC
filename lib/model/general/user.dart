@@ -11,7 +11,7 @@ class User implements Model {
   String username;
   String email;
   String? password;
-  List<ERole>? roles;
+  ERole roles;
 
   User(
     this.id,

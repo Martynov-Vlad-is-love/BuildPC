@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert' as convert;
 
 import 'package:buildpc/constant.dart';
@@ -11,6 +12,10 @@ class UserRepository implements Repository<User> {
   final header = {
     'Content-type': 'application/json',
   };
+
+  final _user = StreamController<User?>();
+
+  Stream<User?> get user => _user.stream;
 
   Future<User?> authentication(String login, String password) async {
     User? user;
@@ -32,6 +37,8 @@ class UserRepository implements Repository<User> {
         user = User.fromJson(jsonData);
         final Future<SharedPreferences> _prefs =
             SharedPreferences.getInstance();
+
+        _user.sink.add(user);
 
         final SharedPreferences prefs = await _prefs;
 
@@ -180,4 +187,8 @@ class UserRepository implements Repository<User> {
       headers: header,
     );
   }
+  void dispose(){
+    _user.close();
+  }
+
 }

@@ -4,7 +4,7 @@ import 'package:json_annotation/json_annotation.dart';
 part 'form_factor.g.dart';
 
 @JsonSerializable()
-class FormFactor implements Model{
+class FormFactor implements Model {
   final int? id;
   String name;
 
@@ -18,10 +18,7 @@ class FormFactor implements Model{
 
   @override
   List<String> parsedModels() {
-    final fields = [
-      id.toString(),
-      name
-    ];
+    final fields = [id.toString(), name];
 
     return fields;
   }

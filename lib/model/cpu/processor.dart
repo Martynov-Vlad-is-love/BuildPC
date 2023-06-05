@@ -73,6 +73,7 @@ class Processor implements Model {
       technicalProcess.toString(),
       tdp.toString(),
       maxTemperature.toString(),
+      embeddedGraphics.toString(),
       pcieVersion.name,
       technologies.name,
       description

@@ -1,9 +1,9 @@
 import 'dart:js_util';
 
+import 'package:buildpc/model/cooler/cooler.dart';
 import 'package:buildpc/model/model.dart';
+import 'package:buildpc/model/ram/ram.dart';
 import 'package:flutter/material.dart';
-
-import '../../../model/cooler/cooler.dart';
 
 class ModelListViewBar extends StatelessWidget {
   final List<Model?>? modelList;
@@ -30,9 +30,12 @@ class ModelListViewBar extends StatelessWidget {
         final item = currentItem?.parsedModels();
         final concatenate = StringBuffer();
         Model? model;
-        if(item != null){
-          if(instanceof(model, item[index])){
-
+        if(currentItem != null){
+          if(currentItem is Cooler){
+            concatenate.write('Cooler');
+          }
+          else if(currentItem is Ram){
+            concatenate.write('Ram');
           }
         }
 
@@ -42,15 +45,18 @@ class ModelListViewBar extends StatelessWidget {
         });
 
 
-        return Container(
-          height: 40,
-          color: _curColor,
-          child: Row(
-            children: [
-              Text(
-                'Id: $concatenate',
-              )
-            ],
+        return Center(
+          child: Container(
+            alignment: Alignment.center,
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: _curColor),
+            height: 60,
+            child: Row(
+              children: [
+                Text(
+                  'Id: $concatenate',
+                )
+              ],
+            ),
           ),
         );
       },

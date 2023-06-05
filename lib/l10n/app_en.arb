@@ -95,5 +95,6 @@
   "powerSupply": "Power Supply",
   "ram": "RAM",
   "hdd": "Hard drive disc",
-  "ssd": "Solid state disc"
+  "ssd": "Solid state disc",
+  "logOut": "Log out"
 }

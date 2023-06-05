@@ -4,7 +4,7 @@ import 'package:json_annotation/json_annotation.dart';
 part 'cooler_socket.g.dart';
 
 @JsonSerializable()
-class CoolerSocket implements Model{
+class CoolerSocket implements Model {
   final int? id;
   String socket;
 
@@ -18,10 +18,7 @@ class CoolerSocket implements Model{
 
   @override
   List<String> parsedModels() {
-    final fields = [
-      id.toString(),
-      socket
-    ];
+    final fields = [id.toString(), socket];
 
     return fields;
   }

@@ -1,10 +1,14 @@
+import 'dart:async';
+
 import 'package:buildpc/controller/general/user_controller.dart';
+import 'package:buildpc/model/general/e_role.dart';
 import 'package:buildpc/project/routes/app_route_constants.dart';
 import 'package:buildpc/ui/widgets/text_bar/text_bar.dart';
 import 'package:buildpc/ui/widgets/top_navigation_bar/custom_top_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+//ignore_for_file: avoid-late-keyword
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -14,17 +18,10 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  //ignore: avoid-late-keyword
-  late UserController _userController;
-
-  @override
-  void initState() {
-    _userController = Provider.of<UserController>(context, listen: false);
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
+    final UserController _userController = context.read<UserController>();
     final screenSize = MediaQuery.of(context).size;
     final _loginController = TextEditingController(text: '');
     final _passwordController = TextEditingController(text: '');
@@ -81,8 +78,8 @@ class _LoginPageState extends State<LoginPage> {
                       _loginController.text,
                       _passwordController.text,
                     );
-                    if(result != null){
-                      await GoRouter.of(context)
+                    if (result != null && result.roles == ERole.ROLE_ADMIN) {
+                       await GoRouter.of(context)
                           .pushNamed(AppRouteConstants.adminRouteName);
                     }
                   },

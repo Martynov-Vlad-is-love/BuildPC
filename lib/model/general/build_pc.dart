@@ -15,7 +15,7 @@ import 'package:json_annotation/json_annotation.dart';
 part 'build_pc.g.dart';
 
 @JsonSerializable()
-class BuildPC implements Model{
+class BuildPC implements Model {
   final int? id;
   String nameOfBuild;
   User user;
@@ -57,15 +57,15 @@ class BuildPC implements Model{
   @override
   List<String> parsedModels() {
     final ramList = [];
-    for(final plate in ram){
+    for (final plate in ram) {
       ramList.add(plate.parsedModels().toString());
     }
     final hddList = [];
-    for(final disc in hdd){
+    for (final disc in hdd) {
       hddList.add(disc.parsedModels().toString());
     }
     final ssdList = [];
-    for(final disc in ssd){
+    for (final disc in ssd) {
       ssdList.add(disc.parsedModels().toString());
     }
 
@@ -82,7 +82,8 @@ class BuildPC implements Model{
       ssdList.toString(),
       pcCase.parsedModels().toString(),
       cooler.parsedModels().toString(),
-
+      countOfLikes.toString(),
+      ratingId.toString()
     ];
 
     return fields;

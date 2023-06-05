@@ -4,7 +4,7 @@ import 'package:json_annotation/json_annotation.dart';
 part 'performance_level.g.dart';
 
 @JsonSerializable()
-class PerformanceLevel implements Model{
+class PerformanceLevel implements Model {
   final int? id;
   String level;
 

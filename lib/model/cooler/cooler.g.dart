@@ -10,7 +10,9 @@ Cooler _$CoolerFromJson(Map<String, dynamic> json) => Cooler(
       json['id'] as int?,
       json['name'] as String,
       Producers.fromJson(json['producer'] as Map<String, dynamic>),
-      CoolerSocket.fromJson(json['socket'] as Map<String, dynamic>),
+      (json['socket'] as List<dynamic>)
+          .map((e) => CoolerSocket.fromJson(e as Map<String, dynamic>))
+          .toList(),
       CoolerMaterial.fromJson(json['material'] as Map<String, dynamic>),
       json['maxTDP'] as int,
       json['supportedSockets'] as int,

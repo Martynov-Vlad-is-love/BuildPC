@@ -4,7 +4,7 @@ import 'package:json_annotation/json_annotation.dart';
 part 'case_design_features.g.dart';
 
 @JsonSerializable()
-class CaseDesignFeatures implements Model{
+class CaseDesignFeatures implements Model {
   final int? id;
   String designFeatures;
 
@@ -18,10 +18,7 @@ class CaseDesignFeatures implements Model{
 
   @override
   List<String> parsedModels() {
-    final List<String> fields = [
-      id.toString(),
-      designFeatures
-    ];
+    final List<String> fields = [id.toString(), designFeatures];
 
     return fields;
   }

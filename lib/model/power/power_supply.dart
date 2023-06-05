@@ -8,7 +8,7 @@ import 'package:json_annotation/json_annotation.dart';
 part 'power_supply.g.dart';
 
 @JsonSerializable()
-class PowerSupply implements Model{
+class PowerSupply implements Model {
   final int? id;
   String name;
   Producers producer;
@@ -36,7 +36,6 @@ class PowerSupply implements Model{
     this.producer,
     this.power,
     this.formFactor,
-    this.performanceLevel,
     this.protectionFunctions,
     this.cpu_4pin,
     this.cpu_4plus4pin,
@@ -47,7 +46,8 @@ class PowerSupply implements Model{
     this.sata,
     this.countOf_12VLines,
     this.description,
-    this.recommendedPrice, {
+    this.recommendedPrice,
+    this.performanceLevel, {
     required this.pfcModule,
     required this.modularConnection,
   });
@@ -61,7 +61,7 @@ class PowerSupply implements Model{
   @override
   List<String> parsedModels() {
     final powerSupplyPF = [];
-    for(final protectionFunction in protectionFunctions){
+    for (final protectionFunction in protectionFunctions) {
       powerSupplyPF.add(protectionFunction.name);
     }
 

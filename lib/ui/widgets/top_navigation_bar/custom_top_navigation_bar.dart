@@ -1,10 +1,12 @@
 import 'package:buildpc/constant.dart';
+import 'package:buildpc/controller/general/user_controller.dart';
 import 'package:buildpc/project/routes/app_route_constants.dart';
 import 'package:buildpc/ui/widgets/language_picker/language_picker_item.dart';
 import 'package:buildpc/ui/widgets/top_navigation_bar/top_navigation_bar.dart';
 import 'package:buildpc/ui/widgets/top_navigation_bar/top_navigation_bar_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
 class CustomTopNavigationBar extends StatelessWidget {
   const CustomTopNavigationBar({Key? key}) : super(key: key);
@@ -12,14 +14,13 @@ class CustomTopNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AppLocalizations? _locale = AppLocalizations.of(context);
-    const isLog = false;
+    final user = Provider.of<UserController>(context, listen: false);
+    final isLog = user.user!=null;
     String profileLabel = '${_locale?.profileLabel}';
     Icon profileWidget = const Icon(Icons.door_front_door_outlined);
-    String destination = AppRouteConstants.loginRouteName;
     if (isLog == true) {
       profileLabel = '${_locale?.profile}';
-      profileWidget = const Icon(Icons.person);
-      destination = AppRouteConstants.mainRouteName;
+      profileWidget = const Icon(Icons.output);
     }
 
     return SafeArea(
@@ -42,7 +43,7 @@ class CustomTopNavigationBar extends StatelessWidget {
           TopNavigationBarItem(
             icon: profileWidget,
             label: Text(profileLabel),
-            destination: destination,
+            destination: AppRouteConstants.loginRouteName,
           ),
           const LanguagePickerItem(),
         ],

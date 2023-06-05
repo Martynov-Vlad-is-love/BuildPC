@@ -80,11 +80,11 @@ class GraphicCard implements Model {
       bus.toString(),
       tdp.toString(),
       connectors.toString(),
-      interfaceType.interfaceType,
       length.toString(),
+      interfaceType.interfaceType,
       description,
-      gpuTechnologies.name,
       recommendedPrice.toString(),
+      gpuTechnologies.name,
       performanceLevel.level
     ];
 

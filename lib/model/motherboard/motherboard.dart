@@ -99,8 +99,6 @@ class Motherboard implements Model {
       formFactor.toString(),
       maxTdpOfProcessors.toString(),
       memorySlots.toString(),
-      maxTdpOfProcessors.toString(),
-      memorySlots.toString(),
       supportedMemoryFrequency.toString(),
       maxAmountOfRam.toString(),
       network.toString(),

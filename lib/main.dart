@@ -13,8 +13,9 @@ void main() => runApp(Main());
 class Main extends StatelessWidget {
   Main({Key? key}) : super(key: key);
 
-  final _config = AppRouteConfig(isAuth: true);
+  final _config = AppRouteConfig();
   final _userRepository = UserRepository();
+
   @override
   Widget build(BuildContext context) {
 

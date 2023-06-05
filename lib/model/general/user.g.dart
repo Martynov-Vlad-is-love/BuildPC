@@ -12,9 +12,7 @@ User _$UserFromJson(Map<String, dynamic> json) => User(
       json['username'] as String,
       json['email'] as String,
       json['password'] as String?,
-      (json['roles'] as List<dynamic>?)
-          ?.map((e) => $enumDecode(_$ERoleEnumMap, e))
-          .toList(),
+      $enumDecode(_$ERoleEnumMap, json['roles']),
     );
 
 Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
@@ -23,7 +21,7 @@ Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'username': instance.username,
       'email': instance.email,
       'password': instance.password,
-      'roles': instance.roles?.map((e) => _$ERoleEnumMap[e]!).toList(),
+      'roles': _$ERoleEnumMap[instance.roles]!,
     };
 
 const _$ERoleEnumMap = {

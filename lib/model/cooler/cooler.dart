@@ -12,7 +12,7 @@ class Cooler implements Model{
   final int? id;
   String name;
   Producers producer;
-  CoolerSocket socket;
+  List<CoolerSocket> socket;
   CoolerMaterial material;
   int maxTDP;
   int supportedSockets;
@@ -40,7 +40,7 @@ class Cooler implements Model{
       id.toString(),
       name,
       producer,
-      socket,
+      socket.toString(),
       material,
       maxTDP.toString(),
       supportedSockets.toString(),
@@ -54,12 +54,16 @@ class Cooler implements Model{
   }
 
     @override
-  List<String> parsedModels( ) {
+  List<String> parsedModels() {
+      final List<String> socketList = [];
+      for(final socket in socket){
+        socketList.add(socket.socket);
+      }
     final List<String> fields = [
       id.toString(),
       name,
       producer.name,
-      socket.socket,
+      socketList.toString(),
       material.material,
       maxTDP.toString(),
       supportedSockets.toString(),

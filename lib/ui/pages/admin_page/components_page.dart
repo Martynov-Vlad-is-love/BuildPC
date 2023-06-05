@@ -44,11 +44,12 @@ class _MainView extends StatelessWidget {
     final CoolerSocket socket = CoolerSocket(1, 'fgdfg');
     final CoolerMaterial material = CoolerMaterial(1, 'do anal');
     final PerformanceLevel performanceLevel = PerformanceLevel(1, 'high');
+    final List<CoolerSocket> sockets = [socket, socket];
     final Cooler model = Cooler(
       1,
       'Test case 1',
       oleg,
-      socket,
+      sockets,
       material,
       41,
       8383,
@@ -57,7 +58,7 @@ class _MainView extends StatelessWidget {
       300,
       performanceLevel,
     );
-    final Ram ram1 = Ram(
+    final Ram model4 = Ram(
       2,
       'Kingston',
       oleg,
@@ -70,7 +71,7 @@ class _MainView extends StatelessWidget {
       300,
       performanceLevel,
     );
-    final Ram ram2 = Ram(
+    final Ram model5 = Ram(
       2,
       'Kingston',
       oleg,
@@ -87,7 +88,7 @@ class _MainView extends StatelessWidget {
       3,
       'Test case 3',
       oleg,
-      socket,
+      sockets,
       material,
       41,
       8383,
@@ -100,7 +101,7 @@ class _MainView extends StatelessWidget {
       4,
       'Test case 4',
       oleg,
-      socket,
+      sockets,
       material,
       41,
       8383,
@@ -109,7 +110,7 @@ class _MainView extends StatelessWidget {
       300,
       performanceLevel,
     );
-    final List<Model> models = [model, model2, model3];
+    final List<Model> models = [model, model2, model3, model4, model5];
 
     return ColoredBox(
       color: Colors.white,

@@ -70,11 +70,12 @@ class Case implements Model{
       formFactorField.toString(),
       producer.name,
       powerSupplyLocation.powerSupplyLocation,
+      fansIncluded.toString(),
       usb_3_2.toString(),
       usb_3_0.toString(),
       usb_2_0.toString(),
-      maxLengthOfGraphicCard.toString(),
       designFeaturesField.toString(),
+      maxLengthOfGraphicCard.toString(),
       description,
       recommendedPrice.toString(),
       performanceLevel.level
