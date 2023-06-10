@@ -8,7 +8,7 @@ class CPUPCIeVersion implements Model{
   final int? id;
   String name;
 
-  CPUPCIeVersion(this.id, this.name);
+  CPUPCIeVersion(this.id, {required this.name});
 
   factory CPUPCIeVersion.fromJson(Map<String, dynamic> json) =>
       _$CPUPCIeVersionFromJson(json);

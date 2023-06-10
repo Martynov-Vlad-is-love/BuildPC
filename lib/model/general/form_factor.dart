@@ -8,7 +8,7 @@ class FormFactor implements Model {
   final int? id;
   String name;
 
-  FormFactor(this.id, this.name);
+  FormFactor({this.id, required this.name});
 
   factory FormFactor.fromJson(Map<String, dynamic> json) =>
       _$FormFactorFromJson(json);

@@ -7,11 +7,6 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CoolerMaterialRepository implements Repository<CoolerMaterial> {
-  final path = 'Producer';
-  final header = {
-    'Content-type': 'application/json',
-  };
-
   Future<String?> _getToken() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
@@ -24,6 +19,8 @@ class CoolerMaterialRepository implements Repository<CoolerMaterial> {
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     await http.delete(
@@ -39,6 +36,8 @@ class CoolerMaterialRepository implements Repository<CoolerMaterial> {
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     final response = await http
@@ -63,6 +62,8 @@ class CoolerMaterialRepository implements Repository<CoolerMaterial> {
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     final response = await http.get(
@@ -82,10 +83,14 @@ class CoolerMaterialRepository implements Repository<CoolerMaterial> {
 
   @override
   Future<void> postData(CoolerMaterial coolerMaterial) async {
+    final token = await _getToken();
     try {
       final jsonData = coolerMaterial.toJson();
       final header = {
         'Content-type': 'application/json',
+        'Authorization': 'Bearer $token',
+        'Access-Control-Allow-Origin': '*',
+        'Accept': '*/*',
       };
       await http.post(
         Uri.http(apiPath, '/api/admin/coolerMaterial'),
@@ -103,6 +108,8 @@ class CoolerMaterialRepository implements Repository<CoolerMaterial> {
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     final jsonData = coolerMaterial.toJson();

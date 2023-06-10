@@ -7,17 +7,18 @@ part of 'ram.dart';
 // **************************************************************************
 
 Ram _$RamFromJson(Map<String, dynamic> json) => Ram(
-      json['id'] as int?,
-      json['name'] as String,
-      Producers.fromJson(json['producer'] as Map<String, dynamic>),
-      RamMemoryType.fromJson(json['memoryType'] as Map<String, dynamic>),
-      json['memoryCapacity'] as int,
-      json['frequency'] as int,
-      RamTimings.fromJson(json['timings'] as Map<String, dynamic>),
-      (json['powerSupplyVoltage'] as num).toDouble(),
-      json['description'] as String,
-      json['recommendedPrice'] as int,
-      PerformanceLevel.fromJson(
+      id: json['id'] as int?,
+      name: json['name'] as String,
+      producer: Producers.fromJson(json['producer'] as Map<String, dynamic>),
+      memoryType:
+          RamMemoryType.fromJson(json['memoryType'] as Map<String, dynamic>),
+      memoryCapacity: json['memoryCapacity'] as int,
+      frequency: json['frequency'] as int,
+      timings: RamTimings.fromJson(json['timings'] as Map<String, dynamic>),
+      powerSupplyVoltage: (json['powerSupplyVoltage'] as num).toDouble(),
+      description: json['description'] as String,
+      recommendedPrice: json['recommendedPrice'] as int,
+      performanceLevel: PerformanceLevel.fromJson(
           json['performanceLevel'] as Map<String, dynamic>),
     );
 

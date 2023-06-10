@@ -8,7 +8,7 @@ class CaseSize implements Model{
   final int? id;
   String size;
 
-  CaseSize(this.id, this.size);
+  CaseSize(this.id, {required this.size});
 
   factory CaseSize.fromJson(Map<String, dynamic> json) =>
       _$CaseSizeFromJson(json);

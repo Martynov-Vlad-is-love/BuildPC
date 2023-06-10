@@ -23,7 +23,7 @@ class TopNavigationBarItem extends StatelessWidget {
           elevation: MaterialStatePropertyAll<double>(0.0),
           minimumSize: MaterialStatePropertyAll<Size>(Size(0, 45)),
           maximumSize: MaterialStatePropertyAll<Size>(Size(153, 70)),
-          backgroundColor: MaterialStatePropertyAll<Color>(Colors.green),
+          backgroundColor: MaterialStatePropertyAll<Color>(Colors.black),
         ),
         onPressed: () {
           GoRouter.of(context).pushNamed(destination);

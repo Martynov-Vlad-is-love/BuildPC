@@ -8,7 +8,7 @@ class Producers implements Model{
   final int? id;
   String name;
 
-  Producers(this.id, this.name);
+  Producers(this.id, {required this.name});
 
   factory Producers.fromJson(Map<String, dynamic> json) =>
       _$ProducersFromJson(json);

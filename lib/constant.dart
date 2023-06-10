@@ -17,9 +17,9 @@ const List<String> user = [];
 
 //ignore: prefer-match-file-name
 class Component {
+
   List<String> getComponentsList(BuildContext context) {
     final AppLocalizations? _locale = AppLocalizations.of(context);
-
 
     final List<String> components = [
       '${_locale?.graphicCard}',
@@ -63,8 +63,8 @@ class Component {
     final List<String> _pcCase = [
       'id',
       '${_locale?.name}',
-      '${_locale?.producer}',
       '${_locale?.size}',
+      '${_locale?.producer}',
       '${_locale?.formFactor}',
       '${_locale?.powerSupplyLocation}',
       '${_locale?.fansIncluded}',
@@ -94,8 +94,8 @@ class Component {
       'id',
       '${_locale?.name}',
       '${_locale?.producer}',
-      '${_locale?.year}',
       '${_locale?.socket}',
+      '${_locale?.year}',
       '${_locale?.countOfCores}',
       '${_locale?.countOfThreads}',
       '${_locale?.baseFrequency}',
@@ -105,9 +105,11 @@ class Component {
       '${_locale?.technicalProcess}',
       '${_locale?.tdp}',
       '${_locale?.maxTemperature}',
+      '${_locale?.embeddedGraphics}',
       '${_locale?.pcieController}',
       '${_locale?.description}',
-      '${_locale?.embeddedGraphics}'
+      '${_locale?.recommendedPrice}',
+      '${_locale?.performanceLevel}'
     ];
     final List<String> _motherboard = [
       'id',
@@ -116,17 +118,32 @@ class Component {
       '${_locale?.socket}',
       '${_locale?.cpuGeneration}',
       '${_locale?.chipset}',
-      '${_locale?.countOfThreads}',
-      '${_locale?.baseFrequency}',
-      '${_locale?.turboBoostFrequency}',
-      '${_locale?.l3Cache}',
-      '${_locale?.generation}',
-      '${_locale?.technicalProcess}',
-      '${_locale?.tdp}',
-      '${_locale?.maxTemperature}',
-      '${_locale?.pcieController}',
+      '${_locale?.formFactor}',
+      '${_locale?.maxTDP}',
+      '${_locale?.memorySlots}',
+      '${_locale?.supportedMemoryFrequency}',
+      '${_locale?.maxAmountOfRam}',
+      '${_locale?.network}',
+      '${_locale?.bluetooth}',
+      '${_locale?.wifi}',
+      '${_locale?.pcieVersion}',
+      '${_locale?.pciExpressX16}',
+      '${_locale?.pciExpressX4}',
+      '${_locale?.pciExpressX1}',
+      '${_locale?.sata3}',
+      'm.2',
+      '${_locale?.dSub}',
+      '${_locale?.dvi}',
+      '${_locale?.hdmi}',
+      '${_locale?.displayPort}',
+      '${_locale?.usb_3_2}',
+      '${_locale?.usb_3_0}',
+      '${_locale?.usb_2_0}',
+      '${_locale?.usbTypeC}',
+      '${_locale?.digitalAudioJack}',
       '${_locale?.description}',
-      '${_locale?.embeddedGraphics}'
+      '${_locale?.recommendedPrice}',
+      '${_locale?.performanceLevel}'
     ];
     final List<String> _power = [
       'id',
@@ -134,10 +151,12 @@ class Component {
       '${_locale?.producer}',
       '${_locale?.power}',
       '${_locale?.formFactor}',
-      '${_locale?.performanceLevel}',
+      '${_locale?.pfcModule}',
+      '${_locale?.modularConnection}',
       '${_locale?.protectionFunctions}',
       '${_locale?.cpu_4pin}',
       '${_locale?.cpu_4plus4pin}',
+      '${_locale?.cpu_8pin}',
       '${_locale?.pcie_6plus2pin}',
       '${_locale?.pcie_8pin}',
       '${_locale?.pcie_5_16pin}',
@@ -145,51 +164,44 @@ class Component {
       '${_locale?.countOf_12VLines}',
       '${_locale?.description}',
       '${_locale?.recommendedPrice}',
-      '${_locale?.pfcModule}',
-      '${_locale?.modularConnection}',
+      '${_locale?.performanceLevel}'
     ];
     final List<String> _ram = [
-      'id',
-      '${_locale?.name}',
-      '${_locale?.producer}',
-      '${_locale?.memoryType}',
-      '${_locale?.memoryCapacity}',
-      '${_locale?.frequency}',
-      '${_locale?.timings}',
-      '${_locale?.powerSupplyVoltage}',
-      '${_locale?.description}',
-      '${_locale?.recommendedPrice}',
-      '${_locale?.performanceLevel}',
+      'id', '${_locale?.name}','${_locale?.producer}',
+      '${_locale?.memoryType}', '${_locale?.memoryCapacity}',
+      '${_locale?.frequency}', '${_locale?.timings}',
+      '${_locale?.powerSupplyVoltage}', '${_locale?.description}',
+      '${_locale?.recommendedPrice}', '${_locale?.performanceLevel}',
     ];
-    final List<String> _hdd = [
-      'id',
-      '${_locale?.producer}',
-      '${_locale?.storageSize}',
-      '${_locale?.speed}',
-      '${_locale?.formFactor}',
-      '${_locale?.storageInterface}',
-      '${_locale?.bufferSize}',
-      '${_locale?.writingSpeed}',
-      '${_locale?.readingSpeed}',
-      '${_locale?.description}',
-      '${_locale?.recommendedPrice}',
+    final List<String> _hdd = ['id', '${_locale?.producer}',
+      '${_locale?.storageSize}', '${_locale?.speed}', '${_locale?.formFactor}',
+      '${_locale?.storageInterface}', '${_locale?.bufferSize}',
+      '${_locale?.readingSpeed}', '${_locale?.writingSpeed}',
+      '${_locale?.description}', '${_locale?.recommendedPrice}',
       '${_locale?.performanceLevel}',
     ];
     final List<String> _ssd = [
-      'id',
-      '${_locale?.producer}',
-      '${_locale?.storageSize}',
-      '${_locale?.speed}',
-      '${_locale?.formFactor}',
-      '${_locale?.storageInterface}',
-      '${_locale?.bufferSize}',
-      '${_locale?.writingSpeed}',
-      '${_locale?.readingSpeed}',
-      '${_locale?.cellsType}',
-      '${_locale?.description}',
-      '${_locale?.recommendedPrice}',
-      '${_locale?.performanceLevel}',
+      'id', '${_locale?.producer}', '${_locale?.storageSize}',
+      '${_locale?.speed}', '${_locale?.formFactor}',
+      '${_locale?.storageInterface}', '${_locale?.bufferSize}',
+      '${_locale?.readingSpeed}', '${_locale?.writingSpeed}',
+      '${_locale?.cellsType}', '${_locale?.description}',
+      '${_locale?.recommendedPrice}', '${_locale?.performanceLevel}',
     ];
+    final List<String> _performanceLevel = ['id',
+      '${_locale?.performanceLevel}'];
+    final List<String> _producer = ['id', '${_locale?.producer}'];
+    final List<String> _formFactor = ['id', '${_locale?.formFactor}'];
+    final List<String> _caseDesignFeatures = [
+      'id', '${_locale?.caseDesignFeatures}'];
+    final List<String> _casePowerSupplyLocation = [
+      'id', '${_locale?.casePowerSupplyLocation}'];
+    final List<String> _caseSize = ['id', '${_locale?.caseSize}'];
+    final List<String> _coolerMaterial = [
+      'id', '${_locale?.coolerMaterial}'];
+    final List<String> _coolerSocket = [
+      'id', '${_locale?.coolerSocket}'];
+    final List<String> _cpuGeneration = ['id', '${_locale?.cpuGeneration}'];
 
     final Map<String, List<String>> components = {
       'Case': _pcCase,
@@ -197,10 +209,19 @@ class Component {
       'Processor': _processor,
       'GraphicCard': _graphicCard,
       'Motherboard': _motherboard,
-      'Power Supply': _power,
-      'RAM': _ram,
-      'HDD': _hdd,
-      'SSD': _ssd
+      'PowerSupply': _power,
+      'Ram': _ram,
+      'Hdd': _hdd,
+      'Ssd': _ssd,
+      'PerformanceLevel': _performanceLevel,
+      'Producers': _producer,
+      'FormFactor': _formFactor,
+      'CaseDesignFeatures': _caseDesignFeatures,
+      'CasePowerSupplyLocation': _casePowerSupplyLocation,
+      'CaseSize': _caseSize,
+      'CoolerMaterial': _coolerMaterial,
+      'CoolerSocket': _coolerSocket,
+      'CpuGeneration': _cpuGeneration
     };
 
     return components;

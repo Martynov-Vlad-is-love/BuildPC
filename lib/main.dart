@@ -1,4 +1,6 @@
+import 'package:buildpc/controller/field_controller.dart';
 import 'package:buildpc/controller/general/user_controller.dart';
+import 'package:buildpc/controller/model_controller.dart';
 import 'package:buildpc/l10n/l10n.dart';
 import 'package:buildpc/project/routes/app_route_config.dart';
 import 'package:buildpc/provider/locale_provider.dart';
@@ -21,6 +23,8 @@ class Main extends StatelessWidget {
 
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider(create: (context) => FieldController()),
+        ChangeNotifierProvider(create: (context) => ModelController()),
         ChangeNotifierProvider(
           create: (context) => UserController(_userRepository),
         ),

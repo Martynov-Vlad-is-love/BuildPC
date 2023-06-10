@@ -3,6 +3,7 @@ import 'package:buildpc/model/general/performance_level.dart';
 import 'package:buildpc/model/general/producers.dart';
 import 'package:buildpc/model/model.dart';
 import 'package:buildpc/model/power/power_supply_protection_functions.dart';
+import 'package:buildpc/model_utilis/model_util.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'power_supply.g.dart';
@@ -30,26 +31,26 @@ class PowerSupply implements Model {
   int recommendedPrice;
   PerformanceLevel performanceLevel;
 
-  PowerSupply(
+  PowerSupply({
     this.id,
-    this.name,
-    this.producer,
-    this.power,
-    this.formFactor,
-    this.protectionFunctions,
-    this.cpu_4pin,
-    this.cpu_4plus4pin,
-    this.cpu_8pin,
-    this.pcie_6plus2pin,
-    this.pcie_8pin,
-    this.pcie_5_16pin,
-    this.sata,
-    this.countOf_12VLines,
-    this.description,
-    this.recommendedPrice,
-    this.performanceLevel, {
+    required this.name,
+    required this.producer,
+    required this.power,
+    required this.formFactor,
     required this.pfcModule,
     required this.modularConnection,
+    required this.protectionFunctions,
+    required this.cpu_4pin,
+    required this.cpu_4plus4pin,
+    required this.cpu_8pin,
+    required this.pcie_6plus2pin,
+    required this.pcie_8pin,
+    required this.pcie_5_16pin,
+    required this.sata,
+    required this.countOf_12VLines,
+    required this.description,
+    required this.recommendedPrice,
+    required this.performanceLevel,
   });
 
   factory PowerSupply.fromJson(Map<String, dynamic> json) =>

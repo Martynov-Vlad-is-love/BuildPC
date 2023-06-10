@@ -15,11 +15,11 @@ class CustomTopNavigationBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final AppLocalizations? _locale = AppLocalizations.of(context);
     final user = Provider.of<UserController>(context, listen: false);
-    final isLog = user.user!=null;
+    final isLog = user.user != null;
     String profileLabel = '${_locale?.profileLabel}';
     Icon profileWidget = const Icon(Icons.door_front_door_outlined);
     if (isLog == true) {
-      profileLabel = '${_locale?.profile}';
+      profileLabel = '${_locale?.logOut}';
       profileWidget = const Icon(Icons.output);
     }
 
@@ -32,17 +32,16 @@ class CustomTopNavigationBar extends StatelessWidget {
         children: [
           TopNavigationBarItem(
             icon: const Icon(Icons.place),
-            label: Text('${_locale?.homePage}'),
-            destination: AppRouteConstants.mainRouteName,
-          ),
-          TopNavigationBarItem(
-            icon: const Icon(Icons.computer),
-            label: Text('${_locale?.myPC}'),
-            destination: AppRouteConstants.mainRouteName,
+            label: Text(
+              '${_locale?.homePage}',
+              style: const TextStyle(color: Colors.white),
+            ),
+            destination: AppRouteConstants.adminRouteName,
           ),
           TopNavigationBarItem(
             icon: profileWidget,
-            label: Text(profileLabel),
+            label:
+                Text(profileLabel, style: const TextStyle(color: Colors.white)),
             destination: AppRouteConstants.loginRouteName,
           ),
           const LanguagePickerItem(),

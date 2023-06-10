@@ -8,7 +8,7 @@ class CPUTechnologies implements Model{
   final int? id;
   String name;
 
-  CPUTechnologies(this.id, this.name);
+  CPUTechnologies(this.id, {required this.name});
 
   factory CPUTechnologies.fromJson(Map<String, dynamic> json) =>
       _$CPUTechnologiesFromJson(json);

@@ -80,45 +80,31 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 child: ElevatedButton(
                   style: ButtonStyle(
                     backgroundColor:
-                        const MaterialStatePropertyAll<Color>(Colors.green),
+                        const MaterialStatePropertyAll<Color>(Colors.black),
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(18.0),
                       ),
                     ),
                   ),
-                  onPressed: () async{
-
+                  onPressed: () async {
                     final result = await _userController.registration(
                       _loginController.text,
                       _passwordController.text,
                       _emailController.text,
                       _nameController.text,
                     );
-                    if(result != null){
+                    if (result != null) {
                       await GoRouter.of(context)
                           .pushNamed(AppRouteConstants.loginRouteName);
                     }
                   },
-                  child: const Text('Register'),
+                  child: const Text(
+                    'Register',
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text('Have an account?'),
-                    TextButton(
-                      onPressed: () {
-                           GoRouter.of(context)
-                              .pushNamed(AppRouteConstants.loginRouteName);
-                      },
-                      child: const Text('Authorize'),
-                    )
-                  ],
-                ),
-              )
             ],
           ),
         ),

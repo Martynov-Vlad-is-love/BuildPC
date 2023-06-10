@@ -63,6 +63,8 @@ class PerformanceLevelRepository implements Repository<PerformanceLevel> {
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     final response = await http.get(
@@ -82,10 +84,14 @@ class PerformanceLevelRepository implements Repository<PerformanceLevel> {
 
   @override
   Future<void> postData(PerformanceLevel performanceLevel) async {
+    final token = await _getToken();
     try {
       final jsonData = performanceLevel.toJson();
       final header = {
         'Content-type': 'application/json',
+        'Authorization': 'Bearer $token',
+        'Access-Control-Allow-Origin': '*',
+        'Accept': '*/*',
       };
       await http.post(
         Uri.http(apiPath, '/api/admin/performanceLevel'),
@@ -103,6 +109,8 @@ class PerformanceLevelRepository implements Repository<PerformanceLevel> {
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     final jsonData = performanceLevel.toJson();

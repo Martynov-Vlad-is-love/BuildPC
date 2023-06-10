@@ -8,7 +8,7 @@ class StorageFormFactor implements Model{
   final int? id;
   String name;
 
-  StorageFormFactor(this.id, this.name);
+  StorageFormFactor(this.id, {required this.name});
 
   factory StorageFormFactor.fromJson(Map<String, dynamic> json) =>
       _$StorageFormFactorFromJson(json);

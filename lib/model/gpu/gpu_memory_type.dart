@@ -8,7 +8,7 @@ class GPUMemoryType implements Model{
   final int? id;
   String type;
 
-  GPUMemoryType(this.id, this.type);
+  GPUMemoryType(this.id, {required this.type});
 
   factory GPUMemoryType.fromJson(Map<String, dynamic> json) =>
       _$GPUMemoryTypeFromJson(json);

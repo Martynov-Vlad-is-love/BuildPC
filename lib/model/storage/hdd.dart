@@ -22,20 +22,20 @@ class Hdd implements Model{
   int recommendedPrice;
   PerformanceLevel performanceLevel;
 
-  Hdd(
+  Hdd({
     this.id,
-    this.producer,
-    this.storageSize,
-    this.speed,
-    this.formFactor,
-    this.storageInterface,
-    this.bufferSize,
-    this.readingSpeed,
-    this.writingSpeed,
-    this.description,
-    this.recommendedPrice,
-    this.performanceLevel,
-  );
+    required this.producer,
+    required this.storageSize,
+    required this.speed,
+    required this.formFactor,
+    required this.storageInterface,
+    required this.bufferSize,
+    required this.readingSpeed,
+    required this.writingSpeed,
+    required this.description,
+    required this.recommendedPrice,
+    required this.performanceLevel,
+  });
 
   factory Hdd.fromJson(Map<String, dynamic> json) => _$HddFromJson(json);
 

@@ -8,7 +8,7 @@ class CasePowerSupplyLocation implements Model{
   final int? id;
   String powerSupplyLocation;
 
-  CasePowerSupplyLocation(this.id, this.powerSupplyLocation);
+  CasePowerSupplyLocation(this.id, {required this.powerSupplyLocation});
 
   factory CasePowerSupplyLocation.fromJson(Map<String, dynamic> json) =>
       _$CasePowerSupplyLocationFromJson(json);

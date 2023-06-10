@@ -8,7 +8,7 @@ class MotherboardChipset implements Model {
   final int? id;
   String chipset;
 
-  MotherboardChipset(this.id, this.chipset);
+  MotherboardChipset(this.id, {required this.chipset});
 
   factory MotherboardChipset.fromJson(Map<String, dynamic> json) =>
       _$MotherboardChipsetFromJson(json);

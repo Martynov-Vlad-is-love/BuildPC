@@ -21,19 +21,19 @@ class Ram implements Model {
   int recommendedPrice;
   PerformanceLevel performanceLevel;
 
-  Ram(
+  Ram({
     this.id,
-    this.name,
-    this.producer,
-    this.memoryType,
-    this.memoryCapacity,
-    this.frequency,
-    this.timings,
-    this.powerSupplyVoltage,
-    this.description,
-    this.recommendedPrice,
-    this.performanceLevel,
-  );
+    required this.name,
+    required this.producer,
+    required this.memoryType,
+    required this.memoryCapacity,
+    required this.frequency,
+    required this.timings,
+    required this.powerSupplyVoltage,
+    required this.description,
+    required this.recommendedPrice,
+    required this.performanceLevel,
+  });
 
   factory Ram.fromJson(Map<String, dynamic> json) => _$RamFromJson(json);
 

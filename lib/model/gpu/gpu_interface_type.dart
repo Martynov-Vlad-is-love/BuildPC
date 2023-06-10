@@ -8,7 +8,7 @@ class GPUInterfaceType implements Model {
   final int? id;
   String interfaceType;
 
-  GPUInterfaceType(this.id, this.interfaceType);
+  GPUInterfaceType(this.id, {required this.interfaceType});
 
   factory GPUInterfaceType.fromJson(Map<String, dynamic> json) =>
       _$GPUInterfaceTypeFromJson(json);

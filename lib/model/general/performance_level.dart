@@ -8,7 +8,7 @@ class PerformanceLevel implements Model {
   final int? id;
   String level;
 
-  PerformanceLevel(this.id, this.level);
+  PerformanceLevel( this.id, {required this.level});
 
   factory PerformanceLevel.fromJson(Map<String, dynamic> json) =>
       _$PerformanceLevelFromJson(json);

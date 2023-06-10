@@ -8,7 +8,7 @@ class MotherboardSocket implements Model {
   final int? id;
   String socket;
 
-  MotherboardSocket(this.id, this.socket);
+  MotherboardSocket(this.id, {required this.socket});
 
   factory MotherboardSocket.fromJson(Map<String, dynamic> json) =>
       _$MotherboardSocketFromJson(json);

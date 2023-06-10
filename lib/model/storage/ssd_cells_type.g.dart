@@ -8,7 +8,7 @@ part of 'ssd_cells_type.dart';
 
 SsdCellsType _$SsdCellsTypeFromJson(Map<String, dynamic> json) => SsdCellsType(
       json['id'] as int?,
-      json['name'] as String,
+      name: json['name'] as String,
     );
 
 Map<String, dynamic> _$SsdCellsTypeToJson(SsdCellsType instance) =>

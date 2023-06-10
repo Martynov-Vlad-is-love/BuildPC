@@ -8,11 +8,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class CasePowerSupplyLocationRepository
     implements Repository<CasePowerSupplyLocation> {
-  final path = 'Producer';
-  final header = {
-    'Content-type': 'application/json',
-  };
-
   Future<String?> _getToken() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
@@ -25,6 +20,8 @@ class CasePowerSupplyLocationRepository
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     await http.delete(
@@ -40,6 +37,8 @@ class CasePowerSupplyLocationRepository
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     final response = await http.get(
@@ -67,6 +66,8 @@ class CasePowerSupplyLocationRepository
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     final response = await http.get(
@@ -86,10 +87,14 @@ class CasePowerSupplyLocationRepository
 
   @override
   Future<void> postData(CasePowerSupplyLocation casePowerSupplyLocation) async {
+    final token = await _getToken();
     try {
       final jsonData = casePowerSupplyLocation.toJson();
       final header = {
         'Content-type': 'application/json',
+        'Authorization': 'Bearer $token',
+        'Access-Control-Allow-Origin': '*',
+        'Accept': '*/*',
       };
       await http.post(
         Uri.http(apiPath, '/api/admin/casePowerSupplyLocation'),
@@ -109,6 +114,8 @@ class CasePowerSupplyLocationRepository
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     final jsonData = casePowerSupplyLocation.toJson();

@@ -8,7 +8,7 @@ class MotherboardNetwork implements Model {
   final int? id;
   String network;
 
-  MotherboardNetwork(this.id, this.network);
+  MotherboardNetwork(this.id, {required this.network});
 
   factory MotherboardNetwork.fromJson(Map<String, dynamic> json) =>
       _$MotherboardNetworkFromJson(json);

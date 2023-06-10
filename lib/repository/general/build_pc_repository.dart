@@ -15,7 +15,7 @@ class BuildPcRepository implements Repository<BuildPC> {
   Future<String?> _getToken() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    return prefs.getString('token');
+    return prefs.getString('Token');
   }
 
   @override
@@ -27,7 +27,7 @@ class BuildPcRepository implements Repository<BuildPC> {
     };
 
     await http.delete(
-      Uri.http(apiPath, '/api/buildPc/buildPc/$id'),
+      Uri.http(apiPath, '/api/admin/buildPc/$id'),
       headers: header,
     );
   }
@@ -42,7 +42,7 @@ class BuildPcRepository implements Repository<BuildPC> {
     };
 
     final response = await http.get(
-      Uri.http(apiPath, '/api/buildPc/buildPc'),
+      Uri.http(apiPath, '/api/all/buildPc'),
       headers: header,
     );
 
@@ -68,7 +68,7 @@ class BuildPcRepository implements Repository<BuildPC> {
     };
 
     final response = await http.get(
-      Uri.http(apiPath, '/api/buildPc/buildPc/$id'),
+      Uri.http(apiPath, '/api/all/buildPc/$id'),
       headers: header,
     );
 
@@ -90,7 +90,7 @@ class BuildPcRepository implements Repository<BuildPC> {
         'Content-type': 'application/json',
       };
       await http.post(
-        Uri.http(apiPath, '/api/buildPc/buildPc'),
+        Uri.http(apiPath, '/api/admin/buildPc'),
         headers: header,
         body: convert.jsonEncode(jsonData),
       );

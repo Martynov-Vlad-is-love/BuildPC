@@ -17,8 +17,8 @@ class RouteModelListButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 250,
-      height: 250,
+      width: 350,
+      height: 350,
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(20)),
         gradient: LinearGradient(
@@ -38,7 +38,7 @@ class RouteModelListButton extends StatelessWidget {
                extra: modelList,);
           },
           style: TextButton.styleFrom(
-            fixedSize: const Size(250, 250),
+            fixedSize: const Size(350, 350),
           ),
           child: Text(
             //LocaleKeys.courses.tr(),

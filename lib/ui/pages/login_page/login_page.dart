@@ -1,11 +1,10 @@
-import 'dart:async';
-
 import 'package:buildpc/controller/general/user_controller.dart';
 import 'package:buildpc/model/general/e_role.dart';
 import 'package:buildpc/project/routes/app_route_constants.dart';
 import 'package:buildpc/ui/widgets/text_bar/text_bar.dart';
 import 'package:buildpc/ui/widgets/top_navigation_bar/custom_top_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 //ignore_for_file: avoid-late-keyword
@@ -18,13 +17,13 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-
   @override
   Widget build(BuildContext context) {
     final UserController _userController = context.read<UserController>();
     final screenSize = MediaQuery.of(context).size;
     final _loginController = TextEditingController(text: '');
     final _passwordController = TextEditingController(text: '');
+    final AppLocalizations? _locale = AppLocalizations.of(context);
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -41,19 +40,19 @@ class _LoginPageState extends State<LoginPage> {
             children: [
               Container(
                 margin: const EdgeInsets.only(top: 45, bottom: 120),
-                child: const Text(
-                  'Login',
-                  style: TextStyle(fontSize: 40),
+                child: Text(
+                  '${_locale?.login}',
+                  style: const TextStyle(fontSize: 40),
                 ),
               ),
               TextBar(
                 icon: Icons.perm_identity,
-                label: 'login',
+                label: '${_locale?.login}',
                 controller: _loginController,
               ),
               TextBar(
                 icon: Icons.lock_open,
-                label: 'password',
+                label: '${_locale?.password}',
                 controller: _passwordController,
               ),
               Container(
@@ -66,7 +65,7 @@ class _LoginPageState extends State<LoginPage> {
                 child: ElevatedButton(
                   style: ButtonStyle(
                     backgroundColor:
-                        const MaterialStatePropertyAll<Color>(Colors.green),
+                        const MaterialStatePropertyAll<Color>(Colors.black),
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(18.0),
@@ -78,12 +77,12 @@ class _LoginPageState extends State<LoginPage> {
                       _loginController.text,
                       _passwordController.text,
                     );
-                    if (result != null && result.roles == ERole.ROLE_ADMIN) {
-                       await GoRouter.of(context)
+                    if (result != null && result.role == ERole.ROLE_ADMIN) {
+                      await GoRouter.of(context)
                           .pushNamed(AppRouteConstants.adminRouteName);
                     }
                   },
-                  child: const Text('Enter'),
+                  child: Text('${_locale?.enter}'),
                 ),
               ),
               Padding(
@@ -91,14 +90,10 @@ class _LoginPageState extends State<LoginPage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text('Not an account?'),
-                    TextButton(
-                      onPressed: () {
-                        GoRouter.of(context)
-                            .pushNamed(AppRouteConstants.registrationRouteName);
-                      },
-                      child: const Text('Register'),
-                    )
+                    Text(
+                      '${_locale?.notAnAccount}',
+                      textAlign: TextAlign.center,
+                    ),
                   ],
                 ),
               )

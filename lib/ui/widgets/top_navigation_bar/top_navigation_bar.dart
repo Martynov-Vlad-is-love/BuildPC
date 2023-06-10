@@ -20,7 +20,10 @@ class TopNavigationBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return DecoratedBox(
       decoration: BoxDecoration(
-        color: color,
+        gradient: const LinearGradient(
+            begin: Alignment.bottomLeft,
+            end: Alignment.topRight,
+            colors: [Colors.red, Colors.blue],),
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(borderRadius),
           bottomRight: Radius.circular(borderRadius),

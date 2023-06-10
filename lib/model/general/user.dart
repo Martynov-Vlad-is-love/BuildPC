@@ -11,16 +11,16 @@ class User implements Model {
   String username;
   String email;
   String? password;
-  ERole roles;
+  ERole role;
 
   User(
-    this.id,
-    this.name,
-    this.username,
-    this.email,
-    this.password,
-    this.roles,
-  );
+    this.id,{
+    required this.name,
+    required this.username,
+    required this.email,
+    required this.password,
+    required this.role,
+  });
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 
@@ -39,7 +39,7 @@ class User implements Model {
       username,
       email,
       pass,
-      roles.toString(),
+      role.toString(),
     ];
 
     return fields;

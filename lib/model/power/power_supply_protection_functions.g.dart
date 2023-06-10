@@ -10,7 +10,7 @@ PowerSupplyProtectionFunctions _$PowerSupplyProtectionFunctionsFromJson(
         Map<String, dynamic> json) =>
     PowerSupplyProtectionFunctions(
       json['id'] as int?,
-      json['name'] as String,
+      name: json['name'] as String,
     );
 
 Map<String, dynamic> _$PowerSupplyProtectionFunctionsToJson(

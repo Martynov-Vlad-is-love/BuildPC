@@ -8,7 +8,7 @@ class CoolerSocket implements Model {
   final int? id;
   String socket;
 
-  CoolerSocket(this.id, this.socket);
+  CoolerSocket(this.id, {required this.socket});
 
   factory CoolerSocket.fromJson(Map<String, dynamic> json) =>
       _$CoolerSocketFromJson(json);

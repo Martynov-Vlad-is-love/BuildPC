@@ -8,7 +8,7 @@ class GPUConnector implements Model {
   final int? id;
   String connector;
 
-  GPUConnector(this.id, this.connector);
+  GPUConnector(this.id, {required this.connector});
 
   factory GPUConnector.fromJson(Map<String, dynamic> json) =>
       _$GPUConnectorFromJson(json);

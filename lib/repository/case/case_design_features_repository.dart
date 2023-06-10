@@ -24,6 +24,8 @@ class CaseDesignFeaturesRepository implements Repository<CaseDesignFeatures> {
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     await http.delete(
@@ -39,6 +41,8 @@ class CaseDesignFeaturesRepository implements Repository<CaseDesignFeatures> {
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     final response = await http
@@ -64,6 +68,8 @@ class CaseDesignFeaturesRepository implements Repository<CaseDesignFeatures> {
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     final response = await http.get(
@@ -83,11 +89,17 @@ class CaseDesignFeaturesRepository implements Repository<CaseDesignFeatures> {
 
   @override
   Future<void> postData(CaseDesignFeatures caseDesignFeatures) async {
+    final token = await _getToken();
+
     try {
       final jsonData = caseDesignFeatures.toJson();
       final header = {
         'Content-type': 'application/json',
+        'Authorization': 'Bearer $token',
+        'Access-Control-Allow-Origin': '*',
+        'Accept': '*/*',
       };
+      print(caseDesignFeatures.parsedModels().toString());
       await http.post(
         Uri.http(apiPath, '/api/admin/caseDesignFeatures'),
         headers: header,
@@ -104,6 +116,8 @@ class CaseDesignFeaturesRepository implements Repository<CaseDesignFeatures> {
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     final jsonData = caseDesignFeatures.toJson();

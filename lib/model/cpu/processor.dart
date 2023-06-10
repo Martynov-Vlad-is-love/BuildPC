@@ -1,6 +1,7 @@
 import 'package:buildpc/model/cpu/cpu_generation.dart';
 import 'package:buildpc/model/cpu/cpu_pcie_version.dart';
 import 'package:buildpc/model/cpu/cpu_technologies.dart';
+import 'package:buildpc/model/general/performance_level.dart';
 import 'package:buildpc/model/general/producers.dart';
 import 'package:buildpc/model/model.dart';
 import 'package:buildpc/model/motherboard/motherboard_socket.dart';
@@ -18,36 +19,40 @@ class Processor implements Model {
   int countOfCores;
   int countOfThreads;
   double baseFrequency;
-  double turboBoostFrequency;
+  double turboFrequency;
   int l3Cache;
-  CPUGeneration generation;
+  CPUGeneration cpuGeneration;
   int technicalProcess;
   int tdp;
   int maxTemperature;
-  bool embeddedGraphics;
+  bool embeddedGraphic;
   CPUPCIeVersion pcieVersion;
-  CPUTechnologies technologies;
+  List<CPUTechnologies?>? cpuTechnologies;
   String description;
+  int recommendedPrice;
+  PerformanceLevel performanceLevel;
 
-  Processor(
+  Processor({
     this.id,
-    this.name,
-    this.producer,
-    this.yearOfRelease,
-    this.socket,
-    this.countOfCores,
-    this.countOfThreads,
-    this.baseFrequency,
-    this.turboBoostFrequency,
-    this.l3Cache,
-    this.generation,
-    this.technicalProcess,
-    this.tdp,
-    this.maxTemperature,
-    this.pcieVersion,
-    this.technologies,
-    this.description, {
-    required this.embeddedGraphics,
+    required this.name,
+    required this.producer,
+    required this.yearOfRelease,
+    required this.socket,
+    required this.countOfCores,
+    required this.countOfThreads,
+    required this.baseFrequency,
+    required this.turboFrequency,
+    required this.l3Cache,
+    required this.cpuGeneration,
+    required this.technicalProcess,
+    required this.tdp,
+    required this.maxTemperature,
+    required this.embeddedGraphic,
+    required this.pcieVersion,
+    required this.cpuTechnologies,
+    required this.description,
+    required this.recommendedPrice,
+    required this.performanceLevel,
   });
 
   factory Processor.fromJson(Map<String, dynamic> json) =>
@@ -58,6 +63,16 @@ class Processor implements Model {
 
   @override
   List<String> parsedModels() {
+    final technology = [];
+    if(cpuTechnologies != null){
+      for (final con in cpuTechnologies!) {
+        technology.add(con?.name);
+      }
+    }
+    else {
+      technology.add('');
+    }
+
     final fields = [
       id.toString(),
       name,
@@ -67,16 +82,18 @@ class Processor implements Model {
       countOfCores.toString(),
       countOfThreads.toString(),
       baseFrequency.toString(),
-      turboBoostFrequency.toString(),
+      turboFrequency.toString(),
       l3Cache.toString(),
-      generation.name,
+      cpuGeneration.name,
       technicalProcess.toString(),
       tdp.toString(),
       maxTemperature.toString(),
-      embeddedGraphics.toString(),
+      embeddedGraphic.toString(),
       pcieVersion.name,
-      technologies.name,
-      description
+      technology.toString(),
+      description,
+      recommendedPrice.toString(),
+      performanceLevel.level
     ];
 
     return fields;

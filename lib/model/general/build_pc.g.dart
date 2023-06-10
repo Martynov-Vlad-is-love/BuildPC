@@ -7,26 +7,43 @@ part of 'build_pc.dart';
 // **************************************************************************
 
 BuildPC _$BuildPCFromJson(Map<String, dynamic> json) => BuildPC(
-      json['id'] as int?,
-      json['nameOfBuild'] as String,
-      User.fromJson(json['user'] as Map<String, dynamic>),
-      Motherboard.fromJson(json['motherboard'] as Map<String, dynamic>),
-      Processor.fromJson(json['processor'] as Map<String, dynamic>),
-      GraphicCard.fromJson(json['graphicCard'] as Map<String, dynamic>),
-      (json['ram'] as List<dynamic>)
-          .map((e) => Ram.fromJson(e as Map<String, dynamic>))
+      id: json['id'] as int?,
+      nameOfBuild: json['nameOfBuild'] as String?,
+      user: User.fromJson(json['user'] as Map<String, dynamic>),
+      motherboard: json['motherboard'] == null
+          ? null
+          : Motherboard.fromJson(json['motherboard'] as Map<String, dynamic>),
+      processor: json['processor'] == null
+          ? null
+          : Processor.fromJson(json['processor'] as Map<String, dynamic>),
+      graphicCard: json['graphicCard'] == null
+          ? null
+          : GraphicCard.fromJson(json['graphicCard'] as Map<String, dynamic>),
+      ram: (json['ram'] as List<dynamic>)
+          .map(
+              (e) => e == null ? null : Ram.fromJson(e as Map<String, dynamic>))
           .toList(),
-      PowerSupply.fromJson(json['powerSupply'] as Map<String, dynamic>),
-      (json['hdd'] as List<dynamic>)
-          .map((e) => Hdd.fromJson(e as Map<String, dynamic>))
+      powerSupply: json['powerSupply'] == null
+          ? null
+          : PowerSupply.fromJson(json['powerSupply'] as Map<String, dynamic>),
+      hdd: (json['hdd'] as List<dynamic>)
+          .map(
+              (e) => e == null ? null : Hdd.fromJson(e as Map<String, dynamic>))
           .toList(),
-      (json['ssd'] as List<dynamic>)
-          .map((e) => Ssd.fromJson(e as Map<String, dynamic>))
+      ssd: (json['ssd'] as List<dynamic>)
+          .map(
+              (e) => e == null ? null : Ssd.fromJson(e as Map<String, dynamic>))
           .toList(),
-      Case.fromJson(json['pcCase'] as Map<String, dynamic>),
-      Cooler.fromJson(json['cooler'] as Map<String, dynamic>),
-      json['countOfLikes'] as int,
-      Rating.fromJson(json['ratingId'] as Map<String, dynamic>),
+      pcCase: json['pcCase'] == null
+          ? null
+          : Case.fromJson(json['pcCase'] as Map<String, dynamic>),
+      cooler: json['cooler'] == null
+          ? null
+          : Cooler.fromJson(json['cooler'] as Map<String, dynamic>),
+      countOfLikes: json['countOfLikes'] as int?,
+      ratingId: json['ratingId'] == null
+          ? null
+          : Rating.fromJson(json['ratingId'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$BuildPCToJson(BuildPC instance) => <String, dynamic>{

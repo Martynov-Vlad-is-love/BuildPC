@@ -6,9 +6,9 @@ part 'case_design_features.g.dart';
 @JsonSerializable()
 class CaseDesignFeatures implements Model {
   final int? id;
-  String designFeatures;
+  String? designFeatures;
 
-  CaseDesignFeatures(this.id, this.designFeatures);
+  CaseDesignFeatures(this.id, {required this.designFeatures});
 
   factory CaseDesignFeatures.fromJson(Map<String, dynamic> json) =>
       _$CaseDesignFeaturesFromJson(json);
@@ -18,7 +18,7 @@ class CaseDesignFeatures implements Model {
 
   @override
   List<String> parsedModels() {
-    final List<String> fields = [id.toString(), designFeatures];
+    final List<String> fields = [id.toString(), '$designFeatures'];
 
     return fields;
   }

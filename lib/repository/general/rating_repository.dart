@@ -24,6 +24,8 @@ class RatingRepository implements Repository<Rating> {
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     await http.delete(
@@ -39,6 +41,8 @@ class RatingRepository implements Repository<Rating> {
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     final response =
@@ -63,6 +67,8 @@ class RatingRepository implements Repository<Rating> {
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     final response = await http.get(
@@ -82,10 +88,14 @@ class RatingRepository implements Repository<Rating> {
 
   @override
   Future<void> postData(Rating rating) async {
+    final token = await _getToken();
     try {
       final jsonData = rating.toJson();
       final header = {
         'Content-type': 'application/json',
+        'Authorization': 'Bearer $token',
+        'Access-Control-Allow-Origin': '*',
+        'Accept': '*/*',
       };
       await http.post(
         Uri.http(apiPath, '/api/admin/rating'),
@@ -103,6 +113,8 @@ class RatingRepository implements Repository<Rating> {
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     final jsonData = rating.toJson();

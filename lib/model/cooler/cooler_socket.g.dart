@@ -8,7 +8,7 @@ part of 'cooler_socket.dart';
 
 CoolerSocket _$CoolerSocketFromJson(Map<String, dynamic> json) => CoolerSocket(
       json['id'] as int?,
-      json['socket'] as String,
+      socket: json['socket'] as String,
     );
 
 Map<String, dynamic> _$CoolerSocketToJson(CoolerSocket instance) =>

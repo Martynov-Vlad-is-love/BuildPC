@@ -24,10 +24,12 @@ class FormFactorRepository implements Repository<FormFactor> {
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     await http.delete(
-      Uri.http(apiPath, '/api/formFactor/formFactor/$id'),
+      Uri.http(apiPath, '/api/admin/formFactor/$id'),
       headers: header,
     );
   }
@@ -39,10 +41,12 @@ class FormFactorRepository implements Repository<FormFactor> {
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     final response = await http
-        .get(Uri.http(apiPath, '/api/formFactor/formFactor'), headers: header);
+        .get(Uri.http(apiPath, '/api/all/formFactor'), headers: header);
 
     if (response.statusCode == 200) {
       final jsonData = convert.jsonDecode(response.body) as List<dynamic>;
@@ -63,10 +67,12 @@ class FormFactorRepository implements Repository<FormFactor> {
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     final response = await http.get(
-      Uri.http(apiPath, '/api/formFactor/formFactor/$id'),
+      Uri.http(apiPath, '/api/all/formFactor/$id'),
       headers: header,
     );
 
@@ -82,13 +88,17 @@ class FormFactorRepository implements Repository<FormFactor> {
 
   @override
   Future<void> postData(FormFactor formFactor) async {
+    final token = await _getToken();
     try {
       final jsonData = formFactor.toJson();
       final header = {
         'Content-type': 'application/json',
+        'Authorization': 'Bearer $token',
+        'Access-Control-Allow-Origin': '*',
+        'Accept': '*/*',
       };
       await http.post(
-        Uri.http(apiPath, '/api/formFactor/formFactor'),
+        Uri.http(apiPath, '/api/admin/formFactor'),
         headers: header,
         body: convert.jsonEncode(jsonData),
       );
@@ -103,13 +113,15 @@ class FormFactorRepository implements Repository<FormFactor> {
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     final jsonData = formFactor.toJson();
     await http.patch(
       Uri.http(
         apiPath,
-        '/api/formFactor/formFactor/${formFactor.id}',
+        '/api/admin/formFactor/${formFactor.id}',
       ),
       body: convert.jsonEncode(jsonData),
       headers: header,

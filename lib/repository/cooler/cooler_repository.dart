@@ -7,11 +7,6 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CoolerRepository implements Repository<Cooler> {
-  final path = 'Producer';
-  final header = {
-    'Content-type': 'application/json',
-  };
-
   Future<String?> _getToken() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
@@ -24,6 +19,8 @@ class CoolerRepository implements Repository<Cooler> {
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     await http.delete(
@@ -39,6 +36,8 @@ class CoolerRepository implements Repository<Cooler> {
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     final response =
@@ -63,6 +62,8 @@ class CoolerRepository implements Repository<Cooler> {
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     final response = await http.get(
@@ -103,6 +104,8 @@ class CoolerRepository implements Repository<Cooler> {
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     final jsonData = cooler.toJson();

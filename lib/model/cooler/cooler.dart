@@ -14,25 +14,26 @@ class Cooler implements Model{
   Producers producer;
   List<CoolerSocket> socket;
   CoolerMaterial material;
-  int maxTDP;
+  int maxTdp;
   int supportedSockets;
-  int thermotubes;
+  int thermalTubes;
   String description;
   int recommendedPrice;
   PerformanceLevel performanceLevel;
 
-  Cooler(this.id,
-      this.name,
-      this.producer,
-      this.socket,
-      this.material,
-      this.maxTDP,
-      this.supportedSockets,
-      this.thermotubes,
-      this.description,
-      this.recommendedPrice,
-      this.performanceLevel,
-      );
+  Cooler({
+    this.id,
+    required this.name,
+    required this.producer,
+    required this.socket,
+    required this.material,
+    required this.maxTdp,
+    required this.supportedSockets,
+    required this.thermalTubes,
+    required this.description,
+    required this.recommendedPrice,
+    required this.performanceLevel,
+  });
   factory Cooler.fromJson(Map<String, dynamic> json) => _$CoolerFromJson(json);
 
   List<dynamic> modelFields() {
@@ -42,9 +43,9 @@ class Cooler implements Model{
       producer,
       socket.toString(),
       material,
-      maxTDP.toString(),
+      maxTdp.toString(),
       supportedSockets.toString(),
-      thermotubes.toString(),
+      thermalTubes.toString(),
       description,
       recommendedPrice.toString(),
       performanceLevel
@@ -65,9 +66,9 @@ class Cooler implements Model{
       producer.name,
       socketList.toString(),
       material.material,
-      maxTDP.toString(),
+      maxTdp.toString(),
       supportedSockets.toString(),
-      thermotubes.toString(),
+      thermalTubes.toString(),
       description,
       recommendedPrice.toString(),
       performanceLevel.level

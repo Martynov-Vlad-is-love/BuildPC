@@ -7,24 +7,34 @@ part of 'processor.dart';
 // **************************************************************************
 
 Processor _$ProcessorFromJson(Map<String, dynamic> json) => Processor(
-      json['id'] as int?,
-      json['name'] as String,
-      Producers.fromJson(json['producer'] as Map<String, dynamic>),
-      json['yearOfRelease'] as int,
-      MotherboardSocket.fromJson(json['socket'] as Map<String, dynamic>),
-      json['countOfCores'] as int,
-      json['countOfThreads'] as int,
-      (json['baseFrequency'] as num).toDouble(),
-      (json['turboBoostFrequency'] as num).toDouble(),
-      json['l3Cache'] as int,
-      CPUGeneration.fromJson(json['generation'] as Map<String, dynamic>),
-      json['technicalProcess'] as int,
-      json['tdp'] as int,
-      json['maxTemperature'] as int,
-      CPUPCIeVersion.fromJson(json['pcieVersion'] as Map<String, dynamic>),
-      CPUTechnologies.fromJson(json['technologies'] as Map<String, dynamic>),
-      json['description'] as String,
-      embeddedGraphics: json['embeddedGraphics'] as bool,
+      id: json['id'] as int?,
+      name: json['name'] as String,
+      producer: Producers.fromJson(json['producer'] as Map<String, dynamic>),
+      yearOfRelease: json['yearOfRelease'] as int,
+      socket:
+          MotherboardSocket.fromJson(json['socket'] as Map<String, dynamic>),
+      countOfCores: json['countOfCores'] as int,
+      countOfThreads: json['countOfThreads'] as int,
+      baseFrequency: (json['baseFrequency'] as num).toDouble(),
+      turboFrequency: (json['turboFrequency'] as num).toDouble(),
+      l3Cache: json['l3Cache'] as int,
+      cpuGeneration:
+          CPUGeneration.fromJson(json['cpuGeneration'] as Map<String, dynamic>),
+      technicalProcess: json['technicalProcess'] as int,
+      tdp: json['tdp'] as int,
+      maxTemperature: json['maxTemperature'] as int,
+      embeddedGraphic: json['embeddedGraphic'] as bool,
+      pcieVersion:
+          CPUPCIeVersion.fromJson(json['pcieVersion'] as Map<String, dynamic>),
+      cpuTechnologies: (json['cpuTechnologies'] as List<dynamic>?)
+          ?.map((e) => e == null
+              ? null
+              : CPUTechnologies.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      description: json['description'] as String,
+      recommendedPrice: json['recommendedPrice'] as int,
+      performanceLevel: PerformanceLevel.fromJson(
+          json['performanceLevel'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$ProcessorToJson(Processor instance) => <String, dynamic>{
@@ -36,14 +46,16 @@ Map<String, dynamic> _$ProcessorToJson(Processor instance) => <String, dynamic>{
       'countOfCores': instance.countOfCores,
       'countOfThreads': instance.countOfThreads,
       'baseFrequency': instance.baseFrequency,
-      'turboBoostFrequency': instance.turboBoostFrequency,
+      'turboFrequency': instance.turboFrequency,
       'l3Cache': instance.l3Cache,
-      'generation': instance.generation,
+      'cpuGeneration': instance.cpuGeneration,
       'technicalProcess': instance.technicalProcess,
       'tdp': instance.tdp,
       'maxTemperature': instance.maxTemperature,
-      'embeddedGraphics': instance.embeddedGraphics,
+      'embeddedGraphic': instance.embeddedGraphic,
       'pcieVersion': instance.pcieVersion,
-      'technologies': instance.technologies,
+      'cpuTechnologies': instance.cpuTechnologies,
       'description': instance.description,
+      'recommendedPrice': instance.recommendedPrice,
+      'performanceLevel': instance.performanceLevel,
     };

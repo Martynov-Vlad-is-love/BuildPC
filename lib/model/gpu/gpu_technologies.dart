@@ -8,7 +8,7 @@ class GPUTechnologies implements Model{
   final int? id;
   String name;
 
-  GPUTechnologies(this.id, this.name);
+  GPUTechnologies(this.id, {required this.name});
 
   factory GPUTechnologies.fromJson(Map<String, dynamic> json) =>
       _$GPUTechnologiesFromJson(json);

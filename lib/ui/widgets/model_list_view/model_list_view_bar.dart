@@ -1,24 +1,24 @@
-import 'dart:js_util';
-
-import 'package:buildpc/model/cooler/cooler.dart';
+import 'package:buildpc/controller/model_controller.dart';
 import 'package:buildpc/model/model.dart';
-import 'package:buildpc/model/ram/ram.dart';
+import 'package:buildpc/project/routes/app_route_constants.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 class ModelListViewBar extends StatelessWidget {
+  final String modelName;
   final List<Model?>? modelList;
-
-  //final int itemCount;
 
   const ModelListViewBar({
     Key? key,
+    required this.modelName,
     required this.modelList,
-    //required this.modelList,
-    //required this.itemCount,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final modelController = context.read<ModelController>();
+
     return ListView.builder(
       shrinkWrap: true,
       itemBuilder: (_, index) {
@@ -29,33 +29,44 @@ class ModelListViewBar extends StatelessWidget {
         final currentItem = modelList?[index];
         final item = currentItem?.parsedModels();
         final concatenate = StringBuffer();
-        Model? model;
-        if(currentItem != null){
-          if(currentItem is Cooler){
-            concatenate.write('Cooler');
-          }
-          else if(currentItem is Ram){
-            concatenate.write('Ram');
-          }
-        }
 
-
-        item?.forEach((item){
+        item?.forEach((item) {
           concatenate.write('$item| ');
         });
 
-
         return Center(
-          child: Container(
-            alignment: Alignment.center,
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: _curColor),
-            height: 60,
-            child: Row(
-              children: [
-                Text(
-                  'Id: $concatenate',
-                )
-              ],
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Container(
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: _curColor,
+              ),
+              height: 60,
+              child: Row(
+                children: [
+                  Text(
+                    'Id: $concatenate',
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      modelController.setCurrentModel(currentItem);
+                      GoRouter.of(context).pushNamed(
+                        AppRouteConstants.editRouteName,
+                        pathParameters: {'modelName': modelName},
+                      );
+                    },
+                    child: Container(
+                      color: Colors.black,
+                      child: const Text(
+                        'Edit',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
         );

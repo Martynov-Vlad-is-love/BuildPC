@@ -9,7 +9,7 @@ part of 'cpu_technologies.dart';
 CPUTechnologies _$CPUTechnologiesFromJson(Map<String, dynamic> json) =>
     CPUTechnologies(
       json['id'] as int?,
-      json['name'] as String,
+      name: json['name'] as String,
     );
 
 Map<String, dynamic> _$CPUTechnologiesToJson(CPUTechnologies instance) =>

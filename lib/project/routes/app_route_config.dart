@@ -1,9 +1,10 @@
 import 'package:buildpc/controller/general/user_controller.dart';
-import 'package:buildpc/model/model.dart';
 import 'package:buildpc/project/routes/app_route_constants.dart';
 import 'package:buildpc/ui/pages/admin_page/admin_page.dart';
 import 'package:buildpc/ui/pages/admin_page/components_page.dart';
+import 'package:buildpc/ui/pages/admin_page/create_model_page.dart';
 import 'package:buildpc/ui/pages/admin_page/edit_page.dart';
+import 'package:buildpc/ui/pages/admin_page/general_models_page.dart';
 import 'package:buildpc/ui/pages/admin_page/model_list_page.dart';
 import 'package:buildpc/ui/pages/admin_page/users_page.dart';
 import 'package:buildpc/ui/pages/login_page/login_page.dart';
@@ -53,7 +54,6 @@ class AppRouteConfig {
               name: AppRouteConstants.editRouteName,
               builder: (context, state) => EditPage(
                 modelName: state.pathParameters['modelName'],
-                model: state.extra as Model,
               ),
               redirect: (context, state) {
                 final user =
@@ -66,10 +66,10 @@ class AppRouteConfig {
               },
             ),
             GoRoute(
-              path: 'components_list_page',
-              name: AppRouteConstants.componentsListPageRouteName,
+              path: 'model_list_page:modelName',
+              name: AppRouteConstants.modelListPageRouteName,
               builder: (context, state) => ModelListPage(
-                modelList: state.extra as List<Model>,
+                modelName: state.pathParameters['modelName'],
               ),
               redirect: (context, state) {
                 final user =
@@ -87,7 +87,7 @@ class AppRouteConfig {
               builder: (context, state) => const ComponentsPage(),
               redirect: (context, state) {
                 final user =
-                Provider.of<UserController>(context, listen: false);
+                    Provider.of<UserController>(context, listen: false);
                 if (user.user == null) {
                   return '/${AppRouteConstants.loginRouteName}';
                 }
@@ -99,7 +99,7 @@ class AppRouteConfig {
               path: 'admin',
               name: AppRouteConstants.adminRouteName,
               builder: (context, state) => const AdminPage(),
-              redirect: (context, state) {
+              redirect: (context, state) async {
                 final user =
                     Provider.of<UserController>(context, listen: false);
                 if (user.user == null) {
@@ -115,7 +115,37 @@ class AppRouteConfig {
               builder: (context, state) => const UsersPage(),
               redirect: (context, state) {
                 final user =
-                Provider.of<UserController>(context, listen: false);
+                    Provider.of<UserController>(context, listen: false);
+                if (user.user == null) {
+                  return '/${AppRouteConstants.loginRouteName}';
+                }
+
+                return null;
+              },
+            ),
+            GoRoute(
+              path: 'create:modelName',
+              name: AppRouteConstants.createModelPage,
+              builder: (context, state) => CreateModelPage(
+                modelName: state.pathParameters['modelName'],
+              ),
+              redirect: (context, state) {
+                final user =
+                    Provider.of<UserController>(context, listen: false);
+                if (user.user == null) {
+                  return '/${AppRouteConstants.loginRouteName}';
+                }
+
+                return null;
+              },
+            ),
+            GoRoute(
+              path: 'general_model_page',
+              name: AppRouteConstants.generalModelPage,
+              builder: (context, state) => const GeneralModelsPage(),
+              redirect: (context, state) {
+                final user =
+                    Provider.of<UserController>(context, listen: false);
                 if (user.user == null) {
                   return '/${AppRouteConstants.loginRouteName}';
                 }

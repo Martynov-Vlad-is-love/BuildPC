@@ -7,48 +7,55 @@ part of 'motherboard.dart';
 // **************************************************************************
 
 Motherboard _$MotherboardFromJson(Map<String, dynamic> json) => Motherboard(
-      json['id'] as int?,
-      json['name'] as String,
-      Producers.fromJson(json['producer'] as Map<String, dynamic>),
-      MotherboardSocket.fromJson(json['socket'] as Map<String, dynamic>),
-      (json['cpuGeneration'] as List<dynamic>)
+      id: json['id'] as int?,
+      name: json['name'] as String,
+      motherboardProducer: Producers.fromJson(
+          json['motherboardProducer'] as Map<String, dynamic>),
+      socket:
+          MotherboardSocket.fromJson(json['socket'] as Map<String, dynamic>),
+      cpuGenerations: (json['cpuGenerations'] as List<dynamic>)
           .map((e) => CPUGeneration.fromJson(e as Map<String, dynamic>))
           .toList(),
-      MotherboardChipset.fromJson(json['chipset'] as Map<String, dynamic>),
-      FormFactor.fromJson(json['formFactor'] as Map<String, dynamic>),
-      json['maxTdpOfProcessors'] as int,
-      json['memorySlots'] as int,
-      json['supportedMemoryFrequency'] as int,
-      json['maxAmountOfRam'] as int,
-      MotherboardNetwork.fromJson(json['network'] as Map<String, dynamic>),
-      json['pciExpressX16'] as int,
-      json['pciExpressX4'] as int,
-      json['pciExpressX1'] as int,
-      json['sata3'] as int,
-      json['m2'] as int,
-      json['dSub'] as int,
-      json['dvi'] as int,
-      json['hdmi'] as int,
-      json['displayPort'] as int,
-      json['usb_3_0'] as int,
-      json['usb_2_0'] as int,
-      json['usbTypeC'] as int,
-      json['description'] as String,
-      json['recommendedPrice'] as int,
-      PerformanceLevel.fromJson(
-          json['performanceLevel'] as Map<String, dynamic>),
+      chipset:
+          MotherboardChipset.fromJson(json['chipset'] as Map<String, dynamic>),
+      formFactor:
+          FormFactor.fromJson(json['formFactor'] as Map<String, dynamic>),
+      maxTdpOfProcessors: json['maxTdpOfProcessors'] as int,
+      memorySlots: json['memorySlots'] as int,
+      supportedMemoryFrequency: json['supportedMemoryFrequency'] as int,
+      maxAmountOfRam: json['maxAmountOfRam'] as int,
+      network:
+          MotherboardNetwork.fromJson(json['network'] as Map<String, dynamic>),
       bluetooth: json['bluetooth'] as bool,
       wifi: json['wifi'] as bool,
+      pcieVersion:
+          CPUPCIeVersion.fromJson(json['pcieVersion'] as Map<String, dynamic>),
+      pciExpressX16: json['pci_express_x16'] as int,
+      pciExpressX4: json['pci_express_x4'] as int,
+      pciExpressX1: json['pci_express_x1'] as int,
+      sata3: json['sata3'] as int,
+      m2: json['m2'] as int,
+      dSub: json['dSub'] as int,
+      dvi: json['dvi'] as int,
+      hdmi: json['hdmi'] as int,
+      displayPort: json['displayPort'] as int,
+      usb_3_0: json['usb_3_0'] as int,
+      usb_2_0: json['usb_2_0'] as int,
+      usbTypeC: json['usb_type_c'] as int,
       digitalAudioJack: json['digitalAudioJack'] as bool,
+      description: json['description'] as String,
+      recommendedPrice: json['recommendedPrice'] as int,
+      performanceLevel: PerformanceLevel.fromJson(
+          json['performanceLevel'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$MotherboardToJson(Motherboard instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
-      'producer': instance.producer,
+      'motherboardProducer': instance.motherboardProducer,
       'socket': instance.socket,
-      'cpuGeneration': instance.cpuGeneration,
+      'cpuGenerations': instance.cpuGenerations,
       'chipset': instance.chipset,
       'formFactor': instance.formFactor,
       'maxTdpOfProcessors': instance.maxTdpOfProcessors,
@@ -58,9 +65,10 @@ Map<String, dynamic> _$MotherboardToJson(Motherboard instance) =>
       'network': instance.network,
       'bluetooth': instance.bluetooth,
       'wifi': instance.wifi,
-      'pciExpressX16': instance.pciExpressX16,
-      'pciExpressX4': instance.pciExpressX4,
-      'pciExpressX1': instance.pciExpressX1,
+      'pcieVersion': instance.pcieVersion,
+      'pci_express_x16': instance.pciExpressX16,
+      'pci_express_x4': instance.pciExpressX4,
+      'pci_express_x1': instance.pciExpressX1,
       'sata3': instance.sata3,
       'm2': instance.m2,
       'dSub': instance.dSub,
@@ -69,7 +77,7 @@ Map<String, dynamic> _$MotherboardToJson(Motherboard instance) =>
       'displayPort': instance.displayPort,
       'usb_3_0': instance.usb_3_0,
       'usb_2_0': instance.usb_2_0,
-      'usbTypeC': instance.usbTypeC,
+      'usb_type_c': instance.usbTypeC,
       'digitalAudioJack': instance.digitalAudioJack,
       'description': instance.description,
       'recommendedPrice': instance.recommendedPrice,

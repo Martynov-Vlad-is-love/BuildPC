@@ -9,7 +9,7 @@ part of 'case_design_features.dart';
 CaseDesignFeatures _$CaseDesignFeaturesFromJson(Map<String, dynamic> json) =>
     CaseDesignFeatures(
       json['id'] as int?,
-      json['designFeatures'] as String,
+      designFeatures: json['designFeatures'] as String?,
     );
 
 Map<String, dynamic> _$CaseDesignFeaturesToJson(CaseDesignFeatures instance) =>

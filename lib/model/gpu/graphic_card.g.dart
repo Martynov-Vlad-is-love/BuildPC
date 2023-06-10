@@ -7,27 +7,30 @@ part of 'graphic_card.dart';
 // **************************************************************************
 
 GraphicCard _$GraphicCardFromJson(Map<String, dynamic> json) => GraphicCard(
-      json['id'] as int?,
-      Producers.fromJson(json['producer'] as Map<String, dynamic>),
-      json['name'] as String,
-      Producers.fromJson(json['vendor'] as Map<String, dynamic>),
-      json['year'] as int,
-      json['technicalProcess'] as int,
-      json['gpuFrequency'] as int,
-      json['memoryAmount'] as int,
-      GPUMemoryType.fromJson(json['memoryType'] as Map<String, dynamic>),
-      json['memoryFrequency'] as int,
-      json['bus'] as int,
-      json['tdp'] as int,
-      (json['connector'] as List<dynamic>)
+      id: json['id'] as int?,
+      producer: Producers.fromJson(json['producer'] as Map<String, dynamic>),
+      name: json['name'] as String,
+      vendor: Producers.fromJson(json['vendor'] as Map<String, dynamic>),
+      year: json['year'] as int,
+      technicalProcess: json['technicalProcess'] as int,
+      gpuFrequency: json['gpuFrequency'] as int,
+      memoryAmount: json['memoryAmount'] as int,
+      memoryType:
+          GPUMemoryType.fromJson(json['memoryType'] as Map<String, dynamic>),
+      memoryFrequency: json['memoryFrequency'] as int,
+      bus: json['bus'] as int,
+      tdp: json['tdp'] as int,
+      connector: (json['connector'] as List<dynamic>)
           .map((e) => GPUConnector.fromJson(e as Map<String, dynamic>))
           .toList(),
-      json['length'] as int,
-      GPUInterfaceType.fromJson(json['interfaceType'] as Map<String, dynamic>),
-      json['description'] as String,
-      json['recommendedPrice'] as int,
-      GPUTechnologies.fromJson(json['gpuTechnologies'] as Map<String, dynamic>),
-      PerformanceLevel.fromJson(
+      interfaceType: GPUInterfaceType.fromJson(
+          json['interfaceType'] as Map<String, dynamic>),
+      length: json['length'] as int,
+      description: json['description'] as String,
+      gpuTechnologies: GPUTechnologies.fromJson(
+          json['gpuTechnologies'] as Map<String, dynamic>),
+      recommendedPrice: json['recommendedPrice'] as int,
+      performanceLevel: PerformanceLevel.fromJson(
           json['performanceLevel'] as Map<String, dynamic>),
     );
 

@@ -1,29 +1,41 @@
+import 'package:buildpc/controller/model_controller_abstract.dart';
 import 'package:buildpc/model/general/form_factor.dart';
 import 'package:buildpc/repository/general/form_factor_repository.dart';
+import 'package:flutter/cupertino.dart';
 
-class FormFactorController {
+class FormFactorController extends ChangeNotifier implements ModelControllerAbstract<FormFactor>{
   final FormFactorRepository _formFactorRepository;
 
   FormFactorController(this._formFactorRepository);
 
+  @override
   Future<List<FormFactor>> getList() async {
-    return _formFactorRepository.getAllData();
+    final data = _formFactorRepository.getAllData();
+    notifyListeners();
+
+    return data;
   }
 
+  @override
   Future<FormFactor?> getDataById(int? id) async {
-    return _formFactorRepository.getDataById(id);
+    final data = _formFactorRepository.getDataById(id);
+    notifyListeners();
+
+    return data;
   }
 
+  @override
   Future<void> updateData(FormFactor data) async {
     await _formFactorRepository.updateData(data);
+    notifyListeners();
   }
 
-  Future<FormFactor?> postData(FormFactor data) async {
+  @override
+  Future<void> postData(FormFactor data) async {
     await _formFactorRepository.postData(data);
-
-    return getDataById(data.id);
   }
 
+  @override
   Future<void> delete(int id) async {
     await _formFactorRepository.deleteData(id);
   }

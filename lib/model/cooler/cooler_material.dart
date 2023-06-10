@@ -8,7 +8,7 @@ class CoolerMaterial implements Model{
   final int? id;
   String material;
 
-  CoolerMaterial(this.id, this.material);
+  CoolerMaterial(this.id, {required this.material});
 
   factory CoolerMaterial.fromJson(Map<String, dynamic> json) =>
       _$CoolerMaterialFromJson(json);

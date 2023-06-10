@@ -8,7 +8,7 @@ class RamTimings implements Model{
   final int? id;
   String timings;
 
-  RamTimings(this.id, this.timings);
+  RamTimings(this.id, {required this.timings});
 
   factory RamTimings.fromJson(Map<String, dynamic> json) =>
       _$RamTimingsFromJson(json);

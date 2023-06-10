@@ -8,7 +8,7 @@ class RamMemoryType implements Model{
   final int? id;
   String memoryType;
 
-  RamMemoryType(this.id, this.memoryType);
+  RamMemoryType(this.id, {required this.memoryType});
 
   factory RamMemoryType.fromJson(Map<String, dynamic> json) =>
       _$RamMemoryTypeFromJson(json);

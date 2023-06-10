@@ -8,7 +8,7 @@ part of 'gpu_connector.dart';
 
 GPUConnector _$GPUConnectorFromJson(Map<String, dynamic> json) => GPUConnector(
       json['id'] as int?,
-      json['connector'] as String,
+      connector: json['connector'] as String,
     );
 
 Map<String, dynamic> _$GPUConnectorToJson(GPUConnector instance) =>

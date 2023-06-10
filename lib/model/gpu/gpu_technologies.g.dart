@@ -9,7 +9,7 @@ part of 'gpu_technologies.dart';
 GPUTechnologies _$GPUTechnologiesFromJson(Map<String, dynamic> json) =>
     GPUTechnologies(
       json['id'] as int?,
-      json['name'] as String,
+      name: json['name'] as String,
     );
 
 Map<String, dynamic> _$GPUTechnologiesToJson(GPUTechnologies instance) =>

@@ -13,8 +13,8 @@ part 'case.g.dart';
 class Case implements Model{
   final int? id;
   String name;
-  Producers producer;
   CaseSize size;
+  Producers producer;
   List<FormFactor> formFactor;
   CasePowerSupplyLocation powerSupplyLocation;
   bool fansIncluded;
@@ -27,22 +27,22 @@ class Case implements Model{
   int recommendedPrice;
   PerformanceLevel performanceLevel;
 
-  Case(
+  Case({
     this.id,
-    this.name,
-    this.size,
-    this.formFactor,
-    this.producer,
-    this.powerSupplyLocation,
-    this.usb_3_2,
-    this.usb_3_0,
-    this.usb_2_0,
-    this.designFeatures,
-    this.maxLengthOfGraphicCard,
-    this.description,
-    this.recommendedPrice,
-    this.performanceLevel, {
+    required this.name,
+    required this.size,
+    required this.formFactor,
+    required this.producer,
+    required this.powerSupplyLocation,
     required this.fansIncluded,
+    required this.usb_3_2,
+    required this.usb_3_0,
+    required this.usb_2_0,
+    required this.designFeatures,
+    required this.maxLengthOfGraphicCard,
+    required this.description,
+    required this.recommendedPrice,
+    required this.performanceLevel,
   });
 
   factory Case.fromJson(Map<String, dynamic> json) => _$CaseFromJson(json);

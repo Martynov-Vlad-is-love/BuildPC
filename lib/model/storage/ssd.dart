@@ -23,20 +23,20 @@ class Ssd implements Model{
   int recommendedPrice;
   PerformanceLevel performanceLevel;
 
-  Ssd(
+  Ssd({
     this.id,
-    this.producer,
-    this.storageSize,
-    this.formFactor,
-    this.storageInterface,
-    this.bufferSize,
-    this.readingSpeed,
-    this.writingSpeed,
-    this.cellsType,
-    this.description,
-    this.recommendedPrice,
-    this.performanceLevel,
-  );
+    required this.producer,
+    required this.storageSize,
+    required this.formFactor,
+    required this.storageInterface,
+    required this.bufferSize,
+    required this.readingSpeed,
+    required this.writingSpeed,
+    required this.cellsType,
+    required this.description,
+    required this.recommendedPrice,
+    required this.performanceLevel,
+  });
 
   factory Ssd.fromJson(Map<String, dynamic> json) => _$SsdFromJson(json);
 

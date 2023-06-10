@@ -31,27 +31,28 @@ class GraphicCard implements Model {
   int recommendedPrice;
   PerformanceLevel performanceLevel;
 
-  GraphicCard(
+
+  GraphicCard({
     this.id,
-    this.producer,
-    this.name,
-    this.vendor,
-    this.year,
-    this.technicalProcess,
-    this.gpuFrequency,
-    this.memoryAmount,
-    this.memoryType,
-    this.memoryFrequency,
-    this.bus,
-    this.tdp,
-    this.connector,
-    this.length,
-    this.interfaceType,
-    this.description,
-    this.recommendedPrice,
-    this.gpuTechnologies,
-    this.performanceLevel,
-  );
+    required this.producer,
+    required this.name,
+    required this.vendor,
+    required this.year,
+    required this.technicalProcess,
+    required this.gpuFrequency,
+    required this.memoryAmount,
+    required this.memoryType,
+    required this.memoryFrequency,
+    required this.bus,
+    required this.tdp,
+    required this.connector,
+    required this.interfaceType,
+    required this.length,
+    required this.description,
+    required this.gpuTechnologies,
+    required this.recommendedPrice,
+    required this.performanceLevel,
+  });
 
   factory GraphicCard.fromJson(Map<String, dynamic> json) =>
       _$GraphicCardFromJson(json);

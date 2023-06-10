@@ -8,7 +8,7 @@ class CPUGeneration implements Model{
   final int? id;
   String name;
 
-  CPUGeneration(this.id, this.name);
+  CPUGeneration(this.id, {required this.name});
 
   factory CPUGeneration.fromJson(Map<String, dynamic> json) =>
       _$CPUGenerationFromJson(json);

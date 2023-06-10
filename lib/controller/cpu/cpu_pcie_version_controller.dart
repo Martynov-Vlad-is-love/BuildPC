@@ -1,29 +1,37 @@
+import 'package:buildpc/controller/model_controller_abstract.dart';
 import 'package:buildpc/model/cpu/cpu_pcie_version.dart';
 import 'package:buildpc/repository/cpu/cpu_pcie_version_repository.dart';
 
-class CpuPcieVersionController{
+class CpuPcieVersionController
+    implements ModelControllerAbstract<CPUPCIeVersion> {
   final CpuPcieVersionRepository _cpuPcieVersionRepository;
+
   CpuPcieVersionController(this._cpuPcieVersionRepository);
 
-  Future<List<CPUPCIeVersion>> getList() async{
+  @override
+  Future<List<CPUPCIeVersion>> getList() async {
     return _cpuPcieVersionRepository.getAllData();
   }
 
-  Future<CPUPCIeVersion?> getDataById(int? id) async{
+  @override
+  Future<CPUPCIeVersion?> getDataById(int? id) async {
     return _cpuPcieVersionRepository.getDataById(id);
   }
 
-  Future<void> updateData(CPUPCIeVersion data) async{
+  @override
+  Future<void> updateData(CPUPCIeVersion data) async {
     await _cpuPcieVersionRepository.updateData(data);
   }
 
-  Future<CPUPCIeVersion?> postData(CPUPCIeVersion data) async{
+  @override
+  Future<CPUPCIeVersion?> postData(CPUPCIeVersion data) async {
     await _cpuPcieVersionRepository.postData(data);
 
     return getDataById(data.id);
   }
 
-  Future<void> delete(int id) async{
+  @override
+  Future<void> delete(int id) async {
     await _cpuPcieVersionRepository.deleteData(id);
   }
 }

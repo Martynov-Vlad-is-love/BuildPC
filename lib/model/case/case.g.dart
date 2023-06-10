@@ -7,34 +7,34 @@ part of 'case.dart';
 // **************************************************************************
 
 Case _$CaseFromJson(Map<String, dynamic> json) => Case(
-      json['id'] as int?,
-      json['name'] as String,
-      CaseSize.fromJson(json['size'] as Map<String, dynamic>),
-      (json['formFactor'] as List<dynamic>)
+      id: json['id'] as int?,
+      name: json['name'] as String,
+      size: CaseSize.fromJson(json['size'] as Map<String, dynamic>),
+      formFactor: (json['formFactor'] as List<dynamic>)
           .map((e) => FormFactor.fromJson(e as Map<String, dynamic>))
           .toList(),
-      Producers.fromJson(json['producer'] as Map<String, dynamic>),
-      CasePowerSupplyLocation.fromJson(
+      producer: Producers.fromJson(json['producer'] as Map<String, dynamic>),
+      powerSupplyLocation: CasePowerSupplyLocation.fromJson(
           json['powerSupplyLocation'] as Map<String, dynamic>),
-      json['usb_3_2'] as int,
-      json['usb_3_0'] as int,
-      json['usb_2_0'] as int,
-      (json['designFeatures'] as List<dynamic>)
+      fansIncluded: json['fansIncluded'] as bool,
+      usb_3_2: json['usb_3_2'] as int,
+      usb_3_0: json['usb_3_0'] as int,
+      usb_2_0: json['usb_2_0'] as int,
+      designFeatures: (json['designFeatures'] as List<dynamic>)
           .map((e) => CaseDesignFeatures.fromJson(e as Map<String, dynamic>))
           .toList(),
-      json['maxLengthOfGraphicCard'] as int,
-      json['description'] as String,
-      json['recommendedPrice'] as int,
-      PerformanceLevel.fromJson(
+      maxLengthOfGraphicCard: json['maxLengthOfGraphicCard'] as int,
+      description: json['description'] as String,
+      recommendedPrice: json['recommendedPrice'] as int,
+      performanceLevel: PerformanceLevel.fromJson(
           json['performanceLevel'] as Map<String, dynamic>),
-      fansIncluded: json['fansIncluded'] as bool,
     );
 
 Map<String, dynamic> _$CaseToJson(Case instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
-      'producer': instance.producer,
       'size': instance.size,
+      'producer': instance.producer,
       'formFactor': instance.formFactor,
       'powerSupplyLocation': instance.powerSupplyLocation,
       'fansIncluded': instance.fansIncluded,

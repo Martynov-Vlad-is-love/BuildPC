@@ -4,14 +4,14 @@ import 'package:json_annotation/json_annotation.dart';
 part 'power_supply_protection_functions.g.dart';
 
 @JsonSerializable()
-class PowerSupplyProtectionFunctions implements Model{
+class PowerSupplyProtectionFunctions implements Model {
   final int? id;
   String name;
 
   PowerSupplyProtectionFunctions(
-    this.id,
-    this.name,
-  );
+    this.id, {
+    required this.name,
+  });
 
   factory PowerSupplyProtectionFunctions.fromJson(Map<String, dynamic> json) =>
       _$PowerSupplyProtectionFunctionsFromJson(json);

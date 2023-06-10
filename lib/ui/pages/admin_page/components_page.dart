@@ -1,116 +1,46 @@
-import 'package:buildpc/model/cooler/cooler.dart';
-import 'package:buildpc/model/cooler/cooler_material.dart';
-import 'package:buildpc/model/cooler/cooler_socket.dart';
-import 'package:buildpc/model/general/performance_level.dart';
-import 'package:buildpc/model/general/producers.dart';
-import 'package:buildpc/model/model.dart';
-import 'package:buildpc/model/ram/ram.dart';
-import 'package:buildpc/model/ram/ram_memory_type.dart';
-import 'package:buildpc/model/ram/ram_timings.dart';
+import 'package:buildpc/controller/model_controller.dart';
 import 'package:buildpc/project/routes/app_route_constants.dart';
-import 'package:buildpc/ui/widgets/button/custom_route_model_button.dart';
 import 'package:buildpc/ui/widgets/button/custom_route_model_name_button.dart';
-import 'package:buildpc/ui/widgets/button/route_model_list_button.dart';
 import 'package:buildpc/ui/widgets/top_navigation_bar/custom_top_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
-class ComponentsPage extends StatelessWidget {
+
+class ComponentsPage extends StatefulWidget {
   const ComponentsPage({Key? key}) : super(key: key);
+
+  @override
+  State<ComponentsPage> createState() => _ComponentsPageState();
+}
+
+class _ComponentsPageState extends State<ComponentsPage> {
 
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
+    final _modelController = context.read<ModelController>();
 
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size(screenSize.width, 80),
         child: const CustomTopNavigationBar(),
       ),
-      body: const SafeArea(
-        child: _MainView(),
+      body: SafeArea(
+        child: _MainView(modelController: _modelController),
       ),
     );
   }
 }
 
 class _MainView extends StatelessWidget {
-  const _MainView({Key? key}) : super(key: key);
+  final ModelController modelController;
+
+  const _MainView({Key? key, required this.modelController}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final RamMemoryType ramMemoryType = RamMemoryType(1, 'as');
-    final RamTimings ramTimings = RamTimings(1, '123123');
-    final Producers oleg = Producers(1, 'Oleg');
-    final CoolerSocket socket = CoolerSocket(1, 'fgdfg');
-    final CoolerMaterial material = CoolerMaterial(1, 'do anal');
-    final PerformanceLevel performanceLevel = PerformanceLevel(1, 'high');
-    final List<CoolerSocket> sockets = [socket, socket];
-    final Cooler model = Cooler(
-      1,
-      'Test case 1',
-      oleg,
-      sockets,
-      material,
-      41,
-      8383,
-      4,
-      'decsr',
-      300,
-      performanceLevel,
-    );
-    final Ram model4 = Ram(
-      2,
-      'Kingston',
-      oleg,
-      ramMemoryType,
-      16000,
-      3200,
-      ramTimings,
-      500,
-      'decsr',
-      300,
-      performanceLevel,
-    );
-    final Ram model5 = Ram(
-      2,
-      'Kingston',
-      oleg,
-      ramMemoryType,
-      16000,
-      3200,
-      ramTimings,
-      500,
-      'decsr',
-      300,
-      performanceLevel,
-    );
-    final Cooler model2 = Cooler(
-      3,
-      'Test case 3',
-      oleg,
-      sockets,
-      material,
-      41,
-      8383,
-      4,
-      'decsr',
-      300,
-      performanceLevel,
-    );
-    final Cooler model3 = Cooler(
-      4,
-      'Test case 4',
-      oleg,
-      sockets,
-      material,
-      41,
-      8383,
-      4,
-      'decsr',
-      300,
-      performanceLevel,
-    );
-    final List<Model> models = [model, model2, model3, model4, model5];
+    final AppLocalizations? _locale = AppLocalizations.of(context);
 
     return ColoredBox(
       color: Colors.white,
@@ -120,61 +50,61 @@ class _MainView extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                const CustomRouteModelNameButton(
-                  label: 'GraphicCard',
-                  destination: AppRouteConstants.editRouteName,
+                CustomRouteModelNameButton(
+                  label: '${_locale?.graphicCard}',
+                  destination: AppRouteConstants.modelListPageRouteName,
                   modelName: 'GraphicCard',
                   //modelName: 'GraphicCard',
                 ),
-                const CustomRouteModelNameButton(
-                  label: 'Case',
-                  destination: AppRouteConstants.editRouteName,
+                CustomRouteModelNameButton(
+                  label: '${_locale?.pcCase}',
+                  destination: AppRouteConstants.modelListPageRouteName,
                   modelName: 'Case',
                 ),
-                RouteModelListButton(
-                  label: 'Cooler',
-                  destination: AppRouteConstants.componentsListPageRouteName,
-                  modelList: models,
+                CustomRouteModelNameButton(
+                  label: '${_locale?.cooler}',
+                  destination: AppRouteConstants.modelListPageRouteName,
+                  modelName: 'Cooler',
                 ),
               ],
             ),
-            const Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 CustomRouteModelNameButton(
-                  label: 'Processor',
-                  destination: AppRouteConstants.editRouteName,
+                  label: '${_locale?.processor}',
+                  destination: AppRouteConstants.modelListPageRouteName,
                   modelName: 'Processor',
                 ),
                 CustomRouteModelNameButton(
-                  label: 'Motherboard',
-                  destination: AppRouteConstants.editRouteName,
+                  label: '${_locale?.motherboard}',
+                  destination: AppRouteConstants.modelListPageRouteName,
                   modelName: 'Motherboard',
                 ),
                 CustomRouteModelNameButton(
-                  label: 'PowerSupply',
-                  destination: AppRouteConstants.editRouteName,
-                  modelName: 'Power Supply',
+                  label: '${_locale?.powerSupply}',
+                  destination: AppRouteConstants.modelListPageRouteName,
+                  modelName: 'PowerSupply',
                 ),
               ],
             ),
-            const Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 CustomRouteModelNameButton(
-                  label: 'RAM',
-                  destination: AppRouteConstants.editRouteName,
-                  modelName: 'RAM',
+                  label: '${_locale?.ram}',
+                  destination: AppRouteConstants.modelListPageRouteName,
+                  modelName: 'Ram',
                 ),
                 CustomRouteModelNameButton(
-                  label: 'HDD',
-                  destination: AppRouteConstants.editRouteName,
-                  modelName: 'HDD',
+                  label: '${_locale?.hdd}',
+                  destination: AppRouteConstants.modelListPageRouteName,
+                  modelName: 'Hdd',
                 ),
                 CustomRouteModelNameButton(
-                  label: 'SSD',
-                  destination: AppRouteConstants.editRouteName,
-                  modelName: 'SSD',
+                  label: '${_locale?.ssd}',
+                  destination: AppRouteConstants.modelListPageRouteName,
+                  modelName: 'Ssd',
                 )
               ],
             ),

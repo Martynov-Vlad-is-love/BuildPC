@@ -17,36 +17,36 @@ part 'build_pc.g.dart';
 @JsonSerializable()
 class BuildPC implements Model {
   final int? id;
-  String nameOfBuild;
+  String? nameOfBuild;
   User user;
-  Motherboard motherboard;
-  Processor processor;
-  GraphicCard graphicCard;
-  List<Ram> ram;
-  PowerSupply powerSupply;
-  List<Hdd> hdd;
-  List<Ssd> ssd;
-  Case pcCase;
-  Cooler cooler;
-  int countOfLikes;
-  Rating ratingId;
+  Motherboard? motherboard;
+  Processor? processor;
+  GraphicCard? graphicCard;
+  List<Ram?> ram;
+  PowerSupply? powerSupply;
+  List<Hdd?> hdd;
+  List<Ssd?> ssd;
+  Case? pcCase;
+  Cooler? cooler;
+  int? countOfLikes;
+  Rating? ratingId;
 
-  BuildPC(
+  BuildPC({
     this.id,
-    this.nameOfBuild,
-    this.user,
-    this.motherboard,
-    this.processor,
-    this.graphicCard,
-    this.ram,
-    this.powerSupply,
-    this.hdd,
-    this.ssd,
-    this.pcCase,
-    this.cooler,
-    this.countOfLikes,
-    this.ratingId,
-  );
+    required this.nameOfBuild,
+    required this.user,
+    required this.motherboard,
+    required this.processor,
+    required this.graphicCard,
+    required this.ram,
+    required this.powerSupply,
+    required this.hdd,
+    required this.ssd,
+    required this.pcCase,
+    required this.cooler,
+    required this.countOfLikes,
+    required this.ratingId,
+  });
 
   factory BuildPC.fromJson(Map<String, dynamic> json) =>
       _$BuildPCFromJson(json);
@@ -55,33 +55,33 @@ class BuildPC implements Model {
   Map<String, dynamic> toJson() => _$BuildPCToJson(this);
 
   @override
-  List<String> parsedModels() {
+  List<String?> parsedModels() {
     final ramList = [];
     for (final plate in ram) {
-      ramList.add(plate.parsedModels().toString());
+      ramList.add(plate?.parsedModels().toString());
     }
     final hddList = [];
     for (final disc in hdd) {
-      hddList.add(disc.parsedModels().toString());
+      hddList.add(disc?.parsedModels().toString());
     }
     final ssdList = [];
     for (final disc in ssd) {
-      ssdList.add(disc.parsedModels().toString());
+      ssdList.add(disc?.parsedModels().toString());
     }
 
     final fields = [
       id.toString(),
       nameOfBuild,
       user.parsedModels().toString(),
-      motherboard.parsedModels().toString(),
-      processor.parsedModels().toString(),
-      graphicCard.parsedModels().toString(),
+      motherboard?.parsedModels().toString(),
+      processor?.parsedModels().toString(),
+      graphicCard?.parsedModels().toString(),
       ramList.toString(),
-      powerSupply.parsedModels().toString(),
+      powerSupply?.parsedModels().toString(),
       hddList.toString(),
       ssdList.toString(),
-      pcCase.parsedModels().toString(),
-      cooler.parsedModels().toString(),
+      pcCase?.parsedModels().toString(),
+      cooler?.parsedModels().toString(),
       countOfLikes.toString(),
       ratingId.toString()
     ];

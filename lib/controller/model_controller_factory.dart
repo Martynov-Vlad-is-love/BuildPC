@@ -1,0 +1,163 @@
+import 'package:buildpc/controller/case/case_controller.dart';
+import 'package:buildpc/controller/case/case_design_features_controller.dart';
+import 'package:buildpc/controller/case/case_power_supply_location_controller.dart';
+import 'package:buildpc/controller/case/case_size_controller.dart';
+import 'package:buildpc/controller/cooler/cooler_controller.dart';
+import 'package:buildpc/controller/cooler/cooler_material_controller.dart';
+import 'package:buildpc/controller/cooler/cooler_socket_controller.dart';
+import 'package:buildpc/controller/cpu/cpu_generation_controller.dart';
+import 'package:buildpc/controller/cpu/cpu_pcie_version_controller.dart';
+import 'package:buildpc/controller/cpu/processor_controller.dart';
+import 'package:buildpc/controller/general/build_pc_controller.dart';
+import 'package:buildpc/controller/general/form_factor_controller.dart';
+import 'package:buildpc/controller/general/like_controller.dart';
+import 'package:buildpc/controller/general/performance_level_controller.dart';
+import 'package:buildpc/controller/general/producers_controller.dart';
+import 'package:buildpc/controller/general/rating_controller.dart';
+import 'package:buildpc/controller/general/user_controller.dart';
+import 'package:buildpc/controller/gpu/gpu_connector_controller.dart';
+import 'package:buildpc/controller/gpu/gpu_interface_type_controller.dart';
+import 'package:buildpc/controller/gpu/gpu_memory_type_controller.dart';
+import 'package:buildpc/controller/gpu/gpu_technologies_controller.dart';
+import 'package:buildpc/controller/gpu/graphic_card_controller.dart';
+import 'package:buildpc/controller/model_controller_abstract.dart';
+import 'package:buildpc/controller/motherboard/motherboard_chipset_controller.dart';
+import 'package:buildpc/controller/motherboard/motherboard_controller.dart';
+import 'package:buildpc/controller/motherboard/motherboard_network_controller.dart';
+import 'package:buildpc/controller/motherboard/motherboard_socket_controller.dart';
+import 'package:buildpc/controller/power/power_supply_controller.dart';
+import 'package:buildpc/controller/power/power_supply_protection_functions_controller.dart';
+import 'package:buildpc/controller/ram/ram_controller.dart';
+import 'package:buildpc/controller/ram/ram_memory_type_controller.dart';
+import 'package:buildpc/controller/ram/ram_timings_controller.dart';
+import 'package:buildpc/controller/storage/hdd_controller.dart';
+import 'package:buildpc/controller/storage/ssd_cells_type_controller.dart';
+import 'package:buildpc/controller/storage/ssd_controller.dart';
+import 'package:buildpc/controller/storage/storage_form_factor_controller.dart';
+import 'package:buildpc/controller/storage/storage_interface_controller.dart';
+import 'package:buildpc/repository/case/case_design_features_repository.dart';
+import 'package:buildpc/repository/case/case_power_supply_location_repository.dart';
+import 'package:buildpc/repository/case/case_repository.dart';
+import 'package:buildpc/repository/case/case_size_repository.dart';
+import 'package:buildpc/repository/cooler/cooler_material_repository.dart';
+import 'package:buildpc/repository/cooler/cooler_repository.dart';
+import 'package:buildpc/repository/cooler/cooler_socket_repository.dart';
+import 'package:buildpc/repository/cpu/cpu_generation_repository.dart';
+import 'package:buildpc/repository/cpu/cpu_pcie_version_repository.dart';
+import 'package:buildpc/repository/cpu/processor_repository.dart';
+import 'package:buildpc/repository/general/build_pc_repository.dart';
+import 'package:buildpc/repository/general/form_factor_repository.dart';
+import 'package:buildpc/repository/general/like_repository.dart';
+import 'package:buildpc/repository/general/performance_level_repository.dart';
+import 'package:buildpc/repository/general/producers_repository.dart';
+import 'package:buildpc/repository/general/rating_repository.dart';
+import 'package:buildpc/repository/general/user_repository.dart';
+import 'package:buildpc/repository/gpu/gpu_connector_repository.dart';
+import 'package:buildpc/repository/gpu/gpu_interface_type_repository.dart';
+import 'package:buildpc/repository/gpu/gpu_memory_type_repository.dart';
+import 'package:buildpc/repository/gpu/gpu_technologies_repository.dart';
+import 'package:buildpc/repository/gpu/graphic_card_repository.dart';
+import 'package:buildpc/repository/motherboard/motherboard_chipset_repository.dart';
+import 'package:buildpc/repository/motherboard/motherboard_network_repository.dart';
+import 'package:buildpc/repository/motherboard/motherboard_repository.dart';
+import 'package:buildpc/repository/motherboard/motherboard_socket_repository.dart';
+import 'package:buildpc/repository/power/power_supply_protection_functions_repository.dart';
+import 'package:buildpc/repository/power/power_supply_repository.dart';
+import 'package:buildpc/repository/ram/ram_memory_type_repository.dart';
+import 'package:buildpc/repository/ram/ram_repository.dart';
+import 'package:buildpc/repository/ram/ram_timings_repository.dart';
+import 'package:buildpc/repository/storage/hdd_repository.dart';
+import 'package:buildpc/repository/storage/ssd_cells_type_repository.dart';
+import 'package:buildpc/repository/storage/ssd_repository.dart';
+import 'package:buildpc/repository/storage/storage_form_factor_repository.dart';
+import 'package:buildpc/repository/storage/storage_interface_repository.dart';
+
+class ModelControllerFactory {
+  static ModelControllerAbstract<dynamic> createController(String modelName) {
+    switch (modelName) {
+      case 'FormFactor':
+        return FormFactorController(FormFactorRepository());
+      case 'PerformanceLevel':
+        return PerformanceLevelController(PerformanceLevelRepository());
+      case 'BuildPC':
+        return BuildPcController(BuildPcRepository());
+      case 'Producers':
+        return ProducersController(ProducersRepository());
+      case 'Case':
+        return CaseController(CaseRepository());
+      case 'CaseDesignFeatures':
+        return CaseDesignFeaturesController(CaseDesignFeaturesRepository());
+      case 'CasePowerSupply':
+        return CasePowerSupplyLocationController(
+          CasePowerSupplyLocationRepository(),
+        );
+      case 'CaseSize':
+        return CaseSizeController(CaseSizeRepository());
+      case 'Cooler':
+        return CoolerController(CoolerRepository());
+      case 'CoolerMaterial':
+        return CoolerMaterialController(CoolerMaterialRepository());
+      case 'CoolerSocket':
+        return CoolerSocketController(CoolerSocketRepository());
+      case 'CpuTechnologies':
+        return CpuGenerationController(CpuGenerationRepository());
+      case 'CpuPcieVersion':
+        return CpuPcieVersionController(CpuPcieVersionRepository());
+      case 'CpuGeneration':
+        return CpuGenerationController(CpuGenerationRepository());
+      case 'Processor':
+        return ProcessorController(ProcessorRepository());
+      case 'GPUConnector':
+        return GpuConnectorController(GpuConnectorRepository());
+      case 'GPUInterfaceType':
+        return GpuInterfaceTypeController(GpuInterfaceTypeRepository());
+      case 'GPUMemoryType':
+        return GpuMemoryTypeController(GpuMemoryTypeRepository());
+      case 'GPUTechnologies':
+        return GpuTechnologiesController(GpuTechnologiesRepository());
+      case 'GraphicCard':
+        return GraphicCardController(GraphicCardRepository());
+      case 'MotherboardChipset':
+        return MotherboardChipsetController(MotherboardChipsetRepository());
+      case 'Motherboard':
+        return MotherboardController(MotherboardRepository());
+      case 'MotherboardNetwork':
+        return MotherboardNetworkController(MotherboardNetworkRepository());
+      case 'MotherboardSocket':
+        return MotherboardSocketController(MotherboardSocketRepository());
+      case 'PowerSupply':
+        return PowerSupplyController(PowerSupplyRepository());
+      case 'PowerSupplyProtectionFunctions':
+        return PowerSupplyProtectionFunctionsController(
+          PowerSupplyProtectionFunctionsRepository(),
+        );
+      case 'Ram':
+        return RamController(RamRepository());
+      case 'RamMemoryType':
+        return RamMemoryTypeController(RamMemoryTypeRepository());
+      case 'RamTimings':
+        return RamTimingsController(RamTimingsRepository());
+      case 'Hdd':
+        return HddController(HddRepository());
+      case 'Ssd':
+        return SsdController(SsdRepository());
+      case 'SsdCellsType':
+        return SsdCellsTypeController(SsdCellsTypeRepository());
+      case 'StorageFormFactor':
+        return StorageFormFactorController(StorageFormFactorRepository());
+      case 'StorageInterface':
+        return StorageInterfaceController(StorageInterfaceRepository());
+      case 'User':
+        return UserController(UserRepository());
+      case 'Like':
+        return LikeController(LikeRepository());
+      case 'Rating':
+        return RatingController(RatingRepository());
+      case 'CasePowerSupplyLocation':
+        return CasePowerSupplyLocationController(
+            CasePowerSupplyLocationRepository(),);
+      default:
+        throw Exception('Unsupported model: $modelName');
+    }
+  }
+}

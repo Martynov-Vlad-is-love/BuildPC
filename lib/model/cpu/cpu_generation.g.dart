@@ -9,7 +9,7 @@ part of 'cpu_generation.dart';
 CPUGeneration _$CPUGenerationFromJson(Map<String, dynamic> json) =>
     CPUGeneration(
       json['id'] as int?,
-      json['name'] as String,
+      name: json['name'] as String,
     );
 
 Map<String, dynamic> _$CPUGenerationToJson(CPUGeneration instance) =>

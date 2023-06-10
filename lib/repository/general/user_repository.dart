@@ -8,10 +8,6 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserRepository implements Repository<User> {
-  final path = 'User';
-  final header = {
-    'Content-type': 'application/json',
-  };
 
   final _user = StreamController<User?>();
 
@@ -42,7 +38,8 @@ class UserRepository implements Repository<User> {
 
         final SharedPreferences prefs = await _prefs;
 
-        await prefs.setString('Token', jsonData['accessToken'].toString());
+        await prefs.setString('token', jsonData['accessToken'].toString());
+        await prefs.remove('Token');
 
         return user;
       } else {
@@ -99,6 +96,8 @@ class UserRepository implements Repository<User> {
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     await http.delete(
@@ -114,6 +113,8 @@ class UserRepository implements Repository<User> {
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     final response =
@@ -138,6 +139,8 @@ class UserRepository implements Repository<User> {
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     final response = await http.get(
@@ -170,6 +173,7 @@ class UserRepository implements Repository<User> {
     } catch (ex) {
       rethrow;
     }
+
   }
 
   @override
@@ -178,6 +182,8 @@ class UserRepository implements Repository<User> {
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     final jsonData = user.toJson();

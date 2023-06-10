@@ -24,6 +24,8 @@ class GraphicCardRepository implements Repository<GraphicCard> {
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     await http.delete(
@@ -39,10 +41,12 @@ class GraphicCardRepository implements Repository<GraphicCard> {
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     final response = await http.get(
-      Uri.http(apiPath, '/api/all/gpuMemoryType'),
+      Uri.http(apiPath, '/api/all/graphicCard'),
       headers: header,
     );
 
@@ -65,6 +69,8 @@ class GraphicCardRepository implements Repository<GraphicCard> {
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     final response = await http.get(
@@ -84,10 +90,14 @@ class GraphicCardRepository implements Repository<GraphicCard> {
 
   @override
   Future<void> postData(GraphicCard graphicCard) async {
+    final token = await _getToken();
     try {
       final jsonData = graphicCard.toJson();
       final header = {
         'Content-type': 'application/json',
+        'Authorization': 'Bearer $token',
+        'Access-Control-Allow-Origin': '*',
+        'Accept': '*/*',
       };
       await http.post(
         Uri.http(apiPath, '/api/admin/graphicCard'),
@@ -105,6 +115,8 @@ class GraphicCardRepository implements Repository<GraphicCard> {
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     final jsonData = graphicCard.toJson();

@@ -8,7 +8,7 @@ part of 'ram_timings.dart';
 
 RamTimings _$RamTimingsFromJson(Map<String, dynamic> json) => RamTimings(
       json['id'] as int?,
-      json['timings'] as String,
+      timings: json['timings'] as String,
     );
 
 Map<String, dynamic> _$RamTimingsToJson(RamTimings instance) =>

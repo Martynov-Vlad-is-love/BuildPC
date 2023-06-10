@@ -1,30 +1,45 @@
+import 'package:buildpc/controller/model_controller_abstract.dart';
 import 'package:buildpc/model/general/performance_level.dart';
 import 'package:buildpc/repository/general/performance_level_repository.dart';
+import 'package:flutter/material.dart';
 
-class PerformanceLevelController {
+class PerformanceLevelController extends ChangeNotifier
+    implements ModelControllerAbstract<PerformanceLevel> {
   final PerformanceLevelRepository _performanceLevelRepository;
 
   PerformanceLevelController(this._performanceLevelRepository);
 
+  @override
   Future<List<PerformanceLevel>> getList() async {
-    return _performanceLevelRepository.getAllData();
+    final data = _performanceLevelRepository.getAllData();
+    notifyListeners();
+
+    return data;
   }
 
+  @override
   Future<PerformanceLevel?> getDataById(int? id) async {
-    return _performanceLevelRepository.getDataById(id);
+    final data = _performanceLevelRepository.getDataById(id);
+    notifyListeners();
+
+    return data;
   }
 
+  @override
   Future<void> updateData(PerformanceLevel data) async {
     await _performanceLevelRepository.updateData(data);
+    notifyListeners();
   }
 
-  Future<PerformanceLevel?> postData(PerformanceLevel data) async {
+  @override
+  Future<void> postData(PerformanceLevel data) async {
     await _performanceLevelRepository.postData(data);
-
-    return getDataById(data.id);
+    notifyListeners();
   }
 
+  @override
   Future<void> delete(int id) async {
     await _performanceLevelRepository.deleteData(id);
+    notifyListeners();
   }
 }

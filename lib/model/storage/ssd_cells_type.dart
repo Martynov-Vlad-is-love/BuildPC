@@ -8,7 +8,7 @@ class SsdCellsType implements Model{
   final int? id;
   String name;
 
-  SsdCellsType(this.id, this.name);
+  SsdCellsType(this.id, {required this.name});
 
   factory SsdCellsType.fromJson(Map<String, dynamic> json) =>
       _$SsdCellsTypeFromJson(json);

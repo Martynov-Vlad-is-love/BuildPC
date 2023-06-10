@@ -42,7 +42,7 @@ class LikeRepository implements Repository<Like> {
     };
 
     final response =
-        await http.get(Uri.http(apiPath, '/api/like/like'), headers: header);
+        await http.get(Uri.http(apiPath, '/api/all/like'), headers: header);
 
     if (response.statusCode == 200) {
       final jsonData = convert.jsonDecode(response.body) as List<dynamic>;
@@ -66,7 +66,7 @@ class LikeRepository implements Repository<Like> {
     };
 
     final response = await http.get(
-      Uri.http(apiPath, '/api/like/like/$id'),
+      Uri.http(apiPath, '/api/all/like/$id'),
       headers: header,
     );
 
@@ -82,13 +82,17 @@ class LikeRepository implements Repository<Like> {
 
   @override
   Future<void> postData(Like like) async {
+    final token = await _getToken();
     try {
       final jsonData = like.toJson();
       final header = {
         'Content-type': 'application/json',
+        'Authorization': 'Bearer $token',
+        'Access-Control-Allow-Origin': '*',
+        'Accept': '*/*',
       };
       await http.post(
-        Uri.http(apiPath, '/api/like/like'),
+        Uri.http(apiPath, '/api/all/like'),
         headers: header,
         body: convert.jsonEncode(jsonData),
       );
@@ -103,13 +107,15 @@ class LikeRepository implements Repository<Like> {
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     final jsonData = like.toJson();
     await http.patch(
       Uri.http(
         apiPath,
-        '/api/like/like/${like.id}',
+        '/api/admin/like/${like.id}',
       ),
       body: convert.jsonEncode(jsonData),
       headers: header,

@@ -11,7 +11,7 @@ class Rating implements Model{
   BuildPC buildPc;
   List<Like> like;
 
-  Rating(this.id, this.buildPc, this.like);
+  Rating({this.id, required this.buildPc, required this.like});
 
   factory Rating.fromJson(Map<String, dynamic> json) => _$RatingFromJson(json);
 

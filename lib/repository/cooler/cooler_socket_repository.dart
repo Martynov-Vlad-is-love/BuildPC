@@ -7,12 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CoolerSocketRepository implements Repository<CoolerSocket> {
-  final path = 'Producer';
-  final header = {
-    'Content-type': 'application/json',
-  };
-
-  Future<String?> _getToken() async {
+ Future<String?> _getToken() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
     return prefs.getString('token');
@@ -24,6 +19,8 @@ class CoolerSocketRepository implements Repository<CoolerSocket> {
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     await http.delete(
@@ -39,6 +36,8 @@ class CoolerSocketRepository implements Repository<CoolerSocket> {
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     final response = await http.get(
@@ -65,6 +64,8 @@ class CoolerSocketRepository implements Repository<CoolerSocket> {
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     final response = await http.get(
@@ -84,16 +85,21 @@ class CoolerSocketRepository implements Repository<CoolerSocket> {
 
   @override
   Future<void> postData(CoolerSocket coolerSocket) async {
+    final token = await _getToken();
     try {
       final jsonData = coolerSocket.toJson();
       final header = {
         'Content-type': 'application/json',
+        'Authorization': 'Bearer $token',
+        'Access-Control-Allow-Origin': '*',
+        'Accept': '*/*',
       };
-      await http.post(
+      final response = await http.post(
         Uri.http(apiPath, '/api/admin/coolerSocket'),
         headers: header,
         body: convert.jsonEncode(jsonData),
       );
+      print(response.statusCode);
     } catch (ex) {
       rethrow;
     }
@@ -105,6 +111,8 @@ class CoolerSocketRepository implements Repository<CoolerSocket> {
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     final jsonData = coolerSocket.toJson();

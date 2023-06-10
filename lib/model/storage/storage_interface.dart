@@ -8,7 +8,7 @@ class StorageInterface implements Model{
   final int? id;
   String name;
 
-  StorageInterface(this.id, this.name);
+  StorageInterface(this.id, {required this.name});
 
   factory StorageInterface.fromJson(Map<String, dynamic> json) =>
       _$StorageInterfaceFromJson(json);

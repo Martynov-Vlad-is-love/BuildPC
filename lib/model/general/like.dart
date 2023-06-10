@@ -11,7 +11,7 @@ class Like implements Model{
   BuildPC buildPc;
   User user;
 
-  Like(this.id, this.buildPc, this.user);
+  Like({this.id, required this.buildPc, required this.user});
 
   factory Like.fromJson(Map<String, dynamic> json) => _$LikeFromJson(json);
 
