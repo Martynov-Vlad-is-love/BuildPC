@@ -11,21 +11,23 @@ part 'ssd.g.dart';
 @JsonSerializable()
 class Ssd implements Model{
   final int? id;
-  Producers producer;
-  int storageSize;
-  StorageFormFactor formFactor;
-  StorageInterface storageInterface;
-  int bufferSize;
-  int readingSpeed;
-  int writingSpeed;
-  SsdCellsType cellsType;
-  String description;
-  int recommendedPrice;
-  PerformanceLevel performanceLevel;
+  Producers? producer;
+  String? name;
+  int? storageSize;
+  StorageFormFactor? formFactor;
+  StorageInterface? storageInterface;
+  int? bufferSize;
+  int? readingSpeed;
+  int? writingSpeed;
+  SsdCellsType? cellsType;
+  String? description;
+  int? recommendedPrice;
+  PerformanceLevel? performanceLevel;
 
   Ssd({
     this.id,
     required this.producer,
+    required this.name,
     required this.storageSize,
     required this.formFactor,
     required this.storageInterface,
@@ -45,19 +47,19 @@ class Ssd implements Model{
 
   @override
   List<String> parsedModels() {
-    final fields = [
+    final List<String> fields = [
       id.toString(),
-      producer.name,
+      '${producer?.name}',
       storageSize.toString(),
-      formFactor.name,
-      storageInterface.name,
+      '${formFactor?.name}',
+      '${storageInterface?.name}',
       bufferSize.toString(),
       readingSpeed.toString(),
       writingSpeed.toString(),
-      cellsType.name,
-      description,
+      '${cellsType?.name}',
+      '$description',
       recommendedPrice.toString(),
-      performanceLevel.level
+      '${performanceLevel?.level}'
     ];
 
     return fields;

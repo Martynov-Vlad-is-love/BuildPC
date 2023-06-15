@@ -8,8 +8,8 @@ part 'like.g.dart';
 @JsonSerializable()
 class Like implements Model{
   final int? id;
-  BuildPC buildPc;
-  User user;
+  BuildPC? buildPc;
+  User? user;
 
   Like({this.id, required this.buildPc, required this.user});
 
@@ -22,8 +22,8 @@ class Like implements Model{
   List<String> parsedModels() {
     final fields = [
       id.toString(),
-      buildPc.parsedModels().toString(),
-      user.parsedModels().toString()
+      '${buildPc?.parsedModels().toString()}',
+      '${user?.parsedModels().toString()}'
     ];
 
     return fields;

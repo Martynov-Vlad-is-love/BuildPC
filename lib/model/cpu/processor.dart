@@ -12,25 +12,25 @@ part 'processor.g.dart';
 @JsonSerializable()
 class Processor implements Model {
   final int? id;
-  String name;
-  Producers producer;
-  MotherboardSocket socket;
-  int yearOfRelease;
-  int countOfCores;
-  int countOfThreads;
-  double baseFrequency;
-  double turboFrequency;
-  int l3Cache;
-  CPUGeneration cpuGeneration;
-  int technicalProcess;
-  int tdp;
-  int maxTemperature;
-  bool embeddedGraphic;
-  CPUPCIeVersion pcieVersion;
+  String? name;
+  Producers? producer;
+  MotherboardSocket? socket;
+  int? yearOfRelease;
+  int? countOfCores;
+  int? countOfThreads;
+  double? baseFrequency;
+  double? turboFrequency;
+  int? l3Cache;
+  CPUGeneration? cpuGeneration;
+  int? technicalProcess;
+  int? tdp;
+  int? maxTemperature;
+  bool? embeddedGraphic;
+  CPUPCIeVersion? pcieVersion;
   List<CPUTechnologies?>? cpuTechnologies;
-  String description;
-  int recommendedPrice;
-  PerformanceLevel performanceLevel;
+  String? description;
+  int? recommendedPrice;
+  PerformanceLevel? performanceLevel;
 
   Processor({
     this.id,
@@ -73,27 +73,27 @@ class Processor implements Model {
       technology.add('');
     }
 
-    final fields = [
+    final List<String> fields = [
       id.toString(),
-      name,
-      producer.name,
+      name.toString(),
+      '${producer?.name}',
       yearOfRelease.toString(),
-      socket.socket,
+      '${socket?.socket}',
       countOfCores.toString(),
       countOfThreads.toString(),
       baseFrequency.toString(),
       turboFrequency.toString(),
       l3Cache.toString(),
-      cpuGeneration.name,
+      '${cpuGeneration?.name}',
       technicalProcess.toString(),
       tdp.toString(),
       maxTemperature.toString(),
       embeddedGraphic.toString(),
-      pcieVersion.name,
+      '${pcieVersion?.name}',
       technology.toString(),
-      description,
+      description.toString(),
       recommendedPrice.toString(),
-      performanceLevel.level
+      '${performanceLevel?.level}'
     ];
 
     return fields;

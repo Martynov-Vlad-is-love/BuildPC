@@ -6,7 +6,7 @@ part 'performance_level.g.dart';
 @JsonSerializable()
 class PerformanceLevel implements Model {
   final int? id;
-  String level;
+  String? level;
 
   PerformanceLevel( this.id, {required this.level});
 
@@ -20,7 +20,7 @@ class PerformanceLevel implements Model {
   List<String> parsedModels() {
     final fields = [
       id.toString(),
-      level,
+      '$level',
     ];
 
     return fields;

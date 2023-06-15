@@ -1,8 +1,9 @@
 import 'package:buildpc/controller/model_controller_abstract.dart';
 import 'package:buildpc/model/power/power_supply_protection_functions.dart';
 import 'package:buildpc/repository/power/power_supply_protection_functions_repository.dart';
+import 'package:flutter/cupertino.dart';
 
-class PowerSupplyProtectionFunctionsController
+class PowerSupplyProtectionFunctionsController extends ChangeNotifier
     implements ModelControllerAbstract<PowerSupplyProtectionFunctions> {
   final PowerSupplyProtectionFunctionsRepository _powerSupplyPFRepository;
 
@@ -10,30 +11,35 @@ class PowerSupplyProtectionFunctionsController
 
   @override
   Future<List<PowerSupplyProtectionFunctions>> getList() async {
-    return _powerSupplyPFRepository.getAllData();
+    final result = _powerSupplyPFRepository.getAllData();
+    notifyListeners();
+
+    return result;
   }
 
   @override
   Future<PowerSupplyProtectionFunctions?> getDataById(int? id) async {
-    return _powerSupplyPFRepository.getDataById(id);
+    final result = _powerSupplyPFRepository.getDataById(id);
+    notifyListeners();
+
+    return result;
   }
 
   @override
   Future<void> updateData(PowerSupplyProtectionFunctions data) async {
     await _powerSupplyPFRepository.updateData(data);
+    notifyListeners();
   }
 
   @override
-  Future<PowerSupplyProtectionFunctions?> postData(
-    PowerSupplyProtectionFunctions data,
-  ) async {
+  Future<void> postData(PowerSupplyProtectionFunctions data) async {
     await _powerSupplyPFRepository.postData(data);
-
-    return getDataById(data.id);
+    notifyListeners();
   }
 
   @override
   Future<void> delete(int id) async {
     await _powerSupplyPFRepository.deleteData(id);
+    notifyListeners();
   }
 }

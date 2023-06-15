@@ -6,7 +6,7 @@ part 'storage_interface.g.dart';
 @JsonSerializable()
 class StorageInterface implements Model{
   final int? id;
-  String name;
+  String? name;
 
   StorageInterface(this.id, {required this.name});
 
@@ -18,7 +18,7 @@ class StorageInterface implements Model{
 
   @override
   List<String> parsedModels() {
-    final fields = [id.toString(), name];
+    final fields = [id.toString(), name.toString()];
 
     return fields;
   }

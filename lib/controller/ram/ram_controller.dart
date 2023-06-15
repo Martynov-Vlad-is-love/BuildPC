@@ -1,36 +1,45 @@
 import 'package:buildpc/controller/model_controller_abstract.dart';
 import 'package:buildpc/model/ram/ram.dart';
 import 'package:buildpc/repository/ram/ram_repository.dart';
+import 'package:flutter/cupertino.dart';
 
-class RamController implements ModelControllerAbstract<Ram>{
+class RamController extends ChangeNotifier
+    implements ModelControllerAbstract<Ram> {
   final RamRepository _ramRepository;
 
   RamController(this._ramRepository);
 
   @override
   Future<List<Ram>> getList() async {
-    return _ramRepository.getAllData();
+    final result = _ramRepository.getAllData();
+    notifyListeners();
+
+    return result;
   }
 
   @override
   Future<Ram?> getDataById(int? id) async {
-    return _ramRepository.getDataById(id);
+    final result = _ramRepository.getDataById(id);
+    notifyListeners();
+
+    return result;
   }
 
   @override
   Future<void> updateData(Ram data) async {
     await _ramRepository.updateData(data);
+    notifyListeners();
   }
 
   @override
-  Future<Ram?> postData(Ram data) async {
+  Future<void> postData(Ram data) async {
     await _ramRepository.postData(data);
-
-    return getDataById(data.id);
+    notifyListeners();
   }
 
   @override
   Future<void> delete(int id) async {
     await _ramRepository.deleteData(id);
+    notifyListeners();
   }
 }

@@ -1,5 +1,6 @@
 import 'package:buildpc/project/routes/app_route_constants.dart';
 import 'package:buildpc/ui/widgets/button/custom_route_button.dart';
+import 'package:buildpc/ui/widgets/button/custom_route_model_name_button.dart';
 import 'package:buildpc/ui/widgets/top_navigation_bar/custom_top_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -51,10 +52,11 @@ class _MainView extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                CustomRouteButton(
-                  label: '${_locale?.pcBuilds}',
-                  destination: AppRouteConstants.componentsPageRouteName,
-                ),
+                  CustomRouteModelNameButton(
+                    label: '${_locale?.pcBuilds}',
+                    destination: AppRouteConstants.mainModelListPageRouteName,
+                    modelName: 'BuildPC',
+                  ),
                 CustomRouteButton(
                   label: '${_locale?.general}',
                   destination: AppRouteConstants.generalModelPage,

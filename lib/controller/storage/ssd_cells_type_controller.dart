@@ -1,36 +1,45 @@
 import 'package:buildpc/controller/model_controller_abstract.dart';
 import 'package:buildpc/model/storage/ssd_cells_type.dart';
 import 'package:buildpc/repository/storage/ssd_cells_type_repository.dart';
+import 'package:flutter/cupertino.dart';
 
-class SsdCellsTypeController implements ModelControllerAbstract<SsdCellsType>{
+class SsdCellsTypeController extends ChangeNotifier
+    implements ModelControllerAbstract<SsdCellsType> {
   final SsdCellsTypeRepository _ssdCellsTypeRepository;
 
   SsdCellsTypeController(this._ssdCellsTypeRepository);
 
   @override
   Future<List<SsdCellsType>> getList() async {
-    return _ssdCellsTypeRepository.getAllData();
+    final result = _ssdCellsTypeRepository.getAllData();
+    notifyListeners();
+
+    return result;
   }
 
   @override
   Future<SsdCellsType?> getDataById(int? id) async {
-    return _ssdCellsTypeRepository.getDataById(id);
+    final result = _ssdCellsTypeRepository.getDataById(id);
+    notifyListeners();
+
+    return result;
   }
 
   @override
   Future<void> updateData(SsdCellsType data) async {
     await _ssdCellsTypeRepository.updateData(data);
+    notifyListeners();
   }
 
   @override
-  Future<SsdCellsType?> postData(SsdCellsType data) async {
+  Future<void> postData(SsdCellsType data) async {
     await _ssdCellsTypeRepository.postData(data);
-
-    return getDataById(data.id);
+    notifyListeners();
   }
 
   @override
   Future<void> delete(int id) async {
     await _ssdCellsTypeRepository.deleteData(id);
+    notifyListeners();
   }
 }

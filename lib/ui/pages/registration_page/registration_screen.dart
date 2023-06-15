@@ -3,6 +3,7 @@ import 'package:buildpc/project/routes/app_route_constants.dart';
 import 'package:buildpc/ui/widgets/text_bar/text_bar.dart';
 import 'package:buildpc/ui/widgets/top_navigation_bar/custom_top_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
@@ -30,6 +31,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     final _passwordController = TextEditingController(text: '');
     final _nameController = TextEditingController(text: '');
     final _emailController = TextEditingController(text: '');
+    final AppLocalizations? _locale = AppLocalizations.of(context);
 
     return Scaffold(
       appBar: PreferredSize(
@@ -45,29 +47,29 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             children: [
               Container(
                 margin: const EdgeInsets.only(top: 45, bottom: 120),
-                child: const Text(
-                  'Registration',
-                  style: TextStyle(fontSize: 40),
+                child: Text(
+                  '${_locale?.registration}',
+                  style: const TextStyle(fontSize: 40),
                 ),
               ),
               TextBar(
                 icon: Icons.perm_identity,
-                label: 'login',
+                label: '${_locale?.login}',
                 controller: _loginController,
               ),
               TextBar(
                 icon: Icons.lock_open,
-                label: 'password',
+                label: '${_locale?.password}',
                 controller: _passwordController,
               ),
               TextBar(
                 icon: Icons.badge_outlined,
-                label: 'name',
+                label: '${_locale?.uname}',
                 controller: _nameController,
               ),
               TextBar(
                 icon: Icons.badge_outlined,
-                label: 'eMail',
+                label: '${_locale?.email}',
                 controller: _emailController,
               ),
               Container(
@@ -99,9 +101,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           .pushNamed(AppRouteConstants.loginRouteName);
                     }
                   },
-                  child: const Text(
-                    'Register',
-                    style: TextStyle(color: Colors.white),
+                  child: Text(
+                    '${_locale?.register}',
+                    style: const TextStyle(color: Colors.white),
                   ),
                 ),
               ),

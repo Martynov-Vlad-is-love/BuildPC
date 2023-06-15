@@ -7,11 +7,6 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class GpuTechnologiesRepository implements Repository<GPUTechnologies> {
-  final path = 'Producer';
-  final header = {
-    'Content-type': 'application/json',
-  };
-
   Future<String?> _getToken() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
@@ -24,6 +19,8 @@ class GpuTechnologiesRepository implements Repository<GPUTechnologies> {
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     await http.delete(
@@ -39,6 +36,8 @@ class GpuTechnologiesRepository implements Repository<GPUTechnologies> {
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     final response = await http.get(
@@ -65,6 +64,8 @@ class GpuTechnologiesRepository implements Repository<GPUTechnologies> {
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     final response = await http.get(
@@ -84,10 +85,14 @@ class GpuTechnologiesRepository implements Repository<GPUTechnologies> {
 
   @override
   Future<void> postData(GPUTechnologies gpuTechnologies) async {
+    final token = await _getToken();
     try {
       final jsonData = gpuTechnologies.toJson();
       final header = {
         'Content-type': 'application/json',
+        'Authorization': 'Bearer $token',
+        'Access-Control-Allow-Origin': '*',
+        'Accept': '*/*',
       };
       await http.post(
         Uri.http(apiPath, '/api/admin/gpuTechnologies'),
@@ -105,10 +110,12 @@ class GpuTechnologiesRepository implements Repository<GPUTechnologies> {
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     final jsonData = gpuTechnologies.toJson();
-    await http.patch(
+    await http.put(
       Uri.http(
         apiPath,
         '/api/admin/gpuTechnologies/${gpuTechnologies.id}',

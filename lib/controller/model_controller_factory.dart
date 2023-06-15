@@ -4,9 +4,9 @@ import 'package:buildpc/controller/case/case_power_supply_location_controller.da
 import 'package:buildpc/controller/case/case_size_controller.dart';
 import 'package:buildpc/controller/cooler/cooler_controller.dart';
 import 'package:buildpc/controller/cooler/cooler_material_controller.dart';
-import 'package:buildpc/controller/cooler/cooler_socket_controller.dart';
 import 'package:buildpc/controller/cpu/cpu_generation_controller.dart';
 import 'package:buildpc/controller/cpu/cpu_pcie_version_controller.dart';
+import 'package:buildpc/controller/cpu/cpu_technologies_controller.dart';
 import 'package:buildpc/controller/cpu/processor_controller.dart';
 import 'package:buildpc/controller/general/build_pc_controller.dart';
 import 'package:buildpc/controller/general/form_factor_controller.dart';
@@ -41,9 +41,9 @@ import 'package:buildpc/repository/case/case_repository.dart';
 import 'package:buildpc/repository/case/case_size_repository.dart';
 import 'package:buildpc/repository/cooler/cooler_material_repository.dart';
 import 'package:buildpc/repository/cooler/cooler_repository.dart';
-import 'package:buildpc/repository/cooler/cooler_socket_repository.dart';
 import 'package:buildpc/repository/cpu/cpu_generation_repository.dart';
 import 'package:buildpc/repository/cpu/cpu_pcie_version_repository.dart';
+import 'package:buildpc/repository/cpu/cpu_technologies_repository.dart';
 import 'package:buildpc/repository/cpu/processor_repository.dart';
 import 'package:buildpc/repository/general/build_pc_repository.dart';
 import 'package:buildpc/repository/general/form_factor_repository.dart';
@@ -97,23 +97,21 @@ class ModelControllerFactory {
         return CoolerController(CoolerRepository());
       case 'CoolerMaterial':
         return CoolerMaterialController(CoolerMaterialRepository());
-      case 'CoolerSocket':
-        return CoolerSocketController(CoolerSocketRepository());
       case 'CpuTechnologies':
-        return CpuGenerationController(CpuGenerationRepository());
+        return CpuTechnologiesController(CpuTechnologiesRepository());
       case 'CpuPcieVersion':
         return CpuPcieVersionController(CpuPcieVersionRepository());
       case 'CpuGeneration':
         return CpuGenerationController(CpuGenerationRepository());
       case 'Processor':
         return ProcessorController(ProcessorRepository());
-      case 'GPUConnector':
+      case 'GpuConnector':
         return GpuConnectorController(GpuConnectorRepository());
-      case 'GPUInterfaceType':
+      case 'GpuInterfaceType':
         return GpuInterfaceTypeController(GpuInterfaceTypeRepository());
-      case 'GPUMemoryType':
+      case 'GpuMemoryType':
         return GpuMemoryTypeController(GpuMemoryTypeRepository());
-      case 'GPUTechnologies':
+      case 'GpuTechnologies':
         return GpuTechnologiesController(GpuTechnologiesRepository());
       case 'GraphicCard':
         return GraphicCardController(GraphicCardRepository());
@@ -155,7 +153,8 @@ class ModelControllerFactory {
         return RatingController(RatingRepository());
       case 'CasePowerSupplyLocation':
         return CasePowerSupplyLocationController(
-            CasePowerSupplyLocationRepository(),);
+          CasePowerSupplyLocationRepository(),
+        );
       default:
         throw Exception('Unsupported model: $modelName');
     }

@@ -10,16 +10,16 @@ part 'ram.g.dart';
 @JsonSerializable()
 class Ram implements Model {
   final int? id;
-  String name;
-  Producers producer;
-  RamMemoryType memoryType;
-  int memoryCapacity;
-  int frequency;
-  RamTimings timings;
-  double powerSupplyVoltage;
-  String description;
-  int recommendedPrice;
-  PerformanceLevel performanceLevel;
+  String? name;
+  Producers? producer;
+  RamMemoryType? memoryType;
+  int? memoryCapacity;
+  int? frequency;
+  RamTimings? timings;
+  double? powerSupplyVoltage;
+  String? description;
+  int? recommendedPrice;
+  PerformanceLevel? performanceLevel;
 
   Ram({
     this.id,
@@ -42,18 +42,18 @@ class Ram implements Model {
 
   @override
   List<String> parsedModels() {
-    final fields = [
+    final List<String> fields = [
       id.toString(),
-      name,
-      producer.name,
-      memoryType.memoryType,
+      '$name',
+      '${producer?.name}',
+      '${memoryType?.memoryType}',
       memoryCapacity.toString(),
       frequency.toString(),
-      timings.timings,
+      '${timings?.timings}',
       powerSupplyVoltage.toString(),
-      description,
+      '$description',
       recommendedPrice.toString(),
-      performanceLevel.level
+      '${performanceLevel?.level}'
     ];
 
     return fields;

@@ -12,20 +12,20 @@ part 'case.g.dart';
 @JsonSerializable()
 class Case implements Model{
   final int? id;
-  String name;
-  CaseSize size;
-  Producers producer;
-  List<FormFactor> formFactor;
-  CasePowerSupplyLocation powerSupplyLocation;
-  bool fansIncluded;
-  int usb_3_2;
-  int usb_3_0;
-  int usb_2_0;
-  List<CaseDesignFeatures> designFeatures;
-  int maxLengthOfGraphicCard;
-  String description;
-  int recommendedPrice;
-  PerformanceLevel performanceLevel;
+  String? name;
+  CaseSize? size;
+  Producers? producer;
+  List<FormFactor?> formFactor;
+  CasePowerSupplyLocation? powerSupplyLocation;
+  bool? fansIncluded;
+  int? usb_3_2;
+  int? usb_3_0;
+  int? usb_2_0;
+  List<CaseDesignFeatures?> designFeatures;
+  int? maxLengthOfGraphicCard;
+  String? description;
+  int? recommendedPrice;
+  PerformanceLevel? performanceLevel;
 
   Case({
     this.id,
@@ -56,29 +56,29 @@ class Case implements Model{
   List<String> parsedModels() {
     final formFactorField = [];
     for(final form in formFactor){
-      formFactorField.add(form.name);
+      formFactorField.add(form?.name);
     }
     final designFeaturesField = [];
     for(final feature in designFeatures){
-      designFeaturesField.add(feature.designFeatures);
+      designFeaturesField.add(feature?.designFeatures);
     }
 
     final List<String> fields = [
       id.toString(),
-      name,
-      size.size,
+      '$name',
+      '${size?.size}',
       formFactorField.toString(),
-      producer.name,
-      powerSupplyLocation.powerSupplyLocation,
+      '${producer?.name}',
+      '${powerSupplyLocation?.powerSupplyLocation}',
       fansIncluded.toString(),
       usb_3_2.toString(),
       usb_3_0.toString(),
       usb_2_0.toString(),
       designFeaturesField.toString(),
       maxLengthOfGraphicCard.toString(),
-      description,
+      '$description',
       recommendedPrice.toString(),
-      performanceLevel.level
+      '${performanceLevel?.level}'
     ];
 
     return fields;

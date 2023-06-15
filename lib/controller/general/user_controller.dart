@@ -43,7 +43,7 @@ class UserController extends ChangeNotifier
     String name,
   ) async {
     final User user = User(
-      null,
+      id: null,
       name: name,
       username: userName,
       email: eMail,

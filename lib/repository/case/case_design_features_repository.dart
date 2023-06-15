@@ -121,7 +121,7 @@ class CaseDesignFeaturesRepository implements Repository<CaseDesignFeatures> {
     };
 
     final jsonData = caseDesignFeatures.toJson();
-    await http.patch(
+    await http.put(
       Uri.http(
         apiPath,
         '/api/admin/caseDesignFeatures/${caseDesignFeatures.id}',

@@ -8,9 +8,12 @@ part of 'rating.dart';
 
 Rating _$RatingFromJson(Map<String, dynamic> json) => Rating(
       id: json['id'] as int?,
-      buildPc: BuildPC.fromJson(json['buildPc'] as Map<String, dynamic>),
+      buildPc: json['buildPc'] == null
+          ? null
+          : BuildPC.fromJson(json['buildPc'] as Map<String, dynamic>),
       like: (json['like'] as List<dynamic>)
-          .map((e) => Like.fromJson(e as Map<String, dynamic>))
+          .map((e) =>
+              e == null ? null : Like.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 

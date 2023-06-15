@@ -1,8 +1,9 @@
 import 'package:buildpc/controller/model_controller_abstract.dart';
 import 'package:buildpc/model/gpu/gpu_interface_type.dart';
 import 'package:buildpc/repository/gpu/gpu_interface_type_repository.dart';
+import 'package:flutter/cupertino.dart';
 
-class GpuInterfaceTypeController
+class GpuInterfaceTypeController extends ChangeNotifier
     implements ModelControllerAbstract<GPUInterfaceType> {
   final GpuInterfaceTypeRepository _gpuInterfaceTypeRepository;
 
@@ -10,28 +11,35 @@ class GpuInterfaceTypeController
 
   @override
   Future<List<GPUInterfaceType>> getList() async {
-    return _gpuInterfaceTypeRepository.getAllData();
+    final result = _gpuInterfaceTypeRepository.getAllData();
+    notifyListeners();
+
+    return result;
   }
 
   @override
   Future<GPUInterfaceType?> getDataById(int? id) async {
-    return _gpuInterfaceTypeRepository.getDataById(id);
+    final result = _gpuInterfaceTypeRepository.getDataById(id);
+    notifyListeners();
+
+    return result;
   }
 
   @override
   Future<void> updateData(GPUInterfaceType data) async {
     await _gpuInterfaceTypeRepository.updateData(data);
+    notifyListeners();
   }
 
   @override
-  Future<GPUInterfaceType?> postData(GPUInterfaceType data) async {
+  Future<void> postData(GPUInterfaceType data) async {
     await _gpuInterfaceTypeRepository.postData(data);
-
-    return getDataById(data.id);
+    notifyListeners();
   }
 
   @override
   Future<void> delete(int id) async {
     await _gpuInterfaceTypeRepository.deleteData(id);
+    notifyListeners();
   }
 }

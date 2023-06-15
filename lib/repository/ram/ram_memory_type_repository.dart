@@ -7,11 +7,6 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class RamMemoryTypeRepository implements Repository<RamMemoryType> {
-  final path = 'Producer';
-  final header = {
-    'Content-type': 'application/json',
-  };
-
   Future<String?> _getToken() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
@@ -39,6 +34,8 @@ class RamMemoryTypeRepository implements Repository<RamMemoryType> {
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     final response = await http.get(
@@ -65,6 +62,8 @@ class RamMemoryTypeRepository implements Repository<RamMemoryType> {
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     final response = await http.get(
@@ -84,10 +83,14 @@ class RamMemoryTypeRepository implements Repository<RamMemoryType> {
 
   @override
   Future<void> postData(RamMemoryType ramMemoryType) async {
+    final token = await _getToken();
     try {
       final jsonData = ramMemoryType.toJson();
       final header = {
         'Content-type': 'application/json',
+        'Authorization': 'Bearer $token',
+        'Access-Control-Allow-Origin': '*',
+        'Accept': '*/*',
       };
       await http.post(
         Uri.http(apiPath, '/api/admin/ramMemoryType'),
@@ -105,10 +108,12 @@ class RamMemoryTypeRepository implements Repository<RamMemoryType> {
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     final jsonData = ramMemoryType.toJson();
-    await http.patch(
+    await http.put(
       Uri.http(
         apiPath,
         '/api/admin/ramMemoryType/${ramMemoryType.id}',

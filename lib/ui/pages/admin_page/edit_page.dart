@@ -4,6 +4,7 @@ import 'package:buildpc/controller/general/user_controller.dart';
 import 'package:buildpc/controller/model_controller.dart';
 import 'package:buildpc/controller/model_controller_factory.dart';
 import 'package:buildpc/model/model.dart';
+import 'package:buildpc/model_utilis/model_util.dart';
 import 'package:buildpc/ui/widgets/border/custom_border.dart';
 import 'package:buildpc/ui/widgets/model_list_view/dynamic_text_form_fields.dart';
 import 'package:buildpc/ui/widgets/model_list_view/model_list_view.dart';
@@ -72,7 +73,7 @@ class _MainViewState extends State<_MainView> {
     final _fieldProvider = context.read<FieldController>();
     final mod = context.read<ModelController>();
     final List<String> modelFields = widget.fieldNames ?? [];
-    final modelController =
+    final model =
         ModelControllerFactory.createController('${widget.modelName}');
 
     return ColoredBox(
@@ -137,6 +138,14 @@ class _MainViewState extends State<_MainView> {
                 ),
                 onPressed: () async {
                   _fieldProvider.fields = result;
+                  if (ModelUtil.modelMapping.containsKey(widget.modelName)) {
+                    final constructor =
+                        ModelUtil.modelMapping[widget.modelName];
+                    final instance =
+                        constructor!(_fieldProvider.fields) as Model;
+                    await model.updateData(instance);
+                    mod.refresh();
+                  }
                   _fieldProvider.deleteFields();
                 },
                 child: Text('${_locale?.submit}'),

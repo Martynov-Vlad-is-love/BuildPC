@@ -3,7 +3,8 @@ import 'package:buildpc/model/general/build_pc.dart';
 import 'package:buildpc/repository/general/build_pc_repository.dart';
 import 'package:flutter/cupertino.dart';
 
-class BuildPcController extends ChangeNotifier implements ModelControllerAbstract<BuildPC>{
+class BuildPcController extends ChangeNotifier
+    implements ModelControllerAbstract<BuildPC> {
   final BuildPcRepository _buildPcRepository;
 
   BuildPcController(this._buildPcRepository);
@@ -18,7 +19,7 @@ class BuildPcController extends ChangeNotifier implements ModelControllerAbstrac
 
   @override
   Future<BuildPC?> getDataById(int? id) async {
-    final data =_buildPcRepository.getDataById(id);
+    final data = _buildPcRepository.getDataById(id);
     notifyListeners();
 
     return data;
@@ -31,11 +32,9 @@ class BuildPcController extends ChangeNotifier implements ModelControllerAbstrac
   }
 
   @override
-  Future<BuildPC?> postData(BuildPC data) async {
+  Future<void> postData(BuildPC data) async {
     await _buildPcRepository.postData(data);
     notifyListeners();
-
-    return getDataById(data.id);
   }
 
   @override

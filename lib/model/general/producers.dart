@@ -6,7 +6,7 @@ part 'producers.g.dart';
 @JsonSerializable()
 class Producers implements Model{
   final int? id;
-  String name;
+  String? name;
 
   Producers(this.id, {required this.name});
 
@@ -18,7 +18,7 @@ class Producers implements Model{
 
   @override
   List<String> parsedModels() {
-    final fields = [id.toString(), name];
+    final fields = [id.toString(), '$name'];
 
     return fields;
   }

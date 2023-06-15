@@ -6,7 +6,7 @@ void main() {
   group('User', () {
     test('toJson() should return valid JSON', () {
       final user = User(
-        1,
+        id: 1,
         name: 'John Doe',
         username: 'johndoe',
         email: 'johndoe@example.com',
@@ -45,7 +45,7 @@ void main() {
 
     test('parsedModels() should return valid list of fields', () {
       final user = User(
-        1,
+        id: 1,
         name: 'John Doe',
         username: 'johndoe',
         email: 'johndoe@example.com',

@@ -14,40 +14,40 @@ part 'motherboard.g.dart';
 @JsonSerializable()
 class Motherboard implements Model {
   final int? id;
-  String name;
-  Producers motherboardProducer;
-  MotherboardSocket socket;
-  List<CPUGeneration> cpuGenerations;
-  MotherboardChipset chipset;
-  FormFactor formFactor;
-  int maxTdpOfProcessors;
-  int memorySlots;
-  int supportedMemoryFrequency;
-  int maxAmountOfRam;
-  MotherboardNetwork network;
-  bool bluetooth;
-  bool wifi;
-  CPUPCIeVersion pcieVersion;
+  String? name;
+  Producers? motherboardProducer;
+  MotherboardSocket? socket;
+  List<CPUGeneration?> cpuGenerations;
+  MotherboardChipset? chipset;
+  FormFactor? formFactor;
+  int? maxTdpOfProcessors;
+  int? memorySlots;
+  int? supportedMemoryFrequency;
+  int? maxAmountOfRam;
+  MotherboardNetwork? network;
+  bool? bluetooth;
+  bool? wifi;
+  CPUPCIeVersion? pcieVersion;
   @JsonKey(name: 'pci_express_x16')
-  int pciExpressX16;
+  int? pciExpressX16;
   @JsonKey(name: 'pci_express_x4')
-  int pciExpressX4;
+  int? pciExpressX4;
   @JsonKey(name: 'pci_express_x1')
-  int pciExpressX1;
-  int sata3;
-  int m2;
-  int dSub;
-  int dvi;
-  int hdmi;
-  int displayPort;
-  int usb_3_0;
-  int usb_2_0;
+  int? pciExpressX1;
+  int? sata3;
+  int? m2;
+  bool? dSub;
+  int? dvi;
+  int? hdmi;
+  int? displayPort;
+  int? usb_3_0;
+  int? usb_2_0;
   @JsonKey(name: 'usb_type_c')
-  int usbTypeC;
-  bool digitalAudioJack;
-  String description;
-  int recommendedPrice;
-  PerformanceLevel performanceLevel;
+  int? usbTypeC;
+  bool? digitalAudioJack;
+  String? description;
+  int? recommendedPrice;
+  PerformanceLevel? performanceLevel;
 
   Motherboard({
     this.id,
@@ -93,25 +93,25 @@ class Motherboard implements Model {
   List<String> parsedModels() {
     final cpuGen = [];
     for (final gen in cpuGenerations) {
-      cpuGen.add(gen.name);
+      cpuGen.add(gen?.name);
     }
 
-    final fields = [
+    final List<String> fields = [
       id.toString(),
-      name,
-      motherboardProducer.name,
-      socket.socket,
+      '$name',
+      '${motherboardProducer?.name}',
+      '${socket?.socket}',
       cpuGen.toString(),
-      chipset.chipset,
-      formFactor.toString(),
+      '${chipset?.chipset}',
+      '${formFactor?.name}',
       maxTdpOfProcessors.toString(),
       memorySlots.toString(),
       supportedMemoryFrequency.toString(),
       maxAmountOfRam.toString(),
-      network.toString(),
+      '${network?.network}',
       bluetooth.toString(),
       wifi.toString(),
-      pcieVersion.name,
+      '${pcieVersion?.name}',
       pciExpressX16.toString(),
       pciExpressX4.toString(),
       pciExpressX1.toString(),
@@ -125,9 +125,9 @@ class Motherboard implements Model {
       usb_2_0.toString(),
       usbTypeC.toString(),
       digitalAudioJack.toString(),
-      description,
+      '$description',
       recommendedPrice.toString(),
-      performanceLevel.level,
+      '${performanceLevel?.level}',
     ];
 
     return fields;

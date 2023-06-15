@@ -12,24 +12,24 @@ part 'graphic_card.g.dart';
 @JsonSerializable()
 class GraphicCard implements Model {
   final int? id;
-  Producers producer;
-  String name;
-  Producers vendor;
-  int year;
-  int technicalProcess;
-  int gpuFrequency;
-  int memoryAmount;
-  GPUMemoryType memoryType;
-  int memoryFrequency;
-  int bus;
-  int tdp;
-  List<GPUConnector> connector;
-  GPUInterfaceType interfaceType;
-  int length;
-  String description;
-  GPUTechnologies gpuTechnologies;
-  int recommendedPrice;
-  PerformanceLevel performanceLevel;
+  Producers? producer;
+  String? name;
+  Producers? vendor;
+  int? year;
+  int? technicalProcess;
+  int? gpuFrequency;
+  int? memoryAmount;
+  GPUMemoryType? memoryType;
+  int? memoryFrequency;
+  int? bus;
+  int? tdp;
+  List<GPUConnector?> connector;
+  GPUInterfaceType? interfaceType;
+  int? length;
+  String? description;
+  GPUTechnologies? gpuTechnologies;
+  int? recommendedPrice;
+  PerformanceLevel? performanceLevel;
 
 
   GraphicCard({
@@ -64,29 +64,29 @@ class GraphicCard implements Model {
   List<String> parsedModels() {
     final connectors = [];
     for(final con in connector){
-      connectors.add(con.connector);
+      connectors.add(con?.connector);
     }
 
-    final fields = [
+    final List<String> fields = [
       id.toString(),
-      producer.name,
-      name,
-      vendor.name,
+      '${producer?.name}',
+      '$name',
+      '${vendor?.name}',
       year.toString(),
       technicalProcess.toString(),
       gpuFrequency.toString(),
       memoryAmount.toString(),
-      memoryType.type,
+      '${memoryType?.type}',
       memoryFrequency.toString(),
       bus.toString(),
       tdp.toString(),
       connectors.toString(),
       length.toString(),
-      interfaceType.interfaceType,
-      description,
+      '${interfaceType?.interfaceType}',
+      '$description',
+      '${gpuTechnologies?.name}',
       recommendedPrice.toString(),
-      gpuTechnologies.name,
-      performanceLevel.level
+      '${performanceLevel?.level}'
     ];
 
     return fields;

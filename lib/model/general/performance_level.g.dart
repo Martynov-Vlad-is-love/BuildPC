@@ -9,7 +9,7 @@ part of 'performance_level.dart';
 PerformanceLevel _$PerformanceLevelFromJson(Map<String, dynamic> json) =>
     PerformanceLevel(
       json['id'] as int?,
-      level: json['level'] as String,
+      level: json['level'] as String?,
     );
 
 Map<String, dynamic> _$PerformanceLevelToJson(PerformanceLevel instance) =>

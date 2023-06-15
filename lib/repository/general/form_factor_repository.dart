@@ -118,7 +118,7 @@ class FormFactorRepository implements Repository<FormFactor> {
     };
 
     final jsonData = formFactor.toJson();
-    await http.patch(
+    await http.put(
       Uri.http(
         apiPath,
         '/api/admin/formFactor/${formFactor.id}',

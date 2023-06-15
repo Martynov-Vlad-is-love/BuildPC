@@ -1,8 +1,9 @@
 import 'package:buildpc/controller/model_controller_abstract.dart';
 import 'package:buildpc/model/storage/storage_interface.dart';
 import 'package:buildpc/repository/storage/storage_interface_repository.dart';
+import 'package:flutter/cupertino.dart';
 
-class StorageInterfaceController
+class StorageInterfaceController extends ChangeNotifier
     implements ModelControllerAbstract<StorageInterface> {
   final StorageInterfaceRepository _storageInterfaceRepositoryRepository;
 
@@ -10,28 +11,35 @@ class StorageInterfaceController
 
   @override
   Future<List<StorageInterface>> getList() async {
-    return _storageInterfaceRepositoryRepository.getAllData();
+    final result = _storageInterfaceRepositoryRepository.getAllData();
+    notifyListeners();
+
+    return result;
   }
 
   @override
   Future<StorageInterface?> getDataById(int? id) async {
-    return _storageInterfaceRepositoryRepository.getDataById(id);
+    final result = _storageInterfaceRepositoryRepository.getDataById(id);
+    notifyListeners();
+
+    return result;
   }
 
   @override
   Future<void> updateData(StorageInterface data) async {
     await _storageInterfaceRepositoryRepository.updateData(data);
+    notifyListeners();
   }
 
   @override
-  Future<StorageInterface?> postData(StorageInterface data) async {
+  Future<void> postData(StorageInterface data) async {
     await _storageInterfaceRepositoryRepository.postData(data);
-
-    return getDataById(data.id);
+    notifyListeners();
   }
 
   @override
   Future<void> delete(int id) async {
     await _storageInterfaceRepositoryRepository.deleteData(id);
+    notifyListeners();
   }
 }

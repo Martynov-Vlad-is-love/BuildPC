@@ -9,7 +9,9 @@ part of 'build_pc.dart';
 BuildPC _$BuildPCFromJson(Map<String, dynamic> json) => BuildPC(
       id: json['id'] as int?,
       nameOfBuild: json['nameOfBuild'] as String?,
-      user: User.fromJson(json['user'] as Map<String, dynamic>),
+      user: json['user'] == null
+          ? null
+          : User.fromJson(json['user'] as Map<String, dynamic>),
       motherboard: json['motherboard'] == null
           ? null
           : Motherboard.fromJson(json['motherboard'] as Map<String, dynamic>),
@@ -44,6 +46,7 @@ BuildPC _$BuildPCFromJson(Map<String, dynamic> json) => BuildPC(
       ratingId: json['ratingId'] == null
           ? null
           : Rating.fromJson(json['ratingId'] as Map<String, dynamic>),
+      totalPrice: json['totalPrice'] as int?,
     );
 
 Map<String, dynamic> _$BuildPCToJson(BuildPC instance) => <String, dynamic>{
@@ -61,4 +64,5 @@ Map<String, dynamic> _$BuildPCToJson(BuildPC instance) => <String, dynamic>{
       'cooler': instance.cooler,
       'countOfLikes': instance.countOfLikes,
       'ratingId': instance.ratingId,
+      'totalPrice': instance.totalPrice,
     };

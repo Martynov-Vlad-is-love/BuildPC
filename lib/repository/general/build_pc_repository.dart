@@ -7,15 +7,10 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class BuildPcRepository implements Repository<BuildPC> {
-  final path = 'BuildPC';
-  final header = {
-    'Content-type': 'application/json',
-  };
-
   Future<String?> _getToken() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    return prefs.getString('Token');
+    return prefs.getString('token');
   }
 
   @override
@@ -24,12 +19,15 @@ class BuildPcRepository implements Repository<BuildPC> {
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
-    await http.delete(
+    final response = await http.delete(
       Uri.http(apiPath, '/api/admin/buildPc/$id'),
       headers: header,
     );
+    print(response.statusCode);
   }
 
   @override
@@ -39,6 +37,8 @@ class BuildPcRepository implements Repository<BuildPC> {
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     final response = await http.get(
@@ -65,6 +65,8 @@ class BuildPcRepository implements Repository<BuildPC> {
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     final response = await http.get(
@@ -84,16 +86,21 @@ class BuildPcRepository implements Repository<BuildPC> {
 
   @override
   Future<void> postData(BuildPC buildPc) async {
+    final token = await _getToken();
     try {
       final jsonData = buildPc.toJson();
       final header = {
         'Content-type': 'application/json',
+        'Authorization': 'Bearer $token',
+        'Access-Control-Allow-Origin': '*',
+        'Accept': '*/*',
       };
-      await http.post(
+      final response = await http.post(
         Uri.http(apiPath, '/api/admin/buildPc'),
         headers: header,
         body: convert.jsonEncode(jsonData),
       );
+      print(response);
     } catch (ex) {
       rethrow;
     }
@@ -105,16 +112,19 @@ class BuildPcRepository implements Repository<BuildPC> {
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     final jsonData = buildPc.toJson();
-    await http.patch(
+    final response = await http.put(
       Uri.http(
         apiPath,
-        '/api/buildPc/buildPc/${buildPc.id}',
+        '/api/admin/buildPc/${buildPc.id}',
       ),
       body: convert.jsonEncode(jsonData),
       headers: header,
     );
+    print(response.body);
   }
 }

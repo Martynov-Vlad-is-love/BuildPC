@@ -18,7 +18,7 @@ part 'build_pc.g.dart';
 class BuildPC implements Model {
   final int? id;
   String? nameOfBuild;
-  User user;
+  User? user;
   Motherboard? motherboard;
   Processor? processor;
   GraphicCard? graphicCard;
@@ -30,6 +30,7 @@ class BuildPC implements Model {
   Cooler? cooler;
   int? countOfLikes;
   Rating? ratingId;
+  int? totalPrice;
 
   BuildPC({
     this.id,
@@ -46,6 +47,7 @@ class BuildPC implements Model {
     required this.cooler,
     required this.countOfLikes,
     required this.ratingId,
+    required this.totalPrice,
   });
 
   factory BuildPC.fromJson(Map<String, dynamic> json) =>
@@ -58,32 +60,33 @@ class BuildPC implements Model {
   List<String?> parsedModels() {
     final ramList = [];
     for (final plate in ram) {
-      ramList.add(plate?.parsedModels().toString());
+      ramList.add(plate?.name);
     }
-    final hddList = [];
+    final List<String?> hddList = [];
     for (final disc in hdd) {
-      hddList.add(disc?.parsedModels().toString());
+      hddList.add('${disc?.name}');
     }
-    final ssdList = [];
+    final List<String?> ssdList = [];
     for (final disc in ssd) {
-      ssdList.add(disc?.parsedModels().toString());
+      ssdList.add(disc?.name);
     }
 
     final fields = [
       id.toString(),
       nameOfBuild,
-      user.parsedModels().toString(),
-      motherboard?.parsedModels().toString(),
-      processor?.parsedModels().toString(),
-      graphicCard?.parsedModels().toString(),
+      '${user?.name}',
+      '${motherboard?.name}',
+      '${processor?.name}',
+      '${graphicCard?.name}',
       ramList.toString(),
-      powerSupply?.parsedModels().toString(),
+      '${powerSupply?.name}',
       hddList.toString(),
       ssdList.toString(),
-      pcCase?.parsedModels().toString(),
-      cooler?.parsedModels().toString(),
+      '${pcCase?.name}',
+      '${cooler?.name}',
       countOfLikes.toString(),
-      ratingId.toString()
+      ratingId.toString(),
+      totalPrice.toString()
     ];
 
     return fields;

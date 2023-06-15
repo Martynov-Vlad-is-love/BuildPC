@@ -1,36 +1,45 @@
 import 'package:buildpc/controller/model_controller_abstract.dart';
 import 'package:buildpc/model/storage/hdd.dart';
 import 'package:buildpc/repository/storage/hdd_repository.dart';
+import 'package:flutter/cupertino.dart';
 
-class HddController implements ModelControllerAbstract<Hdd>{
+class HddController extends ChangeNotifier
+    implements ModelControllerAbstract<Hdd> {
   final HddRepository _hddRepository;
 
   HddController(this._hddRepository);
 
   @override
   Future<List<Hdd>> getList() async {
-    return _hddRepository.getAllData();
+    final result = _hddRepository.getAllData();
+    notifyListeners();
+
+    return result;
   }
 
   @override
   Future<Hdd?> getDataById(int? id) async {
-    return _hddRepository.getDataById(id);
+    final result = _hddRepository.getDataById(id);
+    notifyListeners();
+
+    return result;
   }
 
   @override
   Future<void> updateData(Hdd data) async {
     await _hddRepository.updateData(data);
+    notifyListeners();
   }
 
   @override
-  Future<Hdd?> postData(Hdd data) async {
+  Future<void> postData(Hdd data) async {
     await _hddRepository.postData(data);
-
-    return getDataById(data.id);
+    notifyListeners();
   }
 
   @override
   Future<void> delete(int id) async {
     await _hddRepository.deleteData(id);
+    notifyListeners();
   }
 }

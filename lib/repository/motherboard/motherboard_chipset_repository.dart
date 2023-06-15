@@ -7,12 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MotherboardChipsetRepository implements Repository<MotherboardChipset> {
-  final path = 'Producer';
-  final header = {
-    'Content-type': 'application/json',
-  };
-
-  Future<String?> _getToken() async {
+ Future<String?> _getToken() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
     return prefs.getString('token');
@@ -24,6 +19,8 @@ class MotherboardChipsetRepository implements Repository<MotherboardChipset> {
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     await http.delete(
@@ -39,6 +36,8 @@ class MotherboardChipsetRepository implements Repository<MotherboardChipset> {
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     final response = await http.get(
@@ -66,6 +65,8 @@ class MotherboardChipsetRepository implements Repository<MotherboardChipset> {
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     final response = await http.get(
@@ -85,10 +86,14 @@ class MotherboardChipsetRepository implements Repository<MotherboardChipset> {
 
   @override
   Future<void> postData(MotherboardChipset motherboardChipset) async {
+    final token = await _getToken();
     try {
       final jsonData = motherboardChipset.toJson();
       final header = {
         'Content-type': 'application/json',
+        'Authorization': 'Bearer $token',
+        'Access-Control-Allow-Origin': '*',
+        'Accept': '*/*',
       };
       await http.post(
         Uri.http(apiPath, '/api/admin/motherboardChipset'),
@@ -106,10 +111,12 @@ class MotherboardChipsetRepository implements Repository<MotherboardChipset> {
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     final jsonData = motherboardChipset.toJson();
-    await http.patch(
+    await http.put(
       Uri.http(
         apiPath,
         '/api/admin/motherboardChipset/${motherboardChipset.id}',

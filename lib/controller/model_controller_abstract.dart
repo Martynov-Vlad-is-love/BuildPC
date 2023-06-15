@@ -1,4 +1,4 @@
-abstract class ModelControllerAbstract<T>{
+abstract class ModelControllerAbstract<T> {
   Future<List<T>> getList();
 
   Future<T?> getDataById(int? id);

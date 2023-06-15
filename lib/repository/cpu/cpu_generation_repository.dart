@@ -116,7 +116,7 @@ class CpuGenerationRepository implements Repository<CPUGeneration> {
     };
 
     final jsonData = cpuGeneration.toJson();
-    await http.patch(
+    await http.put(
       Uri.http(
         apiPath,
         '/api/admin/cpuGeneration/${cpuGeneration.id}',

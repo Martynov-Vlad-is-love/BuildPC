@@ -1,8 +1,9 @@
 import 'package:buildpc/controller/model_controller_abstract.dart';
 import 'package:buildpc/model/motherboard/motherboard_socket.dart';
 import 'package:buildpc/repository/motherboard/motherboard_socket_repository.dart';
+import 'package:flutter/cupertino.dart';
 
-class MotherboardSocketController
+class MotherboardSocketController extends ChangeNotifier
     implements ModelControllerAbstract<MotherboardSocket> {
   final MotherboardSocketRepository _motherboardSocketRepository;
 
@@ -10,28 +11,35 @@ class MotherboardSocketController
 
   @override
   Future<List<MotherboardSocket>> getList() async {
-    return _motherboardSocketRepository.getAllData();
+    final result = _motherboardSocketRepository.getAllData();
+    notifyListeners();
+
+    return result;
   }
 
   @override
   Future<MotherboardSocket?> getDataById(int? id) async {
-    return _motherboardSocketRepository.getDataById(id);
+    final result = _motherboardSocketRepository.getDataById(id);
+    notifyListeners();
+
+    return result;
   }
 
   @override
   Future<void> updateData(MotherboardSocket data) async {
     await _motherboardSocketRepository.updateData(data);
+    notifyListeners();
   }
 
   @override
-  Future<MotherboardSocket?> postData(MotherboardSocket data) async {
+  Future<void> postData(MotherboardSocket data) async {
     await _motherboardSocketRepository.postData(data);
-
-    return getDataById(data.id);
+    notifyListeners();
   }
 
   @override
   Future<void> delete(int id) async {
     await _motherboardSocketRepository.deleteData(id);
+    notifyListeners();
   }
 }

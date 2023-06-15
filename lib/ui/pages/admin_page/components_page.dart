@@ -52,18 +52,18 @@ class _MainView extends StatelessWidget {
               children: [
                 CustomRouteModelNameButton(
                   label: '${_locale?.graphicCard}',
-                  destination: AppRouteConstants.modelListPageRouteName,
+                  destination: AppRouteConstants.mainModelListPageRouteName,
                   modelName: 'GraphicCard',
                   //modelName: 'GraphicCard',
                 ),
                 CustomRouteModelNameButton(
                   label: '${_locale?.pcCase}',
-                  destination: AppRouteConstants.modelListPageRouteName,
+                  destination: AppRouteConstants.mainModelListPageRouteName,
                   modelName: 'Case',
                 ),
                 CustomRouteModelNameButton(
                   label: '${_locale?.cooler}',
-                  destination: AppRouteConstants.modelListPageRouteName,
+                  destination: AppRouteConstants.mainModelListPageRouteName,
                   modelName: 'Cooler',
                 ),
               ],
@@ -73,17 +73,17 @@ class _MainView extends StatelessWidget {
               children: [
                 CustomRouteModelNameButton(
                   label: '${_locale?.processor}',
-                  destination: AppRouteConstants.modelListPageRouteName,
+                  destination: AppRouteConstants.mainModelListPageRouteName,
                   modelName: 'Processor',
                 ),
                 CustomRouteModelNameButton(
                   label: '${_locale?.motherboard}',
-                  destination: AppRouteConstants.modelListPageRouteName,
+                  destination: AppRouteConstants.mainModelListPageRouteName,
                   modelName: 'Motherboard',
                 ),
                 CustomRouteModelNameButton(
                   label: '${_locale?.powerSupply}',
-                  destination: AppRouteConstants.modelListPageRouteName,
+                  destination: AppRouteConstants.mainModelListPageRouteName,
                   modelName: 'PowerSupply',
                 ),
               ],
@@ -93,17 +93,17 @@ class _MainView extends StatelessWidget {
               children: [
                 CustomRouteModelNameButton(
                   label: '${_locale?.ram}',
-                  destination: AppRouteConstants.modelListPageRouteName,
+                  destination: AppRouteConstants.mainModelListPageRouteName,
                   modelName: 'Ram',
                 ),
                 CustomRouteModelNameButton(
                   label: '${_locale?.hdd}',
-                  destination: AppRouteConstants.modelListPageRouteName,
+                  destination: AppRouteConstants.mainModelListPageRouteName,
                   modelName: 'Hdd',
                 ),
                 CustomRouteModelNameButton(
                   label: '${_locale?.ssd}',
-                  destination: AppRouteConstants.modelListPageRouteName,
+                  destination: AppRouteConstants.mainModelListPageRouteName,
                   modelName: 'Ssd',
                 )
               ],

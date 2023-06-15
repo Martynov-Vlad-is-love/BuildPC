@@ -3,6 +3,7 @@ import 'package:buildpc/ui/widgets/button/custom_route_button.dart';
 import 'package:buildpc/ui/widgets/button/custom_route_model_name_button.dart';
 import 'package:buildpc/ui/widgets/top_navigation_bar/custom_top_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class UsersPage extends StatelessWidget {
   const UsersPage({Key? key}) : super(key: key);
@@ -28,7 +29,9 @@ class _MainView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const ColoredBox(
+    final AppLocalizations? _locale = AppLocalizations.of(context);
+
+    return ColoredBox(
       color: Colors.white,
       child: SingleChildScrollView(
         child: Column(
@@ -37,13 +40,12 @@ class _MainView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CustomRouteModelNameButton(
-                  label: 'Users',
-                  destination: AppRouteConstants.modelListPageRouteName,
+                  label: '${_locale?.user}',
+                  destination: AppRouteConstants.mainModelListPageRouteName,
                   modelName: 'User',
-                  //modelName: 'GraphicCard',
                 ),
                 CustomRouteButton(
-                  label: 'Registration',
+                  label: '${_locale?.registration}',
                   destination: AppRouteConstants.registrationRouteName,
                   //modelName: 'GraphicCard',
                 ),

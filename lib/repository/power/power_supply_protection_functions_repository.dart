@@ -8,11 +8,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class PowerSupplyProtectionFunctionsRepository
     implements Repository<PowerSupplyProtectionFunctions> {
-  final path = 'Producer';
-  final header = {
-    'Content-type': 'application/json',
-  };
-
   Future<String?> _getToken() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
@@ -25,6 +20,8 @@ class PowerSupplyProtectionFunctionsRepository
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     await http.delete(
@@ -40,10 +37,12 @@ class PowerSupplyProtectionFunctionsRepository
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     final response = await http.get(
-      Uri.http(apiPath, '/api/all/powerSupplyProtectionFunctions'),
+      Uri.http(apiPath, '/api/all/powerSupplyProtectionFunction'),
       headers: header,
     );
 
@@ -67,10 +66,12 @@ class PowerSupplyProtectionFunctionsRepository
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     final response = await http.get(
-      Uri.http(apiPath, '/api/all/powerSupplyProtectionFunctions/$id'),
+      Uri.http(apiPath, '/api/all/powerSupplyProtectionFunction/$id'),
       headers: header,
     );
 
@@ -88,13 +89,17 @@ class PowerSupplyProtectionFunctionsRepository
   @override
   Future<void> postData(
       PowerSupplyProtectionFunctions powerSupplyProtectionFunctions,) async {
+    final token = await _getToken();
     try {
       final jsonData = powerSupplyProtectionFunctions.toJson();
       final header = {
         'Content-type': 'application/json',
+        'Authorization': 'Bearer $token',
+        'Access-Control-Allow-Origin': '*',
+        'Accept': '*/*',
       };
       await http.post(
-        Uri.http(apiPath, '/api/admin/powerSupplyProtectionFunctions'),
+        Uri.http(apiPath, '/api/admin/powerSupplyProtectionFunction'),
         headers: header,
         body: convert.jsonEncode(jsonData),
       );
@@ -110,13 +115,15 @@ class PowerSupplyProtectionFunctionsRepository
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     final jsonData = powerSupplyProtectionFunctions.toJson();
-    await http.patch(
+    await http.put(
       Uri.http(
         apiPath,
-        '/api/admin/powerSupplyProtectionFunctions/${powerSupplyProtectionFunctions.id}',
+        '/api/admin/powerSupplyProtectionFunction/${powerSupplyProtectionFunctions.id}',
       ),
       body: convert.jsonEncode(jsonData),
       headers: header,

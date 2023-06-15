@@ -115,7 +115,7 @@ class CaseSizeRepository implements Repository<CaseSize> {
     };
 
     final jsonData = caseSize.toJson();
-    await http.patch(
+    await http.put(
       Uri.http(
         apiPath,
         '/api/admin/caseSize/${caseSize.id}',

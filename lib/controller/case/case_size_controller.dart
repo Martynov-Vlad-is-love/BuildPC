@@ -1,35 +1,45 @@
 import 'package:buildpc/controller/model_controller_abstract.dart';
 import 'package:buildpc/model/case/case_size.dart';
 import 'package:buildpc/repository/case/case_size_repository.dart';
+import 'package:flutter/cupertino.dart';
 
-class CaseSizeController implements ModelControllerAbstract<CaseSize>{
+class CaseSizeController extends ChangeNotifier
+    implements ModelControllerAbstract<CaseSize> {
   final CaseSizeRepository _caseSizeRepository;
+
   CaseSizeController(this._caseSizeRepository);
 
   @override
-  Future<List<CaseSize>> getList() async{
-    return _caseSizeRepository.getAllData();
+  Future<List<CaseSize>> getList() async {
+    final result = _caseSizeRepository.getAllData();
+    notifyListeners();
+
+    return result;
   }
 
   @override
-  Future<CaseSize?> getDataById(int? id) async{
-    return _caseSizeRepository.getDataById(id);
+  Future<CaseSize?> getDataById(int? id) async {
+    final result = _caseSizeRepository.getDataById(id);
+    notifyListeners();
+
+    return result;
   }
 
   @override
-  Future<void> updateData(CaseSize data) async{
+  Future<void> updateData(CaseSize data) async {
     await _caseSizeRepository.updateData(data);
+    notifyListeners();
   }
 
   @override
-  Future<CaseSize?> postData(CaseSize data) async{
+  Future<void> postData(CaseSize data) async {
     await _caseSizeRepository.postData(data);
-
-    return getDataById(data.id);
+    notifyListeners();
   }
 
   @override
-  Future<void> delete(int id) async{
+  Future<void> delete(int id) async {
     await _caseSizeRepository.deleteData(id);
+    notifyListeners();
   }
 }

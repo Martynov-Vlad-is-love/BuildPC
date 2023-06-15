@@ -8,45 +8,59 @@ part of 'motherboard.dart';
 
 Motherboard _$MotherboardFromJson(Map<String, dynamic> json) => Motherboard(
       id: json['id'] as int?,
-      name: json['name'] as String,
-      motherboardProducer: Producers.fromJson(
-          json['motherboardProducer'] as Map<String, dynamic>),
-      socket:
-          MotherboardSocket.fromJson(json['socket'] as Map<String, dynamic>),
+      name: json['name'] as String?,
+      motherboardProducer: json['motherboardProducer'] == null
+          ? null
+          : Producers.fromJson(
+              json['motherboardProducer'] as Map<String, dynamic>),
+      socket: json['socket'] == null
+          ? null
+          : MotherboardSocket.fromJson(json['socket'] as Map<String, dynamic>),
       cpuGenerations: (json['cpuGenerations'] as List<dynamic>)
-          .map((e) => CPUGeneration.fromJson(e as Map<String, dynamic>))
+          .map((e) => e == null
+              ? null
+              : CPUGeneration.fromJson(e as Map<String, dynamic>))
           .toList(),
-      chipset:
-          MotherboardChipset.fromJson(json['chipset'] as Map<String, dynamic>),
-      formFactor:
-          FormFactor.fromJson(json['formFactor'] as Map<String, dynamic>),
-      maxTdpOfProcessors: json['maxTdpOfProcessors'] as int,
-      memorySlots: json['memorySlots'] as int,
-      supportedMemoryFrequency: json['supportedMemoryFrequency'] as int,
-      maxAmountOfRam: json['maxAmountOfRam'] as int,
-      network:
-          MotherboardNetwork.fromJson(json['network'] as Map<String, dynamic>),
-      bluetooth: json['bluetooth'] as bool,
-      wifi: json['wifi'] as bool,
-      pcieVersion:
-          CPUPCIeVersion.fromJson(json['pcieVersion'] as Map<String, dynamic>),
-      pciExpressX16: json['pci_express_x16'] as int,
-      pciExpressX4: json['pci_express_x4'] as int,
-      pciExpressX1: json['pci_express_x1'] as int,
-      sata3: json['sata3'] as int,
-      m2: json['m2'] as int,
-      dSub: json['dSub'] as int,
-      dvi: json['dvi'] as int,
-      hdmi: json['hdmi'] as int,
-      displayPort: json['displayPort'] as int,
-      usb_3_0: json['usb_3_0'] as int,
-      usb_2_0: json['usb_2_0'] as int,
-      usbTypeC: json['usb_type_c'] as int,
-      digitalAudioJack: json['digitalAudioJack'] as bool,
-      description: json['description'] as String,
-      recommendedPrice: json['recommendedPrice'] as int,
-      performanceLevel: PerformanceLevel.fromJson(
-          json['performanceLevel'] as Map<String, dynamic>),
+      chipset: json['chipset'] == null
+          ? null
+          : MotherboardChipset.fromJson(
+              json['chipset'] as Map<String, dynamic>),
+      formFactor: json['formFactor'] == null
+          ? null
+          : FormFactor.fromJson(json['formFactor'] as Map<String, dynamic>),
+      maxTdpOfProcessors: json['maxTdpOfProcessors'] as int?,
+      memorySlots: json['memorySlots'] as int?,
+      supportedMemoryFrequency: json['supportedMemoryFrequency'] as int?,
+      maxAmountOfRam: json['maxAmountOfRam'] as int?,
+      network: json['network'] == null
+          ? null
+          : MotherboardNetwork.fromJson(
+              json['network'] as Map<String, dynamic>),
+      bluetooth: json['bluetooth'] as bool?,
+      wifi: json['wifi'] as bool?,
+      pcieVersion: json['pcieVersion'] == null
+          ? null
+          : CPUPCIeVersion.fromJson(
+              json['pcieVersion'] as Map<String, dynamic>),
+      pciExpressX16: json['pci_express_x16'] as int?,
+      pciExpressX4: json['pci_express_x4'] as int?,
+      pciExpressX1: json['pci_express_x1'] as int?,
+      sata3: json['sata3'] as int?,
+      m2: json['m2'] as int?,
+      dSub: json['dSub'] as bool?,
+      dvi: json['dvi'] as int?,
+      hdmi: json['hdmi'] as int?,
+      displayPort: json['displayPort'] as int?,
+      usb_3_0: json['usb_3_0'] as int?,
+      usb_2_0: json['usb_2_0'] as int?,
+      usbTypeC: json['usb_type_c'] as int?,
+      digitalAudioJack: json['digitalAudioJack'] as bool?,
+      description: json['description'] as String?,
+      recommendedPrice: json['recommendedPrice'] as int?,
+      performanceLevel: json['performanceLevel'] == null
+          ? null
+          : PerformanceLevel.fromJson(
+              json['performanceLevel'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$MotherboardToJson(Motherboard instance) =>

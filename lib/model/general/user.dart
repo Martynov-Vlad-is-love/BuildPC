@@ -7,18 +7,18 @@ part 'user.g.dart';
 @JsonSerializable()
 class User implements Model {
   int? id;
-  String name;
-  String username;
-  String email;
+  String? name;
+  String? username;
+  String? email;
   String? password;
   ERole role;
 
-  User(
-    this.id,{
+  User({
+    required this.id,
     required this.name,
     required this.username,
     required this.email,
-    required this.password,
+    this.password,
     required this.role,
   });
 
@@ -33,12 +33,12 @@ class User implements Model {
     if (password != null) {
       pass = '$password';
     }
-    final fields = [
+    final List<String> fields = [
       id.toString(),
-      name,
-      username,
-      email,
-      pass,
+      '$name',
+      '$username',
+      '$email',
+      pass.toString(),
       role.toString(),
     ];
 

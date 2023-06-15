@@ -60,9 +60,9 @@ class _MainView extends StatelessWidget {
                   modelName: 'FormFactor',
                 ),
                 CustomRouteModelNameButton(
-                  label: '${_locale?.pcBuilds}',
+                  label: '${_locale?.cellsType}',
                   destination: AppRouteConstants.modelListPageRouteName,
-                  modelName: 'BuildPC',
+                  modelName: 'SsdCellsType',
                 ),
               ],
             ),
@@ -115,14 +115,109 @@ class _MainView extends StatelessWidget {
                   modelName: 'CoolerMaterial',
                 ),
                 CustomRouteModelNameButton(
-                  label: '${_locale?.coolerSocket}',
+                  label: '${_locale?.protectionFunctions}',
                   destination: AppRouteConstants.modelListPageRouteName,
-                  modelName: 'CoolerSocket',
+                  modelName: 'PowerSupplyProtectionFunctions',
                 ),
                 CustomRouteModelNameButton(
                   label: '${_locale?.cpuGeneration}',
                   destination: AppRouteConstants.modelListPageRouteName,
                   modelName: 'CpuGeneration',
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                CustomRouteModelNameButton(
+                  label: '${_locale?.cpuPcieVersion}',
+                  destination: AppRouteConstants.modelListPageRouteName,
+                  modelName: 'CpuPcieVersion',
+                ),
+                CustomRouteModelNameButton(
+                  label: '${_locale?.cpuTechnologies}',
+                  destination: AppRouteConstants.modelListPageRouteName,
+                  modelName: 'CpuTechnologies',
+                ),
+                CustomRouteModelNameButton(
+                  label: '${_locale?.gpuConnector}',
+                  destination: AppRouteConstants.modelListPageRouteName,
+                  modelName: 'GpuConnector',
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                CustomRouteModelNameButton(
+                  label: '${_locale?.gpuInterfaceType}',
+                  destination: AppRouteConstants.modelListPageRouteName,
+                  modelName: 'GpuInterfaceType',
+                ),
+                CustomRouteModelNameButton(
+                  label: '${_locale?.gpuMemoryType}',
+                  destination: AppRouteConstants.modelListPageRouteName,
+                  modelName: 'GpuMemoryType',
+                ),
+                CustomRouteModelNameButton(
+                  label: '${_locale?.gpuTechnologies}',
+                  destination: AppRouteConstants.modelListPageRouteName,
+                  modelName: 'GpuTechnologies',
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                CustomRouteModelNameButton(
+                  label: '${_locale?.motherboardChipset}',
+                  destination: AppRouteConstants.modelListPageRouteName,
+                  modelName: 'MotherboardChipset',
+                ),
+                CustomRouteModelNameButton(
+                  label: '${_locale?.network}',
+                  destination: AppRouteConstants.modelListPageRouteName,
+                  modelName: 'MotherboardNetwork',
+                ),
+                CustomRouteModelNameButton(
+                  label: '${_locale?.motherboardSocket}',
+                  destination: AppRouteConstants.modelListPageRouteName,
+                  modelName: 'MotherboardSocket',
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                CustomRouteModelNameButton(
+                  label: '${_locale?.ramMemoryType}',
+                  destination: AppRouteConstants.modelListPageRouteName,
+                  modelName: 'RamMemoryType',
+                ),
+                CustomRouteModelNameButton(
+                  label: '${_locale?.storageInterface}',
+                  destination: AppRouteConstants.modelListPageRouteName,
+                  modelName: 'StorageInterface',
+                ),
+                CustomRouteModelNameButton(
+                  label: '${_locale?.storageFormFactor}',
+                  destination: AppRouteConstants.modelListPageRouteName,
+                  modelName: 'StorageFormFactor',
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                CustomRouteModelNameButton(
+                  label: '${_locale?.ramMemoryType}',
+                  destination: AppRouteConstants.modelListPageRouteName,
+                  modelName: 'RamMemoryType',
+                ),
+                CustomRouteModelNameButton(
+                  label: '${_locale?.ramTimings}',
+                  destination: AppRouteConstants.modelListPageRouteName,
+                  modelName: 'RamTimings',
                 ),
               ],
             ),

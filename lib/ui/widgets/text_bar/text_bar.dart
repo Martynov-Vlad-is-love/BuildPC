@@ -18,7 +18,7 @@ class TextBar extends StatelessWidget {
 
     return Container(
       height: kTextBarHeight,
-      width: 500,
+      width: 600,
       alignment: Alignment.center,
       child: Padding(
         padding: const EdgeInsets.all(8.0),

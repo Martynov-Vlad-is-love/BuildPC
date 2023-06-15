@@ -120,7 +120,7 @@ class GraphicCardRepository implements Repository<GraphicCard> {
     };
 
     final jsonData = graphicCard.toJson();
-    await http.patch(
+    await http.put(
       Uri.http(
         apiPath,
         '/api/admin/graphicCard/${graphicCard.id}',

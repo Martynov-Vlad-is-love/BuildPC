@@ -7,11 +7,6 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MotherboardNetworkRepository implements Repository<MotherboardNetwork> {
-  final path = 'Producer';
-  final header = {
-    'Content-type': 'application/json',
-  };
-
   Future<String?> _getToken() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
@@ -24,6 +19,8 @@ class MotherboardNetworkRepository implements Repository<MotherboardNetwork> {
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     await http.delete(
@@ -39,6 +36,8 @@ class MotherboardNetworkRepository implements Repository<MotherboardNetwork> {
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     final response = await http.get(
@@ -66,6 +65,8 @@ class MotherboardNetworkRepository implements Repository<MotherboardNetwork> {
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     final response = await http.get(
@@ -85,10 +86,14 @@ class MotherboardNetworkRepository implements Repository<MotherboardNetwork> {
 
   @override
   Future<void> postData(MotherboardNetwork motherboardNetwork) async {
+    final token = await _getToken();
     try {
       final jsonData = motherboardNetwork.toJson();
       final header = {
         'Content-type': 'application/json',
+        'Authorization': 'Bearer $token',
+        'Access-Control-Allow-Origin': '*',
+        'Accept': '*/*',
       };
       await http.post(
         Uri.http(apiPath, '/api/admin/motherboardNetwork'),
@@ -106,10 +111,12 @@ class MotherboardNetworkRepository implements Repository<MotherboardNetwork> {
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     final jsonData = motherboardNetwork.toJson();
-    await http.patch(
+    await http.put(
       Uri.http(
         apiPath,
         '/api/admin/motherboardNetwork/${motherboardNetwork.id}',

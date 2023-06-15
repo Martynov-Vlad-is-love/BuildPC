@@ -3,6 +3,7 @@ import 'package:buildpc/controller/field_controller.dart';
 import 'package:buildpc/controller/general/user_controller.dart';
 import 'package:buildpc/controller/model_controller.dart';
 import 'package:buildpc/controller/model_controller_factory.dart';
+import 'package:buildpc/model/model.dart';
 import 'package:buildpc/model_utilis/model_util.dart';
 import 'package:buildpc/ui/widgets/border/custom_border.dart';
 import 'package:buildpc/ui/widgets/model_list_view/dynamic_text_form_fields.dart';
@@ -11,8 +12,6 @@ import 'package:buildpc/ui/widgets/top_navigation_bar/custom_top_navigation_bar.
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
-
-import '../../../model/model.dart';
 
 //ignore_for_file: avoid-late-keyword
 
@@ -79,13 +78,14 @@ class _MainViewState extends State<_MainView> {
               padding: const EdgeInsets.only(top: 20),
               alignment: Alignment.topCenter,
               width: screenSize.width * 0.5,
-              height: 50,
+              height: 100,
               child: Text(
                 '${_locale?.create} ${widget.modelName}',
                 style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 30,
-                    color: Colors.black),
+                  fontWeight: FontWeight.bold,
+                  fontSize: 30,
+                  color: Colors.black,
+                ),
               ),
             ),
             Row(
@@ -115,6 +115,15 @@ class _MainViewState extends State<_MainView> {
               ],
             ),
             ElevatedButton(
+              style: ButtonStyle(
+                backgroundColor:
+                const MaterialStatePropertyAll<Color>(Colors.black),
+                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18.0),
+                  ),
+                ),
+              ),
               onPressed: () async {
                 final List<String> arr = [];
                 for (final element in _fieldProvider.fields) {
@@ -128,20 +137,9 @@ class _MainViewState extends State<_MainView> {
                   final constructor = ModelUtil.modelMapping[widget.modelName];
                   final instance = constructor!(_fieldProvider.fields) as Model;
                   await model.postData(instance);
-
                 }
 
-
-                    // List<dynamic> res = [1, Producers.producer1, 1000, StorageFormFactor.formFactor1, StorageInterface.interface1, 64, 200, 150, SsdCellsType.cellsType1, 'Description', 100, PerformanceLevel(1, 'Level')];
-//
-// if (modelMapping.containsKey(model)) {
-// Function constructor = modelMapping[model];
-// Model instance = constructor(result);
-// // Используйте экземпляр класса, например:
-// print(instance.description);
-// }
-
-                    print('Form Field Values: ${result}');
+                print('Form Field Values: ${result}');
                 // Очищает список полей
                 _fieldProvider.deleteFields();
               },

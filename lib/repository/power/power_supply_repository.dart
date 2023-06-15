@@ -7,11 +7,6 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PowerSupplyRepository implements Repository<PowerSupply> {
-  final path = 'Producer';
-  final header = {
-    'Content-type': 'application/json',
-  };
-
   Future<String?> _getToken() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
@@ -24,6 +19,8 @@ class PowerSupplyRepository implements Repository<PowerSupply> {
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     await http.delete(
@@ -39,6 +36,8 @@ class PowerSupplyRepository implements Repository<PowerSupply> {
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     final response = await http.get(
@@ -65,6 +64,8 @@ class PowerSupplyRepository implements Repository<PowerSupply> {
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     final response = await http.get(
@@ -83,19 +84,23 @@ class PowerSupplyRepository implements Repository<PowerSupply> {
   }
 
   @override
-  Future<void> postData(
-    PowerSupply powerSupply,
-  ) async {
+  Future<void> postData(PowerSupply powerSupply) async {
+    final token = await _getToken();
+
     try {
       final jsonData = powerSupply.toJson();
       final header = {
         'Content-type': 'application/json',
+        'Authorization': 'Bearer $token',
+        'Access-Control-Allow-Origin': '*',
+        'Accept': '*/*',
       };
-      await http.post(
+      final response = await http.post(
         Uri.http(apiPath, '/api/admin/powerSupply'),
         headers: header,
         body: convert.jsonEncode(jsonData),
       );
+      print(response.statusCode);
     } catch (ex) {
       rethrow;
     }
@@ -107,10 +112,12 @@ class PowerSupplyRepository implements Repository<PowerSupply> {
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     final jsonData = powerSupply.toJson();
-    await http.patch(
+    await http.put(
       Uri.http(
         apiPath,
         '/api/admin/powerSupply/${powerSupply.id}',

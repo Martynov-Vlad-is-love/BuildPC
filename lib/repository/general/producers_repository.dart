@@ -112,7 +112,7 @@ class ProducersRepository implements Repository<Producers> {
     };
 
     final jsonData = producers.toJson();
-    await http.patch(
+    await http.put(
       Uri.http(apiPath, '/api/admin/producers/${producers.id}'),
       body: convert.jsonEncode(jsonData),
       headers: header,

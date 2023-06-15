@@ -1,8 +1,9 @@
 import 'package:buildpc/controller/model_controller_abstract.dart';
 import 'package:buildpc/model/motherboard/motherboard_network.dart';
 import 'package:buildpc/repository/motherboard/motherboard_network_repository.dart';
+import 'package:flutter/cupertino.dart';
 
-class MotherboardNetworkController
+class MotherboardNetworkController extends ChangeNotifier
     implements ModelControllerAbstract<MotherboardNetwork> {
   final MotherboardNetworkRepository _motherboardNetworkRepository;
 
@@ -10,28 +11,35 @@ class MotherboardNetworkController
 
   @override
   Future<List<MotherboardNetwork>> getList() async {
-    return _motherboardNetworkRepository.getAllData();
+    final result = _motherboardNetworkRepository.getAllData();
+    notifyListeners();
+
+    return result;
   }
 
   @override
   Future<MotherboardNetwork?> getDataById(int? id) async {
-    return _motherboardNetworkRepository.getDataById(id);
+    final result = _motherboardNetworkRepository.getDataById(id);
+    notifyListeners();
+
+    return result;
   }
 
   @override
   Future<void> updateData(MotherboardNetwork data) async {
     await _motherboardNetworkRepository.updateData(data);
+    notifyListeners();
   }
 
   @override
-  Future<MotherboardNetwork?> postData(MotherboardNetwork data) async {
+  Future<void> postData(MotherboardNetwork data) async {
     await _motherboardNetworkRepository.postData(data);
-
-    return getDataById(data.id);
+    notifyListeners();
   }
 
   @override
   Future<void> delete(int id) async {
     await _motherboardNetworkRepository.deleteData(id);
+    notifyListeners();
   }
 }

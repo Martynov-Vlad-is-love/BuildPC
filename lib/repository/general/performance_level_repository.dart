@@ -114,7 +114,7 @@ class PerformanceLevelRepository implements Repository<PerformanceLevel> {
     };
 
     final jsonData = performanceLevel.toJson();
-    await http.patch(
+    await http.put(
       Uri.http(apiPath,
           '/api/admin/performanceLevel/${performanceLevel.id}',),
       body: convert.jsonEncode(jsonData),

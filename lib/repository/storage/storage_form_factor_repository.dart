@@ -7,11 +7,6 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class StorageFormFactorRepository implements Repository<StorageFormFactor> {
-  final path = 'Producer';
-  final header = {
-    'Content-type': 'application/json',
-  };
-
   Future<String?> _getToken() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
@@ -24,6 +19,8 @@ class StorageFormFactorRepository implements Repository<StorageFormFactor> {
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     await http.delete(
@@ -39,6 +36,8 @@ class StorageFormFactorRepository implements Repository<StorageFormFactor> {
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     final response = await http
@@ -64,6 +63,8 @@ class StorageFormFactorRepository implements Repository<StorageFormFactor> {
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     final response = await http.get(
@@ -83,10 +84,14 @@ class StorageFormFactorRepository implements Repository<StorageFormFactor> {
 
   @override
   Future<void> postData(StorageFormFactor storageFormFactor) async {
+    final token = await _getToken();
     try {
       final jsonData = storageFormFactor.toJson();
       final header = {
         'Content-type': 'application/json',
+        'Authorization': 'Bearer $token',
+        'Access-Control-Allow-Origin': '*',
+        'Accept': '*/*',
       };
       await http.post(
         Uri.http(apiPath, '/api/admin/storageFormFactor'),
@@ -104,10 +109,12 @@ class StorageFormFactorRepository implements Repository<StorageFormFactor> {
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     final jsonData = storageFormFactor.toJson();
-    await http.patch(
+    await http.put(
       Uri.http(
         apiPath,
         '/api/admin/storageFormFactor/${storageFormFactor.id}',

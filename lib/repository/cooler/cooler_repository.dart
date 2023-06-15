@@ -83,16 +83,21 @@ class CoolerRepository implements Repository<Cooler> {
 
   @override
   Future<void> postData(Cooler cooler) async {
+    final token = await _getToken();
     try {
       final jsonData = cooler.toJson();
       final header = {
         'Content-type': 'application/json',
+        'Authorization': 'Bearer $token',
+        'Access-Control-Allow-Origin': '*',
+        'Accept': '*/*',
       };
-      await http.post(
+      final response = await http.post(
         Uri.http(apiPath, '/api/admin/cooler'),
         headers: header,
         body: convert.jsonEncode(jsonData),
       );
+      print(response.statusCode);
     } catch (ex) {
       rethrow;
     }
@@ -109,7 +114,7 @@ class CoolerRepository implements Repository<Cooler> {
     };
 
     final jsonData = cooler.toJson();
-    await http.patch(
+    final response = await http.put(
       Uri.http(
         apiPath,
         '/api/admin/cooler/${cooler.id}',
@@ -117,5 +122,6 @@ class CoolerRepository implements Repository<Cooler> {
       body: convert.jsonEncode(jsonData),
       headers: header,
     );
+    print(response.statusCode);
   }
 }

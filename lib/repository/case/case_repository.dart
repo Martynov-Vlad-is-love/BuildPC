@@ -8,11 +8,6 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CaseRepository implements Repository<Case> {
-  final path = 'Producer';
-  final header = {
-    'Content-type': 'application/json',
-  };
-
   Future<String?> _getToken() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
@@ -25,6 +20,8 @@ class CaseRepository implements Repository<Case> {
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     await http.delete(
@@ -40,6 +37,8 @@ class CaseRepository implements Repository<Case> {
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     final response = await http.get(
@@ -66,6 +65,8 @@ class CaseRepository implements Repository<Case> {
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     final response = await http.get(
@@ -85,16 +86,21 @@ class CaseRepository implements Repository<Case> {
 
   @override
   Future<void> postData(Case pcCase) async {
+    final token = await _getToken();
     try {
       final jsonData = pcCase.toJson();
       final header = {
         'Content-type': 'application/json',
+        'Authorization': 'Bearer $token',
+        'Access-Control-Allow-Origin': '*',
+        'Accept': '*/*',
       };
-      await http.post(
+      final response = await http.post(
         Uri.http(apiPath, '/api/admin/case'),
         headers: header,
         body: convert.jsonEncode(jsonData),
       );
+      print(response.statusCode);
     } catch (ex) {
       rethrow;
     }
@@ -106,10 +112,12 @@ class CaseRepository implements Repository<Case> {
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     final jsonData = pcCase.toJson();
-    await http.patch(
+    await http.put(
       Uri.http(
         apiPath,
         '/api/admin/case/${pcCase.id}',

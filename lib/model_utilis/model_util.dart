@@ -4,7 +4,6 @@ import 'package:buildpc/model/case/case_power_supply_location.dart';
 import 'package:buildpc/model/case/case_size.dart';
 import 'package:buildpc/model/cooler/cooler.dart';
 import 'package:buildpc/model/cooler/cooler_material.dart';
-import 'package:buildpc/model/cooler/cooler_socket.dart';
 import 'package:buildpc/model/cpu/cpu_generation.dart';
 import 'package:buildpc/model/cpu/cpu_pcie_version.dart';
 import 'package:buildpc/model/cpu/cpu_technologies.dart';
@@ -40,7 +39,7 @@ import 'package:buildpc/model/storage/storage_interface.dart';
 class ModelUtil {
   static final Map<String, Function> modelMapping = {
     'User': (List<dynamic> values) => User(
-          int.tryParse(values.first as String),
+          id: int.tryParse(values.first as String),
           name: values[1] as String,
           username: values[2] as String,
           email: values[3] as String,
@@ -62,15 +61,15 @@ class ModelUtil {
           cooler: values[11] as Cooler,
           countOfLikes: values[12] as int,
           ratingId: values[13] as Rating,
+          totalPrice: values[14] as int,
         ),
     'Cooler': (List<dynamic> values) => Cooler(
           id: int.tryParse(values.first as String),
           name: values[1] as String,
           producer: values[2] as Producers,
-          socket: values[3] as List<CoolerSocket>,
+          socket: values[6] as List<MotherboardSocket>,
           material: values[4] as CoolerMaterial,
           maxTdp: values[5] as int,
-          supportedSockets: values[6] as int,
           thermalTubes: values[7] as int,
           description: values[8] as String,
           recommendedPrice: values[9] as int,
@@ -139,7 +138,7 @@ class ModelUtil {
           pciExpressX1: values[17] as int,
           sata3: values[18] as int,
           m2: values[19] as int,
-          dSub: values[20] as int,
+          dSub: values[20] as bool,
           dvi: values[21] as int,
           hdmi: values[22] as int,
           displayPort: values[23] as int,
@@ -153,31 +152,33 @@ class ModelUtil {
         ),
     'Hdd': (List<dynamic> values) => Hdd(
           id: int.tryParse(values.first as String),
+          name: values[1] as String,
+          producer: values[2] as Producers,
+          storageSize: values[3] as int,
+          speed: values[4] as int,
+          formFactor: values[5] as StorageFormFactor,
+          storageInterface: values[6] as StorageInterface,
+          bufferSize: values[7] as int,
+          readingSpeed: values[8] as int,
+          writingSpeed: values[9] as int,
+          description: values[10] as String,
+          recommendedPrice: values[11] as int,
+          performanceLevel: values[12] as PerformanceLevel,
+        ),
+    'Ssd': (List<dynamic> values) => Ssd(
+          id: int.tryParse(values.first as String),
           producer: values[1] as Producers,
-          storageSize: values[2] as int,
-          speed: values[3] as int,
+          name: values[2] as String,
+          storageSize: values[3] as int,
           formFactor: values[4] as StorageFormFactor,
           storageInterface: values[5] as StorageInterface,
           bufferSize: values[6] as int,
           readingSpeed: values[7] as int,
           writingSpeed: values[8] as int,
-          description: values[9] as String,
-          recommendedPrice: values[10] as int,
-          performanceLevel: values[11] as PerformanceLevel,
-        ),
-    'Ssd': (List<dynamic> values) => Ssd(
-          id: int.tryParse(values.first as String),
-          producer: values[1] as Producers,
-          storageSize: values[2] as int,
-          formFactor: values[3] as StorageFormFactor,
-          storageInterface: values[4] as StorageInterface,
-          bufferSize: values[5] as int,
-          readingSpeed: values[6] as int,
-          writingSpeed: values[7] as int,
-          cellsType: values[8] as SsdCellsType,
-          description: values[9] as String,
-          recommendedPrice: values[10] as int,
-          performanceLevel: values[11] as PerformanceLevel,
+          cellsType: values[9] as SsdCellsType,
+          description: values[10] as String,
+          recommendedPrice: values[11] as int,
+          performanceLevel: values[12] as PerformanceLevel,
         ),
     'Ram': (List<dynamic> values) => Ram(
           id: int.tryParse(values.first as String),
@@ -252,10 +253,6 @@ class ModelUtil {
     'CoolerMaterial': (List<dynamic> values) => CoolerMaterial(
           int.tryParse(values.first as String),
           material: values[1] as String,
-        ),
-    'CoolerSocket': (List<dynamic> values) => CoolerSocket(
-          int.tryParse(values.first as String),
-          socket: values[1] as String,
         ),
     'CpuGeneration': (List<dynamic> values) => CPUGeneration(
           int.tryParse(values.first as String),
@@ -335,15 +332,4 @@ class ModelUtil {
           name: values[1] as String,
         ),
   };
-// String model = 'Ssd';
-// List<dynamic> result = [1, Producers.producer1, 1000,
-// StorageFormFactor.formFactor1, StorageInterface.interface1, 64, 200, 150,
-// SsdCellsType.cellsType1, 'Description', 100, PerformanceLevel(1, 'Level')];
-//
-// if (modelMapping.containsKey(model)) {
-// Function constructor = modelMapping[model];
-// Model instance = constructor(result);
-// // Используйте экземпляр класса, например:
-// print(instance.description);
-// }
 }

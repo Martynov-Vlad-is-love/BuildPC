@@ -113,7 +113,7 @@ class CoolerMaterialRepository implements Repository<CoolerMaterial> {
     };
 
     final jsonData = coolerMaterial.toJson();
-    await http.patch(
+    await http.put(
       Uri.http(
         apiPath,
         '/api/admin/coolerMaterial/${coolerMaterial.id}',

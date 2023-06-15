@@ -6,7 +6,7 @@ part 'form_factor.g.dart';
 @JsonSerializable()
 class FormFactor implements Model {
   final int? id;
-  String name;
+  String? name;
 
   FormFactor({this.id, required this.name});
 
@@ -18,7 +18,7 @@ class FormFactor implements Model {
 
   @override
   List<String> parsedModels() {
-    final fields = [id.toString(), name];
+    final fields = [id.toString(), '$name'];
 
     return fields;
   }

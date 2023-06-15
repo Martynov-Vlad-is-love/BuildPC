@@ -112,7 +112,7 @@ class LikeRepository implements Repository<Like> {
     };
 
     final jsonData = like.toJson();
-    await http.patch(
+    await http.put(
       Uri.http(
         apiPath,
         '/api/admin/like/${like.id}',

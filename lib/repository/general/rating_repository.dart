@@ -118,7 +118,7 @@ class RatingRepository implements Repository<Rating> {
     };
 
     final jsonData = rating.toJson();
-    await http.patch(
+    await http.put(
       Uri.http(
         apiPath,
         '/api/admin/rating/${rating.id}',

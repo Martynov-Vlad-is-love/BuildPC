@@ -8,7 +8,7 @@ part of 'form_factor.dart';
 
 FormFactor _$FormFactorFromJson(Map<String, dynamic> json) => FormFactor(
       id: json['id'] as int?,
-      name: json['name'] as String,
+      name: json['name'] as String?,
     );
 
 Map<String, dynamic> _$FormFactorToJson(FormFactor instance) =>

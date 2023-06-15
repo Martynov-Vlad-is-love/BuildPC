@@ -10,20 +10,22 @@ part 'hdd.g.dart';
 @JsonSerializable()
 class Hdd implements Model{
   final int? id;
-  Producers producer;
-  int storageSize;
-  int speed;
-  StorageFormFactor formFactor;
-  StorageInterface storageInterface;
-  int bufferSize;
-  int readingSpeed;
-  int writingSpeed;
-  String description;
-  int recommendedPrice;
-  PerformanceLevel performanceLevel;
+  String? name;
+  Producers? producer;
+  int? storageSize;
+  int? speed;
+  StorageFormFactor? formFactor;
+  StorageInterface? storageInterface;
+  int? bufferSize;
+  int? readingSpeed;
+  int? writingSpeed;
+  String? description;
+  int? recommendedPrice;
+  PerformanceLevel? performanceLevel;
 
   Hdd({
     this.id,
+    required this.name,
     required this.producer,
     required this.storageSize,
     required this.speed,
@@ -44,19 +46,20 @@ class Hdd implements Model{
 
   @override
   List<String> parsedModels() {
-    final fields = [
+    final List<String> fields = [
       id.toString(),
-      producer.name,
+      '$name',
+      '${producer?.name}',
       storageSize.toString(),
       speed.toString(),
-      formFactor.name,
-      storageInterface.name,
+      '${formFactor?.name}',
+      '${storageInterface?.name}',
       bufferSize.toString(),
       readingSpeed.toString(),
       writingSpeed.toString(),
-      description,
+      '$description',
       recommendedPrice.toString(),
-      performanceLevel.level
+      '${performanceLevel?.level}'
     ];
 
     return fields;

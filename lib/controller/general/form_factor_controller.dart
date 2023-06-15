@@ -3,7 +3,8 @@ import 'package:buildpc/model/general/form_factor.dart';
 import 'package:buildpc/repository/general/form_factor_repository.dart';
 import 'package:flutter/cupertino.dart';
 
-class FormFactorController extends ChangeNotifier implements ModelControllerAbstract<FormFactor>{
+class FormFactorController extends ChangeNotifier
+    implements ModelControllerAbstract<FormFactor> {
   final FormFactorRepository _formFactorRepository;
 
   FormFactorController(this._formFactorRepository);
@@ -33,10 +34,12 @@ class FormFactorController extends ChangeNotifier implements ModelControllerAbst
   @override
   Future<void> postData(FormFactor data) async {
     await _formFactorRepository.postData(data);
+    notifyListeners();
   }
 
   @override
   Future<void> delete(int id) async {
     await _formFactorRepository.deleteData(id);
+    notifyListeners();
   }
 }

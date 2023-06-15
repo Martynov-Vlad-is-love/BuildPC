@@ -8,8 +8,8 @@ part 'rating.g.dart';
 @JsonSerializable()
 class Rating implements Model{
   int? id;
-  BuildPC buildPc;
-  List<Like> like;
+  BuildPC? buildPc;
+  List<Like?> like;
 
   Rating({this.id, required this.buildPc, required this.like});
 
@@ -22,13 +22,14 @@ class Rating implements Model{
   List<String> parsedModels() {
     final likeList = [];
     for(final l in like){
-      likeList.add(l.parsedModels().toString());
+      likeList.add(l?.parsedModels().toString());
     }
 
     final fields = [
       id.toString(),
-      buildPc.parsedModels().toString(),
-      likeList.toString()
+      'user: ${buildPc?.user?.username}',
+      'Build PC:${buildPc?.nameOfBuild}',
+      '${likeList.length} likes'
     ];
 
     return fields;

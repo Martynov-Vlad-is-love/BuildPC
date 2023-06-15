@@ -7,11 +7,6 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class StorageInterfaceRepository implements Repository<StorageInterface> {
-  final path = 'Producer';
-  final header = {
-    'Content-type': 'application/json',
-  };
-
   Future<String?> _getToken() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
@@ -24,6 +19,8 @@ class StorageInterfaceRepository implements Repository<StorageInterface> {
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     await http.delete(
@@ -39,6 +36,8 @@ class StorageInterfaceRepository implements Repository<StorageInterface> {
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     final response = await http
@@ -63,6 +62,8 @@ class StorageInterfaceRepository implements Repository<StorageInterface> {
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     final response = await http.get(
@@ -82,10 +83,14 @@ class StorageInterfaceRepository implements Repository<StorageInterface> {
 
   @override
   Future<void> postData(StorageInterface storageInterface) async {
+    final token = await _getToken();
     try {
       final jsonData = storageInterface.toJson();
       final header = {
         'Content-type': 'application/json',
+        'Authorization': 'Bearer $token',
+        'Access-Control-Allow-Origin': '*',
+        'Accept': '*/*',
       };
       await http.post(
         Uri.http(apiPath, '/api/admin/storageInterface'),
@@ -103,10 +108,12 @@ class StorageInterfaceRepository implements Repository<StorageInterface> {
     final header = {
       'Content-type': 'application/json',
       'Authorization': 'Bearer $token',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': '*/*',
     };
 
     final jsonData = storageInterface.toJson();
-    await http.patch(
+    final response = await http.put(
       Uri.http(
         apiPath,
         '/api/admin/storageInterface/${storageInterface.id}',
@@ -114,5 +121,6 @@ class StorageInterfaceRepository implements Repository<StorageInterface> {
       body: convert.jsonEncode(jsonData),
       headers: header,
     );
+    print(response.statusCode);
   }
 }

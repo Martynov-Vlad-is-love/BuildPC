@@ -119,7 +119,7 @@ class CasePowerSupplyLocationRepository
     };
 
     final jsonData = casePowerSupplyLocation.toJson();
-    await http.patch(
+    await http.put(
       Uri.http(
         apiPath,
         '/api/admin/casePowerSupplyLocation/${casePowerSupplyLocation.id}',
