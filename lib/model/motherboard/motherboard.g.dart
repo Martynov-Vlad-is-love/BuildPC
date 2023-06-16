@@ -32,6 +32,10 @@ Motherboard _$MotherboardFromJson(Map<String, dynamic> json) => Motherboard(
       memorySlots: json['memorySlots'] as int?,
       supportedMemoryFrequency: json['supportedMemoryFrequency'] as int?,
       maxAmountOfRam: json['maxAmountOfRam'] as int?,
+      ramMemoryType: json['ramMemoryType'] == null
+          ? null
+          : RamMemoryType.fromJson(
+              json['ramMemoryType'] as Map<String, dynamic>),
       network: json['network'] == null
           ? null
           : MotherboardNetwork.fromJson(
@@ -47,7 +51,7 @@ Motherboard _$MotherboardFromJson(Map<String, dynamic> json) => Motherboard(
       pciExpressX1: json['pci_express_x1'] as int?,
       sata3: json['sata3'] as int?,
       m2: json['m2'] as int?,
-      dSub: json['dSub'] as bool?,
+      dsub: json['dsub'] as bool?,
       dvi: json['dvi'] as int?,
       hdmi: json['hdmi'] as int?,
       displayPort: json['displayPort'] as int?,
@@ -76,6 +80,7 @@ Map<String, dynamic> _$MotherboardToJson(Motherboard instance) =>
       'memorySlots': instance.memorySlots,
       'supportedMemoryFrequency': instance.supportedMemoryFrequency,
       'maxAmountOfRam': instance.maxAmountOfRam,
+      'ramMemoryType': instance.ramMemoryType,
       'network': instance.network,
       'bluetooth': instance.bluetooth,
       'wifi': instance.wifi,
@@ -85,7 +90,7 @@ Map<String, dynamic> _$MotherboardToJson(Motherboard instance) =>
       'pci_express_x1': instance.pciExpressX1,
       'sata3': instance.sata3,
       'm2': instance.m2,
-      'dSub': instance.dSub,
+      'dsub': instance.dsub,
       'dvi': instance.dvi,
       'hdmi': instance.hdmi,
       'displayPort': instance.displayPort,

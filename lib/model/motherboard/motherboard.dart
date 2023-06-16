@@ -7,6 +7,7 @@ import 'package:buildpc/model/model.dart';
 import 'package:buildpc/model/motherboard/motherboard_chipset.dart';
 import 'package:buildpc/model/motherboard/motherboard_network.dart';
 import 'package:buildpc/model/motherboard/motherboard_socket.dart';
+import 'package:buildpc/model/ram/ram_memory_type.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'motherboard.g.dart';
@@ -24,6 +25,7 @@ class Motherboard implements Model {
   int? memorySlots;
   int? supportedMemoryFrequency;
   int? maxAmountOfRam;
+  RamMemoryType? ramMemoryType;
   MotherboardNetwork? network;
   bool? bluetooth;
   bool? wifi;
@@ -36,7 +38,7 @@ class Motherboard implements Model {
   int? pciExpressX1;
   int? sata3;
   int? m2;
-  bool? dSub;
+  bool? dsub;
   int? dvi;
   int? hdmi;
   int? displayPort;
@@ -61,6 +63,7 @@ class Motherboard implements Model {
     required this.memorySlots,
     required this.supportedMemoryFrequency,
     required this.maxAmountOfRam,
+    required this.ramMemoryType,
     required this.network,
     required this.bluetooth,
     required this.wifi,
@@ -70,7 +73,7 @@ class Motherboard implements Model {
     required this.pciExpressX1,
     required this.sata3,
     required this.m2,
-    required this.dSub,
+    required this.dsub,
     required this.dvi,
     required this.hdmi,
     required this.displayPort,
@@ -108,6 +111,7 @@ class Motherboard implements Model {
       memorySlots.toString(),
       supportedMemoryFrequency.toString(),
       maxAmountOfRam.toString(),
+      '${ramMemoryType?.memoryType}',
       '${network?.network}',
       bluetooth.toString(),
       wifi.toString(),
@@ -117,7 +121,7 @@ class Motherboard implements Model {
       pciExpressX1.toString(),
       sata3.toString(),
       m2.toString(),
-      dSub.toString(),
+      dsub.toString(),
       dvi.toString(),
       hdmi.toString(),
       displayPort.toString(),

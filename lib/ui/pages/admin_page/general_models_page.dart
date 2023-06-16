@@ -210,11 +210,6 @@ class _MainView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 CustomRouteModelNameButton(
-                  label: '${_locale?.ramMemoryType}',
-                  destination: AppRouteConstants.modelListPageRouteName,
-                  modelName: 'RamMemoryType',
-                ),
-                CustomRouteModelNameButton(
                   label: '${_locale?.ramTimings}',
                   destination: AppRouteConstants.modelListPageRouteName,
                   modelName: 'RamTimings',

@@ -84,6 +84,9 @@ class _MainViewState extends State<_MainView> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       getModels();
     });
+    final fields = _modelList.currentModel?.parsedModels();
+    idController.text = '${fields?[0]}';
+    nameController.text = '${fields?[2]}';
     super.initState();
   }
 

@@ -11,6 +11,7 @@ import 'package:buildpc/controller/motherboard/motherboard_chipset_controller.da
 import 'package:buildpc/controller/motherboard/motherboard_controller.dart';
 import 'package:buildpc/controller/motherboard/motherboard_network_controller.dart';
 import 'package:buildpc/controller/motherboard/motherboard_socket_controller.dart';
+import 'package:buildpc/controller/ram/ram_memory_type_controller.dart';
 import 'package:buildpc/model/cpu/cpu_generation.dart';
 import 'package:buildpc/model/cpu/cpu_pcie_version.dart';
 import 'package:buildpc/model/general/form_factor.dart';
@@ -20,6 +21,7 @@ import 'package:buildpc/model/motherboard/motherboard.dart';
 import 'package:buildpc/model/motherboard/motherboard_chipset.dart';
 import 'package:buildpc/model/motherboard/motherboard_network.dart';
 import 'package:buildpc/model/motherboard/motherboard_socket.dart';
+import 'package:buildpc/model/ram/ram_memory_type.dart';
 import 'package:buildpc/repository/cpu/cpu_generation_repository.dart';
 import 'package:buildpc/repository/cpu/cpu_pcie_version_repository.dart';
 import 'package:buildpc/repository/general/form_factor_repository.dart';
@@ -29,6 +31,7 @@ import 'package:buildpc/repository/motherboard/motherboard_chipset_repository.da
 import 'package:buildpc/repository/motherboard/motherboard_network_repository.dart';
 import 'package:buildpc/repository/motherboard/motherboard_repository.dart';
 import 'package:buildpc/repository/motherboard/motherboard_socket_repository.dart';
+import 'package:buildpc/repository/ram/ram_memory_type_repository.dart';
 import 'package:buildpc/ui/widgets/border/custom_border.dart';
 import 'package:buildpc/ui/widgets/model_list_view/dynamic_text_form_fields.dart';
 import 'package:buildpc/ui/widgets/model_list_view/model_list_view.dart';
@@ -97,6 +100,8 @@ class _MainViewState extends State<_MainView> {
     final motherboardChipsetController =
         MotherboardChipsetController(MotherboardChipsetRepository());
     final formFactorController = FormFactorController(FormFactorRepository());
+    final ramMemoryTypeController =
+    RamMemoryTypeController(RamMemoryTypeRepository());
     final motherboardNetworkController =
         MotherboardNetworkController(MotherboardNetworkRepository());
     final pcieVersionController =
@@ -112,6 +117,7 @@ class _MainViewState extends State<_MainView> {
     final pcieVersions = await pcieVersionController.getList();
     final motherboardChipsets = await motherboardChipsetController.getList();
     final formFactors = await formFactorController.getList();
+    final ramMemoryTypes = await ramMemoryTypeController.getList();
     final motherboardNetworks = await motherboardNetworkController.getList();
     final performanceLevels = await performanceLevelController.getList();
 
@@ -122,6 +128,7 @@ class _MainViewState extends State<_MainView> {
       _modelList.addNewKV('PcieVersions', pcieVersions);
       _modelList.addNewKV('MotherboardChipsets', motherboardChipsets);
       _modelList.addNewKV('FormFactors', formFactors);
+      _modelList.addNewKV('RamMemoryTypes', ramMemoryTypes);
       _modelList.addNewKV('MotherboardNetworks', motherboardNetworks);
       _modelList.addNewKV('PerformanceLevels', performanceLevels);
     });
@@ -159,6 +166,7 @@ class _MainViewState extends State<_MainView> {
   CPUPCIeVersion? pickedCpuPcieVersion;
   MotherboardChipset? pickedMotherboardChipset;
   FormFactor? pickedFormFactor;
+  RamMemoryType? pickedRamMemoryType;
   MotherboardNetwork? pickedMotherboardNetwork;
 
   CPUGeneration? pickedCpuGenerations1;
@@ -167,6 +175,7 @@ class _MainViewState extends State<_MainView> {
   CPUGeneration? pickedCpuGenerations4;
 
   PerformanceLevel? pickedPerformanceLevel;
+
   bool? pickedBluetooth;
   bool? pickedWifi;
   bool? pickedDigitalAudioJack;
@@ -385,6 +394,23 @@ class _MainViewState extends State<_MainView> {
                           hintText: '${_locale?.maxAmountOfRam}',
                         ),
                         controller: maxAmountOfRamController,
+                      ),
+                      DropdownButton(
+                        hint: Text('${_locale?.ramMemoryType}'),
+                        items: _modelList.modelMap['RamMemoryTypes']
+                            ?.map((item) {
+                          return DropdownMenuItem(
+                            value: item,
+                            child: Text('${item?.parsedModels()[1]}'),
+                          );
+                        }).toList(),
+                        onChanged: (newVal) {
+                          setState(() {
+                            pickedRamMemoryType =
+                                newVal as RamMemoryType?;
+                          });
+                        },
+                        value: pickedRamMemoryType,
                       ),
                       DropdownButton(
                         hint: Text('${_locale?.network}'),
@@ -618,6 +644,7 @@ class _MainViewState extends State<_MainView> {
                   supportedMemoryFrequency:
                       int.parse(supportedMemoryFrequencyController.text),
                   maxAmountOfRam: int.parse(maxAmountOfRamController.text),
+                  ramMemoryType: pickedRamMemoryType,
                   network: pickedMotherboardNetwork,
                   bluetooth: pickedBluetooth,
                   wifi: pickedWifi,
@@ -627,7 +654,7 @@ class _MainViewState extends State<_MainView> {
                   pciExpressX1: int.parse(pciExpressX1Controller.text),
                   sata3: int.parse(sata3Controller.text),
                   m2: int.parse(m2Controller.text),
-                  dSub: pickeddSub,
+                  dsub: pickeddSub,
                   dvi: int.parse(dviController.text),
                   hdmi: int.parse(hdmiController.text),
                   displayPort: int.parse(displayPortController.text),

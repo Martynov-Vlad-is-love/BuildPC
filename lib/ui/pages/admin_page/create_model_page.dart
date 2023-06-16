@@ -69,7 +69,8 @@ class _MainViewState extends State<_MainView> {
     final model =
         ModelControllerFactory.createController('${widget.modelName}');
 
-    return ColoredBox(
+    return Container(
+      height: screenSize.height,
       color: Colors.white,
       child: SingleChildScrollView(
         child: Column(
@@ -114,6 +115,7 @@ class _MainViewState extends State<_MainView> {
                 const CustomBorder(),
               ],
             ),
+            const SizedBox(height: 100),
             ElevatedButton(
               style: ButtonStyle(
                 backgroundColor:
@@ -143,7 +145,7 @@ class _MainViewState extends State<_MainView> {
                 // Очищает список полей
                 _fieldProvider.deleteFields();
               },
-              child: Text('Submit'),
+              child: Text('${_locale?.submit}'),
             ),
           ],
         ),

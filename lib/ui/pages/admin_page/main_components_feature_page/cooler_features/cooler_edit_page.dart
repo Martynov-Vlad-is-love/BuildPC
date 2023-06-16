@@ -81,6 +81,9 @@ class _MainViewState extends State<_MainView> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       getModels();
     });
+    final fields = _modelList.currentModel?.parsedModels();
+    idController.text = '${fields?[0]}';
+    nameController.text = '${fields?[1]}';
     super.initState();
   }
 
@@ -149,7 +152,7 @@ class _MainViewState extends State<_MainView> {
               width: screenSize.width * 0.5,
               height: 100,
               child: Text(
-                'Edit ${widget.modelName}',
+                '${_locale?.edit} ${widget.modelName}',
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 30,

@@ -17,13 +17,20 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  bool _passwordVisible = false;
+  final _loginController = TextEditingController(text: '');
+  final _passwordController = TextEditingController(text: '');
   @override
   Widget build(BuildContext context) {
     final UserController _userController = context.read<UserController>();
     final screenSize = MediaQuery.of(context).size;
-    final _loginController = TextEditingController(text: '');
-    final _passwordController = TextEditingController(text: '');
+
     final AppLocalizations? _locale = AppLocalizations.of(context);
+
+    IconData visibilityIcon = Icons.visibility_off;
+    if (_passwordVisible) {
+      visibilityIcon = Icons.visibility;
+    }
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -50,10 +57,43 @@ class _LoginPageState extends State<LoginPage> {
                 label: '${_locale?.login}',
                 controller: _loginController,
               ),
-              TextBar(
-                icon: Icons.lock_open,
-                label: '${_locale?.password}',
-                controller: _passwordController,
+              Container(
+                height: 50,
+                width: 600,
+                alignment: Alignment.center,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      const Icon(Icons.lock_open),
+                      Expanded(
+                        child: Text(
+                          '${_locale?.password}',
+                          style: const TextStyle(fontSize: 20),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 2,
+                        child: TextFormField(
+                          keyboardType: TextInputType.text,
+                          decoration: InputDecoration(
+                            suffixIcon: IconButton(
+                              icon: Icon(visibilityIcon),
+                              onPressed: () {
+                                setState(() {
+                                  _passwordVisible = !_passwordVisible;
+                                });
+                              },
+                            ),
+                          ),
+                          controller: _passwordController,
+                          obscureText: !_passwordVisible,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
               ),
               Container(
                 decoration: const BoxDecoration(

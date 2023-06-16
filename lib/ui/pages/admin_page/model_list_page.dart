@@ -1,12 +1,11 @@
 import 'package:buildpc/controller/model_controller.dart';
 import 'package:buildpc/controller/model_controller_factory.dart';
 import 'package:buildpc/model/model.dart';
-import 'package:buildpc/project/routes/app_route_constants.dart';
+import 'package:buildpc/ui/widgets/check_model_name/check_create_model_name.dart';
 import 'package:buildpc/ui/widgets/model_list_view/model_list_view_bar.dart';
 import 'package:buildpc/ui/widgets/top_navigation_bar/custom_top_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class ModelListPage extends StatelessWidget {
@@ -110,37 +109,7 @@ class _MainViewState extends State<_MainView> {
               height: 40,
               width: 50,
             ),
-            Container(
-              alignment: Alignment.center,
-              height: 50,
-              width: 150,
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(10)),
-                gradient: LinearGradient(
-                  begin: Alignment.topRight,
-                  end: Alignment.bottomLeft,
-                  colors: [
-                    Colors.deepPurpleAccent,
-                    Colors.red,
-                  ],
-                ),
-              ),
-              child: TextButton(
-                onPressed: () {
-                  GoRouter.of(context).pushNamed(
-                    AppRouteConstants.createModelPage,
-                    pathParameters: {'modelName': '${widget.modelName}'},
-                  );
-                },
-                style: TextButton.styleFrom(
-                  fixedSize: const Size(150, 50),
-                ),
-                child: Text(
-                  '${_locale?.addComponent}',
-                  style: const TextStyle(color: Colors.black),
-                ),
-              ),
-            )
+            CheckCreateModelName(modelName: modelName,generalMode: true,),
           ],
         ),
       ),

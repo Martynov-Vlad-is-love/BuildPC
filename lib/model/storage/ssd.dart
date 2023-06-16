@@ -50,6 +50,7 @@ class Ssd implements Model{
     final List<String> fields = [
       id.toString(),
       '${producer?.name}',
+      '$name',
       storageSize.toString(),
       '${formFactor?.name}',
       '${storageInterface?.name}',

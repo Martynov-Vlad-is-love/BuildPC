@@ -15,6 +15,10 @@ const List<String> producers = [];
 const List<String> rating = [];
 const List<String> user = [];
 
+const List<String> checkNotCreatableModels = ['User', 'Like', 'Rating'];
+const List<String> checkNotEditableModels = ['Like', 'Rating'];
+const List<String> checkNotDeletableModels = ['Like', 'Rating'];
+
 //ignore: prefer-match-file-name
 class Component {
 
@@ -41,7 +45,7 @@ class Component {
 
     final List<String> _users = [
       'id',
-      '${_locale?.name}',
+      '${_locale?.uname}',
       '${_locale?.userName}',
       '${_locale?.email}',
       '${_locale?.role}'
@@ -136,6 +140,7 @@ class Component {
       '${_locale?.memorySlots}',
       '${_locale?.supportedMemoryFrequency}',
       '${_locale?.maxAmountOfRam}',
+      '${_locale?.ramMemoryType}',
       '${_locale?.network}',
       '${_locale?.bluetooth}',
       '${_locale?.wifi}',

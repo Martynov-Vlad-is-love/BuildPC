@@ -76,7 +76,8 @@ class _MainViewState extends State<_MainView> {
     final model =
         ModelControllerFactory.createController('${widget.modelName}');
 
-    return ColoredBox(
+    return Container(
+      height: screenSize.height,
       color: Colors.white,
       child: SingleChildScrollView(
         child: Column(
@@ -87,7 +88,7 @@ class _MainViewState extends State<_MainView> {
               width: screenSize.width * 0.5,
               height: 100,
               child: Text(
-                'Edit ${widget.modelName}',
+                '${_locale?.edit} ${widget.modelName}',
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 30,

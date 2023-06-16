@@ -30,8 +30,10 @@ class _MainView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AppLocalizations? _locale = AppLocalizations.of(context);
+    final screenSize = MediaQuery.of(context).size;
 
-    return ColoredBox(
+    return Container(
+      height: screenSize.height,
       color: Colors.white,
       child: SingleChildScrollView(
         child: Column(

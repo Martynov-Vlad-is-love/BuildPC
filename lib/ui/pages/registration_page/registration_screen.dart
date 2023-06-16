@@ -96,10 +96,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       _emailController.text,
                       _nameController.text,
                     );
-                    if (result != null) {
-                      await GoRouter.of(context)
-                          .pushNamed(AppRouteConstants.loginRouteName);
-                    }
+                    // if (result != null) {
+                    //   await GoRouter.of(context)
+                    //       .pushNamed(AppRouteConstants.loginRouteName);
+                    // }
                   },
                   child: Text(
                     '${_locale?.register}',

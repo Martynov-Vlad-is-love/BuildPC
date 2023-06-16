@@ -139,6 +139,9 @@
   "userName": "Username",
   "email": "EMail",
   "role": "Role",
-  "register": "Register"
+  "register": "Register",
+  "intError": "This is not a number.",
+  "incorrectEmail": "Incorrect eMail format.",
+  "empty": "EMPTY"
 
 }

@@ -11,6 +11,7 @@ import 'package:buildpc/controller/motherboard/motherboard_chipset_controller.da
 import 'package:buildpc/controller/motherboard/motherboard_controller.dart';
 import 'package:buildpc/controller/motherboard/motherboard_network_controller.dart';
 import 'package:buildpc/controller/motherboard/motherboard_socket_controller.dart';
+import 'package:buildpc/controller/ram/ram_memory_type_controller.dart';
 import 'package:buildpc/model/cpu/cpu_generation.dart';
 import 'package:buildpc/model/cpu/cpu_pcie_version.dart';
 import 'package:buildpc/model/general/form_factor.dart';
@@ -21,6 +22,7 @@ import 'package:buildpc/model/motherboard/motherboard.dart';
 import 'package:buildpc/model/motherboard/motherboard_chipset.dart';
 import 'package:buildpc/model/motherboard/motherboard_network.dart';
 import 'package:buildpc/model/motherboard/motherboard_socket.dart';
+import 'package:buildpc/model/ram/ram_memory_type.dart';
 import 'package:buildpc/repository/cpu/cpu_generation_repository.dart';
 import 'package:buildpc/repository/cpu/cpu_pcie_version_repository.dart';
 import 'package:buildpc/repository/general/form_factor_repository.dart';
@@ -30,6 +32,7 @@ import 'package:buildpc/repository/motherboard/motherboard_chipset_repository.da
 import 'package:buildpc/repository/motherboard/motherboard_network_repository.dart';
 import 'package:buildpc/repository/motherboard/motherboard_repository.dart';
 import 'package:buildpc/repository/motherboard/motherboard_socket_repository.dart';
+import 'package:buildpc/repository/ram/ram_memory_type_repository.dart';
 import 'package:buildpc/ui/widgets/border/custom_border.dart';
 import 'package:buildpc/ui/widgets/model_list_view/model_list_view.dart';
 import 'package:buildpc/ui/widgets/top_navigation_bar/custom_top_navigation_bar.dart';
@@ -88,56 +91,6 @@ class _MainView extends StatefulWidget {
 class _MainViewState extends State<_MainView> {
   ModelController get _modelList => context.read<ModelController>();
 
-  @override
-  void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      getModels();
-    });
-    super.initState();
-  }
-
-  Future<void> getModels() async {
-    final producerController = ProducersController(ProducersRepository());
-    final socketController =
-        MotherboardSocketController(MotherboardSocketRepository());
-    final cpuGenerationController =
-        CpuGenerationController(CpuGenerationRepository());
-    final motherboardChipsetController =
-        MotherboardChipsetController(MotherboardChipsetRepository());
-    final formFactorController = FormFactorController(FormFactorRepository());
-    final motherboardNetworkController =
-        MotherboardNetworkController(MotherboardNetworkRepository());
-    final pcieVersionController =
-        CpuPcieVersionController(CpuPcieVersionRepository());
-    final performanceLevelController =
-        PerformanceLevelController(PerformanceLevelRepository());
-
-    final _modelList = context.read<ModelController>();
-
-    final producers = await producerController.getList();
-    final sockets = await socketController.getList();
-    final cpuGenerations = await cpuGenerationController.getList();
-    final pcieVersions = await pcieVersionController.getList();
-    final motherboardChipsets = await motherboardChipsetController.getList();
-    final formFactors = await formFactorController.getList();
-    final motherboardNetworks = await motherboardNetworkController.getList();
-    final performanceLevels = await performanceLevelController.getList();
-
-    setState(() {
-      _modelList.addNewKV('Producers', producers);
-      _modelList.addNewKV('MotherboardSockets', sockets);
-      _modelList.addNewKV('CpuGenerations', cpuGenerations);
-      _modelList.addNewKV('PcieVersions', pcieVersions);
-      _modelList.addNewKV('MotherboardChipsets', motherboardChipsets);
-      _modelList.addNewKV('FormFactors', formFactors);
-      _modelList.addNewKV('MotherboardNetworks', motherboardNetworks);
-      _modelList.addNewKV('PerformanceLevels', performanceLevels);
-    });
-  }
-
-  List<String> result = [];
-  final motherboardController = MotherboardController(MotherboardRepository());
-
   final idController = TextEditingController(text: '');
   final nameController = TextEditingController(text: '');
   final maxTdpOfProcessorsController = TextEditingController(text: '');
@@ -167,6 +120,7 @@ class _MainViewState extends State<_MainView> {
   CPUPCIeVersion? pickedCpuPcieVersion;
   MotherboardChipset? pickedMotherboardChipset;
   FormFactor? pickedFormFactor;
+  RamMemoryType? pickedRamMemoryType;
   MotherboardNetwork? pickedMotherboardNetwork;
 
   CPUGeneration? pickedCpuGenerations1;
@@ -179,6 +133,65 @@ class _MainViewState extends State<_MainView> {
   bool? pickedWifi;
   bool? pickedDigitalAudioJack;
   bool? pickeddSub;
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      getModels();
+    });
+    final fields = _modelList.currentModel?.parsedModels();
+    idController.text = '${fields?[0]}';
+    nameController.text = '${fields?[1]}';
+    super.initState();
+  }
+
+  Future<void> getModels() async {
+    final producerController = ProducersController(ProducersRepository());
+    final socketController =
+        MotherboardSocketController(MotherboardSocketRepository());
+    final cpuGenerationController =
+        CpuGenerationController(CpuGenerationRepository());
+    final motherboardChipsetController =
+        MotherboardChipsetController(MotherboardChipsetRepository());
+    final formFactorController = FormFactorController(FormFactorRepository());
+    final ramMemoryTypeController =
+    RamMemoryTypeController(RamMemoryTypeRepository());
+    final motherboardNetworkController =
+        MotherboardNetworkController(MotherboardNetworkRepository());
+    final pcieVersionController =
+        CpuPcieVersionController(CpuPcieVersionRepository());
+    final performanceLevelController =
+        PerformanceLevelController(PerformanceLevelRepository());
+
+    final _modelList = context.read<ModelController>();
+
+    final producers = await producerController.getList();
+    final sockets = await socketController.getList();
+    final cpuGenerations = await cpuGenerationController.getList();
+    final pcieVersions = await pcieVersionController.getList();
+    final motherboardChipsets = await motherboardChipsetController.getList();
+    final formFactors = await formFactorController.getList();
+    final ramMemoryTypes = await ramMemoryTypeController.getList();
+    final motherboardNetworks = await motherboardNetworkController.getList();
+    final performanceLevels = await performanceLevelController.getList();
+
+    setState(() {
+      _modelList.addNewKV('Producers', producers);
+      _modelList.addNewKV('MotherboardSockets', sockets);
+      _modelList.addNewKV('CpuGenerations', cpuGenerations);
+      _modelList.addNewKV('PcieVersions', pcieVersions);
+      _modelList.addNewKV('MotherboardChipsets', motherboardChipsets);
+      _modelList.addNewKV('FormFactors', formFactors);
+      _modelList.addNewKV('RamMemoryTypes', ramMemoryTypes);
+      _modelList.addNewKV('MotherboardNetworks', motherboardNetworks);
+      _modelList.addNewKV('PerformanceLevels', performanceLevels);
+    });
+  }
+
+  List<String> result = [];
+  final motherboardController = MotherboardController(MotherboardRepository());
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -201,7 +214,7 @@ class _MainViewState extends State<_MainView> {
               width: screenSize.width * 0.5,
               height: 100,
               child: Text(
-                'Edit ${widget.modelName}',
+                '${_locale?.edit} ${widget.modelName}',
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 30,
@@ -392,6 +405,23 @@ class _MainViewState extends State<_MainView> {
                           hintText: '${_locale?.maxAmountOfRam}',
                         ),
                         controller: maxAmountOfRamController,
+                      ),
+                      DropdownButton(
+                        hint: Text('${_locale?.ramMemoryType}'),
+                        items: _modelList.modelMap['RamMemoryTypes']
+                            ?.map((item) {
+                          return DropdownMenuItem(
+                            value: item,
+                            child: Text('${item?.parsedModels()[1]}'),
+                          );
+                        }).toList(),
+                        onChanged: (newVal) {
+                          setState(() {
+                            pickedRamMemoryType =
+                            newVal as RamMemoryType?;
+                          });
+                        },
+                        value: pickedRamMemoryType,
                       ),
                       DropdownButton(
                         hint: Text('${_locale?.network}'),
@@ -624,6 +654,7 @@ class _MainViewState extends State<_MainView> {
                     int.parse(supportedMemoryFrequencyController.text),
                     maxAmountOfRam:
                     int.parse(maxAmountOfRamController.text),
+                    ramMemoryType: pickedRamMemoryType,
                     network: pickedMotherboardNetwork,
                     bluetooth: pickedBluetooth,
                     wifi: pickedWifi,
@@ -633,7 +664,7 @@ class _MainViewState extends State<_MainView> {
                     pciExpressX1: int.parse(pciExpressX1Controller.text),
                     sata3: int.parse(sata3Controller.text),
                     m2: int.parse(m2Controller.text),
-                    dSub: pickeddSub,
+                    dsub: pickeddSub,
                     dvi: int.parse(dviController.text),
                     hdmi: int.parse(hdmiController.text),
                     displayPort: int.parse(displayPortController.text),
