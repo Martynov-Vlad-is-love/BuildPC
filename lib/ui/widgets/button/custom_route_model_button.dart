@@ -40,7 +40,7 @@ class CustomRouteModelButton extends StatelessWidget {
                 pathParameters: {'modelName': modelName}, extra: model,);
           },
           style: TextButton.styleFrom(
-            fixedSize: const Size(250, 250),
+            fixedSize: const Size(350, 350),
           ),
           child: Text(
             //LocaleKeys.courses.tr(),
