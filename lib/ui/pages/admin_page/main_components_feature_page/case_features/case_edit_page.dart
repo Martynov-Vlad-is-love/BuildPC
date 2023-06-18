@@ -166,6 +166,9 @@ class _MainViewState extends State<_MainView> {
     final _fieldProvider = context.read<FieldController>();
     //final mod = context.read<ModelController>();
     //final List<String> modelFields = widget.fieldNames ?? [];
+    final translatedModel = Translate();
+    final translate =
+    translatedModel.getTranslatedModel('Case', context);
 
     return ColoredBox(
       color: Colors.white,
@@ -178,7 +181,7 @@ class _MainViewState extends State<_MainView> {
               width: screenSize.width * 0.5,
               height: 100,
               child: Text(
-                '${_locale?.edit} ${widget.modelName}',
+                '${_locale?.edit} "$translate"',
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 30,
@@ -475,71 +478,75 @@ class _MainViewState extends State<_MainView> {
               width: 100,
             ),
             Center(
-              child: ElevatedButton(
-                style: ButtonStyle(
-                  backgroundColor:
-                  const MaterialStatePropertyAll<Color>(Colors.black),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(18.0),
+              child: Container(
+                margin: EdgeInsets.only(top: 20),
+                height: 40,
+                child: ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor:
+                    const MaterialStatePropertyAll<Color>(Colors.black),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18.0),
+                      ),
                     ),
                   ),
+                  onPressed: () async {
+
+                    final List<FormFactor?> formFactors = [];
+                    if (pickedFormFactor1 != null) {
+                      formFactors.add(pickedFormFactor1);
+                    }
+                    if (pickedFormFactor2 != null) {
+                      formFactors.add(pickedFormFactor2);
+                    }
+                    if (pickedFormFactor3 != null) {
+                      formFactors.add(pickedFormFactor3);
+                    }
+                    if (pickedFormFactor4 != null) {
+                      formFactors.add(pickedFormFactor4);
+                    }
+
+                    final List<CaseDesignFeatures?> designFeatures = [];
+                    if (pickedCaseDesignFeatures1 != null) {
+                      designFeatures.add(pickedCaseDesignFeatures1);
+                    }
+                    if (pickedCaseDesignFeatures1 != null) {
+                      designFeatures.add(pickedCaseDesignFeatures1);
+                    }
+                    if (pickedCaseDesignFeatures1 != null) {
+                      designFeatures.add(pickedCaseDesignFeatures1);
+                    }
+                    if (pickedCaseDesignFeatures1 != null) {
+                      designFeatures.add(pickedCaseDesignFeatures1);
+                    }
+
+                    final pcCase = Case(
+                      id: int.parse(idController.text),
+                      name: nameController.text,
+                      size: pickedCaseSize,
+                      producer: pickedProducer,
+                      formFactor: formFactors,
+                      powerSupplyLocation: pickedCasePowerSupplyLocation,
+                      fansIncluded: pickedFansIncluded,
+                      usb_3_2: int.parse(usb_3_2Controller.text),
+                      usb_3_0: int.parse(usb_3_0Controller.text),
+                      usb_2_0: int.parse(usb_2_0Controller.text),
+                      designFeatures: designFeatures,
+                      maxLengthOfGraphicCard:
+                      int.parse(maxLengthOfGraphicCardController.text),
+                      description: descriptionController.text,
+                      recommendedPrice: int.parse(recommendedPriceController.text),
+                      performanceLevel: pickedPerformanceLevel,
+                    );
+                    await caseController.updateData(pcCase);
+
+                    print('Form Field Values: $result');
+                    // Очищает список полей
+                    _fieldProvider.deleteFields();
+                  },
+                  child: Text('${_locale?.submit}', style: TextStyle(fontSize: 20),),
                 ),
-                onPressed: () async {
-
-                  final List<FormFactor?> formFactors = [];
-                  if (pickedFormFactor1 != null) {
-                    formFactors.add(pickedFormFactor1);
-                  }
-                  if (pickedFormFactor2 != null) {
-                    formFactors.add(pickedFormFactor2);
-                  }
-                  if (pickedFormFactor3 != null) {
-                    formFactors.add(pickedFormFactor3);
-                  }
-                  if (pickedFormFactor4 != null) {
-                    formFactors.add(pickedFormFactor4);
-                  }
-
-                  final List<CaseDesignFeatures?> designFeatures = [];
-                  if (pickedCaseDesignFeatures1 != null) {
-                    designFeatures.add(pickedCaseDesignFeatures1);
-                  }
-                  if (pickedCaseDesignFeatures1 != null) {
-                    designFeatures.add(pickedCaseDesignFeatures1);
-                  }
-                  if (pickedCaseDesignFeatures1 != null) {
-                    designFeatures.add(pickedCaseDesignFeatures1);
-                  }
-                  if (pickedCaseDesignFeatures1 != null) {
-                    designFeatures.add(pickedCaseDesignFeatures1);
-                  }
-
-                  final pcCase = Case(
-                    id: int.parse(idController.text),
-                    name: nameController.text,
-                    size: pickedCaseSize,
-                    producer: pickedProducer,
-                    formFactor: formFactors,
-                    powerSupplyLocation: pickedCasePowerSupplyLocation,
-                    fansIncluded: pickedFansIncluded,
-                    usb_3_2: int.parse(usb_3_2Controller.text),
-                    usb_3_0: int.parse(usb_3_0Controller.text),
-                    usb_2_0: int.parse(usb_2_0Controller.text),
-                    designFeatures: designFeatures,
-                    maxLengthOfGraphicCard:
-                    int.parse(maxLengthOfGraphicCardController.text),
-                    description: descriptionController.text,
-                    recommendedPrice: int.parse(recommendedPriceController.text),
-                    performanceLevel: pickedPerformanceLevel,
-                  );
-                  await caseController.updateData(pcCase);
-
-                  print('Form Field Values: $result');
-                  // Очищает список полей
-                  _fieldProvider.deleteFields();
-                },
-                child: Text('${_locale?.submit}'),
               ),
             ),
             const SizedBox(

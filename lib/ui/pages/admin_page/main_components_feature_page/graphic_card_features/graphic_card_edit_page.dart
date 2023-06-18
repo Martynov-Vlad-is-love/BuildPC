@@ -163,8 +163,9 @@ class _MainViewState extends State<_MainView> {
     final screenSize = MediaQuery.of(context).size;
     final AppLocalizations? _locale = AppLocalizations.of(context);
     final _fieldProvider = context.read<FieldController>();
-    //final mod = context.read<ModelController>();
-    //final List<String> modelFields = widget.fieldNames ?? [];
+    final translatedModel = Translate();
+    final translate =
+    translatedModel.getTranslatedModel('GraphicCard', context);
 
     return ColoredBox(
       color: Colors.white,
@@ -177,7 +178,7 @@ class _MainViewState extends State<_MainView> {
               width: screenSize.width * 0.5,
               height: 100,
               child: Text(
-                '${_locale?.edit} ${widget.modelName}',
+                '${_locale?.edit} "$translate"',
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 30,
@@ -441,69 +442,73 @@ class _MainViewState extends State<_MainView> {
               width: 100,
             ),
             Center(
-              child: ElevatedButton(
-                style: ButtonStyle(
-                  backgroundColor:
-                  const MaterialStatePropertyAll<Color>(Colors.black),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(18.0),
+              child: Container(
+                margin: EdgeInsets.only(top: 20),
+                height: 40,
+                child: ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor:
+                    const MaterialStatePropertyAll<Color>(Colors.black),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18.0),
+                      ),
                     ),
                   ),
+                  onPressed: () async {
+                    final List<GPUConnector?> gpuCon = [];
+                    if (pickedGpuConnectors1 != null) {
+                      gpuCon.add(pickedGpuConnectors1);
+                    }
+                    if (pickedGpuConnectors2 != null) {
+                      gpuCon.add(pickedGpuConnectors2);
+                    }
+                    if (pickedGpuConnectors3 != null) {
+                      gpuCon.add(pickedGpuConnectors3);
+                    }
+                    if (pickedGpuConnectors4 != null) {
+                      gpuCon.add(pickedGpuConnectors4);
+                    }
+
+                    final graphicCard = GraphicCard(
+                      id: int.parse(idController.text),
+                      producer: pickedProducer,
+                      name: nameController.text,
+                      vendor: pickedVendor,
+                      year: int.parse(yearController.text),
+                      technicalProcess:
+                      int.parse(technicalProcessController.text),
+                      gpuFrequency: int.parse(gpuFrequencyController.text),
+                      memoryAmount: int.parse(memoryAmountController.text),
+                      memoryType: pickedGpuMemoryType,
+                      memoryFrequency:
+                      int.parse(memoryFrequencyController.text),
+                      bus: int.parse(busController.text),
+                      tdp: int.parse(tdpController.text),
+                      connector: gpuCon,
+                      interfaceType: pickedGpuInterfaceType,
+                      length: int.parse(lengthController.text),
+                      description: descriptionController.text,
+                      gpuTechnologies: pickedGpuTechnologies,
+                      recommendedPrice:
+                      int.parse(recommendedPriceController.text),
+                      performanceLevel: pickedPerformanceLevel,
+                    );
+                    await graphicCardController.updateData(graphicCard);
+
+                    print('${graphicCard.parsedModels().toString()}');
+                    // if (ModelUtil.modelMapping.containsKey(widget.modelName)) {
+                    //   final constructor =
+                    //       ModelUtil.modelMapping[widget.modelName];
+                    //   final instance =
+                    //       constructor!(_fieldProvider.fields) as Processor;
+                    //   await processorController.updateData(instance);
+                    //   mod.refresh();
+                    // }
+                    _fieldProvider.deleteFields();
+                  },
+                  child: Text('${_locale?.submit}', style: TextStyle(fontSize: 20),),
                 ),
-                onPressed: () async {
-                  final List<GPUConnector?> gpuCon = [];
-                  if (pickedGpuConnectors1 != null) {
-                    gpuCon.add(pickedGpuConnectors1);
-                  }
-                  if (pickedGpuConnectors2 != null) {
-                    gpuCon.add(pickedGpuConnectors2);
-                  }
-                  if (pickedGpuConnectors3 != null) {
-                    gpuCon.add(pickedGpuConnectors3);
-                  }
-                  if (pickedGpuConnectors4 != null) {
-                    gpuCon.add(pickedGpuConnectors4);
-                  }
-
-                  final graphicCard = GraphicCard(
-                    id: int.parse(idController.text),
-                    producer: pickedProducer,
-                    name: nameController.text,
-                    vendor: pickedVendor,
-                    year: int.parse(yearController.text),
-                    technicalProcess:
-                    int.parse(technicalProcessController.text),
-                    gpuFrequency: int.parse(gpuFrequencyController.text),
-                    memoryAmount: int.parse(memoryAmountController.text),
-                    memoryType: pickedGpuMemoryType,
-                    memoryFrequency:
-                    int.parse(memoryFrequencyController.text),
-                    bus: int.parse(busController.text),
-                    tdp: int.parse(tdpController.text),
-                    connector: gpuCon,
-                    interfaceType: pickedGpuInterfaceType,
-                    length: int.parse(lengthController.text),
-                    description: descriptionController.text,
-                    gpuTechnologies: pickedGpuTechnologies,
-                    recommendedPrice:
-                    int.parse(recommendedPriceController.text),
-                    performanceLevel: pickedPerformanceLevel,
-                  );
-                  await graphicCardController.updateData(graphicCard);
-
-                  print('${graphicCard.parsedModels().toString()}');
-                  // if (ModelUtil.modelMapping.containsKey(widget.modelName)) {
-                  //   final constructor =
-                  //       ModelUtil.modelMapping[widget.modelName];
-                  //   final instance =
-                  //       constructor!(_fieldProvider.fields) as Processor;
-                  //   await processorController.updateData(instance);
-                  //   mod.refresh();
-                  // }
-                  _fieldProvider.deleteFields();
-                },
-                child: Text('${_locale?.submit}'),
               ),
             ),
             const SizedBox(

@@ -22,8 +22,8 @@ class Like implements Model{
   List<String> parsedModels() {
     final fields = [
       id.toString(),
-      '${buildPc?.parsedModels().toString()}',
-      '${user?.parsedModels().toString()}'
+      '${user?.username}',
+      '${buildPc?.nameOfBuild}'
     ];
 
     return fields;

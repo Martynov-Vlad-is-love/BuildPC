@@ -92,8 +92,9 @@ class _MainViewState extends State<_MainView> {
     final screenSize = MediaQuery.of(context).size;
     final AppLocalizations? _locale = AppLocalizations.of(context);
     final _fieldProvider = context.read<FieldController>();
-    //final mod = context.read<ModelController>();
-    //final List<String> modelFields = widget.fieldNames ?? [];
+    final translatedModel = Translate();
+    final translate =
+    translatedModel.getTranslatedModel('Motherboard', context);
 
     return Container(
       height: screenSize.height,
@@ -107,7 +108,7 @@ class _MainViewState extends State<_MainView> {
               width: screenSize.width * 0.5,
               height: 100,
               child: Text(
-                '${_locale?.edit} ${widget.modelName}',
+                '${_locale?.edit} "$translate"',
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 30,

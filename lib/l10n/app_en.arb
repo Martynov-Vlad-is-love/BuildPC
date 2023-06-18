@@ -3,7 +3,7 @@
   "homePage": "Home",
   "myPC": "My PC",
   "profile": "Profile",
-  "profileLabel": "Sign in/Sign up",
+  "profileLabel": "Sign in",
   "name": "Name",
   "vendor": "Vendor",
   "producer": "Producer",
@@ -142,6 +142,7 @@
   "register": "Register",
   "intError": "This is not a number.",
   "incorrectEmail": "Incorrect eMail format.",
-  "empty": "EMPTY"
+  "empty": "EMPTY",
+  "search": "Search"
 
 }

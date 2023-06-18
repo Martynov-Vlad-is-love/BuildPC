@@ -35,12 +35,14 @@ class MainModelListViewBar extends StatelessWidget {
         final item = currentItem?.parsedModels();
         final concatenate = StringBuffer();
 
-        item?.forEach((String? item) {
-          if(item == '[]' || item == 'null'){
+        item?.forEach((item) {
+          if (item.contains('[]') || item.contains('null')) {
+
             item = '${_locale?.empty}';
           }
           concatenate.write('$item| ');
         });
+
 
         return Center(
           child: SingleChildScrollView(
@@ -51,20 +53,17 @@ class MainModelListViewBar extends StatelessWidget {
                 color: _curColor,
               ),
               height: 80,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Id: $concatenate',
-                      ),
-                    ],
+                  Flexible(
+                    child: Text(
+                      'Id: $concatenate',
+                      style: const TextStyle(fontSize: 23),
+                    ),
                   ),
                   const SizedBox(height: 5),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       TextButton(
                         onPressed: () {
@@ -75,7 +74,7 @@ class MainModelListViewBar extends StatelessWidget {
                         },
                         child: Container(
                           alignment: Alignment.center,
-                          height: 20,
+                          height: 30,
                           constraints:
                           const BoxConstraints(minWidth: 50, maxWidth: 100),
                           decoration: const BoxDecoration(
@@ -86,7 +85,7 @@ class MainModelListViewBar extends StatelessWidget {
                           ),
                           child: Text(
                             '${_locale?.edit}',
-                            style: const TextStyle(color: Colors.white),
+                            style: const TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),
                           ),
                         ),
                       ),
@@ -99,7 +98,7 @@ class MainModelListViewBar extends StatelessWidget {
                         },
                         child: Container(
                           alignment: Alignment.center,
-                          height: 20,
+                          height: 30,
                           constraints:
                           const BoxConstraints(minWidth: 50, maxWidth: 100),
                           decoration: const BoxDecoration(
@@ -110,7 +109,7 @@ class MainModelListViewBar extends StatelessWidget {
                           ),
                           child: Text(
                             '${_locale?.delete}',
-                            style: const TextStyle(color: Colors.white),
+                            style: const TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),
                           ),
                         ),
                       )

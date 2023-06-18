@@ -31,6 +31,7 @@ class ModelListViewBar extends StatelessWidget {
 
         item?.forEach((item) {
           if (item == '[]' || item == 'null') {
+
             item = '${_locale?.empty}';
           }
           concatenate.write('$item| ');
@@ -45,16 +46,15 @@ class ModelListViewBar extends StatelessWidget {
                 color: _curColor,
               ),
               height: 80,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Id: $concatenate',
-                      ),
-                    ],
+                  Flexible(
+                    child: Text(
+                      'Id: $concatenate',
+                      style: const TextStyle(fontSize: 23),
+                    ),
                   ),
                   const SizedBox(
                     height: 5,

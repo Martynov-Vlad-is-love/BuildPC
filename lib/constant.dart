@@ -20,6 +20,58 @@ const List<String> checkNotEditableModels = ['Like', 'Rating'];
 const List<String> checkNotDeletableModels = ['Like', 'Rating'];
 
 //ignore: prefer-match-file-name
+class Translate{
+  String? getTranslatedModel(String? modelName, BuildContext context){
+    final AppLocalizations? _locale = AppLocalizations.of(context);
+
+    final translatedModels = {
+      'FormFactor': '${_locale?.formFactor}',
+      'PerformanceLevel': '${_locale?.performanceLevel}',
+      'SsdCellsType': '${_locale?.cellsType}',
+      'Producers': '${_locale?.producer}',
+      'Rating': '${_locale?.rating}',
+      'Like': '${_locale?.like}',
+      'CaseDesignFeatures': '${_locale?.caseDesignFeatures}',
+      'CasePowerSupplyLocation': '${_locale?.casePowerSupplyLocation}',
+      'CaseSize': '${_locale?.caseSize}',
+      'CoolerMaterial': '${_locale?.coolerMaterial}',
+      'PowerSupplyProtectionFunctions': '${_locale?.protectionFunctions}',
+      'CpuGeneration': '${_locale?.cpuGeneration}',
+      'CpuPcieVersion': '${_locale?.cpuPcieVersion}',
+      'CpuTechnologies': '${_locale?.cpuTechnologies}',
+      'GpuConnector': '${_locale?.gpuConnector}',
+      'GpuInterfaceType': '${_locale?.gpuInterfaceType}',
+      'GpuMemoryType': '${_locale?.gpuMemoryType}',
+      'GpuTechnologies': '${_locale?.gpuTechnologies}',
+      'MotherboardChipset': '${_locale?.motherboardChipset}',
+      'MotherboardNetwork': '${_locale?.network}',
+      'MotherboardSocket': '${_locale?.motherboardSocket}',
+      'RamMemoryType': '${_locale?.ramMemoryType}',
+      'StorageInterface': '${_locale?.storageInterface}',
+      'StorageFormFactor': '${_locale?.storageFormFactor}',
+      'RamTimings': '${_locale?.ramTimings}',
+      'GraphicCard': '${_locale?.graphicCard}',
+      'Case': '${_locale?.pcCase}',
+      'Cooler': '${_locale?.cooler}',
+      'Processor': '${_locale?.processor}',
+      'Motherboard': '${_locale?.motherboard}',
+      'Ram': '${_locale?.ram}',
+      'PowerSupply': '${_locale?.powerSupply}',
+      'Hdd': '${_locale?.hdd}',
+      'Ssd': '${_locale?.ssd}',
+      'BuildPC': '${_locale?.buildPC}',
+      'User': '${_locale?.users}'
+    };
+
+    if(translatedModels.containsKey(modelName)){
+      return translatedModels[modelName];
+    }
+
+    return 'ERROR';
+  }
+}
+
+//ignore: prefer-match-file-name
 class Component {
 
   List<String> getComponentsList(BuildContext context) {

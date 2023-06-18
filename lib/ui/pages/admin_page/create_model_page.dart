@@ -61,13 +61,17 @@ class _MainViewState extends State<_MainView> {
   Widget build(BuildContext context) {
     final AppLocalizations? _locale = AppLocalizations.of(context);
     final screenSize = MediaQuery.of(context).size;
-    final modelLength = widget.modelList?.length ?? 0;
     final List<String> modelFields = widget.modelList ?? [];
     final _userController = context.read<UserController>();
     final _modelController = context.read<ModelController>();
     final _fieldProvider = context.read<FieldController>();
     final model =
         ModelControllerFactory.createController('${widget.modelName}');
+    final translatedModel = Translate();
+    final translate =
+    translatedModel.getTranslatedModel(widget.modelName, context);
+    modelFields.remove('id');
+    final modelLength = modelFields.length;
 
     return Container(
       height: screenSize.height,
@@ -81,7 +85,7 @@ class _MainViewState extends State<_MainView> {
               width: screenSize.width * 0.5,
               height: 100,
               child: Text(
-                '${_locale?.create} ${widget.modelName}',
+                '${_locale?.create} "$translate"',
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 30,
@@ -128,16 +132,18 @@ class _MainViewState extends State<_MainView> {
               ),
               onPressed: () async {
                 final List<String> arr = [];
+                final id = _modelController.currentModel?.parsedModels().first;
+                arr.add('$id');
+                _fieldProvider.fields = result;
                 for (final element in _fieldProvider.fields) {
                   if (element != '') {
                     arr.add(element);
                   }
                 }
 
-                _fieldProvider.fields = result;
                 if (ModelUtil.modelMapping.containsKey(widget.modelName)) {
                   final constructor = ModelUtil.modelMapping[widget.modelName];
-                  final instance = constructor!(_fieldProvider.fields) as Model;
+                  final instance = constructor!(arr) as Model;
                   await model.postData(instance);
                 }
 

@@ -138,8 +138,8 @@ class _MainViewState extends State<_MainView> {
     final screenSize = MediaQuery.of(context).size;
     final AppLocalizations? _locale = AppLocalizations.of(context);
     final _fieldProvider = context.read<FieldController>();
-    //final mod = context.read<ModelController>();
-    //final List<String> modelFields = widget.fieldNames ?? [];
+    final translatedModel = Translate();
+    final translate = translatedModel.getTranslatedModel('Cooler', context);
 
     return ColoredBox(
       color: Colors.white,
@@ -152,7 +152,7 @@ class _MainViewState extends State<_MainView> {
               width: screenSize.width * 0.5,
               height: 100,
               child: Text(
-                '${_locale?.edit} ${widget.modelName}',
+                '${_locale?.edit} "$translate"',
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 30,
@@ -338,51 +338,55 @@ class _MainViewState extends State<_MainView> {
               width: 100,
             ),
             Center(
-              child: ElevatedButton(
-                style: ButtonStyle(
-                  backgroundColor:
-                  const MaterialStatePropertyAll<Color>(Colors.black),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(18.0),
+              child: Container(
+                margin: EdgeInsets.only(top: 20),
+                height: 40,
+                child: ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor:
+                    const MaterialStatePropertyAll<Color>(Colors.black),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18.0),
+                      ),
                     ),
                   ),
+                  onPressed: () async {
+                    final List<MotherboardSocket?> sockets = [];
+                    if (pickedMotherboardSocket1 != null) {
+                      sockets.add(pickedMotherboardSocket1);
+                    }
+                    if (pickedMotherboardSocket2 != null) {
+                      sockets.add(pickedMotherboardSocket2);
+                    }
+                    if (pickedMotherboardSocket3 != null) {
+                      sockets.add(pickedMotherboardSocket3);
+                    }
+                    if (pickedMotherboardSocket4 != null) {
+                      sockets.add(pickedMotherboardSocket4);
+                    }
+
+                    final cooler = Cooler(
+                      id: int.parse(idController.text),
+                      name: nameController.text,
+                      producer: pickedProducer,
+                      socket: sockets,
+                      material: pickedCoolerMaterial,
+                      maxTdp: int.parse(maxTdpController.text),
+                      thermalTubes: int.tryParse(thermalTubesController.text),
+                      description: descriptionController.text,
+                      recommendedPrice:
+                          int.parse(recommendedPriceController.text),
+                      performanceLevel: pickedPerformanceLevel,
+                    );
+                    await coolerController.updateData(cooler);
+
+                    print('Form Field Values: $result');
+                    // Очищает список полей
+                    _fieldProvider.deleteFields();
+                  },
+                  child: Text('${_locale?.submit}', style: TextStyle(fontSize: 20),),
                 ),
-                onPressed: () async {
-                  final List<MotherboardSocket?> sockets = [];
-                  if (pickedMotherboardSocket1 != null) {
-                    sockets.add(pickedMotherboardSocket1);
-                  }
-                  if (pickedMotherboardSocket2 != null) {
-                    sockets.add(pickedMotherboardSocket2);
-                  }
-                  if (pickedMotherboardSocket3 != null) {
-                    sockets.add(pickedMotherboardSocket3);
-                  }
-                  if (pickedMotherboardSocket4 != null) {
-                    sockets.add(pickedMotherboardSocket4);
-                  }
-
-                  final cooler = Cooler(
-                    id: int.parse(idController.text),
-                    name: nameController.text,
-                    producer: pickedProducer,
-                    socket: sockets,
-                    material: pickedCoolerMaterial,
-                    maxTdp: int.parse(maxTdpController.text),
-                    thermalTubes: int.tryParse(thermalTubesController.text),
-                    description: descriptionController.text,
-                    recommendedPrice:
-                        int.parse(recommendedPriceController.text),
-                    performanceLevel: pickedPerformanceLevel,
-                  );
-                  await coolerController.updateData(cooler);
-
-                  print('Form Field Values: $result');
-                  // Очищает список полей
-                  _fieldProvider.deleteFields();
-                },
-                child: Text('${_locale?.submit}'),
               ),
             ),
             const SizedBox(

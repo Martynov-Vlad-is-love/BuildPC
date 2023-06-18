@@ -57,7 +57,7 @@ class BuildPC implements Model {
   Map<String, dynamic> toJson() => _$BuildPCToJson(this);
 
   @override
-  List<String?> parsedModels() {
+  List<String> parsedModels() {
     final ramList = [];
     for (final plate in ram) {
       ramList.add(plate?.name);
@@ -73,20 +73,20 @@ class BuildPC implements Model {
 
     final fields = [
       id.toString(),
-      nameOfBuild,
-      '${user?.name}',
-      '${motherboard?.name}',
-      '${processor?.name}',
-      '${graphicCard?.name}',
-      ramList.toString(),
-      '${powerSupply?.name}',
-      hddList.toString(),
-      ssdList.toString(),
-      '${pcCase?.name}',
-      '${cooler?.name}',
-      countOfLikes.toString(),
-      ratingId.toString(),
-      totalPrice.toString()
+      'Build name: $nameOfBuild',
+      'User: ${user?.name}',
+      'Motherboard: ${motherboard?.name}',
+      'Processor: ${processor?.name}',
+      'Graphic card: ${graphicCard?.name}',
+      'RAM: ${ramList.toString()}',
+      'Power supply: ${powerSupply?.name}',
+      'HDD: ${hddList.toString()}',
+      'SSD: ${ssdList.toString()}',
+      'Case: ${pcCase?.name}',
+      'Cooler: ${cooler?.name}',
+      'Count of likes: ${countOfLikes.toString()}',
+      'Rating id: ${ratingId.toString()}',
+      'Total price: ${totalPrice.toString()}'
     ];
 
     return fields;

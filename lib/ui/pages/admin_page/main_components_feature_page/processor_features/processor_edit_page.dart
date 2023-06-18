@@ -165,8 +165,9 @@ class _MainViewState extends State<_MainView> {
     final screenSize = MediaQuery.of(context).size;
     final AppLocalizations? _locale = AppLocalizations.of(context);
     final _fieldProvider = context.read<FieldController>();
-    //final mod = context.read<ModelController>();
-    //final List<String> modelFields = widget.fieldNames ?? [];
+    final translatedModel = Translate();
+    final translate =
+    translatedModel.getTranslatedModel('Processor', context);
 
     return ColoredBox(
       color: Colors.white,
@@ -179,7 +180,7 @@ class _MainViewState extends State<_MainView> {
               width: screenSize.width * 0.5,
               height: 100,
               child: Text(
-                '${_locale?.edit} ${widget.modelName}',
+                '${_locale?.edit} "$translate"',
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 30,
@@ -455,61 +456,65 @@ class _MainViewState extends State<_MainView> {
               width: 100,
             ),
             Center(
-              child: ElevatedButton(
-                style: ButtonStyle(
-                  backgroundColor:
-                  const MaterialStatePropertyAll<Color>(Colors.black),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(18.0),
+              child: Container(
+                margin: EdgeInsets.only(top: 20),
+                height: 40,
+                child: ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor:
+                    const MaterialStatePropertyAll<Color>(Colors.black),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18.0),
+                      ),
                     ),
                   ),
-                ),
-                onPressed: () async {
-                  final List<CPUTechnologies?> cpuTech = [
-                    pickedCpuTechnologies1,
-                    pickedCpuTechnologies2,
-                    pickedCpuTechnologies3,
-                    pickedCpuTechnologies4
-                  ];
-                  final processor = Processor(
-                    id: int.parse(idController.text),
-                    name: nameController.text,
-                    producer: pickedProducer,
-                    socket: pickedMotherboardSocket,
-                    yearOfRelease: int.parse(yearOfReleaseController.text),
-                    countOfCores: int.parse(countOfCoresController.text),
-                    countOfThreads: int.parse(countOfThreadsController.text),
-                    baseFrequency: double.parse(baseFrequencyController.text),
-                    turboFrequency: double.parse(turboFrequencyController.text),
-                    l3Cache: int.parse(l3CacheController.text),
-                    cpuGeneration: pickedCpuGeneration,
-                    technicalProcess:
-                        int.parse(technicalProcessController.text),
-                    tdp: int.parse(tdpController.text),
-                    maxTemperature: int.parse(maxTemperatureController.text),
-                    embeddedGraphic: pickedEmbeddedGraphics,
-                    pcieVersion: pickedCpuPcieVersion,
-                    cpuTechnologies: cpuTech,
-                    description: descriptionController.text,
-                    recommendedPrice:
-                        int.parse(recommendedPriceController.text),
-                    performanceLevel: pickedPerformanceLevel,
-                  );
+                  onPressed: () async {
+                    final List<CPUTechnologies?> cpuTech = [
+                      pickedCpuTechnologies1,
+                      pickedCpuTechnologies2,
+                      pickedCpuTechnologies3,
+                      pickedCpuTechnologies4
+                    ];
+                    final processor = Processor(
+                      id: int.parse(idController.text),
+                      name: nameController.text,
+                      producer: pickedProducer,
+                      socket: pickedMotherboardSocket,
+                      yearOfRelease: int.parse(yearOfReleaseController.text),
+                      countOfCores: int.parse(countOfCoresController.text),
+                      countOfThreads: int.parse(countOfThreadsController.text),
+                      baseFrequency: double.parse(baseFrequencyController.text),
+                      turboFrequency: double.parse(turboFrequencyController.text),
+                      l3Cache: int.parse(l3CacheController.text),
+                      cpuGeneration: pickedCpuGeneration,
+                      technicalProcess:
+                          int.parse(technicalProcessController.text),
+                      tdp: int.parse(tdpController.text),
+                      maxTemperature: int.parse(maxTemperatureController.text),
+                      embeddedGraphic: pickedEmbeddedGraphics,
+                      pcieVersion: pickedCpuPcieVersion,
+                      cpuTechnologies: cpuTech,
+                      description: descriptionController.text,
+                      recommendedPrice:
+                          int.parse(recommendedPriceController.text),
+                      performanceLevel: pickedPerformanceLevel,
+                    );
 
-                  await processorController.updateData(processor);
-                  print('${processor.parsedModels().toString()}');
-                  // if (ModelUtil.modelMapping.containsKey(widget.modelName)) {
-                  //   final constructor =
-                  //       ModelUtil.modelMapping[widget.modelName];
-                  //   final instance =
-                  //       constructor!(_fieldProvider.fields) as Processor;
-                  //   await processorController.updateData(instance);
-                  //   mod.refresh();
-                  // }
-                  _fieldProvider.deleteFields();
-                },
-                child: Text('${_locale?.submit}'),
+                    await processorController.updateData(processor);
+                    print('${processor.parsedModels().toString()}');
+                    // if (ModelUtil.modelMapping.containsKey(widget.modelName)) {
+                    //   final constructor =
+                    //       ModelUtil.modelMapping[widget.modelName];
+                    //   final instance =
+                    //       constructor!(_fieldProvider.fields) as Processor;
+                    //   await processorController.updateData(instance);
+                    //   mod.refresh();
+                    // }
+                    _fieldProvider.deleteFields();
+                  },
+                  child: Text('${_locale?.submit}', style: TextStyle(fontSize: 20),),
+                ),
               ),
             ),
             const SizedBox(

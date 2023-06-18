@@ -1,3 +1,4 @@
+import 'package:buildpc/constant.dart';
 import 'package:buildpc/controller/model_controller.dart';
 import 'package:buildpc/controller/model_controller_factory.dart';
 import 'package:buildpc/model/model.dart';
@@ -75,6 +76,9 @@ class _MainViewState extends State<_MainView> {
         .size;
     final modelName = '${widget.modelName}';
     final AppLocalizations? _locale = AppLocalizations.of(context);
+    final translatedModel = Translate();
+    final translate =
+    translatedModel.getTranslatedModel(modelName, context);
 
     return ColoredBox(
       color: Colors.white,
@@ -86,7 +90,7 @@ class _MainViewState extends State<_MainView> {
               width: screenSize.width,
               height: 100,
               child: Text(
-                '${_locale?.listOf} $modelName',
+                '${_locale?.listOf} "$translate"',
                 style: const TextStyle(
                   color: Colors.black,
                   fontSize: 30,

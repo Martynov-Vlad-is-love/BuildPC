@@ -68,13 +68,18 @@ class _MainViewState extends State<_MainView> {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
-    final modelLength = widget.fieldNames?.length ?? 0;
+
     final AppLocalizations? _locale = AppLocalizations.of(context);
     final _fieldProvider = context.read<FieldController>();
     final mod = context.read<ModelController>();
     final List<String> modelFields = widget.fieldNames ?? [];
     final model =
         ModelControllerFactory.createController('${widget.modelName}');
+    final translatedModel = Translate();
+    final translate =
+        translatedModel.getTranslatedModel(widget.modelName, context);
+    modelFields.remove('id');
+    final modelLength = modelFields.length;
 
     return Container(
       height: screenSize.height,
@@ -88,7 +93,7 @@ class _MainViewState extends State<_MainView> {
               width: screenSize.width * 0.5,
               height: 100,
               child: Text(
-                '${_locale?.edit} ${widget.modelName}',
+                '${_locale?.edit} "$translate"',
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 30,
@@ -138,6 +143,9 @@ class _MainViewState extends State<_MainView> {
                   ),
                 ),
                 onPressed: () async {
+                  final modelProvider = context.read<ModelController>();
+                  final currentItem = modelProvider.currentModel;
+                  result.insert(0, '${currentItem?.parsedModels().first}');
                   _fieldProvider.fields = result;
                   if (ModelUtil.modelMapping.containsKey(widget.modelName)) {
                     final constructor =

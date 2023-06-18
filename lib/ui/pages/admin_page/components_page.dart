@@ -41,74 +41,83 @@ class _MainView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AppLocalizations? _locale = AppLocalizations.of(context);
+    final screenSize = MediaQuery.of(context).size;
 
-    return ColoredBox(
+    return Container(
+      height: screenSize.height,
+      width: screenSize.width,
       color: Colors.white,
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      child: Center(
+        child: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                CustomRouteModelNameButton(
-                  label: '${_locale?.graphicCard}',
-                  destination: AppRouteConstants.mainModelListPageRouteName,
-                  modelName: 'GraphicCard',
-                  //modelName: 'GraphicCard',
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    CustomRouteModelNameButton(
+                      label: '${_locale?.graphicCard}',
+                      destination: AppRouteConstants.mainModelListPageRouteName,
+                      modelName: 'GraphicCard',
+                      //modelName: 'GraphicCard',
+                    ),
+                    CustomRouteModelNameButton(
+                      label: '${_locale?.pcCase}',
+                      destination: AppRouteConstants.mainModelListPageRouteName,
+                      modelName: 'Case',
+                    ),
+                    CustomRouteModelNameButton(
+                      label: '${_locale?.cooler}',
+                      destination: AppRouteConstants.mainModelListPageRouteName,
+                      modelName: 'Cooler',
+                    ),
+                  ],
                 ),
-                CustomRouteModelNameButton(
-                  label: '${_locale?.pcCase}',
-                  destination: AppRouteConstants.mainModelListPageRouteName,
-                  modelName: 'Case',
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    CustomRouteModelNameButton(
+                      label: '${_locale?.processor}',
+                      destination: AppRouteConstants.mainModelListPageRouteName,
+                      modelName: 'Processor',
+                    ),
+                    CustomRouteModelNameButton(
+                      label: '${_locale?.motherboard}',
+                      destination: AppRouteConstants.mainModelListPageRouteName,
+                      modelName: 'Motherboard',
+                    ),
+                    CustomRouteModelNameButton(
+                      label: '${_locale?.powerSupply}',
+                      destination: AppRouteConstants.mainModelListPageRouteName,
+                      modelName: 'PowerSupply',
+                    ),
+                  ],
                 ),
-                CustomRouteModelNameButton(
-                  label: '${_locale?.cooler}',
-                  destination: AppRouteConstants.mainModelListPageRouteName,
-                  modelName: 'Cooler',
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    CustomRouteModelNameButton(
+                      label: '${_locale?.ram}',
+                      destination: AppRouteConstants.mainModelListPageRouteName,
+                      modelName: 'Ram',
+                    ),
+                    CustomRouteModelNameButton(
+                      label: '${_locale?.hdd}',
+                      destination: AppRouteConstants.mainModelListPageRouteName,
+                      modelName: 'Hdd',
+                    ),
+                    CustomRouteModelNameButton(
+                      label: '${_locale?.ssd}',
+                      destination: AppRouteConstants.mainModelListPageRouteName,
+                      modelName: 'Ssd',
+                    )
+                  ],
                 ),
               ],
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                CustomRouteModelNameButton(
-                  label: '${_locale?.processor}',
-                  destination: AppRouteConstants.mainModelListPageRouteName,
-                  modelName: 'Processor',
-                ),
-                CustomRouteModelNameButton(
-                  label: '${_locale?.motherboard}',
-                  destination: AppRouteConstants.mainModelListPageRouteName,
-                  modelName: 'Motherboard',
-                ),
-                CustomRouteModelNameButton(
-                  label: '${_locale?.powerSupply}',
-                  destination: AppRouteConstants.mainModelListPageRouteName,
-                  modelName: 'PowerSupply',
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                CustomRouteModelNameButton(
-                  label: '${_locale?.ram}',
-                  destination: AppRouteConstants.mainModelListPageRouteName,
-                  modelName: 'Ram',
-                ),
-                CustomRouteModelNameButton(
-                  label: '${_locale?.hdd}',
-                  destination: AppRouteConstants.mainModelListPageRouteName,
-                  modelName: 'Hdd',
-                ),
-                CustomRouteModelNameButton(
-                  label: '${_locale?.ssd}',
-                  destination: AppRouteConstants.mainModelListPageRouteName,
-                  modelName: 'Ssd',
-                )
-              ],
-            ),
-          ],
+          ),
         ),
       ),
     );

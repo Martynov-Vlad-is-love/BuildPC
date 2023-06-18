@@ -118,7 +118,6 @@ class _MainViewState extends State<_MainView> {
   List<String> result = [];
   final processorController = ProcessorController(ProcessorRepository());
 
-  final idController = TextEditingController(text: '');
   final nameController = TextEditingController(text: '');
   final yearOfReleaseController = TextEditingController(text: '');
   final countOfCoresController = TextEditingController(text: '');
@@ -150,10 +149,13 @@ class _MainViewState extends State<_MainView> {
   Widget build(BuildContext context) {
     final AppLocalizations? _locale = AppLocalizations.of(context);
     final screenSize = MediaQuery.of(context).size;
-    final modelLength = widget.modelList?.length ?? 0;
+    final modelList = widget.modelList;
+    modelList?.remove('id');
+    final modelLength = modelList?.length ?? 0;
     final List<String> modelFields = widget.modelList ?? [];
-    final _userController = context.read<UserController>();
-    final _modelController = context.read<ModelController>();
+    final translatedModel = Translate();
+    final translate =
+    translatedModel.getTranslatedModel('Processor', context);
     final _fieldProvider = context.read<FieldController>();
     final model =
         ModelControllerFactory.createController('${widget.modelName}');
@@ -169,7 +171,7 @@ class _MainViewState extends State<_MainView> {
               width: screenSize.width * 0.5,
               height: 100,
               child: Text(
-                '${_locale?.create} ${widget.modelName}',
+                '${_locale?.create} "$translate"',
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 30,
@@ -184,7 +186,7 @@ class _MainViewState extends State<_MainView> {
                 Expanded(
                   flex: 2,
                   child: ModelListView(
-                    modelList: widget.modelList,
+                    modelList: modelList,
                     itemCount: modelLength,
                   ),
                 ),
@@ -193,10 +195,6 @@ class _MainViewState extends State<_MainView> {
                   flex: 3,
                   child: Column(
                     children: [
-                      TextFormField(
-                        decoration: const InputDecoration(hintText: 'id'),
-                        controller: idController,
-                      ),
                       TextFormField(
                         decoration:
                             InputDecoration(hintText: '${_locale?.name}'),
@@ -440,52 +438,54 @@ class _MainViewState extends State<_MainView> {
                 const CustomBorder(),
               ],
             ),
-            ElevatedButton(
-              style: ButtonStyle(
-                backgroundColor:
-                const MaterialStatePropertyAll<Color>(Colors.black),
-                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(18.0),
+            Container(
+              margin: EdgeInsets.only(top: 20),
+              height: 40,
+              child: ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor:
+                  const MaterialStatePropertyAll<Color>(Colors.black),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18.0),
+                    ),
                   ),
                 ),
-              ),
-              onPressed: () async {
-                final List<CPUTechnologies?> cpuTech = [
-                  pickedCpuTechnologies1,
-                  pickedCpuTechnologies2,
-                  pickedCpuTechnologies3,
-                  pickedCpuTechnologies4
-                ];
-                final processor = Processor(
-                  id: int.parse(idController.text),
-                  name: nameController.text,
-                  producer: pickedProducer,
-                  socket: pickedMotherboardSocket,
-                  yearOfRelease: int.parse(yearOfReleaseController.text),
-                  countOfCores: int.parse(countOfCoresController.text),
-                  countOfThreads: int.parse(countOfThreadsController.text),
-                  baseFrequency: double.parse(baseFrequencyController.text),
-                  turboFrequency: double.parse(turboFrequencyController.text),
-                  l3Cache: int.parse(l3CacheController.text),
-                  cpuGeneration: pickedCpuGeneration,
-                  technicalProcess: int.parse(technicalProcessController.text),
-                  tdp: int.parse(tdpController.text),
-                  maxTemperature: int.parse(maxTemperatureController.text),
-                  embeddedGraphic: pickedEmbeddedGraphics,
-                  pcieVersion: pickedCpuPcieVersion,
-                  cpuTechnologies: cpuTech,
-                  description: descriptionController.text,
-                  recommendedPrice: int.parse(recommendedPriceController.text),
-                  performanceLevel: pickedPerformanceLevel,
-                );
-                await model.postData(processor);
+                onPressed: () async {
+                  final List<CPUTechnologies?> cpuTech = [
+                    pickedCpuTechnologies1,
+                    pickedCpuTechnologies2,
+                    pickedCpuTechnologies3,
+                    pickedCpuTechnologies4
+                  ];
+                  final processor = Processor(
+                    id: null,
+                    name: nameController.text,
+                    producer: pickedProducer,
+                    socket: pickedMotherboardSocket,
+                    yearOfRelease: int.parse(yearOfReleaseController.text),
+                    countOfCores: int.parse(countOfCoresController.text),
+                    countOfThreads: int.parse(countOfThreadsController.text),
+                    baseFrequency: double.parse(baseFrequencyController.text),
+                    turboFrequency: double.parse(turboFrequencyController.text),
+                    l3Cache: int.parse(l3CacheController.text),
+                    cpuGeneration: pickedCpuGeneration,
+                    technicalProcess: int.parse(technicalProcessController.text),
+                    tdp: int.parse(tdpController.text),
+                    maxTemperature: int.parse(maxTemperatureController.text),
+                    embeddedGraphic: pickedEmbeddedGraphics,
+                    pcieVersion: pickedCpuPcieVersion,
+                    cpuTechnologies: cpuTech,
+                    description: descriptionController.text,
+                    recommendedPrice: int.parse(recommendedPriceController.text),
+                    performanceLevel: pickedPerformanceLevel,
+                  );
+                  await model.postData(processor);
 
-                print('Form Field Values: ${result}');
-                // Очищает список полей
-                _fieldProvider.deleteFields();
-              },
-              child: Text('Submit'),
+                  _fieldProvider.deleteFields();
+                },
+                child: Text('${_locale?.submit}', style: TextStyle(fontSize: 20),),
+              ),
             ),
           ],
         ),

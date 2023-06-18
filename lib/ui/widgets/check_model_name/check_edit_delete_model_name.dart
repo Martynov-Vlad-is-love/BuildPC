@@ -37,7 +37,7 @@ class CheckEditDeleteModelName extends StatelessWidget {
             },
             child: Container(
               alignment: Alignment.center,
-              height: 20,
+              height: 30,
               constraints: const BoxConstraints(minWidth: 50, maxWidth: 100),
               decoration: const BoxDecoration(
                 borderRadius: BorderRadius.all(
@@ -47,7 +47,7 @@ class CheckEditDeleteModelName extends StatelessWidget {
               ),
               child: Text(
                 '${_locale?.edit}',
-                style: const TextStyle(color: Colors.white),
+                style: const TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),
               ),
             ),
           ),
@@ -60,7 +60,7 @@ class CheckEditDeleteModelName extends StatelessWidget {
             },
             child: Container(
               alignment: Alignment.center,
-              height: 20,
+              height: 30,
               constraints: const BoxConstraints(minWidth: 50, maxWidth: 100),
               decoration: const BoxDecoration(
                 borderRadius: BorderRadius.all(
@@ -70,7 +70,7 @@ class CheckEditDeleteModelName extends StatelessWidget {
               ),
               child: Text(
                 '${_locale?.delete}',
-                style: const TextStyle(color: Colors.white),
+                style: const TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),
               ),
             ),
           )
@@ -78,6 +78,6 @@ class CheckEditDeleteModelName extends StatelessWidget {
       );
     }
 
-    return const SizedBox(height: 1);
+    return Container();
   }
 }

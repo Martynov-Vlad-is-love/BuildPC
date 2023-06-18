@@ -22,7 +22,7 @@ class TopNavigationBarItem extends StatelessWidget {
           iconSize: MaterialStatePropertyAll<double>(27.0),
           elevation: MaterialStatePropertyAll<double>(0.0),
           minimumSize: MaterialStatePropertyAll<Size>(Size(0, 45)),
-          maximumSize: MaterialStatePropertyAll<Size>(Size(153, 70)),
+          maximumSize: MaterialStatePropertyAll<Size>(Size(135, 70)),
           backgroundColor: MaterialStatePropertyAll<Color>(Colors.black),
         ),
         onPressed: () {

@@ -57,6 +57,8 @@ class RatingRepository implements Repository<Rating> {
       rating = data.map((e) => Rating.fromJson(e)).toList();
     }
 
+    rating.sort((b, a) => a.like.length.compareTo(b.like.length));
+
     return rating;
   }
 

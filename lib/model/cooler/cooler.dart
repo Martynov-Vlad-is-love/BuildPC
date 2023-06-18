@@ -44,14 +44,14 @@ class Cooler implements Model{
       final List<String> fields = [
         id.toString(),
         '$name',
-        '${producer?.parsedModels()}',
-        '${material?.parsedModels()}',
+        '${producer?.name}',
+        '${material?.material}',
         maxTdp.toString(),
         sockets.toString(),
         thermalTubes.toString(),
         '$description',
         recommendedPrice.toString(),
-        '${performanceLevel?.parsedModels()}'
+        '${performanceLevel?.level}'
       ];
 
     return fields;

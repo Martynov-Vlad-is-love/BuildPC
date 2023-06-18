@@ -38,7 +38,7 @@ class _DynamicTextFormFieldsState extends State<DynamicTextFormFields> {
     return Column(
       children: List.generate(widget.model.length, (index) {
         if(data?[index] != null && fieldsCount > 0){
-          textControllers[index].text += '${data?[index]}';
+          textControllers[index].text += '${data?[index+1]}';
           fieldsCount -= 1;
         }
 

@@ -105,7 +105,6 @@ class _MainViewState extends State<_MainView> {
   List<String> result = [];
   final powerSupplyController = PowerSupplyController(PowerSupplyRepository());
 
-  final idController = TextEditingController(text: '');
   final nameController = TextEditingController(text: '');
   final powerController = TextEditingController(text: '');
   final pfcModuleController = [true, false];
@@ -137,10 +136,12 @@ class _MainViewState extends State<_MainView> {
   Widget build(BuildContext context) {
     final AppLocalizations? _locale = AppLocalizations.of(context);
     final screenSize = MediaQuery.of(context).size;
-    final modelLength = widget.modelList?.length ?? 0;
-    // final List<String> modelFields = widget.modelList ?? [];
-    // final _userController = context.read<UserController>();
-    // final _modelController = context.read<ModelController>();
+    final modelList = widget.modelList;
+    modelList?.remove('id');
+    final modelLength = modelList?.length ?? 0;
+    final translatedModel = Translate();
+    final translate =
+        translatedModel.getTranslatedModel('PowerSupply', context);
     final _fieldProvider = context.read<FieldController>();
 
     return ColoredBox(
@@ -154,7 +155,7 @@ class _MainViewState extends State<_MainView> {
               width: screenSize.width * 0.5,
               height: 100,
               child: Text(
-                '${_locale?.create} ${widget.modelName}',
+                '${_locale?.create} "$translate"',
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 30,
@@ -169,7 +170,7 @@ class _MainViewState extends State<_MainView> {
                 Expanded(
                   flex: 2,
                   child: ModelListView(
-                    modelList: widget.modelList,
+                    modelList: modelList,
                     itemCount: modelLength,
                   ),
                 ),
@@ -178,10 +179,6 @@ class _MainViewState extends State<_MainView> {
                   flex: 3,
                   child: Column(
                     children: [
-                      TextFormField(
-                        decoration: const InputDecoration(hintText: 'id'),
-                        controller: idController,
-                      ),
                       TextFormField(
                         decoration: const InputDecoration(hintText: 'name'),
                         controller: nameController,
@@ -338,7 +335,8 @@ class _MainViewState extends State<_MainView> {
                       ),
                       TextFormField(
                         decoration: InputDecoration(
-                            hintText: '${_locale?.pcie_6plus2pin}'),
+                          hintText: '${_locale?.pcie_6plus2pin}',
+                        ),
                         controller: pcie_6plus2pinController,
                       ),
                       TextFormField(
@@ -349,7 +347,8 @@ class _MainViewState extends State<_MainView> {
                       ),
                       TextFormField(
                         decoration: InputDecoration(
-                            hintText: '${_locale?.pcie_5_16pin}'),
+                          hintText: '${_locale?.pcie_5_16pin}',
+                        ),
                         controller: pcie_5_16pinController,
                       ),
                       TextFormField(
@@ -360,7 +359,8 @@ class _MainViewState extends State<_MainView> {
                       ),
                       TextFormField(
                         decoration: InputDecoration(
-                            hintText: '${_locale?.countOf_12VLines}'),
+                          hintText: '${_locale?.countOf_12VLines}',
+                        ),
                         controller: countOf_12VLinesController,
                       ),
                       TextFormField(
@@ -398,65 +398,69 @@ class _MainViewState extends State<_MainView> {
                 const CustomBorder(),
               ],
             ),
-            ElevatedButton(
-              style: ButtonStyle(
-                backgroundColor:
-                const MaterialStatePropertyAll<Color>(Colors.black),
-                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(18.0),
+            Container(
+              margin: EdgeInsets.only(top: 20),
+              height: 40,
+              child: ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor:
+                  const MaterialStatePropertyAll<Color>(Colors.black),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18.0),
+                    ),
                   ),
                 ),
+                onPressed: () async {
+                  final List<PowerSupplyProtectionFunctions?>
+                      protectionFunctions = [];
+                  if (pickedPowerSupplyProtectionFunctions1 != null) {
+                    protectionFunctions
+                        .add(pickedPowerSupplyProtectionFunctions1);
+                  }
+                  if (pickedPowerSupplyProtectionFunctions2 != null) {
+                    protectionFunctions
+                        .add(pickedPowerSupplyProtectionFunctions2);
+                  }
+                  if (pickedPowerSupplyProtectionFunctions3 != null) {
+                    protectionFunctions
+                        .add(pickedPowerSupplyProtectionFunctions3);
+                  }
+                  if (pickedPowerSupplyProtectionFunctions4 != null) {
+                    protectionFunctions
+                        .add(pickedPowerSupplyProtectionFunctions4);
+                  }
+
+                  final powerSupply = PowerSupply(
+                    id: null,
+                    name: nameController.text,
+                    producer: pickedProducer,
+                    power: int.parse(powerController.text),
+                    formFactor: pickedFormFactor,
+                    pfcModule: pickedPfcModule,
+                    modularConnection: pickedModularConnection,
+                    protectionFunctions: protectionFunctions,
+                    cpu_4pin: int.parse(cpu_4plus4pinController.text),
+                    cpu_4plus4pin: int.tryParse(cpu_4plus4pinController.text),
+                    cpu_8pin: int.tryParse(cpu_8pinController.text),
+                    pcie_6plus2pin: int.tryParse(pcie_6plus2pinController.text),
+                    pcie_8pin: int.tryParse(pcie_8pinController.text),
+                    pcie_5_16pin: int.tryParse(pcie_5_16pinController.text),
+                    sata: int.tryParse(sataController.text),
+                    countOf_12VLines:
+                        int.tryParse(countOf_12VLinesController.text),
+                    description: descriptionController.text,
+                    recommendedPrice: int.parse(recommendedPriceController.text),
+                    performanceLevel: pickedPerformanceLevel,
+                  );
+                  await powerSupplyController.postData(powerSupply);
+
+                  print('Form Field Values: $result');
+                  // Очищает список полей
+                  _fieldProvider.deleteFields();
+                },
+                child: Text('${_locale?.submit}', style: TextStyle(fontSize: 20),),
               ),
-              onPressed: () async {
-                final List<PowerSupplyProtectionFunctions?>
-                    protectionFunctions = [];
-                if (pickedPowerSupplyProtectionFunctions1 != null) {
-                  protectionFunctions
-                      .add(pickedPowerSupplyProtectionFunctions1);
-                }
-                if (pickedPowerSupplyProtectionFunctions2 != null) {
-                  protectionFunctions
-                      .add(pickedPowerSupplyProtectionFunctions2);
-                }
-                if (pickedPowerSupplyProtectionFunctions3 != null) {
-                  protectionFunctions
-                      .add(pickedPowerSupplyProtectionFunctions3);
-                }
-                if (pickedPowerSupplyProtectionFunctions4 != null) {
-                  protectionFunctions
-                      .add(pickedPowerSupplyProtectionFunctions4);
-                }
-
-                final powerSupply = PowerSupply(
-                  id: int.parse(idController.text),
-                  name: nameController.text,
-                  producer: pickedProducer,
-                  power: int.parse(powerController.text),
-                  formFactor: pickedFormFactor,
-                  pfcModule: pickedPfcModule,
-                  modularConnection: pickedModularConnection,
-                  protectionFunctions: protectionFunctions,
-                  cpu_4pin: int.parse(cpu_4plus4pinController.text),
-                  cpu_4plus4pin: int.tryParse(cpu_4plus4pinController.text),
-                  cpu_8pin: int.tryParse(cpu_8pinController.text),
-                  pcie_6plus2pin: int.tryParse(pcie_6plus2pinController.text),
-                  pcie_8pin: int.tryParse(pcie_8pinController.text),
-                  pcie_5_16pin: int.tryParse(pcie_5_16pinController.text),
-                  sata: int.tryParse(sataController.text),
-                  countOf_12VLines:
-                      int.tryParse(countOf_12VLinesController.text),
-                  description: descriptionController.text,
-                  recommendedPrice: int.parse(recommendedPriceController.text),
-                  performanceLevel: pickedPerformanceLevel,
-                );
-                await powerSupplyController.postData(powerSupply);
-
-                print('Form Field Values: $result');
-                // Очищает список полей
-                _fieldProvider.deleteFields();
-              },
-              child: Text('${_locale?.submit}'),
             ),
           ],
         ),

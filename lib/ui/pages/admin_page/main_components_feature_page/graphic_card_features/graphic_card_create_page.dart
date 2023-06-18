@@ -117,7 +117,6 @@ class _MainViewState extends State<_MainView> {
 
   List<String> result = [];
   final graphicCardController = GraphicCardController(GraphicCardRepository());
-  final idController = TextEditingController(text: '');
   final nameController = TextEditingController(text: '');
   final vendorController = TextEditingController(text: '');
   final memorySlotsController = TextEditingController(text: '');
@@ -148,10 +147,12 @@ class _MainViewState extends State<_MainView> {
   Widget build(BuildContext context) {
     final AppLocalizations? _locale = AppLocalizations.of(context);
     final screenSize = MediaQuery.of(context).size;
-    final modelLength = widget.modelList?.length ?? 0;
-    // final List<String> modelFields = widget.modelList ?? [];
-    // final _userController = context.read<UserController>();
-    // final _modelController = context.read<ModelController>();
+    final modelList = widget.modelList;
+    modelList?.remove('id');
+    final modelLength = modelList?.length ?? 0;
+    final translatedModel = Translate();
+    final translate =
+    translatedModel.getTranslatedModel('GraphicCard', context);
     final _fieldProvider = context.read<FieldController>();
 
     return ColoredBox(
@@ -165,7 +166,7 @@ class _MainViewState extends State<_MainView> {
               width: screenSize.width * 0.5,
               height: 100,
               child: Text(
-                '${_locale?.create} ${widget.modelName}',
+                '${_locale?.create} "$translate"',
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 30,
@@ -180,7 +181,7 @@ class _MainViewState extends State<_MainView> {
                 Expanded(
                   flex: 2,
                   child: ModelListView(
-                    modelList: widget.modelList,
+                    modelList: modelList,
                     itemCount: modelLength,
                   ),
                 ),
@@ -189,10 +190,6 @@ class _MainViewState extends State<_MainView> {
                   flex: 3,
                   child: Column(
                     children: [
-                      TextFormField(
-                        decoration: const InputDecoration(hintText: 'id'),
-                        controller: idController,
-                      ),
                       DropdownButton(
                         hint: Text('${_locale?.producer}'),
                         items: _modelList.modelMap['Producers']?.map((item) {
@@ -423,138 +420,67 @@ class _MainViewState extends State<_MainView> {
                 const CustomBorder(),
               ],
             ),
-            ElevatedButton(
-              style: ButtonStyle(
-                backgroundColor:
-                const MaterialStatePropertyAll<Color>(Colors.black),
-                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(18.0),
+            Container(
+              margin: EdgeInsets.only(top: 20),
+              height: 40,
+              child: ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor:
+                  const MaterialStatePropertyAll<Color>(Colors.black),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18.0),
+                    ),
                   ),
                 ),
+                onPressed: () async {
+                  final List<GPUConnector?> gpuCon = [];
+                  if (pickedGpuConnectors1 != null) {
+                    gpuCon.add(pickedGpuConnectors1);
+                  }
+                  if (pickedGpuConnectors2 != null) {
+                    gpuCon.add(pickedGpuConnectors2);
+                  }
+                  if (pickedGpuConnectors3 != null) {
+                    gpuCon.add(pickedGpuConnectors3);
+                  }
+                  if (pickedGpuConnectors4 != null) {
+                    gpuCon.add(pickedGpuConnectors4);
+                  }
+
+                  final graphicCard = GraphicCard(
+                    id: null,
+                    producer: pickedProducer,
+                    name: nameController.text,
+                    vendor: pickedVendor,
+                    year: int.parse(yearController.text),
+                    technicalProcess: int.parse(technicalProcessController.text),
+                    gpuFrequency: int.parse(gpuFrequencyController.text),
+                    memoryAmount: int.parse(memoryAmountController.text),
+                    memoryType: pickedGpuMemoryType,
+                    memoryFrequency: int.parse(memoryFrequencyController.text),
+                    bus: int.parse(busController.text),
+                    tdp: int.parse(tdpController.text),
+                    connector: gpuCon,
+                    interfaceType: pickedGpuInterfaceType,
+                    length: int.parse(lengthController.text),
+                    description: descriptionController.text,
+                    gpuTechnologies: pickedGpuTechnologies,
+                    recommendedPrice: int.parse(recommendedPriceController.text),
+                    performanceLevel: pickedPerformanceLevel,
+                  );
+                  await graphicCardController.postData(graphicCard);
+
+                  print('Form Field Values: ${result}');
+                  // Очищает список полей
+                  _fieldProvider.deleteFields();
+                },
+                child: Text('${_locale?.submit}', style: TextStyle(fontSize: 20),),
               ),
-              onPressed: () async {
-                final List<GPUConnector?> gpuCon = [];
-                if (pickedGpuConnectors1 != null) {
-                  gpuCon.add(pickedGpuConnectors1);
-                }
-                if (pickedGpuConnectors2 != null) {
-                  gpuCon.add(pickedGpuConnectors2);
-                }
-                if (pickedGpuConnectors3 != null) {
-                  gpuCon.add(pickedGpuConnectors3);
-                }
-                if (pickedGpuConnectors4 != null) {
-                  gpuCon.add(pickedGpuConnectors4);
-                }
-
-                final graphicCard = GraphicCard(
-                  id: int.parse(idController.text),
-                  producer: pickedProducer,
-                  name: nameController.text,
-                  vendor: pickedVendor,
-                  year: int.parse(yearController.text),
-                  technicalProcess: int.parse(technicalProcessController.text),
-                  gpuFrequency: int.parse(gpuFrequencyController.text),
-                  memoryAmount: int.parse(memoryAmountController.text),
-                  memoryType: pickedGpuMemoryType,
-                  memoryFrequency: int.parse(memoryFrequencyController.text),
-                  bus: int.parse(busController.text),
-                  tdp: int.parse(tdpController.text),
-                  connector: gpuCon,
-                  interfaceType: pickedGpuInterfaceType,
-                  length: int.parse(lengthController.text),
-                  description: descriptionController.text,
-                  gpuTechnologies: pickedGpuTechnologies,
-                  recommendedPrice: int.parse(recommendedPriceController.text),
-                  performanceLevel: pickedPerformanceLevel,
-                );
-                await graphicCardController.postData(graphicCard);
-
-                print('Form Field Values: ${result}');
-                // Очищает список полей
-                _fieldProvider.deleteFields();
-              },
-              child: Text('${_locale?.submit}'),
             ),
           ],
         ),
       ),
-    );
-  }
-}
-
-class MyWidget extends StatefulWidget {
-  @override
-  _MyWidgetState createState() => _MyWidgetState();
-}
-
-class _MyWidgetState extends State<MyWidget> {
-  final List<String> model = ['Field 1', 'Field 2', 'Field 3'];
-
-  List<String> formFieldValues = [];
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Dynamic TextFormFields Example')),
-      body: Column(
-        children: [
-          DynamicTextFormFields(
-            model: model,
-            onChanged: (values) {
-              setState(() {
-                formFieldValues = values;
-              });
-            },
-          ),
-          ElevatedButton(
-            onPressed: () {
-              // Пример использования значений из формы
-              print('Form Field Values: $formFieldValues');
-            },
-            child: Text('Submit'),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class TextBarListView extends StatelessWidget {
-  final String modelName;
-  final ValueChanged<String> onChanged;
-
-  const TextBarListView({
-    Key? key,
-    required this.modelName,
-    required this.onChanged,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final models = Component();
-    final Map<String, List<String>> modelMap = models.getComponents(context);
-    final List<String>? model = modelMap[modelName];
-    final textController = TextEditingController();
-
-    return ListView.separated(
-      shrinkWrap: true,
-      separatorBuilder: (_, __) => const Divider(),
-      itemBuilder: (_, index) {
-        return Row(
-          children: [
-            Text('${model?[index]}'),
-            TextFormField(
-              decoration: InputDecoration(hintText: model?[index]),
-              controller: textController,
-              onChanged: onChanged,
-            ),
-          ],
-        );
-      },
-      physics: const NeverScrollableScrollPhysics(),
-      itemCount: model?.length ?? 0,
     );
   }
 }

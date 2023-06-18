@@ -194,6 +194,9 @@ class _MainViewState extends State<_MainView> {
     final _fieldProvider = context.read<FieldController>();
     //final mod = context.read<ModelController>();
     //final List<String> modelFields = widget.fieldNames ?? [];
+    final translatedModel = Translate();
+    final translate =
+    translatedModel.getTranslatedModel('BuildPC', context);
 
     return ColoredBox(
       color: Colors.white,
@@ -206,7 +209,7 @@ class _MainViewState extends State<_MainView> {
               width: screenSize.width * 0.5,
               height: 100,
               child: Text(
-                '${_locale?.edit} ${widget.modelName}',
+                '${_locale?.edit} "$translate"',
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 30,
@@ -590,81 +593,85 @@ class _MainViewState extends State<_MainView> {
               width: 100,
             ),
             Center(
-              child: ElevatedButton(
-                style: ButtonStyle(
-                  backgroundColor:
-                  const MaterialStatePropertyAll<Color>(Colors.black),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(18.0),
+              child: Container(
+                margin: EdgeInsets.only(top: 20),
+                height: 40,
+                child: ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor:
+                    const MaterialStatePropertyAll<Color>(Colors.black),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18.0),
+                      ),
                     ),
                   ),
+                  onPressed: () async {
+                    final List<Ram?> ram = [];
+                    if (pickedRam1 != null) {
+                      ram.add(pickedRam1);
+                    }
+                    if (pickedRam2 != null) {
+                      ram.add(pickedRam2);
+                    }
+                    if (pickedRam3 != null) {
+                      ram.add(pickedRam3);
+                    }
+                    if (pickedRam4 != null) {
+                      ram.add(pickedRam4);
+                    }
+
+                    final List<Hdd?> hdd = [];
+                    if (pickedHdd1 != null) {
+                      hdd.add(pickedHdd1);
+                    }
+                    if (pickedHdd2 != null) {
+                      hdd.add(pickedHdd2);
+                    }
+                    if (pickedHdd3 != null) {
+                      hdd.add(pickedHdd3);
+                    }
+                    if (pickedHdd4 != null) {
+                      hdd.add(pickedHdd4);
+                    }
+
+                    final List<Ssd?> ssd = [];
+                    if (pickedSsd1 != null) {
+                      ssd.add(pickedSsd1);
+                    }
+                    if (pickedSsd2 != null) {
+                      ssd.add(pickedSsd2);
+                    }
+                    if (pickedSsd3 != null) {
+                      ssd.add(pickedSsd3);
+                    }
+                    if (pickedSsd4 != null) {
+                      ssd.add(pickedSsd4);
+                    }
+
+                    final buildPc = BuildPC(
+                      id: int.parse(idController.text),
+                      nameOfBuild: nameOfBuildController.text,
+                      user: pickedUser,
+                      motherboard: pickedMotherboard,
+                      processor: pickedProcessor,
+                      graphicCard: pickedGraphicCard,
+                      ram: ram,
+                      powerSupply: pickedPowerSupply,
+                      hdd: hdd,
+                      ssd: ssd,
+                      pcCase: pickedPcCase,
+                      cooler: pickedCooler,
+                      countOfLikes: int.parse(countOfLikesController.text),
+                      ratingId: null,
+                      totalPrice: int.parse(totalPriceController.text),
+                    );
+                    await buildPcController.updateData(buildPc);
+                    // Очищает список полей
+                    _fieldProvider.deleteFields();
+                  },
+                  child: Text('${_locale?.submit}'),
                 ),
-                onPressed: () async {
-                  final List<Ram?> ram = [];
-                  if (pickedRam1 != null) {
-                    ram.add(pickedRam1);
-                  }
-                  if (pickedRam2 != null) {
-                    ram.add(pickedRam2);
-                  }
-                  if (pickedRam3 != null) {
-                    ram.add(pickedRam3);
-                  }
-                  if (pickedRam4 != null) {
-                    ram.add(pickedRam4);
-                  }
-
-                  final List<Hdd?> hdd = [];
-                  if (pickedHdd1 != null) {
-                    hdd.add(pickedHdd1);
-                  }
-                  if (pickedHdd2 != null) {
-                    hdd.add(pickedHdd2);
-                  }
-                  if (pickedHdd3 != null) {
-                    hdd.add(pickedHdd3);
-                  }
-                  if (pickedHdd4 != null) {
-                    hdd.add(pickedHdd4);
-                  }
-
-                  final List<Ssd?> ssd = [];
-                  if (pickedSsd1 != null) {
-                    ssd.add(pickedSsd1);
-                  }
-                  if (pickedSsd2 != null) {
-                    ssd.add(pickedSsd2);
-                  }
-                  if (pickedSsd3 != null) {
-                    ssd.add(pickedSsd3);
-                  }
-                  if (pickedSsd4 != null) {
-                    ssd.add(pickedSsd4);
-                  }
-
-                  final buildPc = BuildPC(
-                    id: int.parse(idController.text),
-                    nameOfBuild: nameOfBuildController.text,
-                    user: pickedUser,
-                    motherboard: pickedMotherboard,
-                    processor: pickedProcessor,
-                    graphicCard: pickedGraphicCard,
-                    ram: ram,
-                    powerSupply: pickedPowerSupply,
-                    hdd: hdd,
-                    ssd: ssd,
-                    pcCase: pickedPcCase,
-                    cooler: pickedCooler,
-                    countOfLikes: int.parse(countOfLikesController.text),
-                    ratingId: null,
-                    totalPrice: int.parse(totalPriceController.text),
-                  );
-                  await buildPcController.updateData(buildPc);
-                  // Очищает список полей
-                  _fieldProvider.deleteFields();
-                },
-                child: Text('${_locale?.submit}'),
               ),
             ),
             const SizedBox(

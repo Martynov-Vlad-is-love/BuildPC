@@ -143,7 +143,6 @@ class _MainViewState extends State<_MainView> {
   List<String> result = [];
   final buildPcController = BuildPcController(BuildPcRepository());
 
-  final idController = TextEditingController(text: '');
   final nameOfBuildController = TextEditingController(text: '');
   final countOfLikesController = TextEditingController(text: '');
   final totalPriceController = TextEditingController(text: '');
@@ -176,8 +175,13 @@ class _MainViewState extends State<_MainView> {
   Widget build(BuildContext context) {
     final AppLocalizations? _locale = AppLocalizations.of(context);
     final screenSize = MediaQuery.of(context).size;
-    final modelLength = widget.modelList?.length ?? 0;
+    final modelList = widget.modelList;
+    modelList?.remove('id');
+    final modelLength = modelList?.length ?? 0;
     final _fieldProvider = context.read<FieldController>();
+    final translatedModel = Translate();
+    final translate =
+    translatedModel.getTranslatedModel('BuildPC', context);
 
     return ColoredBox(
       color: Colors.white,
@@ -190,7 +194,7 @@ class _MainViewState extends State<_MainView> {
               width: screenSize.width * 0.5,
               height: 100,
               child: Text(
-                '${_locale?.create} ${widget.modelName}',
+                '${_locale?.create} "$translate"',
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 30,
@@ -205,7 +209,7 @@ class _MainViewState extends State<_MainView> {
                 Expanded(
                   flex: 2,
                   child: ModelListView(
-                    modelList: widget.modelList,
+                    modelList: modelList,
                     itemCount: modelLength,
                   ),
                 ),
@@ -214,10 +218,6 @@ class _MainViewState extends State<_MainView> {
                   flex: 3,
                   child: Column(
                     children: [
-                      TextFormField(
-                        decoration: const InputDecoration(hintText: 'id'),
-                        controller: idController,
-                      ),
                       TextFormField(
                         decoration: const InputDecoration(hintText: 'name'),
                         controller: nameOfBuildController,
@@ -569,81 +569,85 @@ class _MainViewState extends State<_MainView> {
                 const CustomBorder(),
               ],
             ),
-            ElevatedButton(
-              style: ButtonStyle(
-                backgroundColor:
-                const MaterialStatePropertyAll<Color>(Colors.black),
-                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(18.0),
+            Container(
+              margin: EdgeInsets.only(top: 20),
+              height: 40,
+              child: ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor:
+                  const MaterialStatePropertyAll<Color>(Colors.black),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18.0),
+                    ),
                   ),
                 ),
+                onPressed: () async {
+                  final List<Ram?> ram = [];
+                  if (pickedRam1 != null) {
+                    ram.add(pickedRam1);
+                  }
+                  if (pickedRam2 != null) {
+                    ram.add(pickedRam2);
+                  }
+                  if (pickedRam3 != null) {
+                    ram.add(pickedRam3);
+                  }
+                  if (pickedRam4 != null) {
+                    ram.add(pickedRam4);
+                  }
+
+                  final List<Hdd?> hdd = [];
+                  if (pickedHdd1 != null) {
+                    hdd.add(pickedHdd1);
+                  }
+                  if (pickedHdd2 != null) {
+                    hdd.add(pickedHdd2);
+                  }
+                  if (pickedHdd3 != null) {
+                    hdd.add(pickedHdd3);
+                  }
+                  if (pickedHdd4 != null) {
+                    hdd.add(pickedHdd4);
+                  }
+
+                  final List<Ssd?> ssd = [];
+                  if (pickedSsd1 != null) {
+                    ssd.add(pickedSsd1);
+                  }
+                  if (pickedSsd2 != null) {
+                    ssd.add(pickedSsd2);
+                  }
+                  if (pickedSsd3 != null) {
+                    ssd.add(pickedSsd3);
+                  }
+                  if (pickedSsd4 != null) {
+                    ssd.add(pickedSsd4);
+                  }
+
+                  final buildPc = BuildPC(
+                    id: null,
+                    nameOfBuild: nameOfBuildController.text,
+                    user: pickedUser,
+                    motherboard: pickedMotherboard,
+                    processor: pickedProcessor,
+                    graphicCard: pickedGraphicCard,
+                    ram: ram,
+                    powerSupply: pickedPowerSupply,
+                    hdd: hdd,
+                    ssd: ssd,
+                    pcCase: pickedPcCase,
+                    cooler: pickedCooler,
+                    countOfLikes: int.parse(countOfLikesController.text),
+                    ratingId: pickedRating,
+                    totalPrice: int.parse(totalPriceController.text),
+                  );
+                  await buildPcController.postData(buildPc);
+                  // Очищает список полей
+                  _fieldProvider.deleteFields();
+                },
+                child: Text('${_locale?.submit}', style: TextStyle(fontSize: 20),),
               ),
-              onPressed: () async {
-                final List<Ram?> ram = [];
-                if (pickedRam1 != null) {
-                  ram.add(pickedRam1);
-                }
-                if (pickedRam2 != null) {
-                  ram.add(pickedRam2);
-                }
-                if (pickedRam3 != null) {
-                  ram.add(pickedRam3);
-                }
-                if (pickedRam4 != null) {
-                  ram.add(pickedRam4);
-                }
-
-                final List<Hdd?> hdd = [];
-                if (pickedHdd1 != null) {
-                  hdd.add(pickedHdd1);
-                }
-                if (pickedHdd2 != null) {
-                  hdd.add(pickedHdd2);
-                }
-                if (pickedHdd3 != null) {
-                  hdd.add(pickedHdd3);
-                }
-                if (pickedHdd4 != null) {
-                  hdd.add(pickedHdd4);
-                }
-
-                final List<Ssd?> ssd = [];
-                if (pickedSsd1 != null) {
-                  ssd.add(pickedSsd1);
-                }
-                if (pickedSsd2 != null) {
-                  ssd.add(pickedSsd2);
-                }
-                if (pickedSsd3 != null) {
-                  ssd.add(pickedSsd3);
-                }
-                if (pickedSsd4 != null) {
-                  ssd.add(pickedSsd4);
-                }
-
-                final buildPc = BuildPC(
-                  id: int.parse(idController.text),
-                  nameOfBuild: nameOfBuildController.text,
-                  user: pickedUser,
-                  motherboard: pickedMotherboard,
-                  processor: pickedProcessor,
-                  graphicCard: pickedGraphicCard,
-                  ram: ram,
-                  powerSupply: pickedPowerSupply,
-                  hdd: hdd,
-                  ssd: ssd,
-                  pcCase: pickedPcCase,
-                  cooler: pickedCooler,
-                  countOfLikes: int.parse(countOfLikesController.text),
-                  ratingId: pickedRating,
-                  totalPrice: int.parse(totalPriceController.text),
-                );
-                await buildPcController.postData(buildPc);
-                // Очищает список полей
-                _fieldProvider.deleteFields();
-              },
-              child: Text('${_locale?.submit}'),
             ),
           ],
         ),

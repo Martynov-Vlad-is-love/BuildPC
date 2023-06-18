@@ -155,7 +155,7 @@ class _MainViewState extends State<_MainView> {
         MotherboardChipsetController(MotherboardChipsetRepository());
     final formFactorController = FormFactorController(FormFactorRepository());
     final ramMemoryTypeController =
-    RamMemoryTypeController(RamMemoryTypeRepository());
+        RamMemoryTypeController(RamMemoryTypeRepository());
     final motherboardNetworkController =
         MotherboardNetworkController(MotherboardNetworkRepository());
     final pcieVersionController =
@@ -191,8 +191,6 @@ class _MainViewState extends State<_MainView> {
   List<String> result = [];
   final motherboardController = MotherboardController(MotherboardRepository());
 
-
-
   @override
   Widget build(BuildContext context) {
     final modelLength = widget.fieldNames?.length ?? 0;
@@ -200,8 +198,9 @@ class _MainViewState extends State<_MainView> {
     final screenSize = MediaQuery.of(context).size;
     final AppLocalizations? _locale = AppLocalizations.of(context);
     final _fieldProvider = context.read<FieldController>();
-    //final mod = context.read<ModelController>();
-    //final List<String> modelFields = widget.fieldNames ?? [];
+    final translatedModel = Translate();
+    final translate =
+        translatedModel.getTranslatedModel('Motherboard', context);
 
     return ColoredBox(
       color: Colors.white,
@@ -214,7 +213,7 @@ class _MainViewState extends State<_MainView> {
               width: screenSize.width * 0.5,
               height: 100,
               child: Text(
-                '${_locale?.edit} ${widget.modelName}',
+                '${_locale?.edit} "$translate"',
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 30,
@@ -408,8 +407,8 @@ class _MainViewState extends State<_MainView> {
                       ),
                       DropdownButton(
                         hint: Text('${_locale?.ramMemoryType}'),
-                        items: _modelList.modelMap['RamMemoryTypes']
-                            ?.map((item) {
+                        items:
+                            _modelList.modelMap['RamMemoryTypes']?.map((item) {
                           return DropdownMenuItem(
                             value: item,
                             child: Text('${item?.parsedModels()[1]}'),
@@ -417,8 +416,7 @@ class _MainViewState extends State<_MainView> {
                         }).toList(),
                         onChanged: (newVal) {
                           setState(() {
-                            pickedRamMemoryType =
-                            newVal as RamMemoryType?;
+                            pickedRamMemoryType = newVal as RamMemoryType?;
                           });
                         },
                         value: pickedRamMemoryType,
@@ -614,7 +612,6 @@ class _MainViewState extends State<_MainView> {
                   ),
                 ),
                 const CustomBorder(),
-
               ],
             ),
             const SizedBox(
@@ -622,75 +619,78 @@ class _MainViewState extends State<_MainView> {
               width: 100,
             ),
             Center(
-              child: ElevatedButton(
-                style: ButtonStyle(
-                  backgroundColor:
-                  const MaterialStatePropertyAll<Color>(Colors.black),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(18.0),
+              child: Container(
+                margin: EdgeInsets.only(top: 20),
+                height: 40,
+                child: ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor:
+                    const MaterialStatePropertyAll<Color>(Colors.black),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18.0),
+                      ),
                     ),
                   ),
-                ),
-                onPressed: () async {
-                  final List<CPUGeneration?> cpuGen = [
-                    pickedCpuGenerations1,
-                    pickedCpuGenerations2,
-                    pickedCpuGenerations3,
-                    pickedCpuGenerations4
-                  ];
-                  final motherboard = Motherboard(
-                    id: int.parse(idController.text),
-                    name: nameController.text,
-                    motherboardProducer: pickedProducer,
-                    socket: pickedMotherboardSocket,
-                    cpuGenerations: cpuGen,
-                    chipset: pickedMotherboardChipset,
-                    formFactor: pickedFormFactor,
-                    maxTdpOfProcessors:
-                    int.parse(maxTdpOfProcessorsController.text),
-                    memorySlots: int.parse(memorySlotsController.text),
-                    supportedMemoryFrequency:
-                    int.parse(supportedMemoryFrequencyController.text),
-                    maxAmountOfRam:
-                    int.parse(maxAmountOfRamController.text),
-                    ramMemoryType: pickedRamMemoryType,
-                    network: pickedMotherboardNetwork,
-                    bluetooth: pickedBluetooth,
-                    wifi: pickedWifi,
-                    pcieVersion: pickedCpuPcieVersion,
-                    pciExpressX16: int.parse(pciExpressX16Controller.text),
-                    pciExpressX4: int.parse(pciExpressX4Controller.text),
-                    pciExpressX1: int.parse(pciExpressX1Controller.text),
-                    sata3: int.parse(sata3Controller.text),
-                    m2: int.parse(m2Controller.text),
-                    dsub: pickeddSub,
-                    dvi: int.parse(dviController.text),
-                    hdmi: int.parse(hdmiController.text),
-                    displayPort: int.parse(displayPortController.text),
-                    usb_3_0: int.parse(usb_3_0Controller.text),
-                    usb_2_0: int.parse(usb_2_0Controller.text),
-                    usbTypeC: int.parse(dviController.text),
-                    digitalAudioJack: pickedDigitalAudioJack,
-                    description: descriptionController.text,
-                    recommendedPrice:
-                    int.parse(recommendedPriceController.text),
-                    performanceLevel: pickedPerformanceLevel,
-                  );
+                  onPressed: () async {
+                    final List<CPUGeneration?> cpuGen = [
+                      pickedCpuGenerations1,
+                      pickedCpuGenerations2,
+                      pickedCpuGenerations3,
+                      pickedCpuGenerations4
+                    ];
+                    final motherboard = Motherboard(
+                      id: int.parse(idController.text),
+                      name: nameController.text,
+                      motherboardProducer: pickedProducer,
+                      socket: pickedMotherboardSocket,
+                      cpuGenerations: cpuGen,
+                      chipset: pickedMotherboardChipset,
+                      formFactor: pickedFormFactor,
+                      maxTdpOfProcessors:
+                          int.parse(maxTdpOfProcessorsController.text),
+                      memorySlots: int.parse(memorySlotsController.text),
+                      supportedMemoryFrequency:
+                          int.parse(supportedMemoryFrequencyController.text),
+                      maxAmountOfRam: int.parse(maxAmountOfRamController.text),
+                      ramMemoryType: pickedRamMemoryType,
+                      network: pickedMotherboardNetwork,
+                      bluetooth: pickedBluetooth,
+                      wifi: pickedWifi,
+                      pcieVersion: pickedCpuPcieVersion,
+                      pciExpressX16: int.parse(pciExpressX16Controller.text),
+                      pciExpressX4: int.parse(pciExpressX4Controller.text),
+                      pciExpressX1: int.parse(pciExpressX1Controller.text),
+                      sata3: int.parse(sata3Controller.text),
+                      m2: int.parse(m2Controller.text),
+                      dsub: pickeddSub,
+                      dvi: int.parse(dviController.text),
+                      hdmi: int.parse(hdmiController.text),
+                      displayPort: int.parse(displayPortController.text),
+                      usb_3_0: int.parse(usb_3_0Controller.text),
+                      usb_2_0: int.parse(usb_2_0Controller.text),
+                      usbTypeC: int.parse(dviController.text),
+                      digitalAudioJack: pickedDigitalAudioJack,
+                      description: descriptionController.text,
+                      recommendedPrice:
+                          int.parse(recommendedPriceController.text),
+                      performanceLevel: pickedPerformanceLevel,
+                    );
 
-                  await motherboardController.updateData(motherboard);
-                  print('${motherboard.parsedModels().toString()}');
-                  // if (ModelUtil.modelMapping.containsKey(widget.modelName)) {
-                  //   final constructor =
-                  //       ModelUtil.modelMapping[widget.modelName];
-                  //   final instance =
-                  //       constructor!(_fieldProvider.fields) as Processor;
-                  //   await processorController.updateData(instance);
-                  //   mod.refresh();
-                  // }
-                  _fieldProvider.deleteFields();
-                },
-                child: Text('${_locale?.submit}'),
+                    await motherboardController.updateData(motherboard);
+                    print('${motherboard.parsedModels().toString()}');
+                    // if (ModelUtil.modelMapping.containsKey(widget.modelName)) {
+                    //   final constructor =
+                    //       ModelUtil.modelMapping[widget.modelName];
+                    //   final instance =
+                    //       constructor!(_fieldProvider.fields) as Processor;
+                    //   await processorController.updateData(instance);
+                    //   mod.refresh();
+                    // }
+                    _fieldProvider.deleteFields();
+                  },
+                  child: Text('${_locale?.submit}', style: TextStyle(fontSize: 20),),
+                ),
               ),
             ),
             const SizedBox(

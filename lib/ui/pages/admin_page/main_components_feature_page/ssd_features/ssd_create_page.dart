@@ -108,7 +108,6 @@ class _MainViewState extends State<_MainView> {
   List<String> result = [];
   final ssdController = SsdController(SsdRepository());
 
-  final idController = TextEditingController(text: '');
   final nameController = TextEditingController(text: '');
   final storageSizeController = TextEditingController(text: '');
   final bufferSizeController = TextEditingController(text: '');
@@ -127,8 +126,13 @@ class _MainViewState extends State<_MainView> {
   Widget build(BuildContext context) {
     final AppLocalizations? _locale = AppLocalizations.of(context);
     final screenSize = MediaQuery.of(context).size;
-    final modelLength = widget.modelList?.length ?? 0;
+    final modelList = widget.modelList;
+    modelList?.remove('id');
+    final modelLength = modelList?.length ?? 0;
     final _fieldProvider = context.read<FieldController>();
+    final translatedModel = Translate();
+    final translate =
+    translatedModel.getTranslatedModel('Ssd', context);
 
     return ColoredBox(
       color: Colors.white,
@@ -141,7 +145,7 @@ class _MainViewState extends State<_MainView> {
               width: screenSize.width * 0.5,
               height: 100,
               child: Text(
-                '${_locale?.create} ${widget.modelName}',
+                '${_locale?.create} "$translate"',
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 30,
@@ -156,7 +160,7 @@ class _MainViewState extends State<_MainView> {
                 Expanded(
                   flex: 2,
                   child: ModelListView(
-                    modelList: widget.modelList,
+                    modelList: modelList,
                     itemCount: modelLength,
                   ),
                 ),
@@ -165,10 +169,6 @@ class _MainViewState extends State<_MainView> {
                   flex: 3,
                   child: Column(
                     children: [
-                      TextFormField(
-                        decoration: const InputDecoration(hintText: 'id'),
-                        controller: idController,
-                      ),
                       DropdownButton(
                         hint: Text('${_locale?.producer}'),
                         items: _modelList.modelMap['Producers']?.map((item) {
@@ -296,37 +296,41 @@ class _MainViewState extends State<_MainView> {
                 const CustomBorder(),
               ],
             ),
-            ElevatedButton(
-              style: ButtonStyle(
-                backgroundColor:
-                const MaterialStatePropertyAll<Color>(Colors.black),
-                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(18.0),
+            Container(
+              margin: EdgeInsets.only(top: 20),
+              height: 40,
+              child: ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor:
+                  const MaterialStatePropertyAll<Color>(Colors.black),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18.0),
+                    ),
                   ),
                 ),
+                onPressed: () async {
+                  final ssd = Ssd(
+                    id: null,
+                    name: nameController.text,
+                    producer: pickedProducer,
+                    storageSize: int.parse(storageSizeController.text),
+                    formFactor: pickedFormFactor,
+                    storageInterface: pickedStorageInterface,
+                    bufferSize: int.parse(bufferSizeController.text),
+                    readingSpeed: int.parse(readingSpeedController.text),
+                    writingSpeed: int.parse(writingSpeedController.text),
+                    cellsType: pickedSsdCellsType,
+                    description: descriptionController.text,
+                    recommendedPrice: int.parse(recommendedPriceController.text),
+                    performanceLevel: pickedPerformanceLevel,
+                  );
+                  await ssdController.postData(ssd);
+                  // Очищает список полей
+                  _fieldProvider.deleteFields();
+                },
+                child: Text('${_locale?.submit}', style: TextStyle(fontSize: 20),),
               ),
-              onPressed: () async {
-                final ssd = Ssd(
-                  id: int.parse(idController.text),
-                  name: nameController.text,
-                  producer: pickedProducer,
-                  storageSize: int.parse(storageSizeController.text),
-                  formFactor: pickedFormFactor,
-                  storageInterface: pickedStorageInterface,
-                  bufferSize: int.parse(bufferSizeController.text),
-                  readingSpeed: int.parse(readingSpeedController.text),
-                  writingSpeed: int.parse(writingSpeedController.text),
-                  cellsType: pickedSsdCellsType,
-                  description: descriptionController.text,
-                  recommendedPrice: int.parse(recommendedPriceController.text),
-                  performanceLevel: pickedPerformanceLevel,
-                );
-                await ssdController.postData(ssd);
-                // Очищает список полей
-                _fieldProvider.deleteFields();
-              },
-              child: Text('${_locale?.submit}'),
             ),
             const SizedBox(
               height: 50,

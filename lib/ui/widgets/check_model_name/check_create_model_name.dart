@@ -58,6 +58,6 @@ class CheckCreateModelName extends StatelessWidget {
       );
     }
 
-    return const SizedBox(height: 200);
+    return Container();
   }
 }
